@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%
     String ctxPath = request.getContextPath();
-    //    /MyMVC
-%>    
+    //    /SemiProject
+%>  
   
 <!DOCTYPE html>
 <html lang="en">
@@ -13,17 +13,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" type="text/css" href="bootstrap-4.6.0-dist/css/bootstrap.min.css" > 
-
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/bootstrap-4.6.0-dist/css/bootstrap.min.css" > 
+	
+	<!-- Optional JavaScript -->
+	<script type="text/javascript" src="<%= ctxPath%>/js/jquery-3.6.4.min.js"></script>
+	<script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script> 
+	
+	
     <!-- jQueryUI CSS 및 JS -->
-    <link rel="stylesheet" type="text/css" href="/jquery-ui-1.13.1.custom/jquery-ui.css" />
-    <script type="text/javascript" src="/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
+	<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.css" />
+	<script type="text/javascript" src="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
+
     <!-- 아이콘 JS-->
     <script src="https://kit.fontawesome.com/b7b1b05ad5.js" crossorigin="anonymous"></script>
 
     <!-- original css -->
-    <link href="/css/css.css" rel="stylesheet" type="text/css"></style>
+    <link href="<%=ctxPath %>/css/junhyukcss.css" rel="stylesheet" type="text/css"></style>
     
     <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
