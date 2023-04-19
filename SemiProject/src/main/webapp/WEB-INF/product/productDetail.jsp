@@ -26,7 +26,7 @@
 	<script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script> 
 
     <!-- original css -->
-    <link rel="stylesheet" type="text/css" href="<%= ctxPath%>/css/css.css" />
+    <link rel="stylesheet" type="text/css" href="<%= ctxPath%>/css/order.css" />
     
     <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
