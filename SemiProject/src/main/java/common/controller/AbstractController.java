@@ -1,4 +1,3 @@
-// 초기환경설정
 package common.controller;
 
 import java.sql.SQLException;
@@ -36,7 +35,7 @@ public abstract class AbstractController implements InterCommand {
 
 
 
-	public abstract void execute(HttpServletRequest request, HttpServletResponse response);
+	public abstract void execute(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 
 
