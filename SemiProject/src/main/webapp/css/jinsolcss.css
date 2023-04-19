@@ -1,0 +1,365 @@
+
+
+/******************** ****************************** **************/
+
+/*********** 장바구니 ******** -김진솔/
+
+
+/* h2 장바구니 title 과 01 장바구니 > 02 주문서작성 > 03 주문완료 */
+.cart_content_box .order_wrap .order_tit{
+    overflow:hidden; 
+    border-bottom:1px solid #dbdbdb;}
+    
+
+.cart_content_box .order_wrap .order_tit h2{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size:26px; color:rgb(43, 43, 43);
+    font-weight: 900;
+}
+
+.cart_content_box .order_wrap .order_tit ol{
+    float:right; 
+    line-height: 10px;
+    color: #303030;
+}
+
+.cart_content_box .order_wrap .order_tit ol li{
+    float:left; 
+    font-size:14px; 
+    color:#d1d1d1;}
+
+.cart_content_box .order_wrap .order_tit .page_on{
+    color:#313131;
+    font-weight:bold;}
+
+.cart_content_box .order_wrap .order_tit li span{
+    font-size:16px; 
+    font-weight:bold;}
+
+.cart_content_box .order_wrap .order_tit li span > img{
+    padding:0 14px; 
+    vertical-align: -1px;}
+
+.cart_content_box .order_wrap .cart_cont .cart_no_data{
+    padding:60px 0;
+     margin:0 0 20px 0; 
+     text-align:center; 
+    border-bottom:1px solid #dbdbdb; 
+    color:#444;
+    font-size: 10pt;
+}
+/* h2 장바구니 title 과 01 장바구니 > 02 주문서작성 > 03 주문완료  */
+
+body .cart_content_box {
+    
+    width: 1270px;
+    margin: 60px auto;
+}
+
+body.cart_sub_content{
+    padding: 35px 0 0 0;
+}
+
+body .location_wrap .location_cont {
+    display: none; }
+
+body .location_wrap .location_cont {
+    display: none; }
+
+        
+body .cart_cont .price_sum{
+    border: solid 2px rgba(207, 207, 207, 0.897);
+    
+}
+
+.cart_content_box  #price_box{
+    /* border: solid 1px red; */
+    padding: 10px 30px 0 0;
+    margin-top: 25px;
+    text-align: right;
+}
+    
+.cart_content_box  .allprice{
+    /* border: solid 1px blue; */
+    display: inline-block;
+    padding: 0 10px 0 0;
+    width: 180px;
+    height: 80px;
+}
+
+.cart_content_box  .allprice_head{
+    font-weight: 500;
+    font-size: 12pt;
+    color: #444;
+}
+.cart_content_box  .allprice_won{
+    font-size: 14pt; 
+    color: #202020;
+    font-weight: bold;
+
+}
+
+.cart_content_box  .cart_cont .tobe_mileage{         /* 마일리지*/
+    /* border: solid 1px olivedrab; */
+    padding: 0 30px 5px 0;
+    text-align: right;
+    color:rgba(43, 43, 43, 0.897);
+}
+
+.cart_content_box .order_wrap{
+    margin: 50px 30px;
+}
+
+.cart_content_box .order_tit{
+    border-bottom: solid 2px gray;
+    margin: 10px 0 60px 0;
+}
+
+.cart_content_box .btn_order_whole_box{
+    /* border: solid 1px aqua; */
+    display: block;
+    margin: 25px 0;
+    height: 50px;
+}
+
+.cart_content_box .btn_delete_box{
+    padding: 5px 0px 0 0;
+    display: inline;
+}
+
+.cart_content_box .btn_order_box{
+    float: right;
+    display: inline;
+}
+
+.cart_content_box  .chk_none{              /*※ 주문서 작성단계에서 마일리지 적용을 하실 수 있습니다. 텍스트 */
+    /* border: solid 1px green;*/
+    display: block;
+    text-align: right;
+    color: rgb(71, 71, 71);
+}
+
+
+
+.cart_content_box .btn_order_choice_del {     /* 선택상품 삭제 버튼*/
+  border: solid 1px grey;
+  margin: 0;
+  padding: 5px;
+  color: rgb(110, 110, 110);
+  font-size: 11pt;
+  font-weight: 500;
+  text-align: center;
+  display: inline-block;
+  width: 120px;
+
+}
+
+.cart_content_box .btn_order_choice_buy{      /* 선택상품 주문 버튼*/
+  border: solid 1px rgb(190, 190, 190);
+  border-style: double;
+  margin: 2px;
+  padding: 4px;
+  color: rgba(43, 43, 43, 0.897);
+  background-color: white;
+  text-align: center;
+  font-size: 11pt;
+  font-weight: 600;
+  display: inline-block;
+  width: 180px;
+  height: 58px;
+}
+.cart_content_box .btn_order_whole_buy{      /* 전체상품 주문 버튼*/
+  border: solid 1px rgb(75, 74, 74);
+  border-style: double;
+  background-color:rgb(75, 74, 74);
+  margin: 2px;
+  padding: 4px;
+  color: white;
+  text-align: center;
+  font-size: 11pt;
+  font-weight: 400;
+  display: inline-block;
+  width: 180px;
+  height: 58px;
+}
+
+.cart_content_box .td_order_amount input{     /* 수량 조절 input 태그*/
+    width: 52px;
+    text-align: center;
+    padding: 0 5px 0 0;
+}
+
+
+
+.cart_content_box .order_table_type table{
+    width:100%; 
+   /* border:solid 1px red; */
+     border-collapse:collapse; 
+     text-align:center;
+    margin-bottom: 10px;}
+
+.cart_content_box .order_table_type th{
+    padding: 12px 0;
+    border-top:1px solid #999999; 
+    border-bottom:1px solid #dbdbdb; 
+    background:#f7f7f7;
+    font-size: 11pt;
+    color: #313131;
+}
+
+.cart_content_box .order_table_type td{
+    height:28px; 
+    padding:30px 10px;
+    border-bottom:1px solid #dbdbdb; 
+    /* border-left:1px dotted #ededed; */
+    background:#ffffff;
+    color: #444;
+    font-size: 11pt;
+}
+
+.cart_content_box .order_table_type th .form_element{
+    vertical-align:middle;
+}
+
+.cart_content_box .order_table_type .order_sum_txt{
+    font-size: 11pt;
+}
+
+
+.cart_content_box .order_table_type .td_left {
+    /* border: solid 1px salmon; */
+    text-align: left;
+    margin: 0;
+}
+
+.cart_content_box .order_table_type .td_left a{
+    margin: 10px;
+}
+
+.cart_content_box .btn_left_box{
+    /* border: solid 1px rebeccapurple; */
+    margin-bottom: 20px;
+}
+
+
+.cart_content_box .order_wrap .cart_cont .cart_no_data{
+    padding:60px 0;
+     margin:0 0 20px 0; 
+     text-align:center; 
+    border-bottom:1px solid #dbdbdb; 
+    color:#444;
+    font-size: 10pt;
+}
+
+.cart_content_box #frmCart{
+    border-top: solid 1px rgba(196, 195, 195, 0.575);
+}
+
+
+/**********************************************************************/
+
+/**** 카테고리 클릭하면 나오는 상품들 ! - 김진솔 *****/
+
+.cate_goods_container {
+    width: 1280px;
+    height: auto;
+    margin: 60px auto;
+}
+.cate_goods_container .c_goods_sub{
+    border: solid 1px greenyellow;
+    height: 3000px;
+}
+
+
+/*왼쪽 카테고리 박스*/
+.c_goods_sub .left_wing {
+    border: solid 0.5px #b6b6b6a0;;
+    width: 180px;
+    height: 250px;
+    display: inline-block;
+    position: absolute;
+}
+
+.c_goods_sub .left_wing .current_cate {  
+    font-size: 12pt;
+    height: 46px;
+
+}
+
+.c_goods_sub .left_wing .current_cate ul{
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 300;
+    background-color: #646464;
+    color: #f6f6f6;
+}
+
+.c_goods_sub .left_wing .category_box {
+    border-top: 0;
+}
+
+.c_goods_sub .left_wing .category_box ul{
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.c_goods_sub .left_wing .category_box ul li{
+    padding: 4px 0;
+    font-size: 10pt;
+}
+.c_goods_sub .left_wing .category_box span{
+    color: #646464;
+}
+
+.c_goods_sub .right_contents{   /*오른쪽 상품 컨텐츠*/
+    display: inline;
+    float: right;
+    border: solid 1px red;
+    width: 1025px;
+    height: 3000px;
+}
+.c_goods_sub .goods_count{
+    border: solid 1px green;
+    font-size: 9pt;
+    padding-left: 20px;
+}
+
+.right_contents .container{  /*오른쪽 상품 그리드*/
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(5, 530px);
+}
+.right_contents .container .item{
+    border:  solid 1px salmon;
+    display: block;
+
+}
+.right_contents .container .item_img{
+    text-align: center;
+}
+.right_contents .item_descript{
+    border: solid 1px firebrick;
+    margin: 5px 8px;
+    height: 80px;
+}
+.right_contents .item_goods_name{
+    font-size: 12pt;
+}
+.right_contents .item_goods_detail{
+    font-size: 9pt;
+    color: #9b9b9b;
+}
+.right_contents .item_goods_price{
+    font-size: 12pt;
+}
+
+.pagination li a, .pagination li span {
+    display: block;
+    padding: 0 !important;
+    height: 30px;
+    width: 30px;
+    color: #888;
+    font-size: 11px;
+    line-height: 30px;
+}
