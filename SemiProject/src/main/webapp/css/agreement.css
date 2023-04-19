@@ -1,0 +1,248 @@
+
+div {
+    display: block;
+}
+
+div.container {
+    width: 100%;
+    display: inline-block;
+
+}
+
+ol {
+    display: block;
+    list-style: none;
+
+}
+
+.join_agreement_wrap .member_title ol {
+    float: right;
+    line-height: 62px;
+
+}
+.sub_content:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+li {
+    float: left;
+    list-style: none;
+    font-size: 14px;
+    display: list-item;
+}
+
+.join_agreement_wrap .member_title ol li {
+    float: left;
+    font-size: 14px;
+    color: #d1d1d1;
+}
+
+.join_agreement_wrap .member_title li span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.join_agreement_wrap .member_title li span>img {
+    padding: 0 14px;
+    vertical-align: -1px;
+}
+
+.sub_content {
+    padding: 45px 0 0 0;
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.join_agreement_wrap .member_title {
+    overflow: hidden;
+    border-bottom: 1px solid #999999;
+}
+
+.member_title h2 {
+    margin: 0 0 20px 0;
+    display: block;
+    font-size: 28px;
+    color: #222222;
+    font-weight: bold;
+    float: left;
+}
+.member_cont {
+    width: 743px;
+    margin: 0 auto;
+    padding: 70px 60px;
+      margin: 62px auto;
+   
+}
+
+.member_cont h3 {
+    padding: 0 0 17px 0;
+    display: block;
+}
+.join_agreement_wrap .member_title .page_on {
+    color: #4c4c4c;
+}
+.join_agreement_wrap .member_cont h3 {
+    padding: 0 0 17px 0;
+    font-weight: normal;
+    font-size: 18px;
+    color: #222222;
+}
+
+.join_agreement_wrap .member_cont {
+    padding: 30px 0 0 0;
+    margin-top: 70px;
+}
+
+.join_agreement_cont {
+    padding: 30px 0 0 0;
+    border-top: 1px solid #999999;
+}
+.join_agreement_cont .join_agreement_box {
+    margin: 0 0 30px 0;
+}
+
+iframe {
+    width: 740px;
+    height: 200px;
+}
+
+
+.warning_checkAll {
+    display: none;
+}
+/* 회원가입 폼 css */
+
+.base_info_box > span {
+    float: right;
+    padding: 0 0 0 10px;
+    line-height: 40px;
+    color: #4c4c4c;
+}
+.base_info_box .base_info_sec {
+    border-top: 1px solid #999999;
+}
+.base_info_sec table {
+    width: 100%;
+}
+
+table {
+    border-collapse: separate;
+    text-indent: initial;
+   
+}
+th, td {
+    font-size: 15px;
+    font-family: 'Noto Sans KR', sans-serif, AppleGothic,Dotum,"돋움",sans-serif;
+    letter-spacing: -0.5px;
+    color: #000;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+col {
+    display: table-column;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.base_info_sec table th:first-child, .base_info_sec table td:first-child {
+    border-left: none;
+}
+
+.base_info_sec table th {
+    text-align: left;
+    border-bottom: 1px solid #dcdcdc;
+    background: #fbfbfb;
+    padding: 10px 25px;
+}
+.base_info_sec table td {
+    padding: 15px 0 15px 15px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+input{
+    font-size: 14px;
+    color: #000;
+    border-radius: 5px;
+
+    padding: 0 10px;
+    outline: none;
+   
+    border: 1px solid #d6d6d6;
+    line-height: 31px;
+}
+ .address_input {
+    float: left;
+    width: 72%;
+}
+
+.member_address .address_input > input{
+    margin-top: 10px;
+}
+ul#idle_mem > li:first-child{
+    margin-left: 0;
+}
+ul#idle_mem > li{
+    margin-left: 30px;
+}
+/* 버튼 */
+.btn_center_box {
+    text-align: center;
+}
+
+.btn_double_check{
+    margin-left: 10px;;
+    width: 85px;
+    height: 20px;
+    font-size: 11px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    color: #3e3d3c;
+    cursor: pointer;
+}
+
+.btn_member_next {
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 0;
+    color: #ffffff;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #4c4c4c;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+
+}
+.btn_cancle{
+    width: 150px;
+    height: 45px;
+    margin: 20px;
+    color: #3e3d3c;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn_register{
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 0;
+    color: #ffffff;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #4c4c4c;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+}
