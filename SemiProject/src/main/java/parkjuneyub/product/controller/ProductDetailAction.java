@@ -13,7 +13,7 @@ public class ProductDetailAction extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/product/productDetail.jsp");
+		super.setViewPage("/WEB-INF/pjy_product/productDetail.jsp");
 	}
 	
 }
