@@ -1,3 +1,4 @@
+// 초기환경설정
 package common.controller;
 
 import java.io.*;
