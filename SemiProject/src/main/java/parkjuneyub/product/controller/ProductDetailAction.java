@@ -1,4 +1,4 @@
-package product.controller;
+package parkjuneyub.product.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
