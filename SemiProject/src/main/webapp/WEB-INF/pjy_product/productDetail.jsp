@@ -2,11 +2,9 @@
     pageEncoding="UTF-8"%>
     
 <%
-    String ctxPath = request.getContextPath();
-    //    /MyMVC
+	String ctxPath = request.getContextPath();
+	// SemiProject
 %>    
-    
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,19 +12,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
+    <!-- original css -->
+    <link href="<%= ctxPath%>/css/juneyubcss.css" rel="stylesheet" type="text/css"></style>
 
     <!-- 구글 icon -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <!-- Bootstrap CSS-->
-    <link rel="stylesheet" type="text/css" href="<%= ctxPath%>/bootstrap-4.6.0-dist/css/bootstrap.min.css" > 
+    <link rel="stylesheet" type="text/css" href="bootstrap-4.6.0-dist/css/bootstrap.min.css" > 
 
     <!-- Optional JavaScript -->
-	<script type="text/javascript" src="<%= ctxPath%>/js/jquery-3.6.4.min.js"></script>
-	<script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script> 
+    <script type="text/javascript" src="<%= ctxPath%>/js/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script> 
 
-    <!-- original css -->
-    <link rel="stylesheet" type="text/css" href="<%= ctxPath%>/css/order.css" />
+
     
     <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,8 +38,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Roboto&display=swap" rel="stylesheet">
 
     <!-- jQueryUI CSS 및 JS -->
-	<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.css" />
-	<script type="text/javascript" src="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.css" />
+    <script type="text/javascript" src="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
     
 </head>
 <body>
@@ -83,7 +83,7 @@
                                             <div class="top_search_cont">
                                                 <div class="top_text_cont">
                                                     <input type="text" id="search_form" name="keyword" class="top_srarch_text" title placeholder="검색어를 입력해주세요" autocomplete="off">
-                                                    <input type="image" src="<%= ctxPath%>/image/icon-search-b.png" id="btnSearchTop" class="btn_top_srarch" title="검색" value="검색" alt="검색" />
+                                                    <input type="image" src="/image/icon-search-b.png" id="btnSearchTop" class="btn_top_srarch" title="검색" value="검색" alt="검색" />
                                                         
                                                 </div>
                                             </div>
