@@ -17,7 +17,7 @@ public class Test2Controller extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		super.setRedirect(true);
-		super.setViewPage(request.getContextPath()+"/test1.up");
+		super.setViewPage(request.getContextPath()+"/test1.ban");
 		
 		
 		
