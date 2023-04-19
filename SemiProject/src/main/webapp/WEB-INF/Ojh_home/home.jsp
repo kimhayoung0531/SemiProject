@@ -19,6 +19,7 @@
     <!-- jQueryUI CSS 및 JS -->
     <link rel="stylesheet" type="text/css" href="/jquery-ui-1.13.1.custom/jquery-ui.css" />
     <script type="text/javascript" src="/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
+    
     <!-- 아이콘 JS-->
     <script src="https://kit.fontawesome.com/b7b1b05ad5.js" crossorigin="anonymous"></script>
 
@@ -33,7 +34,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Roboto&display=swap" rel="stylesheet">
-
+	
     <!-- slick 슬라이드 -->
 
     <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
