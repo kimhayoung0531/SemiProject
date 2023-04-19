@@ -10,7 +10,7 @@ public class CartAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-		super.setRedirect(true);
+		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/kjs_cart/cart.jsp");
 		
 		
