@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>세미 회원가입</title>
+    <title>카페노리 회원가입</title>
 
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" type="text/css" href="bootstrap-4.6.0-dist/css/bootstrap.min.css">
@@ -163,7 +163,6 @@
                                 </ol>
                             </div>
 
-
                             <div class="member_cont">
                                 <form id="formJoin" name="formJoin">
                                     <div class="base_info_box">
@@ -171,7 +170,7 @@
                                         <h3>기본정보</h3>
 
                                         <div class="base_info_sec">
-                                            <table border="0" cellpadding="0" cellspacing="0">
+                                            <table>
                                                 <colgroup>
                                                     <col width="25%">
                                                     <col width="75%">
@@ -183,32 +182,38 @@
                                                         </th>
                                                         <td>
                                                             <div>
-                                                                <input type="text" id="userid" class="userid" />
+                                                                <input type="text" id="userid" name="userid" class="requiredInfo" />
                                                                 <button class="btn_double_check"> 아이디 중복 체크</button>
+                                                                <span class="error" style="color:red;">아이디는 필수입력 사항입니다.</span>
                                                             </div>
-                                                        </td>
+                                                        </td> 
                                                     </tr>
                                                     <tr>
                                                         <th>
                                                             <span class="important">* 비밀번호</span>
                                                         </th>
-                                                        <td><input type="password" id="pwd" class="pwd"
-                                                                autocomplete="off" /></td>
+                                                        <td><input type="password" id="pwd" name="pwd" class="requiredInfo"
+                                                                autocomplete="off" />
+                                                            <span class="error">암호는 영문자,숫자,특수기호가 혼합된 8~15 글자로 입력하세요.</span>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <th>
                                                             <span class="important">* 비밀번호확인</span>
                                                         </th>
-                                                        <td><input type="password" id="pwdCheck" class="pwdCheck"
+                                                        <td><input type="password" id="pwdCheck"  name="pwdCheck" class="requiredInfo"
                                                                 autocomplete="off" />
+                                                            <span class="error" style="color:red;">비밀번호가 같지 않습니다.</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th>
                                                             <span class="important">* 이름</span>
                                                         </th>
-                                                        <td><input type=" text" id="name" class="name"
-                                                                autocomplete="off" /></td>
+                                                        <td><input type="text" id="name" class="requiredInfo"
+                                                                autocomplete="off" />
+                                                             <span class="error">성명은 필수입력 사항입니다.</span>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <th>
@@ -216,9 +221,9 @@
 
                                                         </th>
                                                         <td>
-                                                            <input type=" text" id="email" class="email" />
-
+                                                            <input type="text" id="email" class="requiredInfo" />
                                                             <button class=" btn_double_check"> 이메일 중복 체크</button>
+                                                            <span class="error">이메일 형식에 맞지 않습니다.</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -226,9 +231,9 @@
                                                             <span class="important">* 휴대폰번호</span>
                                                         </th>
                                                         <td>
-                                                            <input type="number" id="mobile" class="mobile"
+                                                            <input type="text" id="mobile" name="mobile" class="requiredInfo"
                                                                 placeholder="-없이 입력하세요" />
-
+														    <span class="error">휴대폰 형식이 아닙니다.</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -237,21 +242,21 @@
                                                         </th>
                                                         <td class="member_address">
                                                             <div class="address_postcode">
-                                                                <input type="text" id="address" class="address" />
+                                                                <input type="text" id="address" name="address" class="requiredInfo" />
                                                                 <button type="button" id="btnPostcode"
                                                                     class="btn_post_search btn_double_check"> 우편번호
                                                                     검색</button>
+                                                                <span class="error">우편번호 형식이 아닙니다.</span>
                                                             </div>
                                                             <div class="address_input">
 
                                                                 <input type="text" id="detail_email"
-                                                                    class="detail_email" placeholder="상세주소" />
-
+                                                                    class="requiredInfo" placeholder="상세주소" />
+   																<span class="error">주소를 입력하세요</span>
                                                                 <input type="text" id="extra_address" placeholder="부가주소"
                                                                     class="extra_address" />
+                                                                    
                                                             </div>
-
-
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -286,16 +291,10 @@
                                                                     </li>
                                                                 </ul>
                                                             </div>
-
                                                         </td>
                                                     </tr>
                                                 </tbody>
-
-
                                             </table>
-
-
-
                                         </div> <!--//join_agreement_cont -->
                                         <div class="btn_center_box">
                                             <button type="button" id="btnReset" class="btn_cancle">취소
@@ -303,21 +302,19 @@
                                             <button type="button" id="goToRegis" class="btn_register">회원가입
                                             </button>
                                         </div>
+                                     </div>
                                 </form>
                             </div><!--member_cont-->
 
                         </div>
                     </div>
                 </div> <!--//sub_ contents-->
-
-
             </div>
         </div>
 
         <div id="footer_wrap"></div>
     </div>
-
-    </div>
+    
 </body>
 
 </html>
