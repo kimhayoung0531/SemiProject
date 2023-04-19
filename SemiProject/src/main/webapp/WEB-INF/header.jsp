@@ -29,7 +29,7 @@
     <script src="https://kit.fontawesome.com/b7b1b05ad5.js" crossorigin="anonymous"></script>
 
     <!-- original css -->
-    <link href="<%=ctxPath %>/css/junhyukcss.css" rel="stylesheet" type="text/css"></style>
+    <link href="<%=ctxPath %>/css/style.css" rel="stylesheet" type="text/css"></style>
     
     <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
