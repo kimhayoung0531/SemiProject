@@ -10,7 +10,7 @@ public class RegisterAgreementAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		this.setRedirect(false);
-		this.setViewPage("/WEB-INF/member/registerAgreement.jsp");
+		this.setViewPage("/WEB-INF/sge_member/registerAgreement.jsp");
 		
 	}
 }
