@@ -4,12 +4,12 @@
 	String ctxPath = request.getContextPath();
 %>
 <jsp:include page="../header.jsp" />
+
    <div class="sub_content">
        <div class="content_box">
            <div class="join_agreement_wrap">
                <div class="member_title">
                    <h2>회원가입 </h2>
-
                    <ol>
                        <li>
                            <span>01</span>
@@ -34,7 +34,6 @@
                                <img src="https://cdn-pro-web-250-118.cdn-nhncommerce.com/cafenotr1984_godomall_com/data/skin/front/moment_cafenoli_N/img/member/icon_join_step_on.png"
                                    alt="약관동의완료">
                            </span>
-
                        </li>
                    </ol>
                </div>
@@ -57,18 +56,17 @@
                                                <span class="important">* 아이디</span>
                                            </th>
                                            <td>
-                                               <div>
-                                                   <input type="text" id="userid" name="userid" class="requiredInfo" />
-                                                   <button class="btn_double_check"> 아이디 중복 체크</button>
-                                                   <span class="error" style="color:red;">아이디는 필수입력 사항입니다.</span>
-                                               </div>
+                                                <input type="text" id="userid" name="userid" class="requiredInfo" />
+                                                <button class="btn_double_check"> 아이디 중복 체크</button>
+                                                <span class="error" style="color:red;">아이디는 필수입력 사항입니다.</span>
                                            </td> 
                                        </tr>
                                        <tr>
                                            <th>
                                                <span class="important">* 비밀번호</span>
                                            </th>
-                                           <td><input type="password" id="pwd" name="pwd" class="requiredInfo"
+                                           <td>
+                                           	   <input type="password" id="pwd" name="pwd" class="requiredInfo"
                                                    autocomplete="off" />
                                                <span class="error">암호는 영문자,숫자,특수기호가 혼합된 8~15 글자로 입력하세요.</span>
                                            </td>
@@ -78,7 +76,7 @@
                                                <span class="important">* 비밀번호확인</span>
                                            </th>
                                            <td>
-                                           	<input type="password" id="pwdcheck"  name="pwdcheck" class="requiredInfo"
+                                           	   <input type="password" id="pwdcheck"  name="pwdcheck" class="requiredInfo"
                                                    autocomplete="off" />
                                                <span class="error" style="color:red;">비밀번호가 같지 않습니다.</span>
                                            </td>
@@ -108,9 +106,9 @@
                                                <span class="important">* 휴대폰 번호</span>
                                            </th>
                                            <td>
-                                               <input type="text" id="hp1" name="hp1" size="3" maxlength="3" value="010" readonly />&nbsp;-&nbsp;
-			    							    <input type="text" id="hp2" name="hp2" size="4" maxlength="4" />&nbsp;-&nbsp;
-			    							    <input type="text" id="hp3" name="hp3" size="4" maxlength="4" />
+                                               <input type="text" id="s_hp1" name="hp1" size="3" maxlength="3" value="010" readonly />&nbsp;-&nbsp;
+			    							    <input type="text" id="s_hp2" name="hp2" size="4" maxlength="4" />&nbsp;-&nbsp;
+			    							    <input type="text" id="s_hp3" name="hp3" size="4" maxlength="4" />
 				    							<span class="error">휴대폰 형식이 아닙니다.</span>
                                            </td>
                                        </tr>
@@ -138,10 +136,10 @@
                                                    <span class="error">우편번호 형식이 아닙니다.</span>
                                                </div>
                                                <div class="address_input">
-		    <input type="text" id="address" name="address" class="requiredInfo" placeholder="주소"/>
+		                   						   <input type="text" id="address" name="address" class="requiredInfo" placeholder="주소"/>
                                                    <input type="text" id="detail_email"
                                                        class="requiredInfo" placeholder="상세주소" />
-						<span class="error">주소를 입력하세요</span>
+												   <span class="error">주소를 입력하세요</span>
                                                    <input type="text" id="extra_address" placeholder="부가주소"
                                                        class="extra_address" />
                                                        
@@ -170,7 +168,7 @@
                                                        </li>
                                                        <li>
                                                            <input type="radio" id="female" name="female"
-                                                               value="3" />
+                                                               value="2" />
                                                            <label for="idle3" >여자</label>
                                                        </li>
                                                 
