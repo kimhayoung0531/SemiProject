@@ -10,7 +10,6 @@
            <div class="join_agreement_wrap">
                <div class="member_title">
                    <h2>회원가입 </h2>
-
                    <ol>
                        <li>
                            <span>01</span>
@@ -35,7 +34,6 @@
                                <img src="https://cdn-pro-web-250-118.cdn-nhncommerce.com/cafenotr1984_godomall_com/data/skin/front/moment_cafenoli_N/img/member/icon_join_step_on.png"
                                    alt="약관동의완료">
                            </span>
-
                        </li>
                    </ol>
                </div>
