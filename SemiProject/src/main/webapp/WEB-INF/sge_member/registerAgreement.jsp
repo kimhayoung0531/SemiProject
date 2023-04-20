@@ -94,7 +94,6 @@
                      </div>
                  </form>
              </div><!--member_cont-->
-
          </div>
      </div>
  </div> <!--//sub_ contents-->
