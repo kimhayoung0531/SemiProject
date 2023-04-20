@@ -552,7 +552,7 @@ blockquote:before, blockquote:after,q:before, q:after {content:'';content:none}
 input,select,textarea,button {vertical-align:middle}
 button {border:0 none;background-color:transparent;cursor:pointer}
 body {background:#fff}
-body,th,td,input,select,textarea,button {font-size:12px;line-height:1.5;font-family:Malgun Gothic,"맑은 고딕",AppleGothic,Dotum,"돋움",sans-serif;color:#333} /* color값은 디자인가이드에 맞게사용 */
+body,th,td,input,select,textarea,button {font-size:12px;line-height:1.5;font-family:"Noto Sans KR", Malgun Gothic,"맑은 고딕",AppleGothic,Dotum,"돋움",sans-serif;color:#333} /* color값은 디자인가이드에 맞게사용 */
 a {color:#333;text-decoration:none}
 a:active, a:hover {text-decoration:none;}
 address,caption,cite,code,dfn,em,var {font-style:normal;font-weight:normal}
@@ -1618,11 +1618,15 @@ body #container #contents .order_sub_content .order_sub_content_box #frmOrder .o
 }
 
 body #container #contents .order_sub_content .order_sub_content_box #frmOrder .order_tit ol li.orderEmphasized img {
-    content: url("/image/icon_join_step_on.png");
+    content: url("../image/icon_join_step_on.png");
+    padding: 0 14px;
+    vertical-align: -5px;
 }
 
 body #container #contents .order_sub_content .order_sub_content_box #frmOrder .order_tit ol li.orderUnEmphasized img {
-    content: url("/image/icon_join_step_off.png");
+    content: url("../image/icon_join_step_off.png");
+    padding: 0 14px;
+    vertical-align: -5px;
 }
 
 h3.title_h3 {
@@ -1708,6 +1712,7 @@ body #container #contents .order_sub_content .order_sub_content_box .order_cont 
     float: right;
 } 
 
+
 .order_view_info .order_info .order_table_type {
     border-top: 1px solid #3f3f3f;
     
@@ -1728,6 +1733,7 @@ body #container #contents .order_sub_content .order_sub_content_box .order_cont 
 
 .order_view_info .order_info .order_table_type table.table_left tbody td {
     padding: 20px 20px 20px 20px;
+    text-align: left;
 }
 
 .order_view_info .order_info .order_table_type table.table_left tbody td input, select {
