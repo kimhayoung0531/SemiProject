@@ -12,7 +12,7 @@ public class MemberRegisterAction extends AbstractController {
 		
 		//String method = request.getMethod();
 		this.setRedirect(false);
-		this.setViewPage("/WEB-INF/member/memberRegister.jsp");
+		this.setViewPage("/WEB-INF/sge_member/memberRegister.jsp");
 		
 	}
 
