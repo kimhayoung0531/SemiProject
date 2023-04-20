@@ -83,7 +83,7 @@ create table tbl_product -- 상품 테이블
 (product_num        NUMBER(20)      not null
 ,category_num       NUMBER(20)      not null
 ,product_title      VARCHAR2(150)   not null
-,main_image         VARCHAR2(600)   not null
+,main_image         number(20)      not null
 ,product_price      NUMBER(10)      not null
 ,product_detail     VARCHAR2(1000)  not null
 ,product_inventory  VARCHAR2(1000)  not null
