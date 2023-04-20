@@ -74,7 +74,7 @@
                                                         </dd>
                                                     </dl>
                                                     <span>
-                                                        <img src="/image/order_price_plus.png">
+                                                        <img src="<%=ctxPath%>/image/order_price_plus.png">
                                                     </span>
                                                     <dl>
                                                         <dt>
@@ -86,7 +86,7 @@
                                                         </dd>
                                                     </dl>
                                                     <span>
-                                                        <img src="/image/order_price_total.png">
+                                                        <img src="<%=ctxPath%>/image/order_price_total.png">
                                                     </span>
                                                     <dl>
                                                         <dt>
