@@ -5,12 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.controller.AbstractController;
 
-public class RegisterAgreementAction extends AbstractController {
+public class LoginAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		this.setRedirect(false);
-		this.setViewPage("/WEB-INF/sge_member/registerAgreement.jsp");
+		setRedirect(false);
+		setViewPage("/WEB-INF/sge_member/memberLogin.jsp");
 		
 	}
+
 }
