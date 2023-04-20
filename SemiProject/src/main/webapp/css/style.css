@@ -2127,6 +2127,753 @@ table.review_table tbody td:first-child, td:last-child {
 
 /* 성가은 ------------------------------------------------------------------------------------------- */
 
+.login_sub_content {
+    padding: 45px 0 0 0;
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.login_sub_content:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+.content_box{
+    float: left;
+    width: 100%;
+}
+.member_cont {
+    margin: 62px auto;
+    padding: 70px 60px;
+    border: 1px solid #dbdbdb;
+}
+
+.register_success{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* 로그인 박스옆에 광고 */
+.login_right{
+    height: auto;
+    width: 436px;
+    float: right;
+    margin-right: 50px;
+    margin-top: 81px;
+}
+/* 로그인 박스 */
+.member_wrap{
+    width: 593px;
+    margin: 20px auto 40px auto;
+    float: left;
+    margin-left: 100px;
+}
+.member_cont .member_login_box .id_chk{
+    display: inline-block;
+    padding: 0 0 26px 0;
+}
+.member_cont .member_login_box .login_input_sec input {
+    display: block;
+    width: 292px;
+    height: 36px;
+    margin: 15px 0 10px 0;
+    padding: 0 0 0 8px;
+    border: 1px solid #d0d0d0;
+    color: #979d9d;
+}
+.member_title h2 {
+    margin: 0 0 20px 0;
+    display: block;
+    color: #222222;
+    font-weight: bold;
+    float: left;
+    font-size: 28px;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.member_cont .member_login_box h3 {
+    font-weight: normal;
+    font-size: 18px;
+    color: #222222;
+}
+
+.find_password_box h3{
+    font-weight: normal;
+    font-size: 18px;
+    color: #222222;
+}
+
+.member_cont h3 + p {
+    padding: 5px 0 8px 0;
+    color: #bebebc;
+    font-size: 15px;
+}
+.login_input{
+    padding: 30px 0 0 0;
+    border-top: 1px solid #dbdbdb;
+}
+
+.find_password_box .login_input {
+    padding: 30px 0 0 0;
+}
+#wrap .login_input .member_warning {
+    display: block;
+}
+
+#wrap .member_warning {
+    display: inline;
+    position: relative;
+}
+.find_password_box .login_input .member_warning {
+    width: 370px;
+    margin: 0 0 0 100px;
+}
+
+.find_password_box .login_input input[type=text], .find_password_box .login_input input[type=password] {
+    width: 263px;
+    margin: 10px 0 0 0;
+    
+}
+
+.info_again {
+    padding: 5px 0 0 0;
+    text-align: left;
+    color: #929292;
+    font-size: 15px;
+}
+.member_cont .member_login_box .login_input_sec {
+    overflow: hidden;
+}
+.member_cont .member_login_box .id_chk span {
+    display: inline-block;
+}
+.member_cont .member_login_box .id_chk {
+    padding: 0 0 26px 0;
+}
+.find_password_complete_box{
+     text-align: center;
+}
+
+/* 버튼모음 */
+.btn_login_box li:first-child {
+    margin: 0;
+}
+ .btn_login_box li {
+    float: left;
+    margin: 0 0 0 10px;
+}
+.btn_register_box{
+    text-align: center;
+    
+}
+button {
+    border: 0 none;
+    background-color: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+    font-family: 'Noto Sans KR', sans-serif, AppleGothic,Dotum,"돋움",sans-serif;
+}
+/* 회원가입 아이디찾기 비밀번호 찾기 버튼 */
+.btn_member_join {
+    width: 150px;
+    height: 45px;
+    color: #ffffff;
+    font-size: 14px;
+    border: 1px solid #666666;
+    background: #666666;
+    cursor: pointer;
+    font-weight: bold;
+}
+div#inputIdPwd{
+    margin-right: 20px;
+}
+.member_cont .member_login_box .login_input_sec button {
+    float: right;
+    width: 158px;
+    height: 91px;
+    margin: 15px 0 0 0;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #4c4c4c;
+    background: #4c4c4c;
+}
+
+.btn_member_white {
+    width: 150px;
+    height: 45px;
+    color: #3e3d3c;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid #cccccc;
+    background: #fff;
+    cursor: pointer;
+}
+
+.btn_member_gray {
+    width: 150px;
+    height: 45px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid #cccccc;
+    background: #4c4c4c;
+    cursor: pointer;
+}
+.btn_member_next{
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 0;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid #cccccc;
+    background: #4c4c4c;
+    cursor: pointer;
+}
+
+.btn_member_prev {
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 0;
+    color: #3e3d3c;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    cursor: pointer;
+}
+.btn_confirm_js_btn_login{
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 0;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid #cccccc;
+    background: #4c4c4c;
+    cursor: pointer;
+}
+button#btnfindPwd{
+    margin-left: 80px;
+  
+}
+.btn_register_box{
+    overflow: hidden;
+    margin: 20px 0 20px 0;
+    padding: 20px 0 20px 0;
+    border-top: 1px solid #dcdcdc;
+}
+button#goToMain{
+    margin-left: 80px;
+}
+.btn_register_box li:first-child{
+    margin-left: 80px;
+    margin: 0;
+}
+.btn_register_box li{
+    float: left;
+    margin: 0 0 0 10px;
+}
+
+.member_cont .btn_login_box  {
+    overflow: hidden;
+    margin: 20px 0 20px 0;
+    padding: 20px 0 20px 0;
+    border-top: 1px solid #dcdcdc;
+}
+
+
+.member_cont .member_login_box .login_input_sec > div {
+    float: left;
+}
+
+/* 비밀번호 찾기 버튼 박스 */
+.btn_center_box {
+    text-align: center;
+}
+
+/* 비번 인증 */
+
+label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+.form_element label {
+    position: relative;
+    margin-bottom: 0;
+    display: inline-block;
+    min-width: 20px;
+    min-height: 20px;
+    padding: 0 0 0 10px;
+    font-size: 15px;
+}
+
+.find_password_box {
+    font-weight: normal;
+    font-size: 15px;
+    color: #222222;
+}
+.user_certify_list li:first-child {
+    padding-top: 0;
+}
+.user_certify_list li {
+   margin-top: 15px;
+   
+}
+.user_certify_list li span {
+    display: block;
+    margin-left:27px;
+    color: #888888;
+    font-size: 15px;
+}
+
+/* --------------이용약관// 회원가입 --------------------------------*/
+
+
+ol {
+    display: block;
+    list-style: none;
+
+}
+
+.join_agreement_wrap .member_title ol {
+    float: right;
+    line-height: 62px;
+
+}
+.sub_content:after {
+    display: block;
+    clear: both;
+    content: "";
+}
+
+li {
+    float: left;
+    list-style: none;
+    font-size: 14px;
+    display: list-item;
+}
+
+.join_agreement_wrap .member_title ol li {
+    float: left;
+    font-size: 14px;
+    color: #d1d1d1;
+}
+
+.join_agreement_wrap .member_title li span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.join_agreement_wrap .member_title li span>img {
+    padding: 0 14px;
+    vertical-align: -1px;
+}
+
+.sub_content {
+    padding: 45px 0 0 0;
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.join_agreement_wrap .member_title {
+    overflow: hidden;
+    border-bottom: 1px solid #999999;
+}
+.member_cont h3 {
+    padding: 0 0 17px 0;
+    display: block;
+}
+.join_agreement_wrap .member_title .page_on {
+    color: #4c4c4c;
+}
+.join_agreement_wrap .member_cont h3 {
+    padding: 0 0 17px 0;
+    font-weight: normal;
+    font-size: 18px;
+    color: #222222;
+}
+
+.join_agreement_wrap {
+    padding: 30px 0 0 0;
+    margin-top: 70px;
+}
+
+.join_agreement_cont {
+    padding: 30px 0 0 0;
+    border-top: 1px solid #999999;
+   
+}
+.join_agreement_cont .join_agreement_box {
+    margin: 0 0 30px 0;
+}
+
+.iframeBox{
+	margin-top: 20px;
+}
+iframe {
+    width: 740px;
+    height: 200px;
+}
+
+
+.warning_checkAll {
+    display: none;
+}
+/* 회원가입 폼 css */
+
+.base_info_box > span {
+    float: right;
+    padding: 0 0 0 10px;
+    line-height: 40px;
+    color: #4c4c4c;
+}
+.base_info_box .base_info_sec {
+    border-top: 1px solid #999999;
+}
+.base_info_sec table {
+    width: 100%;
+}
+
+table {
+    border-collapse: separate;
+    text-indent: initial;
+   
+}
+th, td {
+    font-size: 15px;
+    font-family: 'Noto Sans KR', sans-serif, AppleGothic,Dotum,"돋움",sans-serif;
+    letter-spacing: -0.5px;
+    color: #000;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+table#tblMemberRegister td{
+	text-align: left;
+}
+
+col {
+    display: table-column;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.base_info_sec table th:first-child, .base_info_sec table td:first-child {
+    border-left: none;
+}
+
+.base_info_sec table th {
+    text-align: left;
+    border-bottom: 1px solid #dcdcdc;
+    background: #fbfbfb;
+    padding: 10px 25px;
+}
+.base_info_sec table td {
+    padding: 15px 0 15px 15px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+ input{
+    font-size: 14px;
+    color: #000;
+    border-radius: 5px;
+
+    padding: 0 10px;
+    outline: none;
+   
+    border: 1px solid red;
+    line-height: 31px;
+}
+ .address_input {
+    float: left;
+    width: 72%;
+}
+
+.member_address .address_input > input{
+    margin-top: 10px;
+}
+ul#idle_mem > li:first-child{
+    margin-left: 0;
+}
+ul#idle_mem > li{
+    margin-left: 30px;
+}
+/* 버튼 */
+.btn_center_box {
+    text-align: center;
+}
+
+.btn_double_check{
+    margin-left: 10px;;
+    width: 85px;
+    height: 20px;
+    font-size: 11px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    color: #3e3d3c;
+    cursor: pointer;
+}
+
+.btn_member_next {
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 0;
+    color: #ffffff;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #4c4c4c;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+
+}
+.btn_cancle{
+    width: 150px;
+    height: 45px;
+    margin: 20px;
+    color: #3e3d3c;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn_register{
+    width: 150px;
+    height: 45px;
+    margin: 35px 0 0 0;
+    color: #ffffff;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    background: #4c4c4c;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/*-----------------------------------------------------------*/
+
+
+.sub_content .content {
+    width: 100%;
+    min-height: 500px;
+    padding: 0;
+}
+
+.board_zone_sec {
+    position: relative;
+}
+
+.board_zone_tit {
+    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
+    font-size: 16px;
+}
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.board_list_table th {
+    padding: 10px 10px 10px 14px;
+    border-bottom: 1px solid #dbdbdb;
+    background: #fbfbfb;
+}
+table {
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 2px;
+}
+.board_list_table {
+    width: 100%;
+    margin: 0 0 20px 0;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-top: 1px solid #999999;
+    text-align: center;
+}
+.board_list_table th {
+    padding: 10px 10px 10px 14px;
+    border-bottom: 1px solid #dbdbdb;
+    background: #fbfbfb;
+}
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+}
+.board_list_gallery > ul{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 50px;
+    column-gap: 20px;
+   
+}
+.board_img > img {
+    width: 385px;
+}
+.pagination  {
+    margin: 20px 0 0 0;
+   display: inline;
+}
+.search_box{
+    margin: 20px 0 0 0;
+    display: inline;
+    text-align: center;
+
+}
+.pagination ul {
+    padding: 20px 0 0;
+    text-align: center;
+}
+.pagination li{
+display: inline-block;
+}
+
+.pagination li.on span {
+    font-weight: bold;
+    color: #fff;
+    background: #7a7d81;
+    border-radius: 20px;
+}
+
+.pagination li span {
+   
+    display: block;
+    height: 30px;
+    width: 30px;
+    color: #888;
+    font-size: 11px;
+    line-height: 30px;
+   
+}
+
+.board_search_box {
+    margin: 60px 0 30px 0;
+    padding: 10px 10px 10px 10px;
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    background: #f7f7f7;
+    text-align: center;
+}
+
+/*이벤트 상세 페이지*/
+.board_view_tit {
+    overflow: hidden;
+    padding: 15px 15px 15px 15px;
+    border-top: 1px solid #999999;
+    border-bottom: 1px solid #dbdbdb;
+    background: #f7f7f7;
+}
+
+.board_view_tit h3 {
+    display: inline-block;
+    color: #111111;
+    font-size: 14px;
+}
+.board_view_tit h3 {
+    display: inline-block;
+    color: #111111;
+    font-size: 14px;
+}
+
+.board_zone_view .board_view_info {
+    overflow: hidden;
+    padding: 10px 15px 10px 15px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.board_view_info .view_info_day em {
+    position: relative;
+    display: block;
+    top: -3px;
+    padding: 0 0 0 10px;
+    font-size: 11px;
+}
+.board_view_info .view_info_day {
+    display: inline-block;
+    height: 10px;
+    margin: 0 0 0 7px;
+    font-size: 11px;
+    border-left: 1px solid #dbdbdb;
+    vertical-align: middle;
+}
+address, caption, cite, code, dfn, em, var {
+    font-style: normal;
+    font-weight: normal;
+}
+.board_view_info .view_info_hits {
+    display: inline-block;
+    text-align: right;
+}
+
+.board_zone_view .board_view_attach {
+    overflow: hidden;
+    padding: 10px 15px 10px 15px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.board_view_attach strong {
+    display: inline-block;
+    padding: 0 10px 0 10px;
+    font-size: 12px;
+    background: url(../../img/icon/board/icon_board_attach_file.png) no-repeat 0 6px;
+}
+
+.board_view_attach .attach_list a {
+    padding: 0 5px 0 5px;
+    font-size: 12px;
+    
+}
+.board_view_content .seem_cont {
+    padding: 30px 15px 30px 15px;
+    line-height: 1.8;
+}
+a {
+    color: #333;
+    text-decoration: none;
+}
+colgroup {
+    display: table-column-group;
+}
+
+.board_list_table {
+    width: 100%;
+    margin: 0 0 20px 0;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-top: 1px solid #999999;
+    text-align: center;
+}
 /* 성가은 끝 ------------------------------------------------------------------------------------------- */
 
 
