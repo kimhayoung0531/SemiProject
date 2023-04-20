@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-    String ctxPath = request.getContextPath();
-    //    /MyMVC
+	String ctxPath = request.getContextPath();
+	// SemiProject
 %>    
+    
   
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +25,7 @@
     <script src="https://kit.fontawesome.com/b7b1b05ad5.js" crossorigin="anonymous"></script>
 
     <!-- original css -->
-    <link href="" rel="stylesheet" type="text/css"></style>
+    <link href="./css/style.css" rel="stylesheet" type="text/css"></style>
     
     <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,7 +73,7 @@
                         <div class="header_search_cont">
                             <div class="h1_logo">
                                 <a href="#">
-                                    <img src="\image\main_logo.png">
+                                    <img src="<%=ctxPath%>/image/icon_heart_ku.svg">
                                 </a>
                             </div>
 
@@ -929,14 +930,11 @@
                     </div>
                          
                 </div>
-                      
-                     <!-- // sub_content -->
-
-
-
             </div>
         </div>
+             <!-- // sub_content -->
 
+            <!-- footer 시작 -->
             <div id="footer_wrap">
                 <div id="footer">
                     <div class="foot_list">
