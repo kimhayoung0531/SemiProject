@@ -3,8 +3,9 @@
 <%
 	String ctxPath = request.getContextPath();
 %>    
-    
-
+<jsp:include page="../header.jsp" />
+  
+<!-- ㄹㄹ  ㄹ -->
                 
 <div id="cart_contents">
                 <!-- 본문 시작 -->
