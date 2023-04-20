@@ -3,7 +3,8 @@
 <%
 	String ctxPath = request.getContextPath();
 %>    
-    
+<jsp:include page="../header.jsp" />
+  
 
                 
 <div id="cart_contents">
