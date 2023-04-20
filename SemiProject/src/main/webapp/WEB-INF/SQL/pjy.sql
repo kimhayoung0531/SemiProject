@@ -43,3 +43,6 @@ create table tbl_product -- 상품 테이블
 ,constraint PK_tbl_product_product_num primary key(product_num)
 ,constraint FK_tbl_product_category_num foreign key(category_num) references tbl_category(category_num)
 );
+
+delete from tbl_product where product_num = 3;
+alter table tbl_product modify main_image number(20);
