@@ -10,7 +10,7 @@ public class OrderEndAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/order/orderEnd.jsp");
+		super.setViewPage("/WEB-INF/pjy_order/orderEnd.jsp");
 		
 	}
 
