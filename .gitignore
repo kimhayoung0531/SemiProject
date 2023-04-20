@@ -94,6 +94,7 @@ hs_err_pid*
 replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse
+.classpath
 /SemiProject/src/main/webapp/WEB-INF/Command.properties
 /SemiProject/src/main/java/common/controller/InterCommand.java
 /SemiProject/src/main/java/common/controller/FrontController.java
