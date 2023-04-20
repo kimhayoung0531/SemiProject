@@ -11,6 +11,7 @@
     margin: 0 auto;
    
 }
+
 .login_sub_content:after {
     display: block;
     clear: both;
@@ -315,7 +316,7 @@ label {
     font-size: 15px;
 }
 
-/* -----------------------------------------*/
+/* ----------------------------------------------*/
 
 
 
