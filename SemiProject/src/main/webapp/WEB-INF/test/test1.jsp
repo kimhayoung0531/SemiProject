@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>test1.bab 페이지</title>
+<title>test1.ban 페이지</title>
 </head>
 <body>
 	<h2>test1.ban 페이지</h2>
