@@ -5,7 +5,7 @@
 %>    
 <jsp:include page="../header.jsp" />
   
-<!-- ㄹㄹㄹ -->
+<!-- ㄹㄹ  ㄹ -->
                 
 <div id="cart_contents">
                 <!-- 본문 시작 -->
