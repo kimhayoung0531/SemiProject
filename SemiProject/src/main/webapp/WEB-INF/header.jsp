@@ -27,6 +27,9 @@
 
     <!-- 아이콘 JS-->
     <script src="https://kit.fontawesome.com/b7b1b05ad5.js" crossorigin="anonymous"></script>
+    
+    <!-- 구글 icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <!-- original css -->
     <link href="<%=ctxPath %>/css/style.css" rel="stylesheet" type="text/css"></style>
@@ -77,7 +80,7 @@
                         <div class="header_search_cont">
                             <div class="h1_logo">
                                 <a href="#">
-                                    <img src="\image\main_logo.png">
+                                    <img src="<%=ctxPath%>\image\main_logo.png">
                                 </a>
                             </div>
 
@@ -89,7 +92,7 @@
                                             <div class="top_search_cont">
                                                 <div class="top_text_cont">
                                                     <input type="text" id="search_form" name="keyword" class="top_srarch_text" title placeholder="검색어를 입력해주세요" autocomplete="off">
-                                                    <input type="image" src="/image/icon-search-b.png" id="btnSearchTop" class="btn_top_srarch" title="검색" value="검색" alt="검색" />
+                                                    <input type="image" src="<%=ctxPath%>/image/icon-search-b.png" id="btnSearchTop" class="btn_top_srarch" title="검색" value="검색" alt="검색" />
                                                         
                                                 </div>
                                             </div>
