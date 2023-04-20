@@ -4,14 +4,10 @@
 	String ctxPath = request.getContextPath();
 %>    
 <jsp:include page="../header.jsp" />
- 
-<!-- test -->
-<!-- ㄹㄹ  ㄹ -->
-                
+
 <div id="cart_contents">
                 <!-- 본문 시작 -->
         
-
     <div class="cart_sub_content"> <!-- 장바구니 sub_content 시작!! -->
         
         <div class="cart_content_box">
@@ -29,14 +25,113 @@
                 <div class="cart_cont">
         
                     <form id="frmCart" name="frmCart" method="post" target="ifrmProcess">
-                        
-
+                        <input type="hidden" name="mode" value="">
+                        <input type="hidden" name="cart[cartSno]" value="">
+                        <input type="hidden" name="cart[goodsNo]" value="">
+                        <input type="hidden" name="cart[goodsCnt]" value="">
+                        <input type="hidden" name="cart[addGoodsNo]" value="">
+                        <input type="hidden" name="cart[addGoodsCnt]" value="">
+                        <input type="hidden" name="cart[couponApplyNo]" value="">
+                        <input type="hidden" name="useBundleGoods" value="1">
+                        <input type="hidden" name="ac_id" value="">
                         <!-- 장바구니 상품리스트 시작 -->
+                        
+                        <div class="cart_cont_list">
+    
+                            <div class="order_table_type">
+                                <table>
+                                    <colgroup>
+                                        <col style="width:3%">  <!-- 체크박스 -->
+                                        <col>					<!-- 상품명/옵션 -->
+                                        <col style="width: 8%">  <!-- 수량 -->
+                                        <col style="width:10%"> <!-- 상품금액 -->
+                                        <col style="width:13%"> <!-- 마일리지 -->
+                                        <col style="width:10%"> <!-- 합계금액 -->
+                                        <col style="width:10%"> <!-- 배송비 -->
+                                    </colgroup>
+                                  
+                                  
+                                    <thead>
+                                    <tr>
+                                        <th>        <!-- 선택상품을 전체선택 체크박스 allCheck1-->
+                                            <div class="form_element">
+                                                <input type="checkbox" id="allCheck1" class="gd_select_all_goods" checked="checked">
+                                                <label for="allCheck1" class="check_s on"></label>
+                                            </div>
+                                        </th>
+                                        <th>상품/옵션 정보</th>
+                                        <th>수량</th>
+                                        <th>상품금액</th>
+                                        <th>적립 마일리지</th>
+                                        <th>합계금액</th>
+                                        <th>배송비</th>
+                                    </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                    <tr>
+                                        <td class="td_chk"> <!-- 선택상품 체크박스-->    
+                                            <div class="form_element">
+                                                <input type="checkbox" id="cartSno1_1429514" />
+                                            </div>
+                                        </td>
+
+                                        <td class="td_left">    <!-- 상품 이미지 정보 클릭시 이동! -->
+                                            <div class="pick_add_cont"> 
+                                                <div class="pick_add_img_info"> 
+                                                    <a href="../goods/goods_view.php?goodsNo=1000002827"><img src="https://cafenoli605.hgodo.com/data/thum/1000002827.jpg" width="60"
+                                                        alt="냉동생지 - 빵데께쥬/찰치즈빵" title="냉동생지 - 빵데께쥬/찰치즈빵">
+                                                    </a> 
+                                                    <span><a href="../goods/goods_view.php?goodsNo=1000002827">냉동생지 - 빵데께쥬/찰치즈빵</a></span>
+
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td class="td_order_amount">    <!-- 장바구니 수량 / 변경 -->
+                                            <div class="order_goods_num">
+                                                <div class="btn_gray_list">
+                                                    <p><label for="number"></label><input type="number" min="1"  max="50" step="1" value="1" id="number"/></p>                                                </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        
+                                        <td>    <!-- 상품 금액 -->
+                                            <strong class="order_sum_txt price">10,900</strong>
+                                            <span>원</span>
+                                        </td>
+
+                                        <td class="td_mileage">     <!-- 마일리지 -->
+                                                <ul class="mileage_list">
+                                                    <li class="mileage_mileage">
+
+                                                    </li>
+                                                </ul>
+                                        </td>
+                                        <td>
+                                            <strong class="order_sum_txt">10,900</strong>
+                                        </td>
+                                        <td class="td_delivery" rowspan="4">
+                                            기본 - 금액별배송비<br>
+                                            0원
+        
+                                            <br>
+                                            (택배-선결제)
+                                        </td>
+                                    </tr>
+                                        
+        
+                                    </tbody>
+        
+        
+                                </table>
+                            </div>
+        
+                        </div>
+                       
                         <!-- //cart_cont_list -->
                         <!-- 장바구니 상품리스트 끝 -->
-                        
-                        <!--장바구니에 상품이 없을 때-->
-                        <p class="cart_no_data">장바구니에 담겨있는 상품이 없습니다.</p>
         
         
                     </form>
@@ -84,10 +179,8 @@
                                 
                             </div>
 
-                            <div id="deliveryChargeText" class="tobe_mileage"></div>
-
-                            <div class="tobe_mileage">적립예정 마일리지 : <span id="totalGoodsMileage">380</span> 원</div>
-                            
+                        <div id="deliveryChargeText" class="tobe_mileage"></div>
+                        <div class="tobe_mileage">적립예정 마일리지 : <span id="totalGoodsMileage">380</span> 원</div>
                         </div>
                         <!-- //price_sum_cont -->
                     </div>
@@ -102,17 +195,11 @@
                             <button type="button" class="btn_order_whole_buy" onclick="">전체 상품 주문</button>
                         </div>
                     </div>
-                    
                     <div class="chk_none"> ※ 주문서 작성단계에서 마일리지 적용을 하실 수 있습니다.</div>                    
-                
                 </div>
         
-                
-
-            </div>
-        </div><!--cart_content_box 끝-->
-
-    </div>
-</div> <!-- cart_contents 끝 -->
-
+       	 </div><!--cart_content_box 끝-->
+    	</div>
+	</div>
+</div>
 <jsp:include page="../footer.jsp" />
