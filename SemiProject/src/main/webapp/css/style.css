@@ -2591,7 +2591,7 @@ tr {
     border-bottom: 1px solid #dcdcdc;
 }
 
- input{
+ table#tblMemberRegister td input {
     font-size: 14px;
     color: #000;
     border-radius: 5px;
@@ -2599,7 +2599,7 @@ tr {
     padding: 0 10px;
     outline: none;
    
-    border: 1px solid red;
+   	border:1px solid #dcdcdc;
     line-height: 31px;
 }
  .address_input {
