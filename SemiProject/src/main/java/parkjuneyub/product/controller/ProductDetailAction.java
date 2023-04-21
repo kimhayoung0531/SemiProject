@@ -13,21 +13,54 @@ import parkjuneyub.product.model.ProductVO;
 public class ProductDetailAction extends AbstractController {
 	
 
-
+	/// http://localhost:9090/SemiProject/productDeatail.ban?product_num=9 이런식으로 입력하셔야 상품 상세페이지 들어가실 수 있습니다.
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		
 		String product_num = request.getParameter("product_num");
-		System.out.println("상품번호 테스트" + product_num);
-		ProductVO pvo = new ProductVO();
+		if(product_num == null) {
+			product_num = "";
+		}
+		if(product_num.trim().isEmpty()) {
+			
+			String message = "비정상적인 경로로 들어왔습니다.";
+			String loc = "javascript:history.back()";
+			request.setAttribute("message", message);
+			request.setAttribute("loc", loc);
+			
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/msg.jsp");
+		}
 		
-		InterProductDAO pdao = new ProductDAO();
+		if(!product_num.trim().isEmpty()) {
+			try {
+				long num = Long.parseLong(product_num);
+			}
+			catch(NumberFormatException e) {
+				String message = "비정상적인 경로로 들어왔습니다.";
+				String loc = "javascript:history.back()";
+				request.setAttribute("message", message);
+				request.setAttribute("loc", loc);
+				
+				super.setRedirect(false);
+				super.setViewPage("/WEB-INF/msg.jsp");
+				return;
+			}
+			
+			
+			
+			ProductVO pvo = new ProductVO();
+			
+			InterProductDAO pdao = new ProductDAO();
+			
+			pvo = pdao.showItemInfo(product_num);
+			
+			request.setAttribute("pvo", pvo);
+			super.setRedirect(false);
+			super.setViewPage("/WEB-INF/pjy_product/productDetail.jsp");
+		}
 		
-		pvo = pdao.showItemInfo(product_num);
 		
-		request.setAttribute("pvo", pvo);
-		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/pjy_product/productDetail.jsp");
 	}
 	
 }
