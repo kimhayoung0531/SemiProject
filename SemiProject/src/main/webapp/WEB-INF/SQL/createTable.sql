@@ -86,7 +86,7 @@ create table tbl_product -- 상품 테이블
 ,main_image         number(20)      not null
 ,product_price      NUMBER(10)      not null
 ,product_detail     VARCHAR2(1000)  not null
-,product_inventory  VARCHAR2(1000)  not null
+,product_inventory  number(20)  not null
 ,product_date       date default sysdate
 ,sale_count         NUMBER(10)      null
 ,constraint PK_tbl_product_product_num primary key(product_num)
