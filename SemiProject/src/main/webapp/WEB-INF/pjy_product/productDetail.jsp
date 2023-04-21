@@ -25,7 +25,7 @@
                                         <div class="item_photo_big">
                                             <span class="img_photo_big">
                                                 <a href="#lyZoom" id="mainImage" class="zoom_layer_open btn_open_layer">
-                                                    <img src="<%= ctxPath%>/image/testItem.jpg" width="500" class="middle">
+                                                    <img src="<%= ctxPath%>/image/item_main/${requestScope.pvo.main_image}.jpg" width="500" class="middle">
                                                 </a>
                                                 
                                             </span>
@@ -91,7 +91,7 @@
 
                                         <div class="item_tit_detail_cont">
                                             <div class="item_detain_tit">
-                                                <h3>냉동생지 - [삼양사] 애플파이</h3>
+                                                <h3>${requestScope.pvo.product_title}</h3>
                                             </div>
 
                                             <div class="item_datail_list">
@@ -100,7 +100,7 @@
                                                     <dd>
                                                         <strong>
                                                             <strong>
-                                                                #,###
+                                                               ${requestScope.pvo.product_price}
                                                             </strong>
                                                             원
                                                         </strong>
@@ -118,13 +118,6 @@
                                                     <dt>구매혜택</dt>
                                                     <dd>
                                                         마일리지 적립 : <span class="save_mileage">###원</span>
-                                                    </dd>
-                                                </dl>
-
-                                                <dl class="item_detail_discount_mileage">
-                                                    <dt>제조사</dt>
-                                                    <dd>
-                                                        삼양사
                                                     </dd>
                                                 </dl>
 
