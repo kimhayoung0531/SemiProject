@@ -3,7 +3,10 @@
   <display-name>SemiProject</display-name>
   <welcome-file-list>
   
+<<<<<<< HEAD
   	<welcome-file>home.ban</welcome-file>
+=======
+>>>>>>> branch 'main' of https://github.com/kimhayoung0531/SemiProject.git
     <welcome-file>home.html</welcome-file>
     <welcome-file>home.jsp</welcome-file>
     <welcome-file>home.htm</welcome-file>
