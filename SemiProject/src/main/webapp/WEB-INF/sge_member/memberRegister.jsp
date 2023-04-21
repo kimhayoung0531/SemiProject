@@ -228,8 +228,8 @@
 	      //초기값을 오늘 날짜로 설정
 	      //$('input#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후) 
    	   
-   	   // 아이디 중복체크
-   	   $("img#idcheck").click(function(){
+   	   // 아이디 중복체크(예정)
+   	 <%--   $("button#btn_double_check").click(function(){
   	   		//b_flag_idDuplicate_click = true;
   	   
 	   	$.ajax({
@@ -256,7 +256,7 @@
 	            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
 	          }
 	      }); // end of $.ajax
-   	   }); //end of  $("img#idcheck").click(function()
+   	   }); //end of  $("img#idcheck").click(function() --%>
        
    });// end of document ready()
    
@@ -412,9 +412,9 @@
                                                <span class="important">유선번호(선택)</span>
                                            </th>
                                            <td>
-                                                <input type="text" id="hp1" name="hp1" size="3" maxlength="3" value="02" readonly />&nbsp;-&nbsp;
-			    							    <input type="text" id="hp2" name="hp2" size="4" maxlength="4" />&nbsp;-&nbsp;
-			    							    <input type="text" id="hp3" name="hp3" size="4" maxlength="4" />
+                                                <input type="text" id="mp1" name="mp1" size="3" maxlength="3" value="02" readonly />&nbsp;-&nbsp;
+			    							    <input type="text" id="mp2" name="mp2" size="4" maxlength="4" />&nbsp;-&nbsp;
+			    							    <input type="text" id="mp3" name="mp3" size="4" maxlength="4" />
 				    							<span class="error">유선번호 형식이 아닙니다.</span>
                                            </td>
                                        </tr>
@@ -432,10 +432,10 @@
                                                </div>
                                                <div class="address_input">
 		                   						   <input type="text" id="address" name="address" class="requiredInfo" placeholder="주소"/>
-                                                   <input type="text" id="detail_email"
+                                                   <input type="text" id="detailAddress"
                                                        class="requiredInfo" placeholder="상세주소" />
 												   <span class="error">주소를 입력하세요</span>
-                                                   <input type="text" id="extra_address" placeholder="부가주소"
+                                                   <input type="text" id="extraAddress" placeholder="부가주소"
                                                        class="extra_address" />
                                                        
                                                </div>
@@ -446,7 +446,7 @@
                                                <span>생일</span>
                                            </th>
                                            <td>
-                                               <input type="text" id="datepicker"/>
+                                               <input type="text" id="datepicker" />
                                            </td>
                                        </tr>
                                        <tr>
