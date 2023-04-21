@@ -25,7 +25,7 @@
     <script src="https://kit.fontawesome.com/b7b1b05ad5.js" crossorigin="anonymous"></script>
 
     <!-- original css -->
-    <link href="./css/style.css" rel="stylesheet" type="text/css"></style>
+    <link href="<%=ctxPath%>/css/style.css" rel="stylesheet" type="text/css"></style>
     
     <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +73,7 @@
                         <div class="header_search_cont">
                             <div class="h1_logo">
                                 <a href="#">
-                                    <img src="<%=ctxPath%>/image/icon_heart_ku.svg">
+                                    <img src="<%=ctxPath%>/image/main_logo.png">
                                 </a>
                             </div>
 
