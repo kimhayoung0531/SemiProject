@@ -18,14 +18,14 @@ public class MemberRegisterAction extends AbstractController {
 
 		if("GET".equalsIgnoreCase(method)) {
 			this.setRedirect(false);
-			super.setViewPage("/WEB-INF/member/memberRegister.jsp");
+			super.setViewPage("/WEB-INF/sge_member/memberRegister.jsp");
 		}
 		else {
 			// post 방식으로 넘어온다면 디비에 저장해줘야한다.
-		
-			String user_id = request.getParameter("userid");
+		    
+			String user_id = request.getParameter("user_id");
 			String pwd = request.getParameter("pwd");
-			String user_name = request.getParameter("name");
+			String user_name = request.getParameter("user_name");
 			String email = request.getParameter("email");
 			String hp1 = request.getParameter("hp1");
 			String hp2 = request.getParameter("hp2");
@@ -33,7 +33,7 @@ public class MemberRegisterAction extends AbstractController {
 			String mp1 = request.getParameter("mp1");
 			String mp2 = request.getParameter("mp2");
 			String mp3 = request.getParameter("mp3");
-			String post_code = request.getParameter("postcode");
+			String post_code = request.getParameter("post_code");
 			String address = request.getParameter("address");
 			String detailAddress = request.getParameter("detailAddress");
 			String extraAddress = request.getParameter("extraAddress");
@@ -43,10 +43,9 @@ public class MemberRegisterAction extends AbstractController {
 
 			String mobile = hp1+hp2+hp3;
 			String telephone = mp1+mp2+mp3;
+
 			
-			
-			
-		    MemberVO member = new MemberVO( user_id,  pwd,  user_name,  email, telephone,  mobile,  post_code, address,  detailAddress,  extraAddress,  gender,  birthday);
+		    MemberVO member = new MemberVO(user_id, pwd, user_name, email, mobile,telephone,post_code, address,  detailAddress,  extraAddress,  gender,  birthday);
 		
 			try {
 			
