@@ -12,6 +12,8 @@ public class ProductVO {
 	private int product_date;
 	private int sale_count;
 	
+	
+	
 	public ProductVO(int product_num, int category_num, String product_title, int main_image, int product_price,
 			String product_detail, String product_inventory, int product_date, int sale_count) {
 		super();
@@ -24,6 +26,10 @@ public class ProductVO {
 		this.product_inventory = product_inventory;
 		this.product_date = product_date;
 		this.sale_count = sale_count;
+	}
+	
+	public ProductVO() {
+		
 	}
 	
 	public int getProduct_num() {
