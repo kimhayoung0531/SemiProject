@@ -12,6 +12,7 @@
 
 
 <style>
+	
     #container {
         width: 80%;
         margin: 0 auto; /* 가운데 정렬을 위해 margin을 auto로 설정 */
@@ -48,7 +49,17 @@
 	left: 43%;
     color: white;
     }
+    
+    li {
+    float: none;
+    list-style: none;
+    font-size: 14px;
+    display: list-item;
+    }
 
+	th {
+	    font-size: 12px;
+	}
 </style>
     
 </head>
@@ -75,14 +86,7 @@
                                 <li><a href="../mypage/order_list.php">- 주문목록/배송조회</a></li>
                                 <li><a href="../mypage/cancel_list.php">- 취소/반품/교환 내역</a></li>
                                 <li><a href="../mypage/refund_list.php">- 환불/입금 내역</a></li>
-                                <li><a href="../mypage/wish_list.php">- 찜리스트</a></li>
-                            </ul>
-                        </li>
-                        <li>혜택관리
-                            <ul class="sub_depth1">
-                                <li><a href="../mypage/coupon.php">- 쿠폰</a></li>
-                                <li><a href="../mypage/deposit.php">- 예치금</a></li>
-                                <li><a href="../mypage/mileage.php">- 마일리지</a></li>
+                                <li><a href="../mypage/wish_list.php">- 좋아요리스트</a></li>
                             </ul>
                         </li>
                         <li>고객센터
@@ -94,7 +98,7 @@
                             <ul class="sub_depth1">
                                 <li><a href="../mypage/my_page_password.php">- 회원정보 변경</a></li>
                                 <li><a href="../mypage/hack_out.php">- 회원 탈퇴</a></li>
-                                <li><a href="../mypage/shipping.php">- 배송지 관리</a></li>
+                                <li><a href="../mypage/mileage.php">- 마일리지</a></li>
                             </ul>
                         </li>
                         <li>나의 상품문의
