@@ -115,8 +115,7 @@
                                 <div class="switch">전체 카테고리
                                     <div class="switch_submenu">
                                         <ul class ="switch_detail_submenu" >
-                                             <li>
-                                                <a href="">빵</a>
+                                              <li class="ojh_li"><a href="">빵</a>
                                                 <ul class="sub_delth1" >
                                                     <li class="ojh_li"><a href="">식빵</a></li>
                                                     <li class="ojh_li"><a href="">건강빵</a></li>
