@@ -1,11 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <%
 	String ctxPath = request.getContextPath();
 	// SemiProject
 %>    
 	<jsp:include page="../header.jsp" />
+	
+	<script>
+		$(document).ready(function(){
+			$("input#item_cnt").bind("change", function() {
+				const count = Number($("input#item_cnt").val());
+
+				const price = ${requestScope.pvo.product_price};
+
+				const total_price = count * price;
+
+				$("strong.goods_total_price").text(total_price);
+			});
+		});
+		
+	</script>
 
 
             <div id="container">
@@ -42,7 +59,7 @@
                                                         <li class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" 
                                                         tabindex="-1" role="option" aria-describedby="slick-slide00" style="width :84px;">
                                                             <a href="#상품 메인이미지가 현재 클릭한 사진으로 바뀌는 메소드" tabindex="0">
-                                                                <img src="<%= ctxPath%>/image/testItem.jpg" width="84px" class="middle">
+                                                                <img src="<%= ctxPath%>/image/item_main/${requestScope.pvo.main_image}.jpg" width="84px" class="middle">
                                                             </a>
                                                         </li>
                                                     </div>
@@ -99,8 +116,9 @@
                                                     <dt>판매가</dt>
                                                     <dd>
                                                         <strong>
-                                                            <strong>
-                                                               ${requestScope.pvo.product_price}
+                                                            <strong id="price">
+                                                            <fmt:formatNumber value="${requestScope.pvo.product_price}" pattern="#,###" />
+                                                               
                                                             </strong>
                                                             원
                                                         </strong>
@@ -142,7 +160,7 @@
                                                 <div class="end_price item_total_box">
                                                     <dl class="total_goods">
                                                         <dt>총 상품금액</dt>
-                                                        <dd><strong class="goods_total_price">#,###</strong>원</dd>
+                                                        <dd><strong class="goods_total_price">${requestScope.pvo.product_price}</strong>원</dd>
 
                                                     </dl>
                                                 </div>

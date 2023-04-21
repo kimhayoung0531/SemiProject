@@ -423,11 +423,12 @@ a {
     content: "";
     display: block;
     width: 1px;
-    height: 138px;
+    height: 80px;
     background: #dfdfdf;
     position: absolute;
-    top: 0;
+    top: -10%;
     right: 0;
+    
 }
 
 .footer-bottom .container>div:last-child:after {
