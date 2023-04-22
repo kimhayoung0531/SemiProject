@@ -10,4 +10,7 @@ public interface InterMemberDAO {
 	// 아이디가 중복된건지 아닌지 확인해주는 메소드
 	Boolean idDoubleCheck(String user_id)throws SQLException;
 
+	// 이메일이 중복된건지 아닌지 확인해주는 메소드 
+	Boolean emailDoubleCheck(String email)throws SQLException;
+
 }
