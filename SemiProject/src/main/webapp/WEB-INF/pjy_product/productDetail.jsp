@@ -13,13 +13,23 @@
 		$(document).ready(function(){
 			$("input#item_cnt").bind("change", function() {
 				const count = Number($("input#item_cnt").val());
-
+				
 				const price = ${requestScope.pvo.product_price};
 
 				const total_price = count * price;
 
 				$("strong.goods_total_price").text(total_price);
+				$("input#product_cnt").val(count);
 			});
+			
+			$("button.btn_add_order").bind("click", function() {
+				const frm = document.itemFrmView;
+				frm.action = "<%= request.getContextPath() %>/order.ban";
+				frm.submit();
+			});
+			
+			
+			
 		});
 		
 	</script>
@@ -75,7 +85,7 @@
                                 <!-- item_photo_view_box -->
 
                                 <form name="itemFrmView" id="itemFrmView" method="post">
-                                    <input type="hidden" name="mode" value="get_benefit">
+<%--                                     <input type="hidden" name="mode" value="get_benefit">
                                     <input type="hidden" name="scmNo" value="1">
                                     <input type="hidden" name="cartMode" value="">
                                     <input type="hidden" name="set_goods_price" value="21000">
@@ -102,7 +112,11 @@
                                     <input type="hidden" id="set_dc_price" value="0">
                                     <input type="hidden" id="goodsOptionCnt" value="1">
                                     <input type="hidden" name="optionFl" value="n">
-                                    <input type="hidden" name="useBundleGoods" value="1">
+                                    <input type="hidden" name="useBundleGoods" value="1"> --%>
+                                    
+                                    <input type="hidden" name="product_name" value="${requestScope.pvo.product_title}">
+                                    <input type="hidden" id="product_cnt" name="product_cnt" value="">
+                                    
 
                                     <div class="item_info_box">
 
