@@ -10,7 +10,7 @@ public class LoginAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		setRedirect(false);
-		setViewPage("/WEB-INF/sge_member/memberLogin.jsp");
+		setViewPage("/WEB-INF/sge_login/memberLogin.jsp");
 		
 	}
 
