@@ -275,8 +275,25 @@ body .centerMenu ul li a {
 
 /* 전체 카테고리 끝 */
 
+/* (카테고리) 빵 Css 시작*/
 
+.ojh_content {
+	padding: 45px 0px 0px 0px;
+	
+}
 
+.ojh_left_wing {
+	
+	border: solid 1px red;
+}
+
+.current-cate {
+	background: #5a5a5a;
+    line-height: 47px;
+    color: white;
+}
+
+ 
 /* 브라우저 마진과 패딩 리셋 */
 * {margin:0;padding:0;}
 

@@ -122,36 +122,36 @@
                                 <div class="switch">전체 카테고리
                                     <div class="switch_submenu">
                                         <ul class ="switch_detail_submenu" >
-                                             <li>
+                                        <li class="ojh_li">
                                                 <a href="">빵</a>
                                                 <ul class="sub_delth1" >
-                                                    <li><a href="">식빵</a></li>
-                                                    <li><a href="">건강빵</a></li>
-                                                    <li><a href="">도넛/고로케</a></li>
-                                                    <li><a href="">패스트리</a></li>
+                                                    <li class="ojh_li"><a href="">식빵</a></li>
+                                                    <li class="ojh_li"><a href="">건강빵</a></li>
+                                                    <li class="ojh_li"><a href="">도넛/고로케</a></li>
+                                                    <li class="ojh_li"><a href="">패스트리</a></li>
                                                 </ul>
                                             </li>                                           
-                                            <li><a href="">케이크</a>
+                                            <li class="ojh_li"><a href="">케이크</a>
                                                 <ul class="sub_delth1">
-                                                    <li><a href="">생크림 케이크</a></li>
-                                                    <li><a href="">클래식 케이크</a></li>
-                                                    <li><a href="">캐릭터 케이커</a></li>
+                                                    <li class="ojh_li"><a href="">생크림 케이크</a></li>
+                                                    <li class="ojh_li"><a href="">클래식 케이크</a></li>
+                                                    <li class="ojh_li"><a href="">캐릭터 케이커</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="">디저트</a>
+                                            <li class="ojh_li"><a href="">디저트</a>
                                                 <ul class="sub_delth1">
-                                                    <li><a href="">쿠키</a></li>
-                                                    <li><a href="">초코/캔디</a></li>
-                                                    <li><a href="">아이스</a></li>
-                                                    <li><a href="">마카롱</a></li>
+                                                    <li class="ojh_li"><a href="">쿠키</a></li>
+                                                    <li class="ojh_li"><a href="">초코/캔디</a></li>
+                                                    <li class="ojh_li"><a href="">아이스</a></li>
+                                                    <li class="ojh_li"><a href="">마카롱</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="">음료</a>
+                                            <li class="ojh_li"><a href="">음료</a>
                                                 <ul class="sub_delth1">
-                                                    <li><a href="">우유</a></li>
-                                                    <li><a href="">커피</a></li>
-                                                    <li><a href="">에이드/TEA</a></li>
-                                                    <li><a href="">스무디/쉐이크</a></li>
+                                                    <li class="ojh_li"><a href="">우유</a></li>
+                                                    <li class="ojh_li"><a href="">커피</a></li>
+                                                    <li class="ojh_li"><a href="">에이드/TEA</a></li>
+                                                    <li class="ojh_li"><a href="">스무디/쉐이크</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -172,7 +172,49 @@
                 </div>
              </div>
              <!-- // header wrap --> 
+		     
+		     <div class="ojh_sub_content">
+                <div class="ojh_content" style="">
+                            
+                    <div class="ojh_container relative clearfix">
+                        <div class="ojh_left_wing">
+                            
+                            <div class="current-cate">
+                                <h3 class="ojh_li" style="font-size: 18px;"> 빵 </h3>
+                            </div>
 
+                            <div class="category-box">
+                                <ul>
+                                    <li class="ojh_li" style="font-size: 13px;"> 
+                                        <a href="#"></a>
+                                        <span> 식빵</span>
+                                    </li>
+                                    <li class="ojh_li" style="font-size: 13px;"> 
+                                        <a href="#"></a>
+                                        <span> 건강빵</span>
+                                    </li>
+                                    <li class="ojh_li" style="font-size: 13px;"> 
+                                        <a href="#"></a>
+                                        <span> 도넛/고로케</span>
+                                    </li>
+                                    <li class="ojh_li" style="font-size: 13px;"> 
+                                        <a href="#"></a>
+                                        <span> 패스트리</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    
+                        <div class="ojh_right_content goods_list">
+                           <div class="ojh_addition_zone">
+                            <p style="text-align: center;" >
+                                <img src="<%=ctxPath%>/image/bread_ba.jpg" style="width: 850px;">
+                            </p>
+                           </div> 
+                        </div>
+                    </div>   
+                </div>
+            </div>
              
              <div id="footer_wrap">
                 <div id="footer">
