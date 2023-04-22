@@ -11,7 +11,7 @@ public class CartVO implements InterCartDAO{
 	
 	// select용
 	private MemberVO user_id;
-	
+	 
 	public CartVO() {}
 
 	public long getOrder_num() {

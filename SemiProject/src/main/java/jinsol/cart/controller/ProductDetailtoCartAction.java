@@ -15,6 +15,7 @@ public class ProductDetailtoCartAction extends AbstractController {
 		super.setViewPage("/WEB-INF/kjs_cart/productDetailtoCart.jsp");
 		
 		
+		
 	} // end of public void execute() -----------------------------------
 
 }

@@ -21,7 +21,7 @@ public class CartDAO {
 			if(rs != null) { rs.close(); rs=null;}
 			if(pstmt != null) { pstmt.close(); pstmt=null;}
 			if(conn != null) { conn.close(); conn=null;}
-		} catch(SQLException e) {
+		} catch(SQLException e) { 
 			e.printStackTrace();
 		}
 	}	//end of private void close()--------------------------

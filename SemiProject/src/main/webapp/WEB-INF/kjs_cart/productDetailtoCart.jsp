@@ -3,10 +3,10 @@
 
 <%
 	String ctxPath = request.getContextPath();
-	// SemiProject
+	// SemiProject 
 %>    
 <jsp:include page="../header.jsp" />
-
+  
 <script type="text/javascript">
 
 	$(document).ready(function () {

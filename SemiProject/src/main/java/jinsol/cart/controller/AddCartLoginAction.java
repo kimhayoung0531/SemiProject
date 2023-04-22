@@ -14,7 +14,7 @@ public class AddCartLoginAction extends AbstractController{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-		// 장바구니에 상품을 담기위한 전제조건은 먼저 로그인을 해야 하는 것이다.
+		// 장바구니에 상품을 담기위한 전제조건은 먼저 로그인을 해야 하는 것이다.  
 		if(super.checkLogin(request)) {
 			//로그인을 했으면
 			super.setRedirect(false);
