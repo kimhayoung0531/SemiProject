@@ -89,7 +89,7 @@
                          </div>
                      </div> <!--//join_agreement_cont -->
                      <div class="btn_center_box">
-                         <button type="button" id="btnNextStep" class="btn_member_next">다음단계 </button>
+                         <button type="button" id="btnNextStep" class="btn_member_next"  onclick="location.href='<%= ctxPath%>/memberRegister.ban'" >다음단계 </button>
                      </div>
                  </form>
              </div><!--member_cont-->
