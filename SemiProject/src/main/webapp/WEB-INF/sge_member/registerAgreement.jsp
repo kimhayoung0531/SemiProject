@@ -6,8 +6,8 @@
 <jsp:include page="../header.jsp" />
  <div class="sub_content">
      <div class="content_box">
-
-
+     
+     
          <div class="join_agreement_wrap">
              <div class="member_title">
                  <h2>회원가입 </h2>
@@ -53,7 +53,6 @@
                              </label>
                              <span>(전체동의,선택항목도 포합됩니다.)</span>
                          </div>
-
 
                          <div class="join_agreement_box">
                              <div class="form_element">
