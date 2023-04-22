@@ -1,6 +1,7 @@
 package sge.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
@@ -30,7 +31,7 @@ public class IdDoubleCheckAction extends AbstractController {
 			
 			String json = jsonobj.toString();
 			
-			request.setAttribute("user_Id", user_id);
+			request.setAttribute("json", json);
 			
 			super.setRedirect(false);
 			super.setViewPage("/WEB-INF/jsonview.jsp");
