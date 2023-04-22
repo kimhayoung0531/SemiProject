@@ -2886,7 +2886,9 @@ colgroup {
 /* 김진솔 ------------------------------------------------------------------------------------------- */
 .cart_content_box .order_wrap .order_tit{
     overflow:hidden; 
-    border-bottom:1px solid #dbdbdb;}
+    border-bottom:1px solid #dbdbdb;
+    height: 100px;
+    }
     
 
 .cart_content_box .order_wrap .order_tit h2{

@@ -73,7 +73,6 @@
                                         <th>        <!-- 선택상품을 전체선택 체크박스 allCheck-->
                                             <div class="form_element">
                                                 <input type="checkbox" id="allCheck" class="gd_select_all_goods" checked="checked">
-                                                <label for="allCheck" class="check_s on"></label>
                                             </div>
                                         </th>
                                         <th>상품/옵션 정보</th>
@@ -115,7 +114,7 @@
                                         </td>
                                         
                                         <td>    <!-- 상품 금액 -->
-                                            <strong class="order_sum_txt price">10,900</strong>
+                                            <strong class="order_sum_txt price" value=""></strong>
                                             <span>원</span>
                                         </td>
 
@@ -127,7 +126,8 @@
                                                 </ul>
                                         </td>
                                         <td>
-                                            <strong class="order_sum_txt">10,900</strong>
+                                            <strong class="order_sum_txt" value=""></strong>
+                                            <span>원</span>                                     
                                         </td>
                                         <td class="td_delivery" rowspan="4">
                                             기본 - 금액별배송비<br>

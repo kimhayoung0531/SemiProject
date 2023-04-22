@@ -4,9 +4,9 @@ import sge.member.model.MemberVO;
 
 public class CartVO implements InterCartDAO{
 
-	private int order_num;
-	private int product_num;
-	private int product_count;
+	private long order_num;
+	private long product_num;
+	private long product_count;
 	private String cart_date;
 	
 	// select용
@@ -14,35 +14,27 @@ public class CartVO implements InterCartDAO{
 	
 	public CartVO() {}
 
-	
-	
-	////////////////////////////////////////////
-	// Getter Setter
-	
-	
-	
-	
-	public int getOrder_num() {
+	public long getOrder_num() {
 		return order_num;
 	}
 
-	public void setOrder_num(int order_num) {
+	public void setOrder_num(long order_num) {
 		this.order_num = order_num;
 	}
 
-	public int getProduct_num() {
+	public long getProduct_num() {
 		return product_num;
 	}
 
-	public void setProduct_num(int product_num) {
+	public void setProduct_num(long product_num) {
 		this.product_num = product_num;
 	}
 
-	public int getProduct_count() {
+	public long getProduct_count() {
 		return product_count;
 	}
 
-	public void setProduct_count(int product_count) {
+	public void setProduct_count(long product_count) {
 		this.product_count = product_count;
 	}
 
@@ -61,5 +53,14 @@ public class CartVO implements InterCartDAO{
 	public void setUser_id(MemberVO user_id) {
 		this.user_id = user_id;
 	}
+
+	
+	
+	////////////////////////////////////////////
+	// Getter Setter
+	
+	
+	
+	
 	
 }
