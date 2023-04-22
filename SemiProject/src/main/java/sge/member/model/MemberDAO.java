@@ -131,5 +131,32 @@ public class MemberDAO implements InterMemberDAO {
 	
 		return idExist;
 	}// end of idDoubleCheck
+	
+	// 이메일이 중복된건지 아닌지 확인해주는 메소드 
+	@Override
+	public Boolean emailDoubleCheck(String email)throws SQLException {
+		
+		Boolean emailExist = false;
+		 try {
+			conn = ds.getConnection();
+			
+			String sql = " select * " +
+					     " from tbl_member " +
+						 " where email = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, aes.encrypt(email));
+			
+			rs = pstmt.executeQuery();
+			emailExist = rs.next();
+			
+		}catch(GeneralSecurityException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+			
+		}finally {
+			close();
+		}
+		return emailExist;
+	}// end of public Boolean emailDoubleCheck(String email)
 
 }

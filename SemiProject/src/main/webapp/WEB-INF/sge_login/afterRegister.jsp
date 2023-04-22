@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String ctxPath = request.getContextPath();
+%>
 <jsp:include page="../header.jsp" />
  <div class="sub_content">
      <div class="content_box">
@@ -19,10 +22,10 @@
                  <div class="btn_register_box">
                      <ul>
                          <li>
-                             <button id="goToMain" class="btn_member_white">홈으로</button>
+                             <button id="goToMain" class="btn_member_white" >홈으로</button>
                          </li>
                          <li>
-                             <button id="btn_login" class="btn_member_gray">로그인</button>
+                             <button id="btn_login" class="btn_member_gray" href="<%= ctxPath%>/sge_login/memberLogin.jsp">로그인</button>
                          </li>
                      </ul>
                  </div> <!-- // btn_login_box-->
