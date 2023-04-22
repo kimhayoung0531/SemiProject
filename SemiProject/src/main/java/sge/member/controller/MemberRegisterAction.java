@@ -47,18 +47,18 @@ public class MemberRegisterAction extends AbstractController {
 			
 		    MemberVO member = new MemberVO(user_id, pwd, user_name, email, mobile,telephone,post_code, address,  detailAddress,  extraAddress,  gender,  birthday);
 		
-			try {
+		
 			
+			
+			try{
 				InterMemberDAO mdao = new MemberDAO();
 				int n = mdao.registermember(member);
-				
-				/*
-				 * if(n==1) { request.setAttribute("user_id", user_id);
-				 * request.setAttribute("pwd", pwd);
-				 * 
-				 * super.setRedirect(false);
-				 * super.setViewPage("/WEB-INF/login/registerAfterAutoLogin.jsp"); }
-				 */
+				 if(n==1) {
+					 request.setAttribute("user_id", user_id);
+					 request.setAttribute("pwd", pwd);
+					 super.setRedirect(false);
+					 super.setViewPage("/WEB-INF/sge_login/afterRegister.jsp"); 
+				 }
 			}catch (SQLException e) {
 				e.printStackTrace();
 				String message = "SQL구문 오류발생";
@@ -67,8 +67,9 @@ public class MemberRegisterAction extends AbstractController {
 				super.setRedirect(false);
 				super.setViewPage("/WEB-INF/msg.jsp");
 			}
-		
-		}
-	}
 
+	    }
+   }
 }
+
+

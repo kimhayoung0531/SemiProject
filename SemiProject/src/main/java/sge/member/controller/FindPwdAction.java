@@ -5,12 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.controller.AbstractController;
 
-public class LoginAction extends AbstractController {
+public class FindPwdAction extends AbstractController {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		setRedirect(false);
-		setViewPage("/WEB-INF/sge_login/memberLogin.jsp");
+		setViewPage("/WEB-INF/sge_login/findPwd.jsp");
 		
 	}
 
