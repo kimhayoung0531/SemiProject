@@ -1,11 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    
 <%
 	String ctxPath = request.getContextPath();
 	// SemiProject
 %>    
 	<jsp:include page="../header.jsp" />
+	
+	<script>
+		$(document).ready(function(){
+			$("input#item_cnt").bind("change", function() {
+				const count = Number($("input#item_cnt").val());
+
+				const price = ${requestScope.pvo.product_price};
+
+				const total_price = count * price;
+
+				$("strong.goods_total_price").text(total_price);
+			});
+		});
+		
+	</script>
 
 
             <div id="container">
@@ -25,7 +42,7 @@
                                         <div class="item_photo_big">
                                             <span class="img_photo_big">
                                                 <a href="#lyZoom" id="mainImage" class="zoom_layer_open btn_open_layer">
-                                                    <img src="<%= ctxPath%>/image/testItem.jpg" width="500" class="middle">
+                                                    <img src="<%= ctxPath%>/image/item_main/${requestScope.pvo.main_image}.jpg" width="500" class="middle">
                                                 </a>
                                                 
                                             </span>
@@ -42,7 +59,7 @@
                                                         <li class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" 
                                                         tabindex="-1" role="option" aria-describedby="slick-slide00" style="width :84px;">
                                                             <a href="#상품 메인이미지가 현재 클릭한 사진으로 바뀌는 메소드" tabindex="0">
-                                                                <img src="<%= ctxPath%>/image/testItem.jpg" width="84px" class="middle">
+                                                                <img src="<%= ctxPath%>/image/item_main/${requestScope.pvo.main_image}.jpg" width="84px" class="middle">
                                                             </a>
                                                         </li>
                                                     </div>
@@ -91,7 +108,7 @@
 
                                         <div class="item_tit_detail_cont">
                                             <div class="item_detain_tit">
-                                                <h3>냉동생지 - [삼양사] 애플파이</h3>
+                                                <h3>${requestScope.pvo.product_title}</h3>
                                             </div>
 
                                             <div class="item_datail_list">
@@ -99,8 +116,9 @@
                                                     <dt>판매가</dt>
                                                     <dd>
                                                         <strong>
-                                                            <strong>
-                                                                #,###
+                                                            <strong id="price">
+                                                            <fmt:formatNumber value="${requestScope.pvo.product_price}" pattern="#,###" />
+                                                               
                                                             </strong>
                                                             원
                                                         </strong>
@@ -118,13 +136,6 @@
                                                     <dt>구매혜택</dt>
                                                     <dd>
                                                         마일리지 적립 : <span class="save_mileage">###원</span>
-                                                    </dd>
-                                                </dl>
-
-                                                <dl class="item_detail_discount_mileage">
-                                                    <dt>제조사</dt>
-                                                    <dd>
-                                                        삼양사
                                                     </dd>
                                                 </dl>
 
@@ -149,7 +160,7 @@
                                                 <div class="end_price item_total_box">
                                                     <dl class="total_goods">
                                                         <dt>총 상품금액</dt>
-                                                        <dd><strong class="goods_total_price">#,###</strong>원</dd>
+                                                        <dd><strong class="goods_total_price">${requestScope.pvo.product_price}</strong>원</dd>
 
                                                     </dl>
                                                 </div>

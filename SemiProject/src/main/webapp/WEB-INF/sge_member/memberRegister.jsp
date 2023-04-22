@@ -8,13 +8,22 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
    
+   
+   //중복 확인 버튼을 눌렀는지 안눌렀지 여부확인을 위한 FLAG 
+   let b_flag_idDuplicate_click = false;
+   
+   let b_flag_emailDuplicate_click = false;
+   
+   let b_flag_zipcodeSearch_click = false;
+   ////////////////////////////////////////////
+   
    $(document).ready(function(){
    
       $("span.error").hide();
-      $("input#userid").focus();
+      $("input#user_id").focus();
       
       //아이디를 건너뛸 경우 에러메시지
-      $("input#userid").blur( (e) => {
+      $("input#user_id").blur( (e) => {
          if( $(e.target).val().trim() == ""){
          
          
@@ -74,7 +83,7 @@
           });// 비번이 입력한비번과 같은지 체크 
       
        //이름
-       $("input#name").blur((e) => {
+       $("input#user_name").blur((e) => {
          if( $(e.target).val().trim() == ""){
             
             $("table#tblMemberRegister :input").prop("disabled",true);
@@ -152,6 +161,7 @@
              
        });
        
+      
       //우편번호 
        $("button#btnPostcode").click(function(){
            new daum.Postcode({
@@ -186,22 +196,22 @@
                            extraAddr = ' (' + extraAddr + ')';
                        }
                        // 조합된 참고항목을 해당 필드에 넣는다.
-                       document.getElementById("extra_address").value = extraAddr;
+                       document.getElementById("extraAddress").value = extraAddr;
                    
                    } else {
-                       document.getElementById("extra_address").value = '';
+                       document.getElementById("extraAddress").value = '';
                    }
 
                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                   document.getElementById('postcode').value = data.zonecode;
+                   document.getElementById('post_code').value = data.zonecode;
                    document.getElementById("address").value = addr;
                    // 커서를 상세주소 필드로 이동한다.
-                   document.getElementById("detail_email").focus();
+                   document.getElementById("detailAddress").focus();
                }
            }).open();
        });// $("button#btnPostcode").click
        
-   	   $("input:text[id='podtcode']").keyup(function(){
+   	   $("input:text[id='post_code']").keyup(function(){
    		   alert(`우편번호 입력은 "우편번호찾기"를 클릭으로만 됩니다`);
    		   $(this).val("");
    	   });
@@ -228,11 +238,70 @@
 	      //초기값을 오늘 날짜로 설정
 	      //$('input#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후) 
    	   
-   	   // 아이디 중복체크
-   	   $("img#idcheck").click(function(){
-  	   		//b_flag_idDuplicate_click = true;
+	    
+   	   // 우편번호 찾기를 클릭했을때 
+   	   $("button#btn_post_search").click(function(){
+   		    alert("hi");
+   		 	b_flag_zipcodeSearch_click = true;
+   	   });
+   	   
+   	   // 우편번호를 그냥 입력하려고 할떄 
+   	   $("input:text[id='podt_code']").keyup(function(){
+		   alert(`우편번호 입력은 "우편번호검색"를 클릭으로만 됩니다`);
+		   $(this).val("");
+	   });
+   	   
+
+   });// end of document ready()
+   
+   //====================================================================
+   //아이디 값이 변경되면 다시 중복체크
+   	   
+  	$("input#userid").bind("change",() =>{
+      b_flag_idDuplicate_click = false;
+   });	  
   	   
+   //이메일도 마찬가지임 
+  			   
+   $("input#email").bind("change",() =>{
+   	  b_flag_emailDuplicate_click= false;
+   });      
+   
+   // 아이디 중복체크 function declaration
+   
+    // 아이디 중복체크
+   	   function idDobleCheck(){
+
 	   	$.ajax({
+	    	url:"<%= ctxPath%>/idDoubleCheck.up",
+	    	data:{"user_id":$("input#user_id").val()}, // data는 /MyMVC/member/idDuplicateCheck.up로 전송해야할 데이터를 말한다.
+	    	type:"post",// method 를 쓰는 실수 X type을 생략하면 type:"get"이다.
+	        //	dataType:"json",// T 대문자이다 
+	    	success:function(text){ 
+	    		
+	    		const json = JSON.parse(text); // 객체로 파싱 
+	    		
+	    		if(json.isExists ) {
+	    			// 이미 사용중인 userid라면
+	    			$("span#idcheckResult").html($("input#user_id").val()+"은 중복된 ID이므로 사용 불가합니다.").css("color","red");
+	    			$("input#userid").val("");
+	    		}
+	    		else if(!json.isExists && $("input#user_id").val().trim() !="" ){
+	    			// 존재하지 않는 경우라면 또는 공백을 입력한 경우
+	    			$("span#idcheckResult").html($("input#user_id").val()+"은 사용가능합니다.").css("color","blue");
+	    		}
+	    	},
+	    	
+	    	error: function(request, status, error){
+	            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+	          }
+	      }); // end of $.ajax
+   	   }; //end of  $("img#idcheck").click(function() 
+   			   
+    // 이메일 중복체크(예정)	   
+   	   function emailDoubleCheck(){
+   		 alert("hi");
+   		$.ajax({
 	    	url:"<%= ctxPath%>/member/idDuplicateCheck.up",
 	    	data:{"userid":$("input#userid").val()}, // data는 /MyMVC/member/idDuplicateCheck.up로 전송해야할 데이터를 말한다.
 	    	type:"post",// method 를 쓰는 실수 X type을 생략하면 type:"get"이다.
@@ -256,15 +325,9 @@
 	            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
 	          }
 	      }); // end of $.ajax
-   	   }); //end of  $("img#idcheck").click(function()
-       
-   });// end of document ready()
-   
-   //====================================================================
-	   
-	   
-
-   // 회원가입 버튼 누를시 진행되는 메소드
+   	   }
+   		
+   // 회원가입 버튼 누를 시 진행되는 메소드
    function goRegister(){
 	////***** 필수입력사항에 모두 입력이 되었는지 검사한다 *******//////
 		let b_Flag_requiredInfo = false;
@@ -289,8 +352,7 @@
 			alert("성별을 선택하셔야 합니다");
 			return ; // 함수종료
 		}
-		
-		
+
 		const frm = document.formJoin;
 		frm.action="memberRegister.ban";
 		frm.method="post";
@@ -351,8 +413,9 @@
                                                <span class="important">* 아이디</span>
                                            </th>
                                            <td>
-                                                <input type="text" id="userid" name="userid" class="requiredInfo" />
-                                                <button class="btn_double_check"> 아이디 중복 체크</button>
+                                                <input type="text" id="user_id" name="user_id" class="requiredInfo" />
+                                                <button class="btn_double_check" onclick="idDobleCheck();"> 아이디 중복 체크</button>
+                                                <span id="idcheckResult"></span>
                                                 <span class="error" style="color:red;">아이디는 필수입력 사항입니다.</span>
                                            </td> 
                                        </tr>
@@ -380,7 +443,7 @@
                                            <th>
                                                <span class="important">* 이름</span>
                                            </th>
-                                           <td><input type="text" id="name" class="requiredInfo"
+                                           <td><input type="text" id="user_name" name="user_name" class="requiredInfo"
                                                    autocomplete="off" />
                                                 <span class="error">성명은 필수입력 사항입니다.</span>
                                            </td>
@@ -391,8 +454,8 @@
 
                                            </th>
                                            <td>
-                                               <input type="text" id="email" class="requiredInfo" />
-                                               <button class=" btn_double_check"> 이메일 중복 체크</button>
+                                               <input type="text" id="email" name="email" class="requiredInfo" />
+                                               <button class=" btn_double_check" onclick="emailDoubleCheck();" > 이메일 중복 체크</button>
                                                <span class="error">이메일 형식에 맞지 않습니다.</span>
                                            </td>
                                        </tr>
@@ -401,21 +464,21 @@
                                                <span class="important">* 휴대폰 번호</span>
                                            </th>
                                            <td>
-                                                <input type="text" id="s_hp1" name="hp1" class="requiredInfo" size="3" maxlength="3" value="010" readonly />&nbsp;-&nbsp;
-			    							    <input type="text" id="s_hp2" name="hp2" class="requiredInfo" size="4" maxlength="4" />&nbsp;-&nbsp;
-			    							    <input type="text" id="s_hp3" name="hp3" class="requiredInfo" size="4" maxlength="4" />
+                                                <input type="text" id="hp1" name="hp1" class="requiredInfo" size="3" maxlength="3" value="010" readonly />&nbsp;-&nbsp;
+			    							    <input type="text" id="hp2" name="hp2" class="requiredInfo" size="4" maxlength="4" />&nbsp;-&nbsp;
+			    							    <input type="text" id="hp3" name="hp3" class="requiredInfo" size="4" maxlength="4" />
 				    							<span class="error">휴대폰 형식이 아닙니다.</span>
                                            </td>
                                        </tr>
                                        <tr>
                                            <th>
-                                               <span class="important">유선번호(선택)</span>
+                                               <span class="important">일반번호(선택)</span>
                                            </th>
                                            <td>
-                                                <input type="text" id="hp1" name="hp1" size="3" maxlength="3" value="02" readonly />&nbsp;-&nbsp;
-			    							    <input type="text" id="hp2" name="hp2" size="4" maxlength="4" />&nbsp;-&nbsp;
-			    							    <input type="text" id="hp3" name="hp3" size="4" maxlength="4" />
-				    							<span class="error">유선번호 형식이 아닙니다.</span>
+                                                <input type="text" id="mp1" name="mp1" size="3" maxlength="3" />&nbsp;-&nbsp;
+			    							    <input type="text" id="mp2" name="mp2" size="4" maxlength="4" />&nbsp;-&nbsp;
+			    							    <input type="text" id="mp3" name="mp3" size="4" maxlength="4" />
+				    							<span class="error">일반번호 형식이 아닙니다.</span>
                                            </td>
                                        </tr>
                                        <tr>
@@ -424,7 +487,7 @@
                                            </th>
                                            <td class="member_address">
                                                <div class="address_postcode">
-                                                   <input type="text" id="postcode" name="postcode" size="4" class="requiredInfo" />
+                                                   <input type="text" id="post_code" name="post_code" size="4" class="requiredInfo" />
                                                    <button type="button" id="btnPostcode"
                                                        class="btn_post_search btn_double_check"> 우편번호
                                                        검색</button>
@@ -432,10 +495,10 @@
                                                </div>
                                                <div class="address_input">
 		                   						   <input type="text" id="address" name="address" class="requiredInfo" placeholder="주소"/>
-                                                   <input type="text" id="detail_email"
+                                                   <input type="text" id="detailAddress" name="detailAddress"
                                                        class="requiredInfo" placeholder="상세주소" />
 												   <span class="error">주소를 입력하세요</span>
-                                                   <input type="text" id="extra_address" placeholder="부가주소"
+                                                   <input type="text" id="extraAddress" placeholder="부가주소" name="extraAddress"
                                                        class="extra_address" />
                                                        
                                                </div>
@@ -446,7 +509,7 @@
                                                <span>생일</span>
                                            </th>
                                            <td>
-                                               <input type="text" id="datepicker"/>
+                                               <input type="text" id="datepicker" name="datepicker" />
                                            </td>
                                        </tr>
                                        <tr>

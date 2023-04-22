@@ -268,6 +268,11 @@ body .centerMenu ul li a {
     height: 225px;
     top: -1px;
 }
+/* 카테고리 li */
+.ojh_li {
+	width: 100%
+}
+
 /* 전체 카테고리 끝 */
 
 
@@ -401,11 +406,12 @@ a {
     content: "";
     display: block;
     width: 1px;
-    height: 138px;
+    height: 80px;
     background: #dfdfdf;
     position: absolute;
-    top: 0;
+    top: -10%;
     right: 0;
+    
 }
 
 .footer-bottom .container>div:last-child:after {

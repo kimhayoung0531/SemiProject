@@ -85,7 +85,7 @@
                                             <div class="top_search_cont">
                                                 <div class="top_text_cont">
                                                     <input type="text" id="search_form" name="keyword" class="top_srarch_text" title placeholder="검색어를 입력해주세요" autocomplete="off">
-                                                    <input type="image" src="/image/icon-search-b.png" id="btnSearchTop" class="btn_top_srarch" title="검색" value="검색" alt="검색" />
+                                                    <input type="image" src="<%=ctxPath%>/image/icon-search-b.png" id="btnSearchTop" class="btn_top_srarch" title="검색" value="검색" alt="검색" />
                                                         
                                                 </div>
                                             </div>
@@ -115,36 +115,35 @@
                                 <div class="switch">전체 카테고리
                                     <div class="switch_submenu">
                                         <ul class ="switch_detail_submenu" >
-                                             <li>
-                                                <a href="">빵</a>
+                                              <li class="ojh_li"><a href="">빵</a>
                                                 <ul class="sub_delth1" >
-                                                    <li><a href="">식빵</a></li>
-                                                    <li><a href="">건강빵</a></li>
-                                                    <li><a href="">도넛/고로케</a></li>
-                                                    <li><a href="">패스트리</a></li>
+                                                    <li class="ojh_li"><a href="">식빵</a></li>
+                                                    <li class="ojh_li"><a href="">건강빵</a></li>
+                                                    <li class="ojh_li"><a href="">도넛/고로케</a></li>
+                                                    <li class="ojh_li"><a href="">패스트리</a></li>
                                                 </ul>
                                             </li>                                           
-                                            <li><a href="">케이크</a>
+                                            <li class="ojh_li"><a href="">케이크</a>
                                                 <ul class="sub_delth1">
-                                                    <li><a href="">생크림 케이크</a></li>
-                                                    <li><a href="">클래식 케이크</a></li>
-                                                    <li><a href="">캐릭터 케이커</a></li>
+                                                    <li class="ojh_li"><a href="">생크림 케이크</a></li>
+                                                    <li class="ojh_li"><a href="">클래식 케이크</a></li>
+                                                    <li class="ojh_li"><a href="">캐릭터 케이커</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="">디저트</a>
+                                            <li class="ojh_li"><a href="">디저트</a>
                                                 <ul class="sub_delth1">
-                                                    <li><a href="">쿠키</a></li>
-                                                    <li><a href="">초코/캔디</a></li>
-                                                    <li><a href="">아이스</a></li>
-                                                    <li><a href="">마카롱</a></li>
+                                                    <li class="ojh_li"><a href="">쿠키</a></li>
+                                                    <li class="ojh_li"><a href="">초코/캔디</a></li>
+                                                    <li class="ojh_li"><a href="">아이스</a></li>
+                                                    <li class="ojh_li"><a href="">마카롱</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="">음료</a>
+                                            <li class="ojh_li"><a href="">음료</a>
                                                 <ul class="sub_delth1">
-                                                    <li><a href="">우유</a></li>
-                                                    <li><a href="">커피</a></li>
-                                                    <li><a href="">에이드/TEA</a></li>
-                                                    <li><a href="">스무디/쉐이크</a></li>
+                                                    <li class="ojh_li"><a href="">우유</a></li>
+                                                    <li class="ojh_li"><a href="">커피</a></li>
+                                                    <li class="ojh_li"><a href="">에이드/TEA</a></li>
+                                                    <li class="ojh_li"><a href="">스무디/쉐이크</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -179,19 +178,19 @@
                             <div class="visual_0">
                                 <div>
                                   <a href="#">
-                                    <img src="./image/28b1ecaa9879900b9a0988dc49f22f07_47191.jpg" class="middle">
+                                    <img src="<%=ctxPath%>/image/evt_ba1.jpg" class="middle">
                                   </a>
                                 </div>
                         
                                 <div>
                                   <a href="#">
-                                    <img src="./image/7900c456b8048580d26d8282c257c48b_43646.jpg" class="middle">
+                                    <img src="<%=ctxPath%>/image/evt_ba2.jpg" class="middle">
                                   </a>
                                 </div>
                         
                                 <div>
                                   <a href="#">
-                                    <img src="./image/7900c456b8048580d26d8282c257c48b_62853.jpg" class="middle">
+                                    <img src="<%=ctxPath%>/image/evt_ba3.jpg" class="middle">
                                   </a>
                                 </div>
                                 
@@ -225,7 +224,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/new/1.jpg" width="200" alt="[15~20% 할인]감사의 달 타르트" title="[15~20% 할인]감사의 달 타르트 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/1.jpg" width="200" alt="[15~20% 할인]감사의 달 타르트" title="[15~20% 할인]감사의 달 타르트 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -248,7 +247,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/new/2.jpg" width="200" alt="[15~20% 할인] 반미 바게트" title="[15~20% 할인] 반미 바게트 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/2.jpg" width="200" alt="[15~20% 할인] 반미 바게트" title="[15~20% 할인] 반미 바게트 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -271,7 +270,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/new/3.jpg" width="200" alt="[15%~20% 할인] 브리오쉬 식빵" title="[15%~20% 할인] 브리오쉬 식빵 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/3.jpg" width="200" alt="[15%~20% 할인] 브리오쉬 식빵" title="[15%~20% 할인] 브리오쉬 식빵 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -294,7 +293,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/new/4.jpg" width="200" alt="[15%~20% 할인] 올리브 식빵" title="[15%~20% 할인] 올리브 식빵 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/4.jpg" width="200" alt="[15%~20% 할인] 올리브 식빵" title="[15%~20% 할인] 올리브 식빵 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -317,7 +316,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/new/5.jpg" width="200" alt="[15%~20% 할인] 이탈리안 식빵" title="[15%~20% 할인] 이탈리안 식빵 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/5.jpg" width="200" alt="[15%~20% 할인] 이탈리안 식빵" title="[15%~20% 할인] 이탈리안 식빵 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -340,7 +339,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/new/6.jpg" width="200" alt="[15%~20% 할인] 찰치즈빵" title="[15%~20% 할인] 찰치즈빵 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/6.jpg" width="200" alt="[15%~20% 할인] 찰치즈빵" title="[15%~20% 할인] 찰치즈빵 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -363,7 +362,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/new/7.jpg" width="200" alt="[15%~20% 할인] 냉동완제품 - 갈릭 크로플" title="[15%~20% 할인] 냉동완제품 - 갈릭 크로플 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/7.jpg" width="200" alt="[15%~20% 할인] 냉동완제품 - 갈릭 크로플" title="[15%~20% 할인] 냉동완제품 - 갈릭 크로플 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -386,7 +385,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/new/8.jpg" width="200" alt="[15%~20% 할인] 초코 퐁당쇼콜라" title="[15%~20% 할인] 초코 퐁당쇼콜라 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/8.jpg" width="200" alt="[15%~20% 할인] 초코 퐁당쇼콜라" title="[15%~20% 할인] 초코 퐁당쇼콜라 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -448,7 +447,7 @@
                                 </div>
                                 <!-- 메인페이지 중간배너 -->
                                 <a href="#">
-                                   <img src="./image/6907e7fa42fcf6d214b339d6787e0957_88614.jpg"> 
+                                   <img src="<%=ctxPath%>/image/Mid_ba.jpg"> 
                                 </a>
 
                                 <div class="goods_list main_wrap_223" style="
@@ -466,7 +465,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/sale/1.jpg" width="200" alt="[15%~20% 할인] 초코롤" title="[15%~20% 할인] 초코롤 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/9.jpg" width="200" alt="[15%~20% 할인] 초코롤" title="[15%~20% 할인] 초코롤 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -489,7 +488,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/sale/2.jpg" width="200" alt="[15%~20% 할인] 딸기잼파이" title="[15%~20% 할인] 딸기잼파이 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/10.jpg" width="200" alt="[15%~20% 할인] 딸기잼파이" title="[15%~20% 할인] 딸기잼파이 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -512,7 +511,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/sale/3.jpg" width="200" alt="[15%~20% 할인] 미니크로와상" title="[15%~20% 할인] 미니크로와상 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/11.jpg" width="200" alt="[15%~20% 할인] 미니크로와상" title="[15%~20% 할인] 미니크로와상 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -535,7 +534,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/sale/4.jpg" width="200" alt="[15%~20% 할인] 초코칩트위스트" title="[15%~20% 할인] 초코칩트위스트 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/12.jpg" width="200" alt="[15%~20% 할인] 초코칩트위스트" title="[15%~20% 할인] 초코칩트위스트 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -558,7 +557,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/sale/5.jpg" width="200" alt="[15%~20% 할인] 크림브륄레" title="[15%~20% 할인] 크림브륄레 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/13.jpg" width="200" alt="[15%~20% 할인] 크림브륄레" title="[15%~20% 할인] 크림브륄레 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -581,7 +580,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/sale/6.jpg" width="200" alt="[15%~20% 할인] 화이트 유니버스 도넛" title="[15%~20% 할인] 화이트 유니버스 도넛 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/14.jpg" width="200" alt="[15%~20% 할인] 화이트 유니버스 도넛" title="[15%~20% 할인] 화이트 유니버스 도넛 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -604,7 +603,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/sale/7.jpg" width="200" alt="[15%~20% 할인] 마리토쪼" title="[15%~20% 할인] 마리토쪼 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/15.jpg" width="200" alt="[15%~20% 할인] 마리토쪼" title="[15%~20% 할인] 마리토쪼 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -627,7 +626,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/sale/8.jpg" width="200" alt="[15%~20% 할인] 우유크림카스테라" title="[15%~20% 할인] 우유크림카스테라 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/16.jpg" width="200" alt="[15%~20% 할인] 우유크림카스테라" title="[15%~20% 할인] 우유크림카스테라 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -704,7 +703,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/rebuy/1.jpg" width="200" alt="[15%~20% 할인] 애플파이" title="[15%~20% 할인] 애플파이 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/17.jpg" width="200" alt="[15%~20% 할인] 애플파이" title="[15%~20% 할인] 애플파이 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -727,7 +726,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/rebuy/2.jpg" width="200" alt="[베스트 상품] 조각케익 4종" title="[베스트 상품] 조각케익 4종 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/18.jpg" width="200" alt="[베스트 상품] 조각케익 4종" title="[베스트 상품] 조각케익 4종 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -750,7 +749,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/rebuy/3.jpg" width="200" alt="[베스트 상품] 반미 바게트 B" title="[베스트 상품] 반미 바게트 B" " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/19.jpg" width="200" alt="[베스트 상품] 반미 바게트 B" title="[베스트 상품] 반미 바게트 B" " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -773,7 +772,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/rebuy/4.jpg" width="200" alt="[베스트 상품] 초콜릿 브라우니" title="[베스트 상품] 초콜릿 브라우니 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/20.jpg" width="200" alt="[베스트 상품] 초콜릿 브라우니" title="[베스트 상품] 초콜릿 브라우니 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -796,7 +795,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/rebuy/5.jpg" width="200" alt="[베스트 상품] 얼그레이 레몬 스콘" title="[베스트 상품] 얼그레이 레몬 스콘 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/21.jpg" width="200" alt="[베스트 상품] 얼그레이 레몬 스콘" title="[베스트 상품] 얼그레이 레몬 스콘 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -819,7 +818,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/rebuy/6.jpg" width="200" alt="[베스트 상품] 진짜 고구마빵" title="[베스트 상품] 진짜 고구마빵 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/22.jpg" width="200" alt="[베스트 상품] 진짜 고구마빵" title="[베스트 상품] 진짜 고구마빵 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -842,7 +841,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/rebuy/7.jpg" width="200" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/23.jpg" width="200" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -865,7 +864,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="#">
-                                                    <img src="./image/rebuy/8.jpg" width="200" alt="[베스트상품] 플레인롤" title="[베스트상품] 플레인롤" class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/24.jpg" width="200" alt="[베스트상품] 플레인롤" title="[베스트상품] 플레인롤" class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left;">
@@ -956,7 +955,7 @@
                             <div class="h1_logo" style="margin: 30px 0px 0px 50px;
                                                         padding: 0px 175px;">
                                 <a href="#">
-                                    <img src="\image\main_logo.png" style="width: 150px;">
+                                    <img src="<%=ctxPath%>/image/main_logo.png" style="width: 150px;">
                                 </a>
                             </div>
                            
