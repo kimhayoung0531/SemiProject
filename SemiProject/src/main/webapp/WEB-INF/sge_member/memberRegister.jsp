@@ -19,314 +19,304 @@
    
    $(document).ready(function(){
    
-      $("span.error").hide();
-      $("input#user_id").focus();
-      
-      //아이디를 건너뛸 경우 에러메시지
-      $("input#user_id").blur( (e) => {
-         if( $(e.target).val().trim() == ""){
-         
-         
-            $("table#tblMemberRegister :input").prop("disabled",true);
-            $(e.target).prop("disabled",false);
-   
-            $(e.target).parent().find("span.error").show();
-            $(e.target).focus();
-
-         }
-         else{
-            // 공백만이 아닌 글자를 입력했을 경우
-            $("table#tblMemberRegister :input").prop("disabled",false);
-            $(e.target).parent().find("span.error").hide();
-            
-         }
-       }); // end of userid.BLUR 
+	      $("span.error").hide();
+	      $("input#user_id").focus();
+	      
+	      //아이디를 건너뛸 경우 에러메시지
+	      $("input#user_id").blur( (e) => {
+	         if( $(e.target).val().trim() == ""){
+	         
+	         
+	            $("table#tblMemberRegister :input").prop("disabled",true);
+	            $(e.target).prop("disabled",false);
+	   
+	            $(e.target).parent().find("span.error").show();
+	            $(e.target).focus();
+	
+	         }
+	         else{
+	            // 공백만이 아닌 글자를 입력했을 경우
+	            $("table#tblMemberRegister :input").prop("disabled",false);
+	            $(e.target).parent().find("span.error").hide();
+	            
+	         }
+	       }); // end of userid.BLUR 
+	       
+	       //비밀번호 유효성 검사 
+	       $("input#pwd").blur( (e) => {
+	            
+	          const regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g;
+	          
+	          const bool = regExp.test($(e.target).val());
+	          
+	          if(!bool){
+	             //암호가 정규표현식에 위배된 경우
+	             $("table#tblMemberRegister :input").prop("disabled",true);
+	             $(e.target).prop("disabled",false);
+	            
+	             $(e.target).parent().find("span.error").show();
+	             $(e.target).focus();
+	          }
+	          else{
+	             //암호가 정규표현식에 맞는 경우
+	             $("table#tblMemberRegister :input").prop("disabled",false);
+	             $(e.target).parent().find("span.error").hide();
+	          }
+	       });
+	       
+	       // 비밀번호 체크
+	       $("input#pwdcheck").blur( (e) => {
+	            
+	            if($("input#pwd").val() != $(e.target).val() ){
+	               
+	              $(e.target).prop("disabled",false);
+	              $("input#pwd").prop("disabled",false);
+	            
+	               $(e.target).parent().find("span.error").show();
+	               $("input#pwd").focus();
+	            }
+	            else{
+	               $("table#tblMemberRegister :input").prop("disabled",false);
+	               $(e.target).parent().find("span.error").hide();
+	            }
+	             
+	          });// 비번이 입력한비번과 같은지 체크 
+	      
+	       //이름
+	       $("input#user_name").blur((e) => {
+	         if( $(e.target).val().trim() == ""){
+	            
+	            $("table#tblMemberRegister :input").prop("disabled",true);
+	            $(e.target).prop("disabled",false);
+	            
+	            $(e.target).parent().find("span.error").show();
+	            $(e.target).focus();
+	
+	         }
+	         else{
+	            // 공백만이 아닌 글자를 입력했을 경우
+	            $("table#tblMemberRegister :input").prop("disabled",false);
+	            $(e.target).parent().find("span.error").hide();
+	         }
+	       }); 
+	       
+	       //이메일
+	       $("input#email").blur( (e) => {
+	          const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
+	          const bool = regExp.test($(e.target).val());
+	          
+	          if(!bool){
+	             //암호가 정규표현식에 위배된 경우
+	             $("table#tblMemberRegister :input").prop("disabled",true);
+	               $(e.target).prop("disabled",false);
+	               
+	               $(e.target).parent().find("span.error").show();
+	               $(e.target).focus();
+	          }
+	          else{
+	             //암호가 정규표현식에 맞는 경우
+	             $("table#tblMemberRegister :input").prop("disabled",false);
+	             $(e.target).parent().find("span.error").hide();
+	          }
+	             
+	          });
+	      // 휴대폰 두번째 칸
+	       $("input#hp2").blur( (e) => {
+	          const regExp = /^[1-9][0-9]{2,3}$/g; 
+	          const bool = regExp.test($(e.target).val());
+	          
+	          if(!bool){
+	             //국번이 정규표현식에 위배된 경우
+	             $("table#tblMemberRegister :input").prop("disabled",true);
+	               $(e.target).prop("disabled",false);
+	               $(e.target).parent().find("span.error").show();
+	               $(e.target).focus();
+	          }
+	          else{
+	             //국번이 정규표현식에 맞는 경우
+	             $("table#tblMemberRegister :input").prop("disabled",false);
+	             $(e.target).parent().find("span.error").hide();
+	          }
+	             
+	        });
+	      
+	       // 마지막칸  국번
+	       $("input#hp3").blur( (e) => {
+	         
+	          const regExp = /^\d{4}$/g; 
+	          const bool = regExp.test($(e.target).val());
+	          
+	          if(!bool){
+	             //국번이 정규표현식에 위배된 경우
+	             $("table#tblMemberRegister :input").prop("disabled",true);
+	               $(e.target).prop("disabled",false);
+	               $(e.target).parent().find("span.error").show();
+	               $(e.target).focus();
+	          }
+	          else{
+	             //국번이 정규표현식에 맞는 경우
+	             $("table#tblMemberRegister :input").prop("disabled",false);
+	             $(e.target).parent().find("span.error").hide();
+	          }
+	             
+	       });
+	       
+	      
+	      //우편번호 
+	       $("button#btnPostcode").click(function(){
+	           new daum.Postcode({
+	               oncomplete: function(data) {
+	                   // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	
+	                   // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                   // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                   let addr = ''; // 주소 변수
+	                   let extraAddr = ''; // 참고항목 변수
+	
+	                   //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                   if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                       addr = data.roadAddress;
+	                   } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                       addr = data.jibunAddress;
+	                   }
+	
+	                   // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                   if(data.userSelectedType === 'R'){
+	                       // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                       // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                       if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                           extraAddr += data.bname;
+	                       }
+	                       // 건물명이 있고, 공동주택일 경우 추가한다.
+	                       if(data.buildingName !== '' && data.apartment === 'Y'){
+	                           extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                       }
+	                       // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                       if(extraAddr !== ''){
+	                           extraAddr = ' (' + extraAddr + ')';
+	                       }
+	                       // 조합된 참고항목을 해당 필드에 넣는다.
+	                       document.getElementById("extraAddress").value = extraAddr;
+	                   
+	                   } else {
+	                       document.getElementById("extraAddress").value = '';
+	                   }
+	
+	                   // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                   document.getElementById('post_code').value = data.zonecode;
+	                   document.getElementById("address").value = addr;
+	                   // 커서를 상세주소 필드로 이동한다.
+	                   document.getElementById("detailAddress").focus();
+	               }
+	           }).open();
+	       });// $("button#btnPostcode").click
+	       
+	   	   $("input:text[id='post_code']").keyup(function(){
+	   		   alert(`우편번호 입력은 "우편번호찾기"를 클릭으로만 됩니다`);
+	   		   $(this).val("");
+	   	   });
        
-       //비밀번호 유효성 검사 
-       $("input#pwd").blur( (e) => {
-            
-          const regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g;
-          
-          const bool = regExp.test($(e.target).val());
-          
-          if(!bool){
-             //암호가 정규표현식에 위배된 경우
-             $("table#tblMemberRegister :input").prop("disabled",true);
-             $(e.target).prop("disabled",false);
-            
-             $(e.target).parent().find("span.error").show();
-             $(e.target).focus();
-          }
-          else{
-             //암호가 정규표현식에 맞는 경우
-             $("table#tblMemberRegister :input").prop("disabled",false);
-             $(e.target).parent().find("span.error").hide();
-          }
-       });
-       
-       // 비밀번호 체크
-       $("input#pwdcheck").blur( (e) => {
-            
-            if($("input#pwd").val() != $(e.target).val() ){
-               
-              $(e.target).prop("disabled",false);
-              $("input#pwd").prop("disabled",false);
-            
-               $(e.target).parent().find("span.error").show();
-               $("input#pwd").focus();
-            }
-            else{
-               $("table#tblMemberRegister :input").prop("disabled",false);
-               $(e.target).parent().find("span.error").hide();
-            }
-             
-          });// 비번이 입력한비번과 같은지 체크 
-      
-       //이름
-       $("input#user_name").blur((e) => {
-         if( $(e.target).val().trim() == ""){
-            
-            $("table#tblMemberRegister :input").prop("disabled",true);
-            $(e.target).prop("disabled",false);
-            
-            $(e.target).parent().find("span.error").show();
-            $(e.target).focus();
-
-         }
-         else{
-            // 공백만이 아닌 글자를 입력했을 경우
-            $("table#tblMemberRegister :input").prop("disabled",false);
-            $(e.target).parent().find("span.error").hide();
-         }
-       }); 
-       
-       //이메일
-       $("input#email").blur( (e) => {
-          const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
-          const bool = regExp.test($(e.target).val());
-          
-          if(!bool){
-             //암호가 정규표현식에 위배된 경우
-             $("table#tblMemberRegister :input").prop("disabled",true);
-               $(e.target).prop("disabled",false);
-               
-               $(e.target).parent().find("span.error").show();
-               $(e.target).focus();
-          }
-          else{
-             //암호가 정규표현식에 맞는 경우
-             $("table#tblMemberRegister :input").prop("disabled",false);
-             $(e.target).parent().find("span.error").hide();
-          }
-             
-          });
-      // 휴대폰 두번째 칸
-       $("input#hp2").blur( (e) => {
-          const regExp = /^[1-9][0-9]{2,3}$/g; 
-          const bool = regExp.test($(e.target).val());
-          
-          if(!bool){
-             //국번이 정규표현식에 위배된 경우
-             $("table#tblMemberRegister :input").prop("disabled",true);
-               $(e.target).prop("disabled",false);
-               $(e.target).parent().find("span.error").show();
-               $(e.target).focus();
-          }
-          else{
-             //국번이 정규표현식에 맞는 경우
-             $("table#tblMemberRegister :input").prop("disabled",false);
-             $(e.target).parent().find("span.error").hide();
-          }
-             
-        });
-      
-       // 마지막칸  국번
-       $("input#hp3").blur( (e) => {
-         
-          const regExp = /^\d{4}$/g; 
-          const bool = regExp.test($(e.target).val());
-          
-          if(!bool){
-             //국번이 정규표현식에 위배된 경우
-             $("table#tblMemberRegister :input").prop("disabled",true);
-               $(e.target).prop("disabled",false);
-               $(e.target).parent().find("span.error").show();
-               $(e.target).focus();
-          }
-          else{
-             //국번이 정규표현식에 맞는 경우
-             $("table#tblMemberRegister :input").prop("disabled",false);
-             $(e.target).parent().find("span.error").hide();
-          }
-             
-       });
-       
-      
-      //우편번호 
-       $("button#btnPostcode").click(function(){
-           new daum.Postcode({
-               oncomplete: function(data) {
-                   // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                   // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                   // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                   let addr = ''; // 주소 변수
-                   let extraAddr = ''; // 참고항목 변수
-
-                   //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                   if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                       addr = data.roadAddress;
-                   } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                       addr = data.jibunAddress;
-                   }
-
-                   // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                   if(data.userSelectedType === 'R'){
-                       // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                       // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                       if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                           extraAddr += data.bname;
-                       }
-                       // 건물명이 있고, 공동주택일 경우 추가한다.
-                       if(data.buildingName !== '' && data.apartment === 'Y'){
-                           extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                       }
-                       // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                       if(extraAddr !== ''){
-                           extraAddr = ' (' + extraAddr + ')';
-                       }
-                       // 조합된 참고항목을 해당 필드에 넣는다.
-                       document.getElementById("extraAddress").value = extraAddr;
-                   
-                   } else {
-                       document.getElementById("extraAddress").value = '';
-                   }
-
-                   // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                   document.getElementById('post_code').value = data.zonecode;
-                   document.getElementById("address").value = addr;
-                   // 커서를 상세주소 필드로 이동한다.
-                   document.getElementById("detailAddress").focus();
-               }
-           }).open();
-       });// $("button#btnPostcode").click
-       
-   	   $("input:text[id='post_code']").keyup(function(){
-   		   alert(`우편번호 입력은 "우편번호찾기"를 클릭으로만 됩니다`);
-   		   $(this).val("");
-   	   });
-       
-   	 //===== jQery UI의 datapicker =====//
+	   	 //===== jQery UI의 datapicker =====//
 	      $("input#datepicker").datepicker({
 	        dateFormat: 'yy-mm-dd'  //Input Display Format 변경
-           ,showOtherMonths: true   //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-           ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
-           ,changeYear: true        //콤보박스에서 년 선택 가능
-           ,changeMonth: true       //콤보박스에서 월 선택 가능                
-          // ,showOn: "both"          //button:버튼을 표시하고,버튼을 눌러야만 달력 표시됨. both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시됨.  
-          // ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
-          // ,buttonImageOnly: true   //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
-          // ,buttonText: "선택"       //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
-           ,yearSuffix: "년"         //달력의 년도 부분 뒤에 붙는 텍스트
-           ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
-           ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
-           ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
-           ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
-         //,minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-         //,maxDate: "+1M" //최대 선택일자(+1D:하루후, +1M:한달후, +1Y:일년후)  
+	          ,showOtherMonths: true   //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+	          ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+	          ,changeYear: true        //콤보박스에서 년 선택 가능
+	          ,changeMonth: true       //콤보박스에서 월 선택 가능                
+	         // ,showOn: "both"          //button:버튼을 표시하고,버튼을 눌러야만 달력 표시됨. both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시됨.  
+	         // ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+	         // ,buttonImageOnly: true   //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+	         // ,buttonText: "선택"       //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+	          ,yearSuffix: "년"         //달력의 년도 부분 뒤에 붙는 텍스트
+	          ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+	          ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+	          ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+	          ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+	        //,minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+	        //,maxDate: "+1M" //최대 선택일자(+1D:하루후, +1M:한달후, +1Y:일년후)  
 	      });
 	      //초기값을 오늘 날짜로 설정
 	      //$('input#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후) 
+	  	   
+		    
+	  	  // 우편번호 찾기를 클릭했을때 
+		  $("button#btn_post_search").click(function(){
+		      alert("hi");
+		 	  b_flag_zipcodeSearch_click = true;
+		  });
+	 	   
+	 	 // 우편번호를 그냥 입력하려고 할떄 
+	 	 $("input:text[id='podt_code']").keyup(function(){
+			  alert(`우편번호 입력은 "우편번호검색"를 클릭으로만 됩니다`);
+			  $(this).val("");
+	  	 });
+	  	   
+		   	// 아이디 중복체크
+	   	$("button#doublecheckID").click(function(){
+		   	$.ajax({
+		    	url:"<%= ctxPath%>/idDoubleCheck.ban",
+		    	data:{"user_id":$("input#user_id").val()}, // data는 /MyMVC/member/idDuplicateCheck.up로 전송해야할 데이터를 말한다.
+		    	type:"post",// method 를 쓰는 실수 X type을 생략하면 type:"get"이다.
+		    
+		    	success:function(text){ 
+		    
+		    		const json = JSON.parse(text); // 객체로 파싱 
+		    		if(json.idExist ) {
+		    			// 이미 사용중인 userid라면
+		    			$("span#idcheckResult").html($("input#user_id").val()+"은 중복된 ID이므로 사용 불가합니다.").css("color","red");
+		    			$("input#user_id").val("");
+		    		}
+		    		else if(!json.idExist && $("input#user_id").val().trim() !="" ){
+		    			// 존재하지 않는 경우라면 또는 공백을 입력한 경우
+		    			$("span#idcheckResult").html($("input#user_id").val()+"은 사용가능합니다.").css("color","blue");
+		    		}
+		    	},
+		    	
+		    	error: function(request, status, error){
+		            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+		          }
+		      });
+	    });//end of $("img#idcheck").click(function()
+	    		
+	    // 이메일 중복 체크 
    	   
-	    
-   	   // 우편번호 찾기를 클릭했을때 
-   	   $("button#btn_post_search").click(function(){
-   		    alert("hi");
-   		 	b_flag_zipcodeSearch_click = true;
-   	   });
+   		$("button#doubleCheckEmail").click(function(){
+   		 	$.ajax({
+		    	url:"<%= ctxPath%>/emailDoubleCheck.ban",
+		    	data:{"email":$("input#email").val()}, // data는 /MyMVC/member/idDuplicateCheck.up로 전송해야할 데이터를 말한다.
+		    	type:"post",// method 를 쓰는 실수 X type을 생략하면 type:"get"이다.
+		    
+		    	success:function(text){ 
+		    
+		    		const json = JSON.parse(text); // 객체로 파싱 
+		    		if(json.emailExist ) {
+		    			// 이미 사용중인 userid라면
+		    			$("span#emailCheckResult").html($("input#email").val()+"은 중복된 ID이므로 사용 불가합니다.").css("color","red");
+		    			$("input#email").val("");
+		    		}
+		    		else if(!json.emailExist && $("input#email").val().trim() !="" ){
+		    			// 존재하지 않는 경우라면 또는 공백을 입력한 경우
+		    			$("span#emailCheckResult").html($("input#email").val()+"은 사용가능합니다.").css("color","blue");
+		    		}
+		    	},
+		    	
+		    	error: function(request, status, error){
+		            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+		          }
+		      });
+   		});// end of $("button#doublecheckID").click(function()
    	   
-   	   // 우편번호를 그냥 입력하려고 할떄 
-   	   $("input:text[id='podt_code']").keyup(function(){
-		   alert(`우편번호 입력은 "우편번호검색"를 클릭으로만 됩니다`);
-		   $(this).val("");
-	   });
+	   		
+	    		
+   
+    
    	   
 
    });// end of document ready()
    
    //====================================================================
-   //아이디 값이 변경되면 다시 중복체크
-   	   
-  	$("input#userid").bind("change",() =>{
-      b_flag_idDuplicate_click = false;
-   });	  
-  	   
-   //이메일도 마찬가지임 
-  			   
-   $("input#email").bind("change",() =>{
-   	  b_flag_emailDuplicate_click= false;
-   });      
-   
-   // 아이디 중복체크 function declaration
-   
-    // 아이디 중복체크
-   	   function idDobleCheck(){
-
-	   	$.ajax({
-	    	url:"<%= ctxPath%>/idDoubleCheck.up",
-	    	data:{"user_id":$("input#user_id").val()}, // data는 /MyMVC/member/idDuplicateCheck.up로 전송해야할 데이터를 말한다.
-	    	type:"post",// method 를 쓰는 실수 X type을 생략하면 type:"get"이다.
-	        //	dataType:"json",// T 대문자이다 
-	    	success:function(text){ 
-	    		
-	    		const json = JSON.parse(text); // 객체로 파싱 
-	    		
-	    		if(json.isExists ) {
-	    			// 이미 사용중인 userid라면
-	    			$("span#idcheckResult").html($("input#user_id").val()+"은 중복된 ID이므로 사용 불가합니다.").css("color","red");
-	    			$("input#userid").val("");
-	    		}
-	    		else if(!json.isExists && $("input#user_id").val().trim() !="" ){
-	    			// 존재하지 않는 경우라면 또는 공백을 입력한 경우
-	    			$("span#idcheckResult").html($("input#user_id").val()+"은 사용가능합니다.").css("color","blue");
-	    		}
-	    	},
-	    	
-	    	error: function(request, status, error){
-	            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-	          }
-	      }); // end of $.ajax
-   	   }; //end of  $("img#idcheck").click(function() 
-   			   
-    // 이메일 중복체크(예정)	   
-   	   function emailDoubleCheck(){
-   		 alert("hi");
-   		$.ajax({
-	    	url:"<%= ctxPath%>/member/idDuplicateCheck.up",
-	    	data:{"userid":$("input#userid").val()}, // data는 /MyMVC/member/idDuplicateCheck.up로 전송해야할 데이터를 말한다.
-	    	type:"post",// method 를 쓰는 실수 X type을 생략하면 type:"get"이다.
-	        //	dataType:"json",// T 대문자이다 
-	    	success:function(text){ 
-	    		
-	    		const json = JSON.parse(text); // 객체로 파싱 
-	    		
-	    		if(json.isExists ) {
-	    			// 이미 사용중인 userid라면
-	    			$("span#idcheckResult").html($("input#userid").val()+"은 중복된 ID이므로 사용 불가합니다.").css("color","red");
-	    			$("input#userid").val("");
-	    		}
-	    		else if(!json.isExists && $("input#userid").val().trim() !="" ){
-	    			// 존재하지 않는 경우라면 또는 공백을 입력한 경우
-	    			$("span#idcheckResult").html($("input#userid").val()+"은 사용가능합니다.").css("color","blue");
-	    		}
-	    	},
-	    	
-	    	error: function(request, status, error){
-	            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-	          }
-	      }); // end of $.ajax
-   	   }
-   		
+	   
+    
    // 회원가입 버튼 누를 시 진행되는 메소드
    function goRegister(){
 	////***** 필수입력사항에 모두 입력이 되었는지 검사한다 *******//////
@@ -414,7 +404,7 @@
                                            </th>
                                            <td>
                                                 <input type="text" id="user_id" name="user_id" class="requiredInfo" />
-                                                <button class="btn_double_check" onclick="idDobleCheck();"> 아이디 중복 체크</button>
+                                                <button type="button" class="btn_double_check" id="doublecheckID"> 아이디 중복 체크</button>
                                                 <span id="idcheckResult"></span>
                                                 <span class="error" style="color:red;">아이디는 필수입력 사항입니다.</span>
                                            </td> 
@@ -451,11 +441,11 @@
                                        <tr>
                                            <th>
                                                <span class="important">* 이메일</span>
-
                                            </th>
                                            <td>
                                                <input type="text" id="email" name="email" class="requiredInfo" />
-                                               <button class=" btn_double_check" onclick="emailDoubleCheck();" > 이메일 중복 체크</button>
+                                               <button type="button" class=" btn_double_check" id="doubleCheckEmail" > 이메일 중복 체크</button>
+                                               <span id="emailCheckResult"></span>
                                                <span class="error">이메일 형식에 맞지 않습니다.</span>
                                            </td>
                                        </tr>
