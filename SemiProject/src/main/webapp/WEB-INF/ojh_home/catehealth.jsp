@@ -132,7 +132,7 @@
                                                     <li class="ojh_li"><a href="">패스트리</a></li>
                                                 </ul>
                                             </li>                                           
-                                            <li class="ojh_li"><a href="">케이크</a>
+                                            <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homecake.ban">케이크</a>
                                                 <ul class="sub_delth1">
                                                     <li class="ojh_li"><a href="">생크림 케이크</a></li>
                                                     <li class="ojh_li"><a href="">클래식 케이크</a></li>
