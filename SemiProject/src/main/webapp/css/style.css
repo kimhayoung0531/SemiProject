@@ -282,10 +282,7 @@ body .centerMenu ul li a {
 	
 }
 
-.ojh_left_wing {
-	
-	border: solid 1px red;
-}
+
 
 .current-cate {
 	background: #5a5a5a;
@@ -546,22 +543,79 @@ a {
 
 /* sub_site Css */
 
-.sub_content {
-    width: 100%;
-    min-height: 100%;
-    padding: 45px 0px 0px 0px;
-}
-
-
-.sub_content .left_wing {
-    position: absolute;
-}
-
-.sub_content .container relative clearfix {
+.ojh_sub_content {
+    position: relative;
+    width: 1200px;
     margin: 0 auto;
-    width: 1240px;
+}
+
+.ojh_content {
+    width: 100%;
+    min-height: 500px;
+}
+
+.ojh_left_wing {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 185px;
+}
+
+.ojh_left_wing .ojh_current-cate {
+    background: #5a5a5a;
+    line-height: 40px;
+}
+
+.ojh_left_wing .ojh_current-cate > h3.ojh_li {
+    text-indent: 20px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.ojh_left_wing .ojh_category-box {
+    border: solid 1px #ececec;
+    padding: 15px 0px 200px 20px;
+    line-height: 35px;
+}
+.ojh_content .ojh_right_content {
+    width: 1024px;
+    float: right;
     position: relative;
 }
+
+.ojh_good_pick_list .ojh_pick_list_box {
+    text-align: right;
+    border: none;
+}
+
+.ojh_good_pick_list .ojh_pick_list_num  {
+    float: left !important;
+    font-size: 12px;
+}
+
+.ojh_good_pick_list .ojh_pick_list_box .ojh_pick_list input {
+    width: 0;
+}
+
+.ojh_good_pick_list .ojh_pick_list_box >* {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* 상품 리스트 */
+
+.ojh_item_gallery_type >li {
+    margin: 0px -20px 0px 0px;
+}
+
+.ojh_item_gallery_type .ojh_photo_box {
+    margin: 0px 36px 0px 0px;
+}
+
+.ojh_item_gallery_type .item-info-cont .ojh_item_name_explain {
+    display: block;
+}
+
 
 /* 오준혁 끝 ------------------------------------------------------------------------------------------- */
 
