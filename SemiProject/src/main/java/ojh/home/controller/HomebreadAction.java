@@ -11,7 +11,7 @@ public class HomebreadAction extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/ojh_home/catebread.jsp");
+		super.setViewPage("/WEB-INF/ojh_home/homebread.jsp");
 	
 		
 	}
