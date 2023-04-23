@@ -123,14 +123,14 @@
                                                     <li class="ojh_li"><a href="">패스트리</a></li>
                                                 </ul>
                                             </li>                                           
-                                            <li class="ojh_li"><a href="">케이크</a>
+                                            <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homecake.ban">케이크</a>
                                                 <ul class="sub_delth1">
                                                     <li class="ojh_li"><a href="">생크림 케이크</a></li>
                                                     <li class="ojh_li"><a href="">클래식 케이크</a></li>
                                                     <li class="ojh_li"><a href="">캐릭터 케이커</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="ojh_li"><a href="">디저트</a>
+                                            <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedessert.ban">디저트</a>
                                                 <ul class="sub_delth1">
                                                     <li class="ojh_li"><a href="">쿠키</a></li>
                                                     <li class="ojh_li"><a href="">초코/캔디</a></li>
@@ -138,7 +138,7 @@
                                                     <li class="ojh_li"><a href="">마카롱</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="ojh_li"><a href="">음료</a>
+                                            <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedrink.ban">음료</a>
                                                 <ul class="sub_delth1">
                                                     <li class="ojh_li"><a href="">우유</a></li>
                                                     <li class="ojh_li"><a href="">커피</a></li>
