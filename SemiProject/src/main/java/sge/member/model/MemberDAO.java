@@ -267,13 +267,14 @@ public class MemberDAO implements InterMemberDAO {
 		
 		try {
 			conn = ds.getConnection();
+			
 			String sql = " select user_id " +
 						 " from tbl_member " +
 						 " where status = 1 and user_name = ? and email = ? ";
 			
 			pstmt = conn.prepareStatement(sql);	
 			
-			pstmt.setString(1, paraMap.get("uesr_name"));
+			pstmt.setString(1, paraMap.get("user_name"));
 			pstmt.setString(2, aes.encrypt(paraMap.get("email")));
 		
 			
