@@ -133,9 +133,9 @@
                                             </li>                                           
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homecake.ban">케이크</a>
                                                 <ul class="sub_delth1">
-                                                    <li class="ojh_li"><a href="">생크림 케이크</a></li>
-                                                    <li class="ojh_li"><a href="">클래식 케이크</a></li>
-                                                    <li class="ojh_li"><a href="">캐릭터 케이커</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakecream.ban">생크림 케이크</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakeclassic.ban">클래식 케이크</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakecharacter.ban">캐릭터 케이커</a></li>
                                                 </ul>
                                             </li>
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedessert.ban">디저트</a>
