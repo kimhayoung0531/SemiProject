@@ -133,25 +133,25 @@
                                             </li>                                           
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homecake.ban">케이크</a>
                                                 <ul class="sub_delth1">
-                                                   <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakecream.ban">생크림 케이크</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakecream.ban">생크림 케이크</a></li>
                                                     <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakeclassic.ban">클래식 케이크</a></li>
                                                     <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakecharacter.ban">캐릭터 케이커</a></li>
                                                 </ul>
                                             </li>
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedessert.ban">디저트</a>
                                                 <ul class="sub_delth1">
-                                                    <li class="ojh_li"><a href="">쿠키</a></li>
-                                                    <li class="ojh_li"><a href="">초코/캔디</a></li>
-                                                    <li class="ojh_li"><a href="">아이스</a></li>
-                                                    <li class="ojh_li"><a href="">마카롱</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/desscok.ban">쿠키</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/desscho.ban">초코/캔디</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/dessice.ban">아이스</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/dessmac.ban">마카롱</a></li>
                                                 </ul>
                                             </li>
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedrink.ban">음료</a>
                                                 <ul class="sub_delth1">
-                                                    <li class="ojh_li"><a href="">우유</a></li>
-                                                    <li class="ojh_li"><a href="">커피</a></li>
-                                                    <li class="ojh_li"><a href="">에이드/TEA</a></li>
-                                                    <li class="ojh_li"><a href="">스무디/쉐이크</a></li>
+                                                  <li class="ojh_li"><a href="http://localhost:9090/SemiProject/drimil.ban">우유</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/dricof.ban">커피</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/driade.ban">에이드/TEA</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/drismo.ban">스무디/쉐이크</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -196,7 +196,7 @@
 
                                     <div class="ojh_category-box" >
                                         <ul>
-                                            <li class="ojh_li"> 
+                                             <li class="ojh_li"> 
                                                 <a href="http://localhost:9090/SemiProject/desscok.ban">
                                                 <span> 쿠키</span>
                                                 </a>
@@ -221,12 +221,7 @@
                                 </div> <!-- end of ojh_left_wing -->
 
                                 <div class="ojh_right_content goods_list">
-                                    <div class="ojh_addition_zone" style="padding: 0px 0px 20px 0px;">
-                           
-                                        <p style="text-align: center;" >
-                                            <img src="<%=ctxPath%>/image/homedessert.jpg" style="width: 900px; ">
-                                        </p>
-                                    </div> 
+                                    
 
                                     <div class="ojh_good_pick_list" style="">
                                         <form name="ojh_frmList" action>

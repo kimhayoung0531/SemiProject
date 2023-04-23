@@ -148,10 +148,10 @@
                                             </li>
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedrink.ban">음료</a>
                                                 <ul class="sub_delth1">
-                                                    <li class="ojh_li"><a href="">우유</a></li>
-                                                    <li class="ojh_li"><a href="">커피</a></li>
-                                                    <li class="ojh_li"><a href="">에이드/TEA</a></li>
-                                                    <li class="ojh_li"><a href="">스무디/쉐이크</a></li>
+                                                      <li class="ojh_li"><a href="http://localhost:9090/SemiProject/drimil.ban">우유</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/dricof.ban">커피</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/driade.ban">에이드/TEA</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/drismo.ban">스무디/쉐이크</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -197,22 +197,22 @@
                                     <div class="ojh_category-box" >
                                         <ul>
                                             <li class="ojh_li"> 
-                                                <a href="#">
+                                                <a href="http://localhost:9090/SemiProject/drimil.ban">
                                                 <span> 우유</span>
                                                 </a>
                                             </li>
                                             <li class="ojh_li"> 
-                                                <a href="#">
+                                                <a href="http://localhost:9090/SemiProject/dricof.ban">
                                                 <span> 커피</span>
                                                 </a>
                                             </li>
                                             <li class="ojh_li"> 
-                                                <a href="#">
+                                                <a href="http://localhost:9090/SemiProject/driade.ban">
                                                 <span> 에이드/TEA</span>
                                                 </a>
                                             </li>
                                             <li class="ojh_li"> 
-                                                <a href="#">
+                                                <a href="http://localhost:9090/SemiProject/drismo.ban">
                                                 <span> 스무디/쉐이크</span>
                                                 </a>
                                             </li>
