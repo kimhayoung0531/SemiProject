@@ -125,10 +125,10 @@
                                         <li class="ojh_li">
                                                 <a href="http://localhost:9090/SemiProject/homebread.ban">빵</a>
                                                 <ul class="sub_delth1" >
-                                                    <li class="ojh_li"><a href="">식빵</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/catehealth.ban">건강빵</a></li>
-                                                    <li class="ojh_li"><a href="">도넛/고로케</a></li>
-                                                    <li class="ojh_li"><a href="">패스트리</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breadnomal.ban">식빵</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breadhealth.ban">건강빵</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breaddonut.ban">도넛/고로케</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breadpastry.ban">패스트리</a></li>
                                                 </ul>
                                             </li>                                           
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homecake.ban">케이크</a>
@@ -198,22 +198,22 @@
                                         <ul>
                                             <li class="ojh_li"> 
                                                 <a href="#">
-                                                <span> 식빵</span>
+                                                <span> 생크림 케이크</span>
                                                 </a>
                                             </li>
                                             <li class="ojh_li"> 
                                                 <a href="#">
-                                                <span> 건강빵</span>
+                                                <span> 클래식 케이크</span>
                                                 </a>
                                             </li>
                                             <li class="ojh_li"> 
                                                 <a href="#">
-                                                <span> 도넛/고로케</span>
+                                                <span> 캐릭터 케이크</span>
                                                 </a>
                                             </li>
                                             <li class="ojh_li"> 
                                                 <a href="#">
-                                                <span> 패스트리</span>
+                                                <span> </span>
                                                 </a>
                                             </li>
                                         </ul>
