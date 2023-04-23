@@ -11,6 +11,8 @@
 	
 	<script>
 		$(document).ready(function(){
+			$("input#product_cnt").val($("input#item_cnt").val());
+			
 			$("input#item_cnt").bind("change", function() {
 				const count = Number($("input#item_cnt").val());
 				
