@@ -1,10 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+    
 <%
 	String ctxPath = request.getContextPath();
 %>    
 <jsp:include page="../header.jsp" />
 
+<script type="text/javascript">
+
+	$(document).ready(function () {
+		
+       if(${not empty requestScope.itemCnt}) {
+    	   $("input#cart_cnt").val("${requestScope.itemCnt}");
+       }		
+		
+	});	//end of $(document).ready(function () -------------------------------------
+
+</script>
+
+
+ 
 <div id="cart_contents">
                 <!-- 본문 시작 -->
         
@@ -53,10 +70,9 @@
                                   
                                     <thead>
                                     <tr>
-                                        <th>        <!-- 선택상품을 전체선택 체크박스 allCheck1-->
+                                        <th>        <!-- 선택상품을 전체선택 체크박스 allCheck-->
                                             <div class="form_element">
-                                                <input type="checkbox" id="allCheck1" class="gd_select_all_goods" checked="checked">
-                                                <label for="allCheck1" class="check_s on"></label>
+                                                <input type="checkbox" id="allCheck" class="gd_select_all_goods" checked="checked">
                                             </div>
                                         </th>
                                         <th>상품/옵션 정보</th>
@@ -73,7 +89,7 @@
                                     <tr>
                                         <td class="td_chk"> <!-- 선택상품 체크박스-->    
                                             <div class="form_element">
-                                                <input type="checkbox" id="cartSno1_1429514" />
+                                                <input type="checkbox" id="" checked="checked"/>
                                             </div>
                                         </td>
 
@@ -92,13 +108,13 @@
                                         <td class="td_order_amount">    <!-- 장바구니 수량 / 변경 -->
                                             <div class="order_goods_num">
                                                 <div class="btn_gray_list">
-                                                    <p><label for="number"></label><input type="number" min="1"  max="50" step="1" value="1" id="number"/></p>                                                </div>
+                                                    <p><label for="number"></label><input type="number" id="cart_cnt" min="1"  max="50" step="1" value="1" id="number"/></p>                                                </div>
                                                 </div>
                                             </div>
                                         </td>
                                         
                                         <td>    <!-- 상품 금액 -->
-                                            <strong class="order_sum_txt price">10,900</strong>
+                                            <strong class="order_sum_txt price" value=""></strong>
                                             <span>원</span>
                                         </td>
 
@@ -110,7 +126,8 @@
                                                 </ul>
                                         </td>
                                         <td>
-                                            <strong class="order_sum_txt">10,900</strong>
+                                            <strong class="order_sum_txt" value=""></strong>
+                                            <span>원</span>                                     
                                         </td>
                                         <td class="td_delivery" rowspan="4">
                                             기본 - 금액별배송비<br>

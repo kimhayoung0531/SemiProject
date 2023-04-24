@@ -72,7 +72,7 @@
                     <div class="header_search"> <!-- 검색창, 찜, 장바구니--> 
                         <div class="header_search_cont">
                             <div class="h1_logo">
-                                <a href="#">
+                                <a href="http://localhost:9090/SemiProject/home.ban/">
                                     <img src="<%=ctxPath%>/image/main_logo.png">
                                 </a>
                             </div>
@@ -117,33 +117,33 @@
                                         <ul class ="switch_detail_submenu" >
                                               <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homebread.ban">빵</a>
                                                 <ul class="sub_delth1" >
-                                                    <li class="ojh_li"><a href="">식빵</a></li>
-                                                    <li class="ojh_li"><a href="">건강빵</a></li>
-                                                    <li class="ojh_li"><a href="">도넛/고로케</a></li>
-                                                    <li class="ojh_li"><a href="">패스트리</a></li>
+                                                   <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breadnomal.ban">식빵</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breadhealth.ban">건강빵</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breaddonut.ban">도넛/고로케</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breadpastry.ban">패스트리</a></li>
                                                 </ul>
                                             </li>                                           
-                                            <li class="ojh_li"><a href="">케이크</a>
+                                            <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homecake.ban">케이크</a>
                                                 <ul class="sub_delth1">
-                                                    <li class="ojh_li"><a href="">생크림 케이크</a></li>
-                                                    <li class="ojh_li"><a href="">클래식 케이크</a></li>
-                                                    <li class="ojh_li"><a href="">캐릭터 케이커</a></li>
+                                                   <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakecream.ban">생크림 케이크</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakeclassic.ban">클래식 케이크</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakecharacter.ban">캐릭터 케이커</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="ojh_li"><a href="">디저트</a>
+                                            <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedessert.ban">디저트</a>
                                                 <ul class="sub_delth1">
-                                                    <li class="ojh_li"><a href="">쿠키</a></li>
-                                                    <li class="ojh_li"><a href="">초코/캔디</a></li>
-                                                    <li class="ojh_li"><a href="">아이스</a></li>
-                                                    <li class="ojh_li"><a href="">마카롱</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/desscok.ban">쿠키</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/desscho.ban">초코/캔디</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/dessice.ban">아이스</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/dessmac.ban">마카롱</a></li>
                                                 </ul>
                                             </li>
-                                            <li class="ojh_li"><a href="">음료</a>
+                                            <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedrink.ban">음료</a>
                                                 <ul class="sub_delth1">
-                                                    <li class="ojh_li"><a href="">우유</a></li>
-                                                    <li class="ojh_li"><a href="">커피</a></li>
-                                                    <li class="ojh_li"><a href="">에이드/TEA</a></li>
-                                                    <li class="ojh_li"><a href="">스무디/쉐이크</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/drimil.ban">우유</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/dricof.ban">커피</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/driade.ban">에이드/TEA</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/drismo.ban">스무디/쉐이크</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -964,7 +964,7 @@
                             <div class="company-info pull-left" style="margin: 30px 0px 0px 140px;">
                                 <div class="team-title"><p> 팀 원 </p></div>
                                 <div class="info">
-                                    <p> 김하영(조장) &nbsp&nbsp 김가은 &nbsp&nbsp 김진솔 &nbsp&nbsp&nbsp&nbsp  </p>
+                                    <p> 김하영(조장) &nbsp&nbsp 성가은 &nbsp&nbsp 김진솔 &nbsp&nbsp&nbsp&nbsp  </p>
                                     <p> 오준혁 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 박준엽 &nbsp&nbsp 박주진</p>
                                     
                                
