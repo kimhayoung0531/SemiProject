@@ -139,7 +139,7 @@ body #header .headBtn {
     top: 0;
     bottom: 0;
     right: 0;
-    width: 150px;
+    width: 110px;
     height: 50px;
     text-align: right;
     margin: auto;
@@ -316,16 +316,16 @@ body .centerMenu ul li a {
     font-family: 'xeicon'; color: black; font-size: 30px;}
 
 .visual_1 button.slick-prev, .visual_2 button.slick-prev, .visual_3 button.slick-prev {
-    left: -25px; font-size: 0; color: transparent;}
+    left: 0px; font-size: 0; color: transparent;}
 .visual_0 button.slick-prev{
-    left: 50px; font-size: 0; color: transparent;}
+    left: 0px; font-size: 0; color: transparent;}
 
 .visual_0 button.slick-prev:before, .visual_1 button.slick-prev:before, .visual_2 button.slick-prev:before, .visual_3 button.slick-prev:before {
     content: "\e93d"; }
 .visual_0 button.slick-next,  .visual_1 button.slick-next, .visual_2 button.slick-next, .visual_3 button.slick-next {
-    right: 25px; font-size: 0; color: transparent;}
+    right: 0px; font-size: 0; color: transparent;}
 .visual_0 button.slick-next {
-    right: 50px; font-size: 0; color: transparent;}
+    right: 0px; font-size: 0; color: transparent;}
 .visual_0 button.slick-next::before, .visual_1 button.slick-next::before, .visual_2 button.slick-next::before, .visual_3 button.slick-next::before {
     content: "\e940"; }
 
