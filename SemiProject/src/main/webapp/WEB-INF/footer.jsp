@@ -25,7 +25,7 @@
                             <!-- 고객센터 -->
                             <div class="h1_logo" style="margin: 30px 0px 0px 50px;
                                                         padding: 0px 175px;">
-                                <a href="#">
+                                <a href="http://localhost:9090/SemiProject/home.ban">
                                     <img src="<%=ctxPath%>\image\main_logo.png" style="width: 150px;">
                                 </a>
                             </div>
