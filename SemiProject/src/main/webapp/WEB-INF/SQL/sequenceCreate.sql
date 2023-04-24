@@ -24,3 +24,13 @@ nomaxvalue
 nominvalue
 nocycle
 nocache;
+
+create sequence seq_cart_cart_num
+start with 1
+increment by 1
+nomaxvalue
+nominvalue
+nocycle
+nocache;
+
+--
