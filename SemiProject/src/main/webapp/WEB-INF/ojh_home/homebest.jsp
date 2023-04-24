@@ -51,8 +51,9 @@
     <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     
 </head>
-<body>
-    <jsp:include page="../header.jsp" />
+
+<jsp:include page="../header.jsp" />
+		     
 		    
 		     <div id="container">
                 
@@ -69,37 +70,7 @@
                           
                             <div class="ojh_container relative clearfix" style="position: relative;" width: 1240px; margin: 0 auto;>
                            
-                                <div class="ojh_left_wing">
-                                    <div class="ojh_current-cate" >
-                                        <h3 class="ojh_li" style="line-height: 40px;"> 빵 </h3>
-                                    </div>
-
-                                    <div class="ojh_category-box" >
-                                        <ul>
-                                            <li class="ojh_li"> 
-                                                <a href="http://localhost:9090/SemiProject/breadnomal.ban">
-                                                <span> 식빵</span>
-                                                </a>
-                                            </li>
-                                            <li class="ojh_li"> 
-                                                <a href="http://localhost:9090/SemiProject/breadhealth.ban">
-                                                <span> 건강빵</span>
-                                                </a>
-                                            </li>
-                                            <li class="ojh_li"> 
-                                                <a href="http://localhost:9090/SemiProject/breaddonut.ban">
-                                                <span> 도넛/고로케</span>
-                                                </a>
-                                            </li>
-                                            <li class="ojh_li"> 
-                                                <a href="http://localhost:9090/SemiProject/breadpastry.ban">
-                                                <span> 패스트리</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> <!-- end of ojh_left_wing -->
-
+                                
                                 <div class="ojh_right_content goods_list">
                                     
 
@@ -304,12 +275,13 @@
                                            <li style="width: 33.333333%;">
 
                                                     <div class="ojh_imte_cont">
-                                                        <div class="ojh_photo_box">
+                                                    	 <div class="ojh_photo_box">
                                                             <a href="#">
                                                                 <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
                                                             </a>
 
                                                         </div>
+                                                       
                                                         <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
                                                                 <a href="#">
                                                                 <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
@@ -612,7 +584,7 @@
              </div> <!-- end of container -->
 
              
-<jsp:include page="../footer.jsp" />
+ <jsp:include page="../footer.jsp" />
 
 </body>
 </html>
