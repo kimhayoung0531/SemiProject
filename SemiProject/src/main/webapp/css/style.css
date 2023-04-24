@@ -1818,6 +1818,22 @@ body #container #contents .order_sub_content .order_sub_content_box .order_cont 
     border-radius: 5px;
 }
 
+.order_view_info .order_info .order_table_type table.shipping_info_table tbody tr:nth-child(2) td div.address_postcode input:nth-child(2) {
+	width : 90px;
+}
+
+.order_view_info .order_info .order_table_type table.shipping_info_table tbody tr:nth-child(2) td div.address_input input {
+	margin-top: 15px;
+	line-height: 20px;
+	width:300px
+}
+
+.order_view_info .order_info .order_table_type table.shipping_info_table tbody tr:nth-child(2) td input#sample6_postcode {
+	width: 100px;
+	line-height: 20px;
+}
+	
+
 .order_benefit_list {
     margin: 0;
     line-height: 300%;
