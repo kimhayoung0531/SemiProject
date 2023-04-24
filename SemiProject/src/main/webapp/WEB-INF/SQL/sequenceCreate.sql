@@ -25,6 +25,7 @@ nominvalue
 nocycle
 nocache;
 
+-- 장바구니 id 시퀀스
 create sequence seq_cart_cart_num
 start with 1
 increment by 1
