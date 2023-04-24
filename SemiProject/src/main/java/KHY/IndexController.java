@@ -1,4 +1,4 @@
-package KHY.model;
+package KHY;
 
 import java.sql.SQLException;
 import java.util.List;

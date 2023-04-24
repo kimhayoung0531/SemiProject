@@ -6,8 +6,8 @@
 <jsp:include page="../header.jsp" />
  <div class="sub_content">
      <div class="content_box">
-     
-     
+
+
          <div class="join_agreement_wrap">
              <div class="member_title">
                  <h2>회원가입 </h2>
@@ -54,6 +54,7 @@
                              <span>(전체동의,선택항목도 포합됩니다.)</span>
                          </div>
 
+
                          <div class="join_agreement_box">
                              <div class="form_element">
                                  <input type="checkbox" id="termAgree1" name="" />
@@ -89,7 +90,7 @@
                          </div>
                      </div> <!--//join_agreement_cont -->
                      <div class="btn_center_box">
-                         <button type="button" id="btnNextStep" class="btn_member_next"  onclick="location.href='<%= ctxPath%>/memberRegister.ban'" >다음단계 </button>
+                         <button type="button" id="btnNextStep" class="btn_member_next">다음단계 </button>
                      </div>
                  </form>
              </div><!--member_cont-->

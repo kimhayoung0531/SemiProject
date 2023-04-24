@@ -22,10 +22,10 @@
                  <div class="btn_register_box">
                      <ul>
                          <li>
-                             <button  type="button" id="goToMain" class="btn_member_white" >홈으로</button>
+                             <button id="goToMain" class="btn_member_white" >홈으로</button>
                          </li>
                          <li>
-                             <button type="button" id="btn_login" class="btn_member_gray" onclick="location.href='<%= ctxPath%>/login.ban'">로그인</button>
+                             <button id="btn_login" class="btn_member_gray" href="<%= ctxPath%>/sge_login/memberLogin.jsp">로그인</button>
                          </li>
                      </ul>
                  </div> <!-- // btn_login_box-->

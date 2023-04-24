@@ -33,18 +33,6 @@
 			});
 			
 		}); //'장바구니' 클릭시 뜨는 팝업창
-		function goCart(){
-			const frm = document.itemFrmView;
-	
-			<%-- if(frm.searchWord.value.trim()==""){
-				alert("검색어를 올바르게 입력하세요");
-				return;		//함수종료
-			}
-			--%>
-			frm.action = "cart.up";
-			frm.method = "post";
-			frm.submit();
-		}
 		
 	});	//end of $(document).ready(function () --------------------------------------
 

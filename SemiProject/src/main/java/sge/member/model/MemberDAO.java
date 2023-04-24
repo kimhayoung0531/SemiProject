@@ -2,16 +2,15 @@ package sge.member.model;
 
 import java.io.UnsupportedEncodingException;
 
+
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
 
 import util.security.AES256;
 import util.security.SecretMyKey;
@@ -159,139 +158,5 @@ public class MemberDAO implements InterMemberDAO {
 		}
 		return emailExist;
 	}// end of public Boolean emailDoubleCheck(String email)
-
-	
-	//로그인을 위해 가입된 회원인지 알아보는 메소드 
-	@Override
-	public MemberVO selectOneMember(Map<String, String> paraMap) throws SQLException {
-		MemberVO member = null;
-		
-		try {
-			
-			conn = ds.getConnection();
-			
-
-			String sql = " SELECT user_id, user_name, email, telephone, mobile, post_code, address, detailAddress, extraAddress, gender,"+
-					     " birthday, mileage, registerday, pwdchangegap, NVL(lastlogingap, trunc( months_between(sysdate, registerday)) ) AS lastlogingap "+
-						 " FROM "+
-						 " ( "+
-						 "		select user_id, user_name, email, telephone, mobile, post_code, address, detailAddress, extraAddress, gender, birthday "+
-						 "		,mileage, to_char(registerday, 'yyyy-mm-dd') AS registerday "+
-						 "      ,trunc( months_between(sysdate, lastPwdChange) ) AS pwdchangegap "+
-						 "		from tbl_member "+
-						 "      where status = 1 and user_id = ? and pwd = ?"+
-						 " ) M "+
-						 " CROSS JOIN "+
-						 " ( " +
-						 "		select trunc( months_between(sysdate, max(login_date)) ) AS lastlogingap "+
-						 "      from tbl_login_history "+
-						 "      where fk_user_id = ? "+
-						 " ) H ";
-
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, paraMap.get("user_id"));
-			pstmt.setString(2, Sha256.encrypt(paraMap.get("pwd")));
-			pstmt.setString(3, paraMap.get("user_id"));
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				 member = new MemberVO();
-				 
-				 member.setUser_id(rs.getString(1));
-				 member.setUser_name(rs.getString(2));
-				 member.setEmail( aes.decrypt(rs.getString(3)) );  // 복호화 
-				 member.setTelephone(aes.decrypt(rs.getString(4))); // 복호화 
-				 member.setMobile( aes.decrypt(rs.getString(5)) ); // 복호화 
-				 member.setPost_code(rs.getString(6));
-				 member.setAddress(rs.getString(7));
-				 member.setDetailAddress(rs.getString(8));
-				 member.setExtraAddress(rs.getString(9));
-				 member.setGender(rs.getString(10));
-				 member.setBirthday(rs.getString(11));
-				 member.setMileage(rs.getInt(12));
-				 member.setRegisterday(rs.getString(13));
-				 
-				 if( rs.getInt(14) >= 3 ) { 
-						 
-						member.setRequirePwdChange(true); // 로그인시 암호를 변경해라는 alert 를 띄우도록 할때 사용한다.  
-				 }
-				 
-				 if ( rs.getInt(15) >= 12 ) { // 또는 rs.getInt("LASTLOGINGAP")
-					 // 마지막으로 로그인 한 날짜시간이 현재시각으로 부터 1년이 지났으면 휴면으로 지정  
-					 
-					 member.setIdle(1); 
-					 
-					 // === tbl_member 테이블의 idle 컬럼의 값을 1 로 변경하기 === //
-					 sql = " update tbl_member set idle = 1 "
-					 	 + " where user_id = ? "; 
-					 
-					 pstmt = conn.prepareStatement(sql); 
-					 pstmt.setString(1, paraMap.get("user_id"));
-					 
-					 pstmt.executeUpdate();
-				 }
-				 
-				 // === tbl_loginhistory(로그인기록) 테이블에 insert 하기 === // 
-				 if(member.getIdle() != 0) {
-				
-					 sql = " insert into tbl_login_history(fk_user_id, clientip) "
-					 	 + " values(?, ?) "; 
-					 
-					 pstmt = conn.prepareStatement(sql);
-					 pstmt.setString(1, paraMap.get("user_id"));
-					 pstmt.setString(2, paraMap.get("clientip"));
-					 
-					 pstmt.executeUpdate();
-				 }
-				
-			}
-			
-		} catch(GeneralSecurityException | UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-		
-		return member;
-		
-	}// end of  end of public MemberVO selectOneMember(Map<String, String> paraMap)
-
-	//아이디를 찾아주는 메소드
-	@Override
-	public String findUserId(Map<String, String> paraMap) throws SQLException{
-		
-		String user_id = null;
-		
-		try {
-			conn = ds.getConnection();
-			
-			String sql = " select user_id " +
-						 " from tbl_member " +
-						 " where status = 1 and user_name = ? and email = ? ";
-			
-			pstmt = conn.prepareStatement(sql);	
-			
-			pstmt.setString(1, paraMap.get("user_name"));
-			pstmt.setString(2, aes.encrypt(paraMap.get("email")));
-		
-			
-			rs = pstmt.executeQuery();
-			//행이없으면 false;
-			
-			if(rs.next()) {
-				user_id = rs.getString(1);
-			}
-		} catch (GeneralSecurityException | UnsupportedEncodingException e) {
-			
-			e.printStackTrace();
-		}finally {
-			close();
-		}
-		
-		return user_id;
-	}
 
 }
