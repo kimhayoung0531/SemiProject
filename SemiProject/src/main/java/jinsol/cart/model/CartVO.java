@@ -14,6 +14,12 @@ public class CartVO implements InterCartDAO{
 	 
 	public CartVO() {}
 
+	
+	
+	
+
+	///////////////////////////////////////////////////
+	// Getter Setter
 	public long getOrder_num() {
 		return order_num;
 	}
@@ -56,8 +62,6 @@ public class CartVO implements InterCartDAO{
 
 	
 	
-	////////////////////////////////////////////
-	// Getter Setter
 	
 	
 	
