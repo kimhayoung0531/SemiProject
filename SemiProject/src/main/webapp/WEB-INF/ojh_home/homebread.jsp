@@ -122,18 +122,18 @@
                                 <div class="switch">전체 카테고리
                                     <div class="switch_submenu">
                                         <ul class ="switch_detail_submenu" >
-                                        <li class="ojh_li">
+                                         <li class="ojh_li">
                                                 <a href="http://localhost:9090/SemiProject/homebread.ban">빵</a>
                                                 <ul class="sub_delth1" >
-                                                    <li class="ojh_li"><a href="">식빵</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/catehealth.ban">건강빵</a></li>
-                                                    <li class="ojh_li"><a href="">도넛/고로케</a></li>
-                                                    <li class="ojh_li"><a href="">패스트리</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breadnomal.ban">식빵</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breadhealth.ban">건강빵</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breaddonut.ban">도넛/고로케</a></li>
+                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breadpastry.ban">패스트리</a></li>
                                                 </ul>
                                             </li>                                           
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homecake.ban">케이크</a>
                                                 <ul class="sub_delth1">
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakecream.ban">생크림 케이크</a></li>
+                                                   <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakecream.ban">생크림 케이크</a></li>
                                                     <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakeclassic.ban">클래식 케이크</a></li>
                                                     <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakecharacter.ban">캐릭터 케이커</a></li>
                                                 </ul>
