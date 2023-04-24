@@ -6,8 +6,13 @@
 %>    
     
   
+
+
 <jsp:include page="../header.jsp" />  
              
+
+    
+             <!-- // header wrap --> 
             <div id="container">
                 <div id="contents">
 
