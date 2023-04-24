@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+	
 <%
-    String ctxPath = request.getContextPath();
-    //    /SemiProject
-%>
-    
-	<div id="footer_wrap">
-                <div id="footer">
+	String ctxPath = request.getContextPath();
+	// SemiProject
+%>    
+
+<div id="footer_wrap">
+              <div id="footer">
+
                     <div class="foot_list">
                        <div class="container clearfix" style="display: flex;">
                             <!-- 인스타그램 영역 -->
@@ -35,15 +37,12 @@
                             <div class="company-info pull-left" style="margin: 30px 0px 0px 140px;">
                                 <div class="team-title"><p> 팀 원 </p></div>
                                 <div class="info">
-                                    <p> 김하영(조장) &nbsp&nbsp 김가은 &nbsp&nbsp 김진솔 &nbsp&nbsp&nbsp&nbsp  </p>
+                                    <p> 김하영(조장) &nbsp&nbsp 성가은 &nbsp&nbsp 김진솔 &nbsp&nbsp&nbsp&nbsp  </p>
                                     <p> 오준혁 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 박준엽 &nbsp&nbsp 박주진</p>
-                                    
-                               
-                            
-                            </div>
+                                </div>
                             <!--// 회사정보 -->
+                            </div>
                         </div>
-                    </div>
                     <div class="copyright text-center">
                         <p>copyright © by www.cafenoli.com All Right Reserved</p>
                     </div>
@@ -51,12 +50,15 @@
                     <div class="foot_certify">
                         <span></span>
                         <span></span>
-                    </div>
-                    <!-- //foot_certify -->
-                </div>
-            </div>
-     </div>
+                    </div>  <!-- //foot_certify -->
+                       
+                </div> <!-- footer-bottom -->
 
+              </div> <!-- footer  -->
+     	    </div> <!-- footer_wrap -->
 
+      </div> <!-- wrap -->
+	 </div> <!-- body-main body-index pc -->
+   	
 </body>
 </html>

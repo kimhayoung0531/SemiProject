@@ -114,7 +114,7 @@ create table tbl_admin
  ,constraint pk_tbl_admin_admin_id primary key(admin_id)
 );
 
--- 공지사항
+-- 
 create table tbl_notice
 ( notice_num        number(10)              not null -- 번호
  ,admin_id          varchar2(40)              not null -- 관리자 아이디 

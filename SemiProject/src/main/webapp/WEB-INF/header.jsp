@@ -50,6 +50,7 @@
 <body>
     <div class="body-main body-index pc">
         <div id="wrap">
+        
             <div id="header_wrap">
                 <div id="header">
                     <div class="header_top"> <!--회원가입 로그인 고객센터--> 

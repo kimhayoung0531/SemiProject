@@ -6,50 +6,8 @@
 %>    
     
   
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	
-	<title> 세미 프로젝트 </title>
-	
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" type="text/css" href="bootstrap-4.6.0-dist/css/bootstrap.min.css" > 
-
-    <!-- jQueryUI CSS 및 JS -->
-    <link rel="stylesheet" type="text/css" href="/jquery-ui-1.13.1.custom/jquery-ui.css" />
-    <script type="text/javascript" src="/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
-    
-    <!-- 아이콘 JS-->
-    <script src="https://kit.fontawesome.com/b7b1b05ad5.js" crossorigin="anonymous"></script>
-
-    <!-- original css -->
-    <link href="<%=ctxPath%>/css/style.css" rel="stylesheet" type="text/css"></style>
-    
-    <!-- 폰트 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Roboto&display=swap" rel="stylesheet">
-	
-    <!-- slick 슬라이드 -->
-
-    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    
-</head>
-<body>
-<jsp:include page="../header.jsp" />
-
+<jsp:include page="../header.jsp" />  
+             
             <div id="container">
                 <div id="contents">
 
@@ -747,7 +705,7 @@
                                           <li class="slick-slider slick-current" style="width: 265px;">  
                                             <div class="item_cont" >
                                               <div class="photo_box">  
-                                                <a href="http://localhost:9090/SemiProject/home.ban/">
+                                                <a href="#">
                                                     <img src="<%=ctxPath%>/image/item_main/24.jpg" width="200" alt="[베스트상품] 플레인롤" title="[베스트상품] 플레인롤" class="middle" >
                                                 </a>
                                               </div>  
@@ -805,20 +763,16 @@
                                                 ]
                                                 });
                                           </script>
-                                    </div>
-                                </div>
+                                    </div> <!-- goods_list_cont_1 goods_content_222 -->
+                                </div> <!-- goods_list main_wrap_224 -->
 
 
-                        </div>
-                    </div>
+                        </div> <!-- main_content -->
+                    </div> <!-- ojh_sub_content -->
                          
-                </div>
-            </div>
-        </div>
+                </div> <!-- content -->
+            </div> <!-- container -->
+        
              <!-- // sub_content -->
-             
-<jsp:include page="../footer.jsp" />    
 
-
-</body>
-</html>
+<jsp:include page="../footer.jsp" />

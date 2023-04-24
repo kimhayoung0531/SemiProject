@@ -4,56 +4,8 @@
     String ctxPath = request.getContextPath();
     //    /SemiProject
 %>  
-  
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/bootstrap-4.6.0-dist/css/bootstrap.min.css" > 
-	
-	<!-- Optional JavaScript -->
-	<script type="text/javascript" src="<%= ctxPath%>/js/jquery-3.6.4.min.js"></script>
-	<script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script> 
-	
-	
-    <!-- jQueryUI CSS 및 JS -->
-	<link rel="stylesheet" type="text/css" href="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.css" />
-	<script type="text/javascript" src="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
-
-    <!-- 아이콘 JS-->
-    <script src="https://kit.fontawesome.com/b7b1b05ad5.js" crossorigin="anonymous"></script>
-    
-    <!-- 구글 icon -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-    <!-- original css -->
-    <link href="<%=ctxPath %>/css/style.css" rel="stylesheet" type="text/css"></style>
-    
-    <!-- 폰트 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Roboto&display=swap" rel="stylesheet">
-
-    <!-- slick 슬라이드 -->
-
-    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    
-</head>
 
 <jsp:include page="../header.jsp" />
-		     
 		    
 		     <div id="container">
                 
@@ -70,14 +22,14 @@
                           
                             <div class="ojh_container relative clearfix" style="position: relative;" width: 1240px; margin: 0 auto;>
                            
-                                <div class="ojh_left_wing">
+                               <div class="ojh_left_wing">
                                     <div class="ojh_current-cate" >
-                                        <h3 class="ojh_li" style="line-height: 40px;"> 빵 </h3>
+                                        <h3 class="ojh_li" style="line-height: 40px;"> 디저트 </h3>
                                     </div>
 
-                                    <div class="ojh_category-box" >
+                                   <div class="ojh_category-box" >
                                         <ul>
-                                            <li class="ojh_li"> 
+                                             <li class="ojh_li"> 
                                                 <a href="http://localhost:9090/SemiProject/desscok.ban">
                                                 <span> 쿠키</span>
                                                 </a>
@@ -100,12 +52,11 @@
                                         </ul>
                                     </div>
                                 </div> <!-- end of ojh_left_wing -->
-
                                 <div class="ojh_right_content goods_list">
                                     <div class="ojh_addition_zone" style="padding: 0px 0px 20px 0px;">
                            
                                         <p style="text-align: center;" >
-                                            <img src="<%=ctxPath%>/image/homedessert.jpg" style="width: 900px; ">
+                                            <img src="<%=ctxPath%>/image/homedessert.jpg" style="width: 900px; height: 300px;">
                                         </p>
                                     </div> 
 
@@ -592,13 +543,6 @@
 	                                                        </div> 
 	                                                    </div>
 	                                                </li>
-                                           
-                                           		
-                                           		
-                                           		
-                                           	
-                                           
-                                           
                                                 
                                         </ul>
                                     </div>
@@ -609,16 +553,12 @@
 
                             </div> <!-- end of ojh_container relative clearfix -->
 
-                        </div> <!-- end of ojh_content -->
-
-                    </div> <!-- end of ojh_sub_content -->
-
-                </div> <!-- end of content -->
-
-             </div> <!-- end of container -->
-
+                        </div> 
+                    </div> 
+              </div> <!-- end of ojh_content -->
+            </div>	<!-- end of ojh_sub_content -->
+		  </div> <!-- end of content -->
+		</div> <!-- end of container -->
              
  <jsp:include page="../footer.jsp" />
 
-</body>
-</html>
