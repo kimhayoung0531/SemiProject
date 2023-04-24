@@ -2398,6 +2398,14 @@ div#inputIdPwd{
     cursor: pointer;
 }
 
+.findPwd_member_cont{
+	margin: 62px auto;
+    padding: 70px 60px;
+    border: 1px solid #dbdbdb;
+    margin-left: 100px;
+    width: 593px;
+}
+
 .btn_member_gray {
     width: 150px;
     height: 45px;
