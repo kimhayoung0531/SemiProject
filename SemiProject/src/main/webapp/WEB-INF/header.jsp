@@ -58,12 +58,12 @@
                         <div class="header_top_cont">
                             <ul class="top_member_box">
                                 <li>
-                                    <a href="#">회원가입</a>
+                                    <a href="<%= ctxPath%>/registerAgreement.ban"">회원가입</a>
                                     <span class="txt_bar"></span>
                                 </li>
 
                                 <li>
-                                    <a href="#">로그인</a>
+                                    <a href="<%= ctxPath%>/login.ban"">로그인</a>
                                     <span class="txt_bar"></span>
                                 </li>
 
