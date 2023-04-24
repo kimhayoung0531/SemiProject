@@ -806,14 +806,14 @@ label.check-s.color-white{border: #dfdfdf 1px solid;}
 
 /* 1:1 문의 조회기간 영역 */
 .date_check_box{margin:0 0 35px 0; padding:20px 20px 20px 30px; border:3px solid #eeeeee;}
-.date_check_box:after{display:block; clear:both; content:"";}
+/* .date_check_box:after{display:block; clear:both; content:"";} */
 .date_check_box h3{float:left; padding:6px 15px 0 0; color:#777777; font-size:13px;}
 .date_check_list{float:left; padding:0 10px 0 0;}
 .date_check_list button{float:left; width:54px; height:31px; margin:0 0 0 -1px; color:#777777; font-size:12px; border:1px solid #d6d6d6;}
 .date_check_list button:hover,
 .date_check_list button.on{color:#ffffff; background:#aeaeae;}
 .date_check_calendar{position:relative; float:left; width:30.5%;}
-.date_check_calendar .anniversary{width:45%; background:url('../../img/member/icon_calendar.png') no-repeat right center;}
+.date_check_calendar .anniversary{width:45%; height: 62%; background:url('../img/icon_calendar.png') no-repeat right center;}
 /* 자주묻는 질문 검색 */
 .date_faq_list{display:inline-block; width:70%;}
 .date_faq_list h2{padding:0 0 10px 0;}
