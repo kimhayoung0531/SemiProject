@@ -7,6 +7,55 @@
 %>    
 	<jsp:include page="../header.jsp" />
 	
+	<script>
+		$(document).ready(function () {
+			
+			
+			$("select.emailDomain_select").bind("change", function() {
+				email_domain_change();
+			});
+			
+			
+		});
+		
+		function email_domain_change() {
+			
+			var target = $("select.emailDomain_select").val()
+			var emailContent = $("input#order_email").val();
+			if(isAtSignExist(emailContent)) {					<%-- @ 가 포함 시--%>
+			
+				var indexAtSign = emailContent.indexOf('@');
+				emailContent = emailContent.slice(0, indexAtSign+1);
+				
+				if(target != "직접입력") {
+					emailContent += target;
+				}
+				$("input#order_email").val(emailContent);
+
+			}
+			else {												<%-- @ 가 미포함 시--%>
+				if(target != "직접입력") {
+					emailContent += '@';
+					emailContent += target;
+				}
+				else {
+					emailContent += '@';
+				}
+				$("input#order_email").val(emailContent);
+			}	
+		};
+		
+		function isAtSignExist(emailContent) {
+			var num = emailContent.indexOf('@');
+			if(num == -1) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		};
+	</script>
+	
 <div id="container">
                 <div id="contents">
 
@@ -46,8 +95,8 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr class="order_goods_layout">
-                                                            <td>test</td>
-                                                            <td>test</td>
+                                                            <td><%= request.getParameter("product_name") %></td>
+                                                            <td><%= request.getParameter("product_cnt") %></td>
                                                             <td>test</td>
                                                             <td>test</td>
                                                             <td>test</td>
@@ -117,23 +166,23 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th><span class="order_important">주문하시는 분</span></th>
-                                                                <td><input type="text" name="order_name" id="order_name"></td>
+                                                                <td><input type="text" name="order_name" id="order_name" value="${requestScope.mvo.user_name}"></td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">주소</span></th>
-                                                                <td>주소 표시 부분</td>
+                                                                <td>${requestScope.mvo.address}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">전화번호</span></th>
-                                                                <td><input type="text" name="order_phone" id="order_phone"></td>
+                                                                <td><input type="text" name="order_phone" id="order_phone" value="${requestScope.mvo.telephone}"></td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">휴대폰 번호</span></th>
-                                                                <td><input type="text" name="order_mobile" id="order_mobile"></td>
+                                                                <td><input type="text" name="order_mobile" id="order_mobile" value="${requestScope.mvo.mobile}"></td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">이메일</span></th>
-                                                                <td><input type="text" name="order_email" id="order_email">
+                                                                <td><input type="text" name="order_email" id="order_email" value="${requestScope.mvo.email}">
                                                                     <select name="emailDomain_select" class="emailDomain_select">
                                                                         <option value="직접입력">직접입력</option>
                                                                         <option value="naver.com">naver.com</option>
