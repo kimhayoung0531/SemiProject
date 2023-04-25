@@ -1,13 +1,17 @@
 package parkjuneyub.order.controller;
 
 import java.sql.SQLException;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.controller.AbstractController;
+import jinsol.cart.model.CartVO;
 import parkjuneyub.member.controller.InterMemberDAO;
 import parkjuneyub.member.controller.MemberDAO;
+import parkjuneyub.product.model.InterProductDAO;
+import parkjuneyub.product.model.ProductDAO;
 import sge.member.model.MemberVO;
 
 public class OrderAction extends AbstractController {
@@ -28,24 +32,38 @@ public class OrderAction extends AbstractController {
 		}
 		
 		if("post".equalsIgnoreCase(method)) {
+			InterProductDAO pdao = new ProductDAO();
+			/*
+			System.out.println(request.getParameter("product_num"));
+			System.out.println(request.getParameter("product_title"));
+			System.out.println(request.getParameter("product_cnt"));
+			System.out.println("상품 총합계 금액" + request.getParameter("product_price"));
+			*/
 			
 			// 1. 장바구니를 통해 넘어온 경우 유저 정보와 장바구니의 내용이 필요합니다.
-			
-			// 2. 물건 바로 구매하기 버튼을 통해 넘어온 경우 유저 정보와 장바구니 그리고 구매하기 직전에 상품의 아이디와 상품 구매 개수가 필요합니다.
-			
-			
 			// 유저정보 가져오기
 			String userid = "test";
 			
+			// 바로 구매한 아이템을 저장한 Map
+			Map<String, String> buyItem = new HashMap<>();
+			if(request.getParameter("proudct_num") != null && !request.getParameter("proudct_num").isEmpty() ) {
+				buyItem.put("product_num", request.getParameter("product_num"));
+				buyItem.put("product_title", request.getParameter("product_title"));
+				buyItem.put("product_cnt", request.getParameter("product_cnt"));
+				buyItem.put("product_price", request.getParameter("product_price"));
+				
+				request.setAttribute("buyItem", buyItem);
+			}
+			
+			//유저 정보로 장바구니 가져오기
+			List<CartVO> cartList = pdao.getCartList(userid);
+			request.setAttribute("cartList", cartList);
+			
+			// 구매자 정보
 			InterMemberDAO mdao = new MemberDAO();
 			MemberVO mvo = mdao.getUserInfo(userid);
-			
 			request.setAttribute("mvo", mvo);
-			
-			// 유저정보를 활용해 장바구니 가져오기
-			
-			
-			
+
 			super.setRedirect(false);
 			super.setViewPage("WEB-INF/pjy_order/order.jsp");
 		}
