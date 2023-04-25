@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <%
 	String ctxPath = request.getContextPath();
@@ -16,6 +16,37 @@
 			$("select.emailDomain_select").bind("change", function() {
 				email_domain_change();
 			});
+			
+			<%-- 상품 금액 * 개수 구해서 추가하기 --%>
+			//$(table#shopping_list_table)
+			const table = document.getElementById('shopping_list_table');
+
+			
+			<%-- 상품의 총 개수 구하기 --%>
+			var sumCount = 0;
+			for(let i = 1; i < table.rows.length; i++) {
+				sumCount += parseInt(table.rows[i].cells[1].innerHTML);
+				console.log(i)
+			}
+			$("strong#order_total_count").val(sumCount);
+			$("strong#order_total_count").html(sumCount);
+			
+			<%-- 테이블의 금액 총합 계산하기 --%>
+			var sumPrice = 0;
+			for(let i = 1; i < table.rows.length; i++) {
+				sumPrice += parseInt(table.rows[i].cells[4].innerHTML.replace(',', ''));
+				console.log("sumprice" + sumPrice);
+			}
+			
+			$("strong#order_total_price").val(sumPrice);
+			$("strong#order_total_price").html(sumPrice.toLocaleString('ko-KR'));
+			
+			<%-- 주문금액 계산 --%>
+			
+			$("strong#total_price_plus_delivery_fee").val( Number($("strong#order_total_price").val()) + 3000 );
+			$("strong#total_price_plus_delivery_fee").html( (Number($("strong#order_total_price").val()) + 3000).toLocaleString('ko-KR') );
+			$("strong#totalPrice").html( (Number($("strong#order_total_price").val()) + 3000).toLocaleString('ko-KR') );
+			$("strong.total_good_price").html(sumPrice.toLocaleString('ko-KR'));
 			
 			
 		});
@@ -96,15 +127,23 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <c:if test="${not empty requestScope.buyItem}">
+
+                                                    <c:if test="${not empty requestScope.buyItem_map}">
                                                         <tr class="order_goods_layout">
-                                                            <td><%=%></td>
-                                                            <td><%= request.getParameter("product_cnt") %></td>
-                                                            <td>test</td>
-                                                            <td>test</td>
-                                                            <td>test</td>
-                                                            <td>test</td>
+                                                            <td>${requestScope.buyItem_map.product_title}</td>
+                                                            <td>${requestScope.buyItem_map.product_cnt}</td>
+                                                            <td>
+                                                            <fmt:formatNumber value="${requestScope.buyItem_map.product_price}" pattern="#,###" />
+                                                            </td>
+                                                            <td></td>
+                                                            <td id="priceMultiCountResult">
+                                                            <fmt:parseNumber var="cnt" integerOnly="true" value="${requestScope.buyItem_map.product_cnt}" />
+                                                            <fmt:parseNumber var="price" integerOnly="true" value="${requestScope.buyItem_map.product_price}" />
+                                                            <fmt:formatNumber value="${cnt*price}" pattern="#,###" />
+                                                            </td>
+                                                            <td></td>
                                                         </tr>
+                                                        
                                                     </c:if>
 
                                                     </tbody>
@@ -119,11 +158,11 @@
                                                     <dl>
                                                         <dt>
                                                             총 
-                                                            <strong>n</strong>
+                                                            <strong id="order_total_count">n</strong>
                                                             개의 상품금액
                                                         </dt>
                                                         <dd>
-                                                            <strong>###,###</strong>
+                                                            <strong id="order_total_price"></strong>
                                                             원
                                                         </dd>
                                                     </dl>
@@ -135,7 +174,7 @@
                                                             배송비
                                                         </dt>
                                                         <dd>
-                                                            <strong>#,###</strong>
+                                                            <strong>3,000</strong>
                                                             원
                                                         </dd>
                                                     </dl>
@@ -147,7 +186,7 @@
                                                             합계
                                                         </dt>
                                                         <dd>
-                                                        <strong>#,###</strong>
+                                                        <strong id="total_price_plus_delivery_fee"></strong>
                                                         원 
                                                         </dd>
                                                     </dl>
@@ -257,7 +296,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th><span class="order_important">상품 합계 금액</span></th>
-                                                                <td><strong class="total_good_price" name="total_good_price" id="total_good_price">#,###원</strong></td>
+                                                                <td><strong class="total_good_price" name="total_good_price" id="total_good_price"></strong>원</td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">배송비</span></th>
@@ -267,8 +306,8 @@
                                                                 <th><span class="order_important">할인 밎 적립</span></th>
                                                                 <td>
                                                                     <ul class="order_benefit_list">
-                                                                        <li>할인 : <span class="save_mileage">###원</span></li>
-                                                                        <li>마일리지 적립 : <span class="save_mileage">###원</span></li>
+                                                                        <li>할인 : <span class="save_mileage"></span>원</li>
+                                                                        <li>마일리지 적립 : <span class="save_mileage"></span>원</li>
                                                                     </ul>
                                                                 </td>
                                                             </tr>
@@ -282,7 +321,7 @@
                                                             <tr>
                                                                 <th><span class="order_important">최종 결제 금액</span></th>
                                                                 <td>
-                                                                    <strong id="tatalPrice">#,###</strong>원
+                                                                    <strong id="totalPrice"></strong>원
                                                                 </td>
                                                             </tr>
                                                         </tbody>
