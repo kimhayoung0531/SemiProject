@@ -69,7 +69,7 @@
                      <h2>아이디 찾기</h2>
                  </div> <!-- // member_title-->
 
-                 <div class="member_cont">
+                 <div class="member_cont findPwd_member_cont">
                      <form name="formFindId">
                          <div class="member_login_box">
                              <h3>회원 아이디 찾기</h3>
