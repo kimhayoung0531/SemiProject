@@ -14,6 +14,7 @@
 		
 			var count = Number($("input#item_cnt").val());
 			var price = ${requestScope.pvo.product_price};
+			$("input[name=product_price]").val(price);
 			var total_price = count * price;
 			$("input[name=total_price]").val(total_price);
 			
@@ -25,8 +26,8 @@
 				total_price = count * price;
 
 				$("strong.goods_total_price").text(total_price);
-				$("input[name=product_price]").val(price);
 				$("input#product_cnt").val(count);
+				
 			});
 			
 			$("button.btn_add_order").bind("click", function() {
