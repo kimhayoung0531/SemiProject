@@ -1,5 +1,6 @@
 package parkjuneyub.product.model;
 
+import parkjuneyub.member.controller.MemberVO;
 import parkjuneyub.product.model.ProductVO;
 
 public class CartVO {
