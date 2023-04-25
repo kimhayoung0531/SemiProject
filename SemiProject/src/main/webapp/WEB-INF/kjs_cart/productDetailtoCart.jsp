@@ -13,42 +13,25 @@
 		$("div.add_cart_layer_popup").hide();
 
 		
-		$("button.btn_add_cart").bind("click", function(){
+	 $("button.btn_add_cart").bind("click", function(){
 			$("div.add_cart_layer_popup").show();
 			$("button.btn_cancel").bind("click", function(){
 				$("div.add_cart_layer_popup").hide();
 			});
 			$("button.btn_confirm").bind("click", function goCart(){
-				<%-- 수량 --%>
-				const itemCnt = $("input#item_cnt").val();
-				<%-- 판매가 --%>
-				
-				<%-- 총 상품 금액 --%>
-				
-				location.href="<%= request.getContextPath()%>/cart.ban?itemCnt=" + itemCnt;
-
+				const frm = document.itemFrmView;
+				frm.action = "cart.ban";
+				frm.method = "post";
+				frm.submit();
 				
 				$("div.add_cart_layer_popup").hide();
 				
 			});
 			
-		}); //'장바구니' 클릭시 뜨는 팝업창
-		function goCart(){
-			const frm = document.itemFrmView;
-	
-			<%-- if(frm.searchWord.value.trim()==""){
-				alert("검색어를 올바르게 입력하세요");
-				return;		//함수종료
-			}
-			--%>
-			frm.action = "cart.up";
-			frm.method = "post";
-			frm.submit();
-		}
+		});  //'장바구니' 클릭시 뜨는 팝업창
 		
 	});	//end of $(document).ready(function () --------------------------------------
 
-	
 	
 </script>
 
@@ -181,9 +164,10 @@
                                                     <dl class="item_detail_each">
                                                         <dt>개수</dt>
                                                         <dd>
-                                                            <input id="item_cnt" type="number" class="form-control" min="1" max="50" value="1">
+                                                            <input id="item_cnt"  name="item_cnt" type="number" class="form-control" min="1" max="50" value="1">
                                                         </dd>
                                                     </dl>
+                                                   <input type="text" name="pnum" value="${requestScope.pvo.pnum}" />
                                                 </div>
                                             </div>
                                             <!-- item_datail_list 끝-->

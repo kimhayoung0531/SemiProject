@@ -3,7 +3,7 @@ package jinsol.cart.model;
 import parkjuneyub.product.model.ProductVO;
 import sge.member.model.MemberVO;
 
-public class CartVO implements InterCartDAO{
+public class CartVO{
 
 	private long cart_num;
 	private long product_num;
@@ -54,8 +54,6 @@ public class CartVO implements InterCartDAO{
 	public void setPvo(ProductVO pvo) {
 		this.pvo = pvo;
 	}
-
-
 	
 	
 }

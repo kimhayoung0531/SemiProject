@@ -12,8 +12,8 @@
 
 	$(document).ready(function () {
 		
-       if(${not empty requestScope.itemCnt}) {
-    	   $("input#cart_cnt").val("${requestScope.itemCnt}");
+       if(${not empty requestScope.item_cnt}) {
+    	   $("input#cart_cnt").val("${requestScope.item_cnt}");
        }		
 		
 	});	//end of $(document).ready(function () -------------------------------------
@@ -108,7 +108,7 @@
                                         <td class="td_order_amount">    <!-- 장바구니 수량 / 변경 -->
                                             <div class="order_goods_num">
                                                 <div class="btn_gray_list">
-                                                    <p><label for="number"></label><input type="number" id="cart_cnt" min="1"  max="50" step="1" value="1" id="number"/></p>                                                </div>
+                                                    <p><label for="number"></label><input type="number" id="cart_cnt" min="1"  max="50" step="1" value="1" /></p>                                                </div>
                                                 </div>
                                             </div>
                                         </td>

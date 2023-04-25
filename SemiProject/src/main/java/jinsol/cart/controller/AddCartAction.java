@@ -10,56 +10,53 @@ public class AddCartAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-		/*
-		// 장바구니 이동을 위한 전제조건은 먼저 로그인을 해야 하는 것이다.
-		if(super.checkLogin(request)) {
-			//로그인을 했으면
-			super.setRedirect(false);
-			super.setViewPage("/WEB-INF/member/coinPurchaseTypeChoice.jsp");
-			
-			HttpSession session = request.getSession();
-		    HashMap<String, String> login_map = (HashMap<String, String>)session.getAttribute("login_map");	//로그인된 유저
-			
-			String user_id = request.getParameter("user_id");	// 넘어온 값
-			
-			
-			if( login_map.getUser_id().equals(user_id) ) {
-				super.setRedirect(false);
-				super.setViewPage("/WEB-INF/kjs_cart/cart.jsp");
-			}
-			else {
-				String message = "다른 사용자의 장바구니 추가는 불가합니다.";
-				String loc = "javascript:history.back()";		//이전페이지로 가기
-				
-				request.setAttribute("message", message);
-				request.setAttribute("loc", loc);
-				
-				super.setRedirect(false);
-				super.setViewPage("/WEB-INF/msg.jsp");
-			}
-			
-		}
-		else {
-			String message = "장바구니 추가를 하기 위해서는 먼저 로그인 하세요.";
-			String loc = "javascript:history.back()";		//이전페이지로 가기
-			
-			request.setAttribute("message", message);
-			request.setAttribute("loc", loc);
-			
-			super.setRedirect(false);
-			super.setViewPage("/WEB-INF/msg.jsp");
-		}
+		  String method = request.getMethod();
 		  
-		*/
-		
-		    String itemCnt = request.getParameter("itemCnt");
-		
-		    request.setAttribute("itemCnt", itemCnt);
-		    
-			super.setRedirect(false);
-			super.setViewPage("/WEB-INF/kjs_cart/cart.jsp");
+		  if(!"POST".equalsIgnoreCase(method)) { //POST방식으로 넘어온 것이 아니라면
+		  
+		  String message = "비정상적인 경로로 들어왔습니다."; 
+		  String loc = "javascript:history.back()"; //"javascript:history.back()" 얘 암기해두기!
+		  
+		  request.setAttribute("message", message); 
+		  request.setAttribute("loc", loc);
+		  
+		  super.setRedirect(false); super.setViewPage("/WEB-INF/msg.jsp");
+		  
+		  return; //execute(HttpServletRequest request, HttpServletRespons response)메소드를 종료함
+		  
+		 } 
+		 else { 
+			 //POST방식으로 넘어온 것이라면 			 
+			 
+			  boolean isLogin = super.checkLogin(request);
+			  if(isLogin) {	//로그인 한 상태라면
+				 
+				  String item_cnt = request.getParameter("item_cnt");
+				  request.setAttribute("item_cnt", item_cnt);
+				  
+				  super.setRedirect(false);
+				  super.setViewPage("/WEB-INF/kjs_cart/cart.jsp");
+
+			  }
+			  else {
+				  request.setAttribute("message", "장바구니를 이용하기 위해서는 먼저 로그인 하세요.");
+				  request.setAttribute("loc", "javascript:history.back()");
+					
+				  super.setRedirect(false);
+				  super.setViewPage("/WEB-INF/msg.jsp");
+				  return;
+			  }
+		 
+		 }
+				/*
+				 * InterCartDAO cdao = new CartDAO();
+				 * 
+				 * List<CartVO> cartList = cdao.cartSelectAll();
+				 * request.setAttribute("cartList", cartList);
+				 */
+
 			
-		
+		  
 	} //end of public void execute ---------------------------------------
 
 	
