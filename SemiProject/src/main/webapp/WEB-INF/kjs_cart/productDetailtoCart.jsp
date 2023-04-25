@@ -13,7 +13,7 @@
 		$("div.add_cart_layer_popup").hide();
 
 		 
-	 $("button.btn_add_cart").bind("click", function(){
+	    $("button.btn_add_cart").bind("click", function(){
 			$("div.add_cart_layer_popup").show();
 			$("button.btn_cancel").bind("click", function(){
 				$("div.add_cart_layer_popup").hide();
@@ -439,7 +439,7 @@
                         
                     </div>
                
-               		<!-- 장바구니 클릭시 뜨는 팝업창 시작 -- 김진솔 -->
+               		<!-- 장바구니 클릭시 뜨는 팝업창 시작 -- 김진솔
                    <div class="add_cart_layer_popup">
                        <div class="view">
                            <h2>장바구니 담기</h2>
@@ -453,7 +453,7 @@
                            </div>
                        </div>
                    </div>
-               		<!-- 장바구니 클릭시 뜨는 팝업창 끝  -->
+               		 장바구니 클릭시 뜨는 팝업창 끝  -->
 	                
                 
                 </div>
