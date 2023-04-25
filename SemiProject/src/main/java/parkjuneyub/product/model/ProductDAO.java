@@ -109,11 +109,13 @@ public class ProductDAO implements InterProductDAO  {
 			while(rs.next()) {
 				
 				CartVO cvo = new CartVO();
+				ProductVO pvo = new ProductVO();
+				pvo.setProduct_num(rs.getLong("product_num"));
+				pvo.setProduct_price(rs.getLong("product_price"));;
 				cvo.setCart_num(rs.getLong("cart_num"));
-				cvo.getPvo().setProduct_num(rs.getLong("product_num"));
 				cvo.setProduct_count(rs.getLong("product_count"));
 				cvo.setCart_date(rs.getString("cart_date"));
-				cvo.getPvo().setProduct_price(rs.getLong("product_price"));;
+				
 				
 				cartList.add(cvo);
 			}
