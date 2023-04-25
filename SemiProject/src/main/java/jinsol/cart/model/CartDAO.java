@@ -45,7 +45,7 @@ public class CartDAO implements InterCartDAO {
 	    
 	}	//end of public CartDAO() --------------------------------
 	
-	
+	/*
 	// test cart select
 	public List<CartVO> cartSelectAll() throws SQLException {
 					
@@ -89,6 +89,6 @@ public class CartDAO implements InterCartDAO {
 			return cartList; 
 		}//end of public List<CartVO> cartSelectAll()  ---------------
 	
-	
+	*/
 	
 }

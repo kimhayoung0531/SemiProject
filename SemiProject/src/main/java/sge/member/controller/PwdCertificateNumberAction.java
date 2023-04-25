@@ -5,13 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.controller.AbstractController;
 
-public class FindIdResultAction extends AbstractController {
+public class PwdCertificateNumberAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/sge_login/findIdResult.jsp");
-		
+		super.setViewPage("/WEB-INF/sge_login/pwd_certificateNum.jsp");
 	}
 
 }

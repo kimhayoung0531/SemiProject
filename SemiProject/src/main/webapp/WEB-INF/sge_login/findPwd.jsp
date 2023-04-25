@@ -19,9 +19,9 @@
                                         <div class="login_input">
                                             <div class="member_warning">
                                                 <input type="text" class="form-control" id="loginId" name="loginId"
-                                                    value="" placeholder="아이디" aria-required="true">
+                                                    value="" placeholder="아이디" required="true" aria-required="true">
                                                 <input type="password" class="form-control" id="loginPwd"
-                                                    name="loginPwd" value="" placeholder="이름" 
+                                                    name="loginPwd" value="" placeholder="이름" required="true"
                                                     aria-required="true">
                                                 <p class="info_again">아이디를 모르시나요?
                                                     <a href="<%=ctxPath %>/findId.ban" class="js_btn_find_id">아이디 찾기</a>

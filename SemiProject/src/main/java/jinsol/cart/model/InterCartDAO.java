@@ -7,6 +7,5 @@ import sge.member.model.MemberVO;
 
 public interface InterCartDAO {
 
-	public List<CartVO> cartSelectAll() throws SQLException;
 	
 }

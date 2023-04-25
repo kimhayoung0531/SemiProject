@@ -37,7 +37,8 @@
 	         else{
 	            // 공백만이 아닌 글자를 입력했을 경우
 	            $("table#tblMemberRegister :input").prop("disabled",false);
-	            $(e.target).parent().find("span.error").hide();       
+	            $(e.target).parent().find("span.error").hide();
+	            
 	         }
 	       }); // end of userid.BLUR 
 	       

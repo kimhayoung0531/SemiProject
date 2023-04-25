@@ -37,7 +37,7 @@ CREATE TABLE tbl_cart (
 	cart_num      number(20)  NOT NULL, -- 장바구니번호
 	user_id       VARCHAR(40) NOT NULL, -- 아이디
 	product_num   number(20)  NOT NULL, -- 상품번호
-	product_count NUMber(15) NOT NULL, -- 상품개수
+	prodect_count NUMber(15) NOT NULL, -- 상품개수
 	cart_date     DATE        NOT NULL  -- 생성일자
      ,CONSTRAINT PK_tbl_cart_cart_num primary key(cart_num)
     ,CONSTRAINT FK_tbl_cart_user_id foreign key(user_id) REFERENCES tbl_member(user_id)
@@ -114,7 +114,7 @@ create table tbl_admin
  ,constraint pk_tbl_admin_admin_id primary key(admin_id)
 );
 
--- 공지사항
+-- 
 create table tbl_notice
 ( notice_num        number(10)              not null -- 번호
  ,admin_id          varchar2(40)              not null -- 관리자 아이디 

@@ -1,16 +1,17 @@
-package sge.member.controller;
+package KHY;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.controller.AbstractController;
 
-public class FindIdAction extends AbstractController {
+public class ErrorController extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		setRedirect(false);
-		setViewPage("/WEB-INF/sge_login/findId.jsp");
+		
+		//super.setRedirect(false);
+		super.setViewPage("/WEB-INF/KHY/error/error.jsp");
 		
 	}
 

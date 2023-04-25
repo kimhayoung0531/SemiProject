@@ -64,7 +64,7 @@
     
 </head>
 
-<div id="container" style="margin-left: 12%;">
+<div id="container" style="margin-left: 15%;">
     <div id="contents">
         <!-- 본문 시작 -->
 
@@ -157,7 +157,7 @@
                                     <b>배송중</b>
                                     <img src="image/mypgae_ing_list_bg.png" alt="">
                                     <span>0</span>
- 
+
                                 </li>
                                 <li class="jb-wrap">
                                     <b>배송완료</b>

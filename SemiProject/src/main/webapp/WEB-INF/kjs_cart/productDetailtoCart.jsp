@@ -6,13 +6,13 @@
 	// SemiProject 
 %>    
 <jsp:include page="../header.jsp" />
-  
+
 <script type="text/javascript">
 
 	$(document).ready(function () {
 		$("div.add_cart_layer_popup").hide();
 
-		
+		 
 	 $("button.btn_add_cart").bind("click", function(){
 			$("div.add_cart_layer_popup").show();
 			$("button.btn_cancel").bind("click", function(){
@@ -28,8 +28,6 @@
 				
 			});
 			
-		});  //'장바구니' 클릭시 뜨는 팝업창
-		
 	});	//end of $(document).ready(function () --------------------------------------
 
 	
@@ -167,7 +165,6 @@
                                                             <input id="item_cnt"  name="item_cnt" type="number" class="form-control" min="1" max="50" value="1">
                                                         </dd>
                                                     </dl>
-                                                   <input type="text" name="pnum" value="${requestScope.pvo.pnum}" />
                                                 </div>
                                             </div>
                                             <!-- item_datail_list 끝-->
