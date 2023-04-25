@@ -3,6 +3,7 @@ package jinsol.cart.model;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -44,6 +45,12 @@ public class CartDAO implements InterCartDAO {
 		}
 	    
 	}	//end of public CartDAO() --------------------------------
+
+	@Override
+	public int addCart(Map<String, String> paraMap) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	/*
 	// test cart select
