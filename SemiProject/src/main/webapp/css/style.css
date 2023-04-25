@@ -2414,6 +2414,14 @@ div#inputIdPwd{
     cursor: pointer;
 }
 
+.findPwd_member_cont{
+	margin: 62px auto;
+    padding: 70px 60px;
+    border: 1px solid #dbdbdb;
+    margin-left: 100px;
+    width: 593px;
+}
+
 .btn_member_gray {
     width: 150px;
     height: 45px;
@@ -2552,12 +2560,15 @@ ol {
 }
 
 li {
-    float: left;
+   
     list-style: none;
     font-size: 14px;
     display: list-item;
 }
 
+#idle_mem > li{
+	float: left;
+}
 .join_agreement_wrap .member_title ol li {
     float: left;
     font-size: 14px;
