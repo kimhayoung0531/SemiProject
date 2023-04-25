@@ -106,7 +106,7 @@
                         </div>
                        
                     </div>
-                    <div class="header_gnb" id="gnb"> <!-- 전체카테고리, 베스트 할인상품 이벤트 공지사항 --> 
+                    <div class="header_gnb" id="gnb"> <!-- 전체카테고리, 베스트 할인상품 이벤트  --> 
                         <div class="gnb">
                             <div class="allMenu">
                               <li> 
@@ -155,7 +155,7 @@
                                     <li><a href="">베스트</a></li>
                                     <li><a href="">이벤트</a></li>
                                     <li><a href="">구매후기</a></li>
-                                    <li><a href="">공지사항</a></li>
+                                    <li><a href=""></a></li>
                                 </ul>
                             </div>
                         </div>
