@@ -170,12 +170,8 @@
                             <div class="centerMenu">
                                 <ul>
 
-                                    <li><a href="">베스트</a></li>
+                                    <li><a href="<%= ctxPath%>/homebest.ban">베스트</a></li>
                                     <li><a href="<%= ctxPath%>/event.ban">이벤트</a></li>
-
-                                    <li><a href="http://localhost:9090/SemiProject/homebest.ban">베스트</a></li>
-                                    <li><a href="">이벤트</a></li>
-
                                     <li><a href="">구매후기</a></li>
                                     <li><a href="">고객센터</a></li>
                                 </ul>
