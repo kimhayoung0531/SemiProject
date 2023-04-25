@@ -19,10 +19,15 @@
 
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" type="text/css" href="bootstrap-4.6.0-dist/css/bootstrap.min.css" > 
-
-    <!-- jQueryUI CSS 및 JS -->
-    <link rel="stylesheet" type="text/css" href="/jquery-ui-1.13.1.custom/jquery-ui.css" />
-    <script type="text/javascript" src="/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
+	
+	<!-- Optional JavaScript -->
+	<script type="text/javascript" src="<%= ctxPath%>/js/jquery-3.6.4.min.js"></script>
+	<script type="text/javascript" src="<%= ctxPath%>/bootstrap-4.6.0-dist/js/bootstrap.bundle.min.js" ></script> 
+	
+	
+	<!-- jQueryUI CSS 및 JS -->
+    <link rel="stylesheet" type="text/css" href="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.css" />
+    <script type="text/javascript" src="<%= ctxPath%>/jquery-ui-1.13.1.custom/jquery-ui.js"></script>
     
     <!-- 아이콘 JS-->
     <script src="https://kit.fontawesome.com/b7b1b05ad5.js" crossorigin="anonymous"></script>
@@ -46,7 +51,7 @@
 
     <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+   <!--  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
     <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     
 </head>
