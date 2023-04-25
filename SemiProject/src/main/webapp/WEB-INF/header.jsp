@@ -58,12 +58,12 @@
                         <div class="header_top_cont">
                             <ul class="top_member_box">
                                 <li>
-                                    <a href="<%= ctxPath%>/registerAgreement.ban"">회원가입</a>
+                                    <a href="<%= ctxPath%>/registerAgreement.ban">회원가입</a>
                                     <span class="txt_bar"></span>
                                 </li>
 
                                 <li>
-                                    <a href="<%= ctxPath%>/login.ban"">로그인</a>
+                                    <a href="<%= ctxPath%>/login.ban">로그인</a>
                                     <span class="txt_bar"></span>
                                 </li>
 
@@ -160,7 +160,7 @@
                             <div class="centerMenu">
                                 <ul>
                                     <li><a href="">베스트</a></li>
-                                    <li><a href="">이벤트</a></li>
+                                    <li><a href="<%= ctxPath%>/event.ban">이벤트</a></li>
                                     <li><a href="">구매후기</a></li>
                                     <li><a href="">공지사항</a></li>
                                 </ul>
