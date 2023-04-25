@@ -27,6 +27,9 @@
     <!-- 아이콘 JS-->
     <script src="https://kit.fontawesome.com/b7b1b05ad5.js" crossorigin="anonymous"></script>
 
+	<!-- 구글 icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	
     <!-- original css -->
     <link href="<%=ctxPath%>/css/style.css" rel="stylesheet" type="text/css"></style>
     
@@ -57,12 +60,12 @@
                         <div class="header_top_cont">
                             <ul class="top_member_box">
                                 <li>
-                                    <a href="#">회원가입</a>
+                                    <a href="<%= ctxPath%>/registerAgreement.ban"">회원가입</a>
                                     <span class="txt_bar"></span>
                                 </li>
 
                                 <li>
-                                    <a href="#">로그인</a>
+                                    <a href="<%= ctxPath%>/login.ban"">로그인</a>
                                     <span class="txt_bar"></span>
                                 </li>
 

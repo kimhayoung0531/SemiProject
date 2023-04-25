@@ -1,16 +1,13 @@
-package KHY;
+package KHY.model;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import common.controller.AbstractController;
-
-public class MypageController extends AbstractController {
+public class MypageDAO implements InterMypageDAO {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		super.setViewPage("/WEB-INF/KHY/mypage_main.jsp"); //this. 써도 되고
+		// TODO Auto-generated method stub
 		
 	}
 
