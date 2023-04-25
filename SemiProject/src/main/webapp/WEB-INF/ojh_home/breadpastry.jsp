@@ -25,7 +25,7 @@
                            
                                 <div class="ojh_left_wing">
                                     <div class="ojh_current-cate" >
-                                        <h3 class="ojh_li" style="line-height: 40px;"> 음료 </h3>
+                                        <h3 class="ojh_li" style="line-height: 40px;"> 빵 </h3>
                                     </div>
 
                                    <div class="ojh_category-box" >
