@@ -27,6 +27,9 @@
     <!-- 아이콘 JS-->
     <script src="https://kit.fontawesome.com/b7b1b05ad5.js" crossorigin="anonymous"></script>
 
+	<!-- 구글 icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	
     <!-- original css -->
     <link href="<%=ctxPath%>/css/style.css" rel="stylesheet" type="text/css"></style>
     
