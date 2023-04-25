@@ -34,11 +34,11 @@ public class MypageOrderListAction extends AbstractController {
 		
 		super.setViewPage("/WEB-INF/KHY/mypage_order_list.jsp");
 		
-		
+		  
 		/* 로그인 기능 제대로 구현되기 전까지 멈춤
 		
 		// 자신의 주문 정보를 조회하기 위해서는 먼저 로그인이 되어 있어야 한다.
-		if(super.checkLogin(request)) {
+		if(super.checkLogin(request)) { 
 			// 로그인을 했으면
 			
 			
