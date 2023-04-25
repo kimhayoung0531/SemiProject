@@ -1,25 +1,16 @@
 package jinsol.cart.model;
 
+import parkjuneyub.product.model.ProductVO;
 import sge.member.model.MemberVO;
 
 public class CartVO implements InterCartDAO{
 
-	private long order_num;
-	private long product_num;
-	private long product_count;
-	private String cart_date;
-	
-	// select용
-	private MemberVO user_id;
-	 
-	public CartVO() {}
-
-	public long getOrder_num() {
-		return order_num;
+	public long getCart_num() {
+		return cart_num;
 	}
 
-	public void setOrder_num(long order_num) {
-		this.order_num = order_num;
+	public void setCart_num(long cart_num) {
+		this.cart_num = cart_num;
 	}
 
 	public long getProduct_num() {
@@ -46,13 +37,33 @@ public class CartVO implements InterCartDAO{
 		this.cart_date = cart_date;
 	}
 
-	public MemberVO getUser_id() {
-		return user_id;
+	public MemberVO getMvo() {
+		return mvo;
 	}
 
-	public void setUser_id(MemberVO user_id) {
-		this.user_id = user_id;
+	public void setMvo(MemberVO mvo) {
+		this.mvo = mvo;
 	}
+
+	public ProductVO getPvo() {
+		return pvo;
+	}
+
+	public void setPvo(ProductVO pvo) {
+		this.pvo = pvo;
+	}
+
+	private long cart_num;
+	private long product_num;
+	private long product_count;
+	private String cart_date;
+	
+	// select용
+	private MemberVO mvo;
+	private ProductVO pvo;
+	 
+	public CartVO() {}
+
 
 	
 	
