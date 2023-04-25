@@ -11,16 +11,21 @@
 	
 	<script>
 		$(document).ready(function(){
+		
+			var count = Number($("input#item_cnt").val());
+			var price = ${requestScope.pvo.product_price};
+			var total_price = count * price;
+			$("input[name=total_price]").val(total_price);
+			
 			$("input#product_cnt").val($("input#item_cnt").val());
 			
 			$("input#item_cnt").bind("change", function() {
-				const count = Number($("input#item_cnt").val());
-				
-				const price = ${requestScope.pvo.product_price};
-
-				const total_price = count * price;
+				count = Number($("input#item_cnt").val());
+				price = ${requestScope.pvo.product_price};
+				total_price = count * price;
 
 				$("strong.goods_total_price").text(total_price);
+				$("input[name=product_price]").val(price);
 				$("input#product_cnt").val(count);
 			});
 			
@@ -115,11 +120,11 @@
                                     <input type="hidden" id="goodsOptionCnt" value="1">
                                     <input type="hidden" name="optionFl" value="n">
                                     <input type="hidden" name="useBundleGoods" value="1"> --%>
-                                    
-                                    <input type="hidden" name="product_name" value="${requestScope.pvo.product_title}">
-                                    <input type="hidden" id="product_cnt" name="product_cnt" value="">
-                                    
-
+                                    <input type="hidden" name="product_num" value=${requestScope.pvo.product_num} />
+                                    <input type="hidden" name="product_title" value="${requestScope.pvo.product_title}" />
+                                    <input type="hidden" id="product_cnt" name="product_cnt" value=""/>
+                                    <input type="hidden" name="product_price" value=""/>
+									
                                     <div class="item_info_box">
 
                                         <div class="item_tit_detail_cont">
