@@ -46,10 +46,49 @@ public class CartDAO implements InterCartDAO {
 	    
 	}	//end of public CartDAO() --------------------------------
 
+	
+	
+	// 장바구니 담기 
+    // 장바구니 테이블(tbl_cart)에 해당 제품을 담아야 한다.
+    // 장바구니 테이블에 해당 제품이 존재하지 않는 경우에는 tbl_cart 테이블에 insert 를 해야하고, 
+    // 장바구니 테이블에 해당 제품이 존재하는 경우에는 또 그 제품을 추가해서 장바구니 담기를 한다라면 tbl_cart 테이블에 update 를 해야한다. 
 	@Override
 	public int addCart(Map<String, String> paraMap) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int n = 0;
+		
+		try {
+	         conn = ds.getConnection();
+	         
+	         String sql = " select cart_num "
+	                  + " from tbl_cart "
+	                  + " where user_id = 'test' ";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, paraMap.get("fk_user_id"));         
+	         pstmt.setString(2, paraMap.get("fk_pnum"));  
+	         
+	         rs = pstmt.executeQuery();
+	         
+	         if(rs.next()) {	// 어떤 제품을 추가로 장바구니에 넣고자 하는경우
+	        	  int cart_num = rs.getInt("cart_num");
+	        	  
+	        	  sql = " update tbl_cart set product_count = product_count + ? " +
+		                  " where cart_num = ? ";
+
+	        	  pstmt = conn.prepareStatement(sql);
+	        	  pstmt.setInt(1, Integer.parseInt(paraMap.get("product_count")) );         
+	        //	  pstmt.setInt(2, );         
+	            
+	        	  n= pstmt.executeUpdate();
+	         }
+	         
+	         
+		}
+		finally {
+			close();
+		}
+		
+		return n;
 	}
 	
 	/*
