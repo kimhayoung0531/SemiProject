@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <%
 	String ctxPath = request.getContextPath();
@@ -238,14 +240,17 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                    <c:if test="${not empty requestScope.buyItem}">
                                                         <tr class="order_goods_layout">
-                                                            <td><%= request.getParameter("product_name") %></td>
+                                                            <td><%=%></td>
                                                             <td><%= request.getParameter("product_cnt") %></td>
                                                             <td>test</td>
                                                             <td>test</td>
                                                             <td>test</td>
                                                             <td>test</td>
                                                         </tr>
+                                                    </c:if>
+
                                                     </tbody>
                                                 </table>
                                                 <!--장바구니 상품리스트 끝 -->
