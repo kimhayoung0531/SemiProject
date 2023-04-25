@@ -6,7 +6,7 @@
 	// SemiProject
 %>    
 
-<div id="footer_wrap">
+		<div id="footer_wrap">
               <div id="footer">
 
                     <div class="foot_list">
