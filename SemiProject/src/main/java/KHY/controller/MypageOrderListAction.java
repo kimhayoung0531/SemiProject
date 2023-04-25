@@ -2,20 +2,6 @@ package KHY.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
-
-import common.controller.AbstractController;
-
-public class MypageOrderListAction extends AbstractController {
-
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		super.setViewPage("/WEB-INF/KHY/mypage_order_list.jsp");
-		
-	}
-
-=======
 import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
@@ -83,5 +69,4 @@ public class MypageOrderListAction extends AbstractController {
 		
 		*/
 	}
->>>>>>> refs/heads/main
 }
