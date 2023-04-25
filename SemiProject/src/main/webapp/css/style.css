@@ -2591,6 +2591,15 @@ li {
     width: 1200px;
     margin: 0 auto;
 }
+#agreement_content{
+	border: none;
+	width: 800px;
+	margin-top:0px;
+}
+.em_strong > em {
+	font-size:15px;
+	font-weight: bold;
+}
 
 .join_agreement_wrap .member_title {
     overflow: hidden;
@@ -2627,10 +2636,13 @@ li {
 	margin-top: 20px;
 }
 iframe {
-    width: 740px;
-    height: 200px;
+    width: 675px;
+    height: 180px;
+    padding:0 0 0 10px;
 }
-
+.checkAll_box{
+	margin-bottom: 30px;
+}
 
 .warning_checkAll {
     display: none;
@@ -2723,6 +2735,7 @@ ul#idle_mem > li{
 /* 버튼 */
 .btn_center_box {
     text-align: center;
+    margin-top:20px;
 }
 
 .btn_double_check{
@@ -2764,7 +2777,7 @@ ul#idle_mem > li{
 .btn_register{
     width: 150px;
     height: 45px;
-    margin: 35px 0 0 0;
+    
     color: #ffffff;
     font-size: 14px;
     border: 1px solid #cccccc;
@@ -2774,7 +2787,16 @@ ul#idle_mem > li{
     text-align: center;
 }
 
-
+::-webkit-scrollbar-thumb {
+    background: #bbb;
+    width: 15px;
+    border-radius: 15px;
+}
+::-webkit-scrollbar-track {
+    width: 15px;
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 15px;
+}
 /*-----------------------------------------------------------*/
 
 
