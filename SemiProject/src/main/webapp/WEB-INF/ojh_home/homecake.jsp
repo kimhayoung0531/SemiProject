@@ -24,13 +24,13 @@
                            
                                 <div class="ojh_left_wing">
                                     <div class="ojh_current-cate" >
-                                        <h3 class="ojh_li" style="line-height: 40px;"> 빵 </h3>
+                                        <h3 class="ojh_li" style="line-height: 40px;"> 케이크 </h3>
                                     </div>
 
                                    <div class="ojh_category-box" >
                                         <ul>
                                             <li class="ojh_li"> 
-                                                <a href=http://localhost:9090/SemiProject/cakecream.ban">
+                                                <a href="http://localhost:9090/SemiProject/cakecream.ban">
                                                 <span> 생크림 케이크</span>
                                                 </a>
                                             </li>
