@@ -1,6 +1,8 @@
 package jinsol.cart.controller;
 
 
+
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,29 +20,42 @@ import sge.member.model.MemberVO;
 public class AddCartAction extends AbstractController {
 
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		  boolean isLogin = super.checkLogin(request);
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		  
-		  if(!isLogin) {	//로그인 하지 않은 상태라면
-			  /*
-	            사용자가 로그인을 하지 않은 상태에서 특정제품을 장바구니에 담고자 하는 경우 
-	            사용자가 로그인을 하면 장바구니에 담고자 했던 그 특정제품 페이지로 이동하도록 해야 한다.
-	            이와 같이 하려고 ProdViewAction 클래스에서 super.goBackURL(request); 을 해두었음.   
-				 */
-			  request.setAttribute("message", "장바구니를 이용하기 위해서는 먼저 로그인 하세요.");
-			  request.setAttribute("loc", "javascript:history.back()");
-				
-			  super.setRedirect(false);
-			  super.setViewPage("/WEB-INF/msg.jsp");
-			  return;
+		
+		  String item_cnt = request.getParameter("item_cnt");
+		  String pnum = request.getParameter("pnum");
 
+		  HttpSession session = request.getSession();
+		  MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
+		  
+		  InterProductDAO pdao = new ProductDAO();
+		  
+		  Map<String, String> paraMap = new HashMap<>();
+		  paraMap.put("fk_user_id", loginuser.getUser_id());
+		  paraMap.put("fk_pnum", pnum);
+		  paraMap.put("item_cnt", item_cnt);
+		  
+		  InterCartDAO cdao = new CartDAO();
+		  int n = cdao.addCart(paraMap);
+		  
+		  if(n==1) {
+			request.setAttribute("message", "장바구니에 담겼습니다.");
+			request.setAttribute("loc", "/WEB-INF/kjs_cart/cart.jsp");
 		  }
-		  else { //로그인을 한 상태라면 
+		  else {
+			request.setAttribute("message", "장바구니 담기에 실패하셨습니다.");
+			request.setAttribute("loc", "javascript:history.back()");
+		  }
+		  
+			super.setViewPage("/WEB-INF/msg.jsp");
+
+		  
 			  /* 
 				장바구니 테이블(tbl_cart)에 해당 제품을 담아야 한다.
 		        장바구니 테이블에 해당 제품이 존재하지 않는 경우에는 tbl_cart 테이블에 insert 를 해야하고, 
 		        장바구니 테이블에 해당 제품이 존재하는 경우에는 또 그 제품을 추가해서 장바구니 담기를 한다라면 tbl_cart 테이블에 update 를 해야한다.
-				*/
+				
 			  String method = request.getMethod();
 			  
 			  if(!"POST".equalsIgnoreCase(method)) { //GET방식이라면
@@ -71,17 +86,9 @@ public class AddCartAction extends AbstractController {
 				  paraMap.put("item_cnt", item_cnt);
 				  
 				  InterCartDAO cdao = new CartDAO();
-				 // int n = cdao.addCart(paraMap);
-				  
-				  
-				  
-				  
+				  int n = cdao.addCart(paraMap);
+				   */
 				 
-			}
-			 
-	 }// 로그인 한 상태
-			  
-			
 	} //end of public void execute ---------------------------------------
 
 	
