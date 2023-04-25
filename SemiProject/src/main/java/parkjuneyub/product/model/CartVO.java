@@ -1,4 +1,4 @@
-package parkjuneyub.member.controller;
+package parkjuneyub.product.model;
 
 import parkjuneyub.product.model.ProductVO;
 
