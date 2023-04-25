@@ -232,9 +232,9 @@
                             </div>
 
 
-                        </div>
-                        <!-- //mypage_lately_info_cont -->
-                        <a href="../mypage/order_list.php" class="btn_board_more">+ 더보기</a>
+                    	</div>
+                     	 <!-- //mypage_lately_info_cont -->
+                      <a href="../mypage/order_list.php" class="btn_board_more">+ 더보기</a>
                     </div>
                     <!-- //mypage_lately_info -->
 
