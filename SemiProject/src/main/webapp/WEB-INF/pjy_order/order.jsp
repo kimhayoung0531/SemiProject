@@ -7,8 +7,7 @@
 	String ctxPath = request.getContextPath();
 	// SemiProject
 %>    
-	<jsp:include page="../header.jsp" />
-	
+	<jsp:include page="../header.jsp" />	
 	<script>
 		$(document).ready(function () {
 			
