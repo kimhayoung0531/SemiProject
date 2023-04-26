@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
 	String ctxPath = request.getContextPath();
@@ -9,9 +10,10 @@
 
 <script type="text/javascript">
 
+	
 	$(document).ready(function () {
 		$("div.add_cart_layer_popup").hide();
-
+	
 		 
 	    $("button.btn_add_cart").bind("click", function(){
 			$("div.add_cart_layer_popup").show();
@@ -25,12 +27,12 @@
 				frm.submit();
 				
 				$("div.add_cart_layer_popup").hide();
-				
+	
 			});
 			
 	});	//end of $(document).ready(function () --------------------------------------
-
 	
+		
 </script>
 
 
@@ -82,7 +84,7 @@
                                 <!-- item_photo_view_box -->
 
                                 <form name="itemFrmView" id="itemFrmView" method="post">
-                                    <input type="hidden" name="mode" value="get_benefit">
+<%--                                     <input type="hidden" name="mode" value="get_benefit">
                                     <input type="hidden" name="scmNo" value="1">
                                     <input type="hidden" name="cartMode" value="">
                                     <input type="hidden" name="set_goods_price" value="21000">
@@ -109,13 +111,17 @@
                                     <input type="hidden" id="set_dc_price" value="0">
                                     <input type="hidden" id="goodsOptionCnt" value="1">
                                     <input type="hidden" name="optionFl" value="n">
-                                    <input type="hidden" name="useBundleGoods" value="1">
-
+                                    <input type="hidden" name="useBundleGoods" value="1"> --%>
+                                    <input type="hidden" name="product_num" value=${requestScope.pvo.product_num} />
+                                    <input type="hidden" name="product_title" value="${requestScope.pvo.product_title}" />
+                                    <input type="hidden" id="product_cnt" name="product_cnt" value=""/>
+                                    <input type="hidden" name="product_price" value=""/>
+									
                                     <div class="item_info_box">
 
                                         <div class="item_tit_detail_cont">
                                             <div class="item_detain_tit">
-                                                <h3>냉동생지 - [삼양사] 애플파이</h3>
+                                                <h3>${requestScope.pvo.product_title}</h3>
                                             </div>
 
                                             <div class="item_datail_list">
@@ -124,7 +130,8 @@
                                                     <dd>
                                                         <strong>
                                                             <strong>
-                                                                #,###
+                                                               <fmt:formatNumber value="${requestScope.pvo.product_price}" pattern="#,###" />
+                                                               
                                                             </strong>
                                                             원
                                                         </strong>
@@ -173,7 +180,7 @@
                                                 <div class="end_price item_total_box">
                                                     <dl class="total_goods">
                                                         <dt>총 상품금액</dt>
-                                                        <dd><strong class="goods_total_price">#,###</strong>원</dd>
+                                                        <dd><strong class="goods_total_price">${requestScope.pvo.product_price}</strong>원</dd>
 
                                                     </dl>
                                                 </div>
@@ -439,7 +446,7 @@
                         
                     </div>
                
-               		<!-- 장바구니 클릭시 뜨는 팝업창 시작 -- 김진솔
+               		<!-- 장바구니 클릭시 뜨는 팝업창 시작 -- 김진솔 
                    <div class="add_cart_layer_popup">
                        <div class="view">
                            <h2>장바구니 담기</h2>
