@@ -8,7 +8,7 @@
 	// SemiProject
 %>    
 	<jsp:include page="../header.jsp" />
-	
+	 
 	<script>
 		$(document).ready(function(){
 		
