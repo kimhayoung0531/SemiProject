@@ -67,7 +67,7 @@ public class LoginAction extends AbstractController {
 			  
 			  if(loginuser.isRequirePwdChange() == true) {
 				  String message = "비밀번호를 변경하신지 3개월이 지났습니다. 암호를 변경하세요!!";
-				  String loc = request.getContextPath()+"/passwordChange.up";
+				  String loc = request.getContextPath()+"/passwordChange.ban";
 
 				  request.setAttribute("message", message);
 				  request.setAttribute("loc", loc);
@@ -78,12 +78,9 @@ public class LoginAction extends AbstractController {
 			  else {
 				  
 				  super.setRedirect(true);
-				  super.setViewPage("/WEB-INF/msg.jsp");
+				  super.setViewPage(request.getContextPath() + "/home.ban");
 			  }
-			  super.setRedirect(true);
-			  super.setViewPage("/WEB-INF/ojh_home/home.jsp");
-			  
-			  
+
 		}
 		else {
 			String message = "로그인 실패";
