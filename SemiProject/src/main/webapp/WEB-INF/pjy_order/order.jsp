@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
 <%
 	String ctxPath = request.getContextPath();
@@ -12,15 +12,90 @@
 	<script>
 		$(document).ready(function () {
 			
+			b_flag_zipcodeSearch_click = false;
+			const deliveryFee = 3000;
 			
 			$("select.emailDomain_select").bind("change", function() {
 				email_domain_change();
 			});
 			
+			<%-- 상품 금액 * 개수 구해서 추가하기 --%>
+			//$(table#shopping_list_table)
+			const table = document.getElementById('shopping_list_table');
+
+			
+			<%-- 상품의 총 개수 구하기 --%>
+			var sumCount = 0;
+			for(let i = 1; i < table.rows.length; i++) {
+				sumCount += parseInt(table.rows[i].cells[1].innerHTML);
+			}
+			$("strong#order_total_count").val(sumCount);
+			$("strong#order_total_count").html(sumCount);
+			
+			<%-- 상품의 마일리지 총합 계산하기 --%>
+			const product_len = $("input.productMileage").length;
+			var sumMileage = 0;
+			for(let i = 0; i < product_len; i++) {
+				sumMileage += Number($("input.productMileage").eq(i).val());
+				
+			}
+			$("span#earndeMileage").text(sumMileage.toLocaleString('en'));
+			$("span.save_mileage").text(sumMileage.toLocaleString('en'));
+			
+			<%-- 테이블의 금액 총합 계산하기 --%>
+			var sumPrice = 0;
+			for(let i = 1; i < table.rows.length; i++) {
+				sumPrice += parseInt(table.rows[i].cells[4].innerHTML.replace(',', ''));
+			}
+			
+			$("strong#order_total_price").val(sumPrice);
+			$("strong#order_total_price").html(sumPrice.toLocaleString('ko-KR'));
+			
+			<%-- 주문금액 계산 --%>
+			$("strong#total_price_plus_delivery_fee").val( Number($("strong#order_total_price").val()) + deliveryFee );
+			$("strong#total_price_plus_delivery_fee").html( (Number($("strong#order_total_price").val()) + deliveryFee).toLocaleString('ko-KR') );
+			$("strong.total_good_price").html(sumPrice.toLocaleString('ko-KR'));
+			
+			$("strong#totalPrice").html( (Number($("strong#order_total_price").val()) + deliveryFee).toLocaleString('ko-KR') );
+			$("span#totalPrice").html( (Number($("strong#order_total_price").val()) + deliveryFee).toLocaleString('ko-KR') );
+			
 			
 			$("button.btn_order_buy").bind("click", function() {
 				checkOrderDetail();
 			})
+			
+			$("input#useMileage").blur(function(e) {
+				const myMileage = Number(${requestScope.mvo.mileage});
+				if($(e.target).val() > myMileage) {
+					alert("사용 가능 하신 마일리지를 초과하셨습니다.\n 사용 가능 마일리지 : " +  myMileage);
+					$(e.target).val(0);
+					$("input:checkbox[name='useMileageAll']").prop("checked",false);
+					$(e.target).focus();
+				}
+				
+				if($(e.target).val() != myMileage) {
+					$("input#useMileageAll").prop("checked",false);
+				}
+				
+				if($(e.target).val() == myMileage) {
+					$("input#useMileageAll").prop("checked",true);
+				}
+			});
+			
+			$("#zipcodeSearch").click(function() {
+				
+				b_flag_zipcodeSearch_click = true;
+				// 우편번호 찾기를 클릭했는지 여부를 확인
+			});
+			
+			$("input:text[id='postcode']").bind('keyup', function(){
+				
+				
+				alert(`우편번호 입력은 "우편번호찾기" 클릭으로만 됩니다. `);
+				/* 또는 alert("우편번호 입력은 \"우편번호찾기\" 클릭으로만 됩니다. "); */
+				//${"input:text[id='postcode']"}.val("");
+				$(this).val("");
+			});
 			
 			
 		}); <%-- end of $(document).ready(function () --%>
@@ -48,7 +123,7 @@
 				return;
 			}
 			
-			var regExp= /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;   		<%-- 휴대폰번호 정규식 01로 시작하며 3번째 자리는 0,1,6,7,8,9 가 오며 - 는 있을수도 없을수도 있다. --%>
+			var regExp= /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;   		<%-- 휴대폰번호 정규식 01로 시작하며 3번째 자리는 0,1,6,7,8,9 가 오며 - 는 있을수도 없을수도 있다. --%>
 			const boolOrderMobile = regExp.test($("input#order_mobile").val());
 			if(!boolOrderMobile) {
 				alert("휴대폰 형식이 맞지 않습니다");
@@ -149,6 +224,107 @@
 				return true;
 			}
 		};
+		
+		function checkOrderDetail() {
+			
+			var regName = /^[가-힣]{2,6}$/;  
+			var regMobile= /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
+			var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
+			
+			if($("input#order_name").val().trim() == "" ) {
+				alert("주문하시는 분 정보를 입력해주세요");
+				$("input#order_name").focus();
+				return;
+			}
+			
+			const boolOrderName = regName.test($("input#order_name").val());
+			if(!boolOrderName) {
+				alert("이름은 2~6자로 이루어진 한글로 구성되어 있어야 합니다");
+				$("input#order_name").focus();
+				return;
+			}
+			
+			if($("input#order_mobile").val().trim() == "" ) {
+				alert("주문하시는 분 휴대폰 번호를 입력해주세요");
+				$("input#order_mobile").focus();
+				return;
+			}
+
+			const boolOrderMobile = regMobile.test($("input#order_mobile").val());
+			if(!boolOrderMobile) {
+				alert("휴대폰 형식이 맞지 않습니다");
+				$("input#order_mobile").focus();
+				return;
+			}
+			
+			if($("input#order_email").val().trim() == "" ) {
+				alert("주문하시는 분 이메일을 입력해주세요");
+				$("input#order_email").focus();
+				return;
+			}
+			
+			const boolOrderEmail = regEmail.test( $("input#order_email").val() );
+			if(!boolOrderEmail) {
+				alert("이메일 형식이 맞지 않습니다");
+				$("input#order_email").focus();
+				return;
+			}
+			
+			if($("input#receive_name").val().trim() == "" ) {
+				alert("받으시는 분 정보를 입력해주세요");
+				$("input#receive_name").focus();
+				return;
+			}
+			
+			const boolReceiveName = regName.test($("input#receive_name").val());
+			if(!boolReceiveName) {
+				alert("이름은 2~6자로 이루어진 한글로 구성되어 있어야 합니다");
+				$("input#receive_name").focus();
+				return;
+			}
+			
+			//"우편번호 찾기" 을 클릭했는지 여부 알아오기
+			const regExp = /^\d{5}$/g; // 우편번호에 숫자 5개가 들어갔는지 확인하기
+			bool = regExp.test($("input:text[id='postcode']").val());
+			
+			if(!bool) {
+				
+				alert("우편번호 형식에 맞지 않습니다.");
+				$("input:text[id='postcode']").val("");
+				b_flag_zipcodeSearch_click = false;
+				$("input:text[id='postcode']").focus();
+				return; // 함수종료
+			}
+			else {
+				b_flag_zipcodeSearch_click = true;
+			}
+			
+			if(!b_flag_zipcodeSearch_click) {
+				alert("우편번호 찾기를 해주세요");
+				return;
+			}
+			
+			if($("input#receive_mobile").val().trim() == "" ) {
+				alert("받으시는 분 휴대폰 번호를 입력해주세요");
+				$("input#receive_mobile").focus();
+				return;
+			}
+			
+			const boolReceiveMobile = regMobile.test($("input#receive_mobile").val());
+			if(!boolReceiveMobile) {
+				alert("휴대폰 형식이 맞지 않습니다");
+				$("input#receive_mobile").focus();
+				return;
+			}
+			
+
+		}; // end of  function checkOrderDetail()
+		
+		function checkUseMileageAll() {
+			const myMileage = Number(${requestScope.mvo.mileage});
+			$("input#useMileage").val(myMileage);
+		}
+		
 	</script>
 	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -186,17 +362,17 @@
                         extraAddr = ' (' + extraAddr + ')';
                     }
                     // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("sample6_extraAddress").value = extraAddr;
+                    document.getElementById("extraAddress").value = extraAddr;
                 
                 } else {
-                    document.getElementById("sample6_extraAddress").value = '';
+                    document.getElementById("extraAddress").value = '';
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
+                document.getElementById('postcode').value = data.zonecode;
+                document.getElementById("address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("sample6_detailAddress").focus();
+                document.getElementById("detailAddress").focus();
             }
         }).open();
     }
@@ -234,21 +410,35 @@
                                                             <th>상품/옵션 정보</th>
                                                             <th>수량</th>
                                                             <th>상품금액</th>
-                                                            <th>할인/적립</th>
+                                                            <th>적립</th>
                                                             <th>합계금액</th>
-                                                            <th>배송비</th>
+                                                            
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <c:if test="${not empty requestScope.buyItem}">
+
+                                                    <c:if test="${not empty requestScope.buyItem_map}">
                                                         <tr class="order_goods_layout">
-                                                            <td><%=%></td>
-                                                            <td><%= request.getParameter("product_cnt") %></td>
-                                                            <td>test</td>
-                                                            <td>test</td>
-                                                            <td>test</td>
-                                                            <td>test</td>
+                                                            <td>${requestScope.buyItem_map.product_title}</td>
+                                                            
+                                                            <td>${requestScope.buyItem_map.product_cnt}</td>
+                                                            
+                                                            <td>
+                                                            <fmt:formatNumber value="${requestScope.buyItem_map.product_price}" pattern="#,###" />
+                                                            </td>
+                                                            
+                                                            <td><fmt:formatNumber value="${requestScope.buyItem_map.product_mileage}" pattern="#,###" />
+                                                            <input class="productMileage" type="hidden" value="${requestScope.buyItem_map.product_mileage}">
+                                                            </td>
+                                                            
+                                                            <td class="priceMultiCountResult">
+                                                            <fmt:parseNumber var="cnt" integerOnly="true" value="${requestScope.buyItem_map.product_cnt}" />
+                                                            <fmt:parseNumber var="price" integerOnly="true" value="${requestScope.buyItem_map.product_price}" />
+                                                            <fmt:formatNumber value="${cnt*price}" pattern="#,###" />
+                                                            </td>
+                                                            
                                                         </tr>
+                                                        
                                                     </c:if>
 
                                                     </tbody>
@@ -263,11 +453,11 @@
                                                     <dl>
                                                         <dt>
                                                             총 
-                                                            <strong>n</strong>
+                                                            <strong id="order_total_count">n</strong>
                                                             개의 상품금액
                                                         </dt>
                                                         <dd>
-                                                            <strong>###,###</strong>
+                                                            <strong id="order_total_price"></strong>
                                                             원
                                                         </dd>
                                                     </dl>
@@ -279,7 +469,7 @@
                                                             배송비
                                                         </dt>
                                                         <dd>
-                                                            <strong>#,###</strong>
+                                                            <strong>3,000</strong>
                                                             원
                                                         </dd>
                                                     </dl>
@@ -291,12 +481,12 @@
                                                             합계
                                                         </dt>
                                                         <dd>
-                                                        <strong>#,###</strong>
+                                                        <strong id="total_price_plus_delivery_fee"></strong>
                                                         원 
                                                         </dd>
                                                     </dl>
                                                 </div>
-                                                <em class="tobe_mileage">적립예정 마일리지 : <span>#,###</span>원</em>
+                                                <em class="tobe_mileage">적립예정 마일리지 : <span id="earndeMileage"></span>원</em>
                                             </div>
                                             <!-- price_sum_cont-->
                                         </div>
@@ -370,13 +560,13 @@
                                                                 <th><span class="order_important">*받으실 곳</span></th>
                                                                 <td>
 																	<div class="address_postcode">
-																		<input type="text" id="sample6_postcode" placeholder="우편번호">
-																		<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+																		<input type="text" id="postcode" placeholder="우편번호">
+																		<input type="button" id="zipcodeSearch" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 																	</div>
 																	<div class="address_input">
-																		<input type="text" id="sample6_address" placeholder="주소"><br>
-																		<input type="text" id="sample6_detailAddress" placeholder="상세주소">
-																		<input type="text" id="sample6_extraAddress" placeholder="참고항목">
+																		<input type="text" id="address" placeholder="주소"><br>
+																		<input type="text" id="detailAddress" placeholder="상세주소">
+																		<input type="text" id="extraAddress" placeholder="참고항목">
 																	</div>
                                                                 	
                                                                 </td>
@@ -412,32 +602,32 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th><span class="order_important">상품 합계 금액</span></th>
-                                                                <td><strong class="total_good_price" name="total_good_price" id="total_good_price">#,###원</strong></td>
+                                                                <td><strong class="total_good_price" name="total_good_price" id="total_good_price"></strong>원</td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">배송비</span></th>
                                                                 <td><span class="deliver_fee">3,000원</span></td>
                                                             </tr>
                                                             <tr>
-                                                                <th><span class="order_important">할인 밎 적립</span></th>
+                                                                <th><span class="order_important">적립</span></th>
                                                                 <td>
                                                                     <ul class="order_benefit_list">
-                                                                        <li>할인 : <span class="save_mileage">###원</span></li>
-                                                                        <li>마일리지 적립 : <span class="save_mileage">###원</span></li>
+                                                                        <%-- <li>할인 : <span class="save_mileage"></span>원</li> --%>
+                                                                        <li>마일리지 적립 : <span class="save_mileage"></span>원</li>
                                                                     </ul>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">마일리지 사용</span></th>
                                                                 <td><input type="text" name="useMileage" id="useMileage">
-                                                                    <input type="checkbox" name="useMileageAll" id="useMileageAll" onclick="">
+                                                                    <input type="checkbox" name="useMileageAll" id="useMileageAll" onclick="checkUseMileageAll()">
                                                                     <label for="useMileageAll">전액 사용하기</label>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">최종 결제 금액</span></th>
                                                                 <td>
-                                                                    <strong id="tatalPrice">#,###</strong>원
+                                                                    <strong id="totalPrice"></strong>원
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -468,7 +658,7 @@
                                                     <div class="payment_final_total">
                                                         <dl>
                                                             <dt>최종 결제 금액</dt>
-                                                            <dd><span>#,###</span>원</dd>
+                                                            <dd><span id="totalPrice"></span>원</dd>
                                                         </dl>
                                                     </div>
 

@@ -46,11 +46,70 @@ public class CartDAO implements InterCartDAO {
 	    
 	}	//end of public CartDAO() --------------------------------
 
+	
+	
+	// 장바구니 담기 ~
+    // 장바구니 테이블(tbl_cart)에 해당 제품을 담아야 한다.
+    // 장바구니 테이블에 해당 제품이 존재하지 않는 경우에는 tbl_cart 테이블에 insert 를 해야하고, 
+    // 장바구니 테이블에 해당 제품이 존재하는 경우에는 또 그 제품을 추가해서 장바구니 담기를 한다라면 tbl_cart 테이블에 update 를 해야한다. 
 	@Override
 	public int addCart(Map<String, String> paraMap) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		int n = 0;
+		// user_id == fk_user_id ,  product_count == item_cnt(int) , product_num == fk_pnum(Long)
+		try {
+	         conn = ds.getConnection();
+	         
+	         String sql = " select cart_num "
+	                  + " from  "
+	                  + " ( "
+	                  + " select cart_num, product_num, product_count, cart_date "
+	                  + " from tbl_cart "
+	                  + " where user_id = 'test' product_num = ? "
+	                  + " ) A "
+	                  + " join "
+	                  + " (select product_num, product_price from tbl_product ) B "
+	                  + " on A.product_num = B.product_num ";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setLong(1, Long.parseLong(paraMap.get("fk_pnum")));  
+	         
+	         rs = pstmt.executeQuery();
+	         
+	         if(rs.next()) {	
+	        	 // 어떤 제품을 추가로 장바구니에 넣고자 하는경우
+	        	  int cart_num = rs.getInt("cart_num");
+	        	  
+	        	  sql = " update tbl_cart set product_count = product_count + ? " +
+		                  " where cart_num = ? ";
+
+	        	  pstmt = conn.prepareStatement(sql);
+	        	  pstmt.setInt(1, Integer.parseInt(paraMap.get("item_cnt")) );         
+	        	  pstmt.setInt(2, cart_num);         
+	            
+	        	  n= pstmt.executeUpdate();
+	         }
+	         else {
+	        	 // 장바구니에 존재하지 않는 새로운 제품을 넣고자 하는 경우
+	        	 sql = " insert into tbl_cart(cart_num, user_id, product_num, product_count, cart_date) "
+			         + " values(seq_tbl_cart_cartno.nextval, ?, ? , ?, default) ";
+	        	 
+	        	 pstmt = conn.prepareStatement(sql);
+	        	 
+	        	 pstmt.setString(1, paraMap.get("fk_user_id"));
+		         pstmt.setLong(2, Long.parseLong(paraMap.get("fk_pnum")));
+	        	 pstmt.setInt(3, Integer.parseInt(paraMap.get("item_cnt")) );         
+	         
+	         
+		         n = pstmt.executeUpdate();
+	         }
+	         
+		}
+		finally {
+			close();
+		}
+		
+		return n;
+	}	//end of public int addCart(Map<String, String> paraMap) ----------------
 	
 	/*
 	// test cart select

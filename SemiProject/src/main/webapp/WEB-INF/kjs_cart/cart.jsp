@@ -86,6 +86,16 @@
 
 
                                     <tbody>
+                                    <%--
+                                    <c:if test="${empty requestScope.cartList}">
+						                <form id="frmCart">
+						                      <p class="cart_no_data">장바구니에 담겨있는 상품이 없습니다.</p>
+						                </form>
+						            </c:if>   
+                                    <c:if test="${not empty requestScope.cartList}">
+                                    
+                                     --%>
+                                    <c:if test="${empty requestScope.cartList}">
                                     <tr>
                                         <td class="td_chk"> <!-- 선택상품 체크박스-->    
                                             <div class="form_element">
@@ -137,7 +147,7 @@
                                             (택배-선결제)
                                         </td>
                                     </tr>
-                                        
+                                    </c:if>
         
                                     </tbody>
         

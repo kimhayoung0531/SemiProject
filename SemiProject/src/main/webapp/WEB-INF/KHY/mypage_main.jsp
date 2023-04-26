@@ -96,7 +96,7 @@
                         </li>
                         <li>회원정보
                             <ul class="sub_depth1">
-                                <li><a href="../mypage/my_page_password.php">- 회원정보 변경</a></li>
+                                <li><a href="<%= ctxPath%>/mypageMemberChangePwdcheck.ban">- 회원정보 변경</a></li>
                                 <li><a href="../mypage/hack_out.php">- 회원 탈퇴</a></li>
                                 <li><a href="../mypage/mileage.php">- 마일리지</a></li>
                             </ul>

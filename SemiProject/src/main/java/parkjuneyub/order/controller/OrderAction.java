@@ -12,6 +12,7 @@ import parkjuneyub.member.controller.InterMemberDAO;
 import parkjuneyub.member.controller.MemberDAO;
 import parkjuneyub.product.model.InterProductDAO;
 import parkjuneyub.product.model.ProductDAO;
+import parkjuneyub.product.model.ProductVO;
 import sge.member.model.MemberVO;
 
 public class OrderAction extends AbstractController {
@@ -45,20 +46,29 @@ public class OrderAction extends AbstractController {
 			String userid = "test";
 			
 			// 바로 구매한 아이템을 저장한 Map
-			Map<String, String> buyItem = new HashMap<>();
-			if(request.getParameter("proudct_num") != null && !request.getParameter("proudct_num").isEmpty() ) {
-				buyItem.put("product_num", request.getParameter("product_num"));
-				buyItem.put("product_title", request.getParameter("product_title"));
-				buyItem.put("product_cnt", request.getParameter("product_cnt"));
-				buyItem.put("product_price", request.getParameter("product_price"));
+			Map<String, String> buyItem_map = new HashMap<>();
+
+			if(request.getParameter("product_num") != null && !request.getParameter("product_num").isEmpty() ) {	// 바로주문하기의 경우
 				
-				request.setAttribute("buyItem", buyItem);
+				int product_cnt = Integer.parseInt(request.getParameter("product_cnt"));
+				int product_price = Integer.parseInt(request.getParameter("product_price"));
+				int product_totalPrice = product_cnt*product_price;
+				
+				buyItem_map.put("product_mileage", String.valueOf(product_totalPrice / 100) );
+				buyItem_map.put("product_num", request.getParameter("product_num"));
+				buyItem_map.put("product_title", request.getParameter("product_title"));
+				buyItem_map.put("product_cnt", request.getParameter("product_cnt"));
+				buyItem_map.put("product_price", request.getParameter("product_price"));
+				buyItem_map.put("product_totalPrice", String.valueOf(product_totalPrice));
+				
+				request.setAttribute("buyItem_map", buyItem_map);
 			}
 			
-			//유저 정보로 장바구니 가져오기
-			List<CartVO> cartList = pdao.getCartList(userid);
-			request.setAttribute("cartList", cartList);
 			
+			/*
+			 * //유저 정보로 장바구니 가져오기 List<CartVO> cartList = pdao.getCartList(userid);
+			 * request.setAttribute("cartList", cartList);
+			 */
 			// 구매자 정보
 			InterMemberDAO mdao = new MemberDAO();
 			MemberVO mvo = mdao.getUserInfo(userid);
