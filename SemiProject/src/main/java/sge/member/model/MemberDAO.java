@@ -294,4 +294,37 @@ public class MemberDAO implements InterMemberDAO {
 		return user_id;
 	}
 
+	
+	// 비밀번호를 찾기위해서 있는 회원인지 알아보는 메소드
+	@Override
+	public boolean isUserExist(Map<String, String> paraMap) throws SQLException {
+		boolean isExist = false; 
+		
+		try {
+			conn = ds.getConnection();
+			String sql = " select user_id " +
+						 " from tbl_member " +
+						 " where status = 1 and user_id = ? and email = ? ";
+			
+			pstmt = conn.prepareStatement(sql);	
+			pstmt.setString(1, paraMap.get("user_id"));
+			pstmt.setString(2, aes.encrypt(paraMap.get("email")) );
+			
+			rs = pstmt.executeQuery();
+			
+			isExist = rs.next(); // 그러한 아이디의 존재유무
+			
+			
+		} catch (GeneralSecurityException | UnsupportedEncodingException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+
+		return isExist;
+	}
+
+	
+
 }
