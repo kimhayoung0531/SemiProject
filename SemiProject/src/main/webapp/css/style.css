@@ -5,8 +5,8 @@ textarea, button {
     font-family: 'Noto Sans KR', sans-serif, AppleGothic,Dotum,"돋움",sans-serif;
     letter-spacing: -0.5px;
     color: #000;
- 
-} 
+
+}
 
 a {
     color: #333;
@@ -139,7 +139,7 @@ body #header .headBtn {
     top: 0;
     bottom: 0;
     right: 0;
-    width: 110px;
+    width: 150px;
     height: 50px;
     text-align: right;
     margin: auto;
@@ -316,16 +316,16 @@ body .centerMenu ul li a {
     font-family: 'xeicon'; color: black; font-size: 30px;}
 
 .visual_1 button.slick-prev, .visual_2 button.slick-prev, .visual_3 button.slick-prev {
-    left: 0px; font-size: 0; color: transparent;}
+    left: -25px; font-size: 0; color: transparent;}
 .visual_0 button.slick-prev{
-    left: 0px; font-size: 0; color: transparent;}
+    left: 50px; font-size: 0; color: transparent;}
 
 .visual_0 button.slick-prev:before, .visual_1 button.slick-prev:before, .visual_2 button.slick-prev:before, .visual_3 button.slick-prev:before {
     content: "\e93d"; }
 .visual_0 button.slick-next,  .visual_1 button.slick-next, .visual_2 button.slick-next, .visual_3 button.slick-next {
-    right: 0px; font-size: 0; color: transparent;}
+    right: 25px; font-size: 0; color: transparent;}
 .visual_0 button.slick-next {
-    right: 0px; font-size: 0; color: transparent;}
+    right: 50px; font-size: 0; color: transparent;}
 .visual_0 button.slick-next::before, .visual_1 button.slick-next::before, .visual_2 button.slick-next::before, .visual_3 button.slick-next::before {
     content: "\e940"; }
 
@@ -574,8 +574,8 @@ a {
 
 .ojh_left_wing .ojh_category-box {
     border: solid 1px #ececec;
-    padding: 15px 0px 200px 20px;
-    line-height: 35px;
+    padding: 15px 0px 100px 20px;
+    line-height: 40px;
 }
 .ojh_content .ojh_right_content {
     width: 1024px;
@@ -616,6 +616,9 @@ a {
     display: block;
 }
 
+.ojh_content .ojh_li {
+	display: inline-block;
+}
 
 /* 오준혁 끝 ------------------------------------------------------------------------------------------- */
 
