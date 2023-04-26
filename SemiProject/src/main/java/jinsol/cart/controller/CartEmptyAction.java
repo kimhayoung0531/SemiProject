@@ -11,7 +11,7 @@ public class CartEmptyAction extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 
 		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/kjs_cart/cartEmpty.jsp");
+		super.setViewPage("/WEB-INF/kjs_cart/cart.jsp");
 		
 	}
 
