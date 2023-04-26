@@ -64,7 +64,6 @@ public class OrderAction extends AbstractController {
 				request.setAttribute("buyItem_map", buyItem_map);
 			}
 			
-			
 			/*
 			 * //유저 정보로 장바구니 가져오기 List<CartVO> cartList = pdao.getCartList(userid);
 			 * request.setAttribute("cartList", cartList);
