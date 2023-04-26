@@ -11,6 +11,11 @@ public class ProductVO {
 	private long product_inventory;
 	private String product_date;
 	private int sale_count;
+	private long mileage;
+	
+	private long totalPrice;
+	private long totalMileage;
+	
 	
 	public ProductVO() {
 		
@@ -28,6 +33,19 @@ public class ProductVO {
 		this.product_inventory = product_inventory;
 		this.product_date = product_date;
 		this.sale_count = sale_count;
+	}
+	
+	/////////////////////////////////////////////////
+	// *** 제품의 총판매가(실제판매가 * 주문량) 구해오기 ***
+	public void setTotalPriceTotalPoint(int oqty) {   
+		// int oqty 이 주문량이다.
+	
+		totalPrice = product_price * oqty; // 판매당시의 제품판매가 * 주문량
+		totalMileage = mileage * oqty;     // 판매당시의 포인트점수 * 주문량 
+	}
+	
+	public long getMileage() {
+		return mileage;
 	}
 
 	public long getProduct_num() {
@@ -67,6 +85,7 @@ public class ProductVO {
 	}
 
 	public void setProduct_price(long product_price) {
+		this.mileage = product_price/100;
 		this.product_price = product_price;
 	}
 
