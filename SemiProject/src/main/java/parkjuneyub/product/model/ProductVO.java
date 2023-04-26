@@ -16,7 +16,6 @@ public class ProductVO {
 	private long totalPrice;
 	private long totalMileage;
 	
-	
 	public ProductVO() {
 		
 	}
