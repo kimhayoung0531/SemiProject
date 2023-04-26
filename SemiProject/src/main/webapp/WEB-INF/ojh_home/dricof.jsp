@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	
 <%
-	String ctxPath = request.getContextPath();
-	// SemiProject
-%>    
-        
-<jsp:include page="../header.jsp" />           
-		     
+    String ctxPath = request.getContextPath();
+    //    /SemiProject
+%>  
+  
+
+    <jsp:include page="../header.jsp" />
 		    
 		     <div id="container">
                 
@@ -29,9 +28,9 @@
                                         <h3 class="ojh_li" style="line-height: 40px;"> 음료 </h3>
                                     </div>
 
-                                    <div class="ojh_category-box" >
+                                   <div class="ojh_category-box" >
                                         <ul>
-                                            <li class="ojh_li"> 
+                                             <li class="ojh_li"> 
                                                 <a href="http://localhost:9090/SemiProject/drimil.ban">
                                                 <span> 우유</span>
                                                 </a>
@@ -69,35 +68,21 @@
                                                       개
                                                   </span>
 
-                                                  <ul class="ojh_pick_list">
-                                                    <li>
-                                                        <input type="radio" id="sort1" class="ojh_radio" name="sort" value>
-                                                        <label for="sort1" class="on">추천순</label>
-                                                    </li>
-
-                                                    <li>
+                                                  <ul class="ojh_pick_list" style="margin: 0px -57px 0px 0px;" ">
+                                                  
+                                                    <li class="ojh_li">
                                                         <input type="radio" id="sort2" class="ojh_radio" name="sort" value>
                                                         <label for="sort2" >판매인기순</label>
                                                     </li>
 
-                                                    <li>
+                                                    <li class="ojh_li">
                                                         <input type="radio" id="sort3" class="ojh_radio" name="sort" value>
                                                         <label for="sort3" >낮은가격순</label>
                                                     </li>
 
-                                                    <li>
+                                                    <li class="ojh_li">
                                                         <input type="radio" id="sort1" class="ojh_radio" name="sort" value>
                                                         <label for="sort1" >높은가격순</label>
-                                                    </li>
-
-                                                    <li>
-                                                        <input type="radio" id="sort1" class="ojh_radio" name="sort" value>
-                                                        <label for="sort1" >상품평순</label>
-                                                    </li>
-
-                                                    <li>
-                                                        <input type="radio" id="sort1" class="ojh_radio" name="sort" value>
-                                                        <label for="sort1" >등록일순</label>
                                                     </li>
                                                     
                                                   </ul>
@@ -127,7 +112,7 @@
                                                                               margin: 10px 0px 0px 36px;">  
                                         <div class="ojh_item_gallery_type">
                                         <ul>
-                                                <li style="width: 33.333333%;">
+                                                <li class="ojh_li" style="width: 33%;">
 
                                                     <div class="ojh_imte_cont">
                                                         <div class="ojh_photo_box">
@@ -153,7 +138,7 @@
                                                     </div>
                                                 </li>
                                                 
-                                                <li style="width: 33.333333%;">
+                                                <li class="ojh_li" style="width: 33%;">
 
                                                     <div class="ojh_imte_cont">
                                                         <div class="ojh_photo_box">
@@ -179,7 +164,7 @@
                                                     </div>
                                                 </li>
                                            
-                                           		<li style="width: 33.333333%;">
+                                           		<li class="ojh_li" style="width: 33%;">
 
                                                     <div class="ojh_imte_cont">
                                                         <div class="ojh_photo_box">
@@ -205,7 +190,7 @@
                                                     </div>
                                                 </li>
                                            		
-                                           		<li style="width: 33.333333%;">
+                                           		<li class="ojh_li" style="width: 33%;">
 
                                                     <div class="ojh_imte_cont">
                                                         <div class="ojh_photo_box">
@@ -231,7 +216,7 @@
                                                     </div>
                                                 </li>
                                            	
-                                           		<li style="width: 33.333333%;">
+                                           		<li class="ojh_li" style="width: 33%;">
 
                                                     <div class="ojh_imte_cont">
                                                         <div class="ojh_photo_box">
@@ -257,7 +242,7 @@
                                                     </div>
                                                 </li>
                                            
-                                           <li style="width: 33.333333%;">
+                                           <li class="ojh_li" style="width: 33%;">
 
                                                     <div class="ojh_imte_cont">
                                                     	<div class="ojh_photo_box">
@@ -282,7 +267,7 @@
                                                     </div>
                                                 </li>
                                            
-                                           <li style="width: 33.333333%;">
+                                           <li class="ojh_li" style="width: 33%;">
 
                                                     <div class="ojh_imte_cont">
                                                         <div class="ojh_photo_box">
@@ -308,7 +293,7 @@
                                                     </div>
                                                 </li>
 	                                           
-	                                           <li style="width: 33.333333%;">
+	                                           <li class="ojh_li" style="width: 33%;">
 	
 	                                                    <div class="ojh_imte_cont">
 	                                                        <div class="ojh_photo_box">
@@ -334,7 +319,7 @@
 	                                                    </div>
 	                                                </li>
 	                                           
-	                                           <li style="width: 33.333333%;">
+	                                           <li class="ojh_li" style="width: 33%;">
 	
 	                                                    <div class="ojh_imte_cont">
 	                                                        <div class="ojh_photo_box">
@@ -360,7 +345,7 @@
 	                                                    </div>
 	                                                </li>
 	                                           
-	                                           <li style="width: 33.333333%;">
+	                                           <li class="ojh_li" style="width: 33%;">
 	
 	                                                    <div class="ojh_imte_cont">
 	                                                        <div class="ojh_photo_box">
@@ -386,7 +371,7 @@
 	                                                    </div>
 	                                                </li>
 	                                           
-	                                           <li style="width: 33.333333%;">
+	                                           <li class="ojh_li" style="width: 33%;">
 	
 	                                                    <div class="ojh_imte_cont">
 	                                                        <div class="ojh_photo_box">
@@ -412,7 +397,7 @@
 	                                                    </div>
 	                                                </li>
 	                                           
-	                                           <li style="width: 33.333333%;">
+	                                           <li class="ojh_li" style="width: 33%;">
 	
 	                                                    <div class="ojh_imte_cont">
 	                                                        <div class="ojh_photo_box">
@@ -438,7 +423,7 @@
 	                                                    </div>
 	                                                </li>
 	                                           
-	                                           <li style="width: 33.333333%;">
+	                                           <li class="ojh_li" style="width: 33%;">
 	
 	                                                    <div class="ojh_imte_cont">
 	                                                        <div class="ojh_photo_box">
@@ -464,7 +449,7 @@
 	                                                    </div>
 	                                                </li>
 	                                           
-	                                           <li style="width: 33.333333%;">
+	                                           <li class="ojh_li" style="width: 33%;">
 	
 	                                                    <div class="ojh_imte_cont">
 	                                                        <div class="ojh_photo_box">
@@ -490,7 +475,7 @@
 	                                                    </div>
 	                                                </li>
 	                                           
-	                                           <li style="width: 33.333333%;">
+	                                           <li class="ojh_li" style="width: 33%;">
 	
 	                                                    <div class="ojh_imte_cont">
 	                                                        <div class="ojh_photo_box">
@@ -516,7 +501,7 @@
 	                                                    </div>
 	                                                </li>
 	                                           
-	                                           <li style="width: 33.333333%;">
+	                                           <li class="ojh_li" style="width: 33%;">
 	
 	                                                    <div class="ojh_imte_cont">
 	                                                        <div class="ojh_photo_box">
@@ -555,5 +540,6 @@
                     </div> <!-- ojh_sub_content -->
                 </div> <!-- content -->
              </div> <!-- container -->
-
+             
 <jsp:include page="../footer.jsp" />
+
