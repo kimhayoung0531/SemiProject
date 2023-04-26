@@ -157,7 +157,7 @@
                                                 <dl class="item_detail_discount_mileage">
                                                     <dt>구매혜택</dt>
                                                     <dd>
-                                                        마일리지 적립 : <span class="save_mileage">###원</span>
+                                                        마일리지 적립 : <span class="save_mileage">${requestScope.pvo.mileage}</span>원
                                                     </dd>
                                                 </dl>
 
