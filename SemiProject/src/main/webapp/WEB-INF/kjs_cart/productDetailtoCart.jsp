@@ -10,28 +10,61 @@
 
 <script type="text/javascript">
 
-	
 	$(document).ready(function () {
-		$("div.add_cart_layer_popup").hide();
+		
+		
+		$("div.add_cart_layer_popup").hide();		//팝업창 가리기
+		
+		
+		// ====== 장바구니 시작 =======//
+		$("button.btn_add_cart").bind("click", function(){
+			
+			// 주문수량에 대한 유효성 검사 //
+			const frm = document.itemFrmView;
 	
-		 
-	    $("button.btn_add_cart").bind("click", function(){
-			$("div.add_cart_layer_popup").show();
+			const regExp = /^[1-9]+$/;  // 숫자(1-9)만 체크하는 정규표현식
+			const item_cnt = $("input#item_cnt").val();		//주문수량
+			const bool = regExp.test(item_cnt);
+			
+			if(!bool){	//숫자 이외의 값 들어온 경우
+		         alert("주문 개수는 1개 이상이어야 합니다.");
+		         frm.item_cnt.value = "1";
+		         frm.item_cnt.focus();
+		         return; // 종료 
+			}
+			else{
+			}
+	
+			$("div.add_cart_layer_popup").show();	// '장바구니 바로 확인?' 팝업창
+	
+			
 			$("button.btn_cancel").bind("click", function(){
-				$("div.add_cart_layer_popup").hide();
+				$("div.add_cart_layer_popup").hide();	// 취소하면 팝업창 닫음
 			});
-			$("button.btn_confirm").bind("click", function goCart(){
-				const frm = document.itemFrmView;
-				frm.action = "cart.ban";
-				frm.method = "post";
+	
+			
+			$("button.btn_confirm").bind("click", function goCart(){	//확인하면 장바구니로 이동
+	
+		       // 주문개수가 1개 이상인 경우
+				frm.action = "<%= request.getContextPath()%>/cart.ban";
+				frm.method = "POST";
 				frm.submit();
 				
 				$("div.add_cart_layer_popup").hide();
-	
-			});
+			 });	
 			
-	});	//end of $(document).ready(function () --------------------------------------
-	
+		});	//end of $("button.btn_add_cart").bind("click", function()---------------------------
+		// ====== 장바구니 끝 =======//
+				
+				
+
+	});
+		
+		
+		
+		
+		
+		
 		
 </script>
 
@@ -446,7 +479,7 @@
                         
                     </div>
                
-               		<!-- 장바구니 클릭시 뜨는 팝업창 시작 -- 김진솔 
+               		<!--  장바구니 클릭시 뜨는 팝업창 시작 -- 김진솔  -->
                    <div class="add_cart_layer_popup">
                        <div class="view">
                            <h2>장바구니 담기</h2>
@@ -460,8 +493,7 @@
                            </div>
                        </div>
                    </div>
-               		 장바구니 클릭시 뜨는 팝업창 끝  -->
-	                
+               		<!--   장바구니 클릭시 뜨는 팝업창 끝   -->
                 
                 </div>
             </div>

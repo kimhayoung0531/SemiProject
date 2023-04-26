@@ -13,8 +13,6 @@ import javax.servlet.http.HttpSession;
 import common.controller.AbstractController;
 import jinsol.cart.model.CartDAO;
 import jinsol.cart.model.InterCartDAO;
-import parkjuneyub.product.model.InterProductDAO;
-import parkjuneyub.product.model.ProductDAO;
 import parkjuneyub.product.model.ProductVO;
 import sge.member.model.MemberVO;
 
@@ -22,21 +20,22 @@ public class AddCartAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-		  
-		
-		  String item_cnt = request.getParameter("item_cnt");
-		  String pnum = request.getParameter("pnum");
 
 		  HttpSession session = request.getSession();
 		  MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
+		  InterCartDAO cdao = new CartDAO();
+
 		  ProductVO pvo = new ProductVO();
+
+		  String item_cnt = request.getParameter("item_cnt");
 		  
+		  //pvo.getProduct_num()
+
 		  Map<String, String> paraMap = new HashMap<>();
 		  paraMap.put("fk_user_id", loginuser.getUser_id());
 		  paraMap.put("fk_pnum", String.valueOf(pvo.getProduct_num()));
 		  paraMap.put("item_cnt", item_cnt);
 		  
-		  InterCartDAO cdao = new CartDAO();
 		  int n = cdao.addCart(paraMap);
 		  
 		  if(n==1) {
@@ -48,7 +47,7 @@ public class AddCartAction extends AbstractController {
 			request.setAttribute("loc", "javascript:history.back()");
 		  }
 		  
-			super.setViewPage("/WEB-INF/msg.jsp");
+		  super.setViewPage("/WEB-INF/msg.jsp");
 
 		  
 			  /* 
