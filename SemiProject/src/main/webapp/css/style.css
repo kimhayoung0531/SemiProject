@@ -1795,6 +1795,10 @@ body #container #contents .order_sub_content .order_sub_content_box .order_cont 
     
 }
 
+.order_view_info .order_info .order_table_type input {
+	padding : 3px;
+}
+
 .order_view_info .order_info .order_table_type table.table_left {
     width: 100%;
 }
@@ -1831,6 +1835,11 @@ body #container #contents .order_sub_content .order_sub_content_box .order_cont 
 .order_view_info .order_info .order_table_type table.shipping_info_table tbody tr:nth-child(2) td input#sample6_postcode {
 	width: 100px;
 	line-height: 20px;
+}
+
+.order_view_info .order_info .order_table_type table.shipping_info_table tbody input#receive_last_say {
+	width:700px;
+	
 }
 	
 

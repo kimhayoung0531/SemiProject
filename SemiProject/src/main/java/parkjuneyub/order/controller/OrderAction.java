@@ -12,6 +12,7 @@ import parkjuneyub.member.controller.InterMemberDAO;
 import parkjuneyub.member.controller.MemberDAO;
 import parkjuneyub.product.model.InterProductDAO;
 import parkjuneyub.product.model.ProductDAO;
+import parkjuneyub.product.model.ProductVO;
 import sge.member.model.MemberVO;
 
 public class OrderAction extends AbstractController {
@@ -48,11 +49,17 @@ public class OrderAction extends AbstractController {
 			Map<String, String> buyItem_map = new HashMap<>();
 
 			if(request.getParameter("product_num") != null && !request.getParameter("product_num").isEmpty() ) {	// 바로주문하기의 경우
-
+				
+				int product_cnt = Integer.parseInt(request.getParameter("product_cnt"));
+				int product_price = Integer.parseInt(request.getParameter("product_price"));
+				int product_totalPrice = product_cnt*product_price;
+				
+				buyItem_map.put("product_mileage", String.valueOf(product_totalPrice / 100) );
 				buyItem_map.put("product_num", request.getParameter("product_num"));
 				buyItem_map.put("product_title", request.getParameter("product_title"));
 				buyItem_map.put("product_cnt", request.getParameter("product_cnt"));
 				buyItem_map.put("product_price", request.getParameter("product_price"));
+				buyItem_map.put("product_totalPrice", String.valueOf(product_totalPrice));
 				
 				request.setAttribute("buyItem_map", buyItem_map);
 			}
