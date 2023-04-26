@@ -45,8 +45,10 @@
 			
 			$("strong#total_price_plus_delivery_fee").val( Number($("strong#order_total_price").val()) + 3000 );
 			$("strong#total_price_plus_delivery_fee").html( (Number($("strong#order_total_price").val()) + 3000).toLocaleString('ko-KR') );
-			$("strong#totalPrice").html( (Number($("strong#order_total_price").val()) + 3000).toLocaleString('ko-KR') );
 			$("strong.total_good_price").html(sumPrice.toLocaleString('ko-KR'));
+			
+			$("strong#totalPrice").html( (Number($("strong#order_total_price").val()) + 3000).toLocaleString('ko-KR') );
+			$("span#totalPrice").html( (Number($("strong#order_total_price").val()) + 3000).toLocaleString('ko-KR') );
 			
 			
 		});
@@ -87,6 +89,94 @@
 				return true;
 			}
 		};
+		
+		function checkOrderDetail() {
+			
+			if($("input#order_name").val().trim() == "" ) {
+				alert("주문하시는 분 정보를 입력해주세요");
+				$("input#order_name").focus();
+				return;
+			}
+			
+			var regExp = /^[가-힣]{2,6}$/;   		<%-- 이름은 2~6자로 이루어진 한글로 구성되어져 있는지 확인한다. --%>
+			const boolOrderName = regExp.test($("input#order_name").val());
+			if(!boolOrderName) {
+				alert("이름은 2~6자로 이루어진 한글로 구성되어 있어야 합니다");
+				$("input#order_name").focus();
+				return;
+			}
+			
+			if($("input#order_mobile").val().trim() == "" ) {
+				alert("주문하시는 분 휴대폰 번호를 입력해주세요");
+				$("input#order_mobile").focus();
+				return;
+			}
+			
+			var regExp= /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;   		<%-- 휴대폰번호 정규식 01로 시작하며 3번째 자리는 0,1,6,7,8,9 가 오며 - 는 있을수도 없을수도 있다. --%>
+			const boolOrderMobile = regExp.test($("input#order_mobile").val());
+			if(!boolOrderMobile) {
+				alert("휴대폰 형식이 맞지 않습니다");
+				$("input#order_mobile").focus();
+				return;
+			}
+			
+			if($("input#order_email").val().trim() == "" ) {
+				alert("주문하시는 분 이메일을 입력해주세요");
+				$("input#order_email").focus();
+				return;
+			}
+			
+			var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
+			const boolOrderEmail = regExp.test( $("input#order_email").val() );
+			if(!boolOrderEmail) {
+				alert("이메일 형식이 맞지 않습니다");
+				$("input#order_email").focus();
+				return;
+			}
+			
+			if($("input#receive_name").val().trim() == "" ) {
+				alert("받으시는 분 정보를 입력해주세요");
+				$("input#receive_name").focus();
+				return;
+			}
+			
+			var regExp = /^[가-힣]{2,6}$/;   		<%-- 이름은 2~6자로 이루어진 한글로 구성되어져 있는지 확인한다. --%>
+			const boolReceiveName = regExp.test($("input#receive_name").val());
+			if(!boolReceiveName) {
+				alert("이름은 2~6자로 이루어진 한글로 구성되어 있어야 합니다");
+				$("input#receive_name").focus();
+				return;
+			}
+			
+			if($("input#receive_mobile").val().trim() == "" ) {
+				alert("받으시는 분 휴대폰 번호를 입력해주세요");
+				$("input#receive_mobile").focus();
+				return;
+			}
+			
+			var regPhone= /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;   		<%-- 휴대폰번호 정규식 01로 시작하며 3번째 자리는 0,1,6,7,8,9 가 오며 - 는 있을수도 없을수도 있다. --%>
+			const boolReceiveMobile = regExp.test($("input#receive_mobile").val());
+			if(!boolReceiveMobile) {
+				alert("휴대폰 형식이 맞지 않습니다");
+				$("input#receive_mobile").focus();
+				return;
+			}
+			
+			if($("input#receive_email").val().trim() == "" ) {
+				alert("받으시는 분 이메일을 입력해주세요");
+				$("input#receive_email").focus();
+				return;
+			}
+			
+			var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
+			const boolReceiveEmail = regExp.test( $("input#receive_email").val() );
+			if(!boolOrderEmail) {
+				alert("이메일 형식이 맞지 않습니다");
+				$("input#receive_email").focus();
+				return;
+			}
+		}; // end of  function checkOrderDetail()
+		
 	</script>
 	
 <div id="container">
@@ -123,7 +213,7 @@
                                                             <th>상품금액</th>
                                                             <th>할인/적립</th>
                                                             <th>합계금액</th>
-                                                            <th>배송비</th>
+                                                            
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -141,7 +231,7 @@
                                                             <fmt:parseNumber var="price" integerOnly="true" value="${requestScope.buyItem_map.product_price}" />
                                                             <fmt:formatNumber value="${cnt*price}" pattern="#,###" />
                                                             </td>
-                                                            <td></td>
+                                                            
                                                         </tr>
                                                         
                                                     </c:if>
@@ -352,7 +442,7 @@
                                                     <div class="payment_final_total">
                                                         <dl>
                                                             <dt>최종 결제 금액</dt>
-                                                            <dd><span>#,###</span>원</dd>
+                                                            <dd><span id="totalPrice"></span>원</dd>
                                                         </dl>
                                                     </div>
 
