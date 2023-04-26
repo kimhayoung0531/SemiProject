@@ -31,9 +31,9 @@ public class FindIdAction extends AbstractController {
 			
 			String user_id = mdao.findUserId(paraMap);
 			
-			System.out.println("user_name" + user_name);
-			System.out.println("email" + email);
-			System.out.println("user_id" + user_id);
+			//System.out.println("user_name" + user_name);
+			//System.out.println("email" + email);
+			//System.out.println("user_id" + user_id);
 			
 			if(user_id != null) {
 				request.setAttribute("user_id", user_id);

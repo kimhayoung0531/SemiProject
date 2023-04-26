@@ -27,7 +27,7 @@
 
 
 			
-	// 로그인 처리를 하는 함수
+	//아이디 찾기를 하는 함수
 	function goFindId(){
 		
 		const loginName = $("input#user_name").val().trim();
@@ -56,10 +56,6 @@
 		frm.submit();
 		
 	}
-		
-		
-
-
 
 </script>
 	  <div class="sub_content">
