@@ -21,19 +21,17 @@ public class AddCartAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 
+		  String item_cnt = request.getParameter("item_cnt");
+		  String pnum = request.getParameter("product_num");
+		  
 		  HttpSession session = request.getSession();
 		  MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
-		  InterCartDAO cdao = new CartDAO();
-
-		  ProductVO pvo = new ProductVO();
-		  String item_cnt = request.getParameter("item_cnt");
-		  String pnum = request.getParameter("pnum");
 		  
-		  //pvo.getProduct_num()
+		  InterCartDAO cdao = new CartDAO();
 
 		  Map<String, String> paraMap = new HashMap<>();
 		  paraMap.put("fk_user_id", loginuser.getUser_id());
-		  paraMap.put("fk_pnum", String.valueOf(pvo.getProduct_num()));
+		  paraMap.put("fk_pnum", pnum);
 		  paraMap.put("item_cnt", item_cnt);
 		  
 		  int n = cdao.addCart(paraMap);

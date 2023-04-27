@@ -12,10 +12,10 @@ public class CartVO{
 	private String cart_date;
 
 	// * select용 *
-	private MemberVO user_id;
-	private ProductVO product_price;
-	private ProductVO mileage;
+	private MemberVO mvo;
+	private ProductVO pvo;
 	
+
 	/* 기본생성자 */
 	public CartVO() {}
 
@@ -28,9 +28,9 @@ public class CartVO{
 
 
 
+
 	///////////////////////////////////////////////////
 	// GETTER SETTER
-	
 	
 	
 	public int getCart_num() {
@@ -73,23 +73,23 @@ public class CartVO{
 	}
 
 
-	public MemberVO getUser_id() {
-		return user_id;
+	public MemberVO getMvo() {
+		return mvo;
 	}
 
 
-	public void setUser_id(MemberVO user_id) {
-		this.user_id = user_id;
+	public void setMvo(MemberVO mvo) {
+		this.mvo = mvo;
 	}
 
 
-	public ProductVO getProduct_price() {
-		return product_price;
+	public ProductVO getPvo() {
+		return pvo;
 	}
 
 
-	public void setProduct_price(ProductVO product_price) {
-		this.product_price = product_price;
+	public void setPvo(ProductVO pvo) {
+		this.pvo = pvo;
 	}
 
 
@@ -98,15 +98,10 @@ public class CartVO{
 	}
 
 
-	public void setTotalMileage(int totalMileage) {
-		this.totalMileage = totalMileage;
-	}
-
-
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-	
+
 
 
 	///////////////////////////////////////////////////
@@ -114,7 +109,7 @@ public class CartVO{
 	// *** 제품의 마일리지 (1%)  ***
 	public int getmileage() {
 		
-		int mileage =  (int)(product_price / 100);
+		int mileage =  (int)(pvo.getProduct_price() / 100);
 		
 		return mileage;
 	}
@@ -124,11 +119,11 @@ public class CartVO{
 	
 
 	// *** 제품의 총판매가(실제판매가 * 주문량) 구해오기 ***
-	public void setTotalPriceTotalPoint(int item_cnt) {   
+	public void setTotalMileage(int item_cnt) {   
 		// int oqty 이 주문량이다.
 	
-		totalPrice = product_price * item_cnt; // 판매당시의 제품판매가 * 주문량
-		totalMileage = mileage * item_cnt;     // 판매당시의 포인트점수 * 주문량 
+		totalPrice = (int)pvo.getProduct_price() * item_cnt; // 판매당시의 제품판매가 * 주문량
+		totalMileage = (int)pvo.getMileage() * item_cnt;     // 판매당시의 포인트점수 * 주문량 
 	}
 	
 	public int getTotalPrice() {
@@ -136,7 +131,7 @@ public class CartVO{
 	}
 	
 	public int getTotalPoint() {
-		return totalPoint;
+		return totalMileage;
 	}
 	
 }
