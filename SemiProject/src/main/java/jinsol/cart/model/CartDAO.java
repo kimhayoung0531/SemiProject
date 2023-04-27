@@ -71,7 +71,7 @@ public class CartDAO implements InterCartDAO {
 	                  + " on A.product_num = B.product_num ";
 	         
 	         pstmt = conn.prepareStatement(sql);
-	         pstmt.setLong(1, Long.parseLong(paraMap.get("fk_pnum")));  
+	         pstmt.setString(1, (paraMap.get("fk_pnum")) );  
 	         
 	         rs = pstmt.executeQuery();
 	         
@@ -91,7 +91,7 @@ public class CartDAO implements InterCartDAO {
 	         else {
 	        	 // 장바구니에 존재하지 않는 새로운 제품을 넣고자 하는 경우
 	        	 sql = " insert into tbl_cart(cart_num, user_id, product_num, product_count, cart_date) "
-			         + " values(seq_tbl_cart_cartno.nextval, ?, ? , ?, default) ";
+			         + " values(seq_cart_cart_num.nextval, ?, ?, ?, default) ";
 	        	 
 	        	 pstmt = conn.prepareStatement(sql);
 	        	 
@@ -100,7 +100,7 @@ public class CartDAO implements InterCartDAO {
 	        	 pstmt.setInt(3, Integer.parseInt(paraMap.get("item_cnt")) );         
 	         
 	         
-		         n = pstmt.executeUpdate();
+		         n = pstmt.executeUpdate(); 
 	         }
 	         
 		}
@@ -111,50 +111,6 @@ public class CartDAO implements InterCartDAO {
 		return n;
 	}	//end of public int addCart(Map<String, String> paraMap) ----------------
 	
-	/*
-	// test cart select
-	public List<CartVO> cartSelectAll() throws SQLException {
-					
-			List<CartVO> cartList = new ArrayList<>();
-
-			try {
-				conn = ds.getConnection();
-
-				String sql = " select cart_num, A.product_num as product_num, product_count, cart_date, product_price "
-						+ " from "
-						+ " ( "
-						+ " select cart_num, product_num, product_count, cart_date "
-						+ " from tbl_cart "
-						+ " where user_id = 'test' "
-						+ " ) A  "
-						+ " join "
-						+ " (select product_num, product_price from tbl_product ) B "
-						+ " on A.product_num = B.product_num ";
-				
-					pstmt = conn.prepareStatement(sql);
-					rs = pstmt.executeQuery();
-					while(rs.next()) {
-						CartVO cartvo = new CartVO();
-						cartvo.setCart_num(rs.getLong(1));
-						
-						ProductVO pvo = new ProductVO();
-						cartvo.setPvo(pvo);
-						cartvo.setProduct_num(rs.getLong(2));
-						cartvo.setProduct_count(rs.getLong(3));
-						cartvo.setCart_date(rs.getString(4));
-						pvo.setProduct_price(rs.getLong(5));
-						cartvo.setPvo(pvo);
-						
-						cartList.add(cartvo);
-					}
-					
-				} finally {
-					close();
-				}
-			
-			return cartList; 
-		}//end of public List<CartVO> cartSelectAll()  ---------------
 	
-	*/
 	
 }
