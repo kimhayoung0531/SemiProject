@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import common.controller.AbstractController;
 import jinsol.cart.model.CartDAO;
 import jinsol.cart.model.InterCartDAO;
-import parkjuneyub.product.model.ProductVO;
 import sge.member.model.MemberVO;
 
 public class AddCartAction extends AbstractController {
