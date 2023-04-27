@@ -60,8 +60,10 @@ public class PwdCertificateNumberAction extends AbstractController {
 
 		//!! 중요  !!
 		// 세션에 저장된 인증코드 삭제하기 
-		// session.removeAttribute("certificationCode");
-		
+		/*
+		 * if(session.getAttribute("certificationCode") != null) {
+		 * session.removeAttribute("certificationCode"); }
+		 */
 		
 	}
 
