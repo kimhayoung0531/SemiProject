@@ -26,15 +26,16 @@ public class AddCartAction extends AbstractController {
 		  HttpSession session = request.getSession();
 		  MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 		  
-		  InterCartDAO cdao = new CartDAO();
+		  //InterCartDAO cdao = new CartDAO();
 
 		  Map<String, String> paraMap = new HashMap<>();
 		  paraMap.put("fk_user_id", loginuser.getUser_id());
 		  paraMap.put("fk_pnum", pnum);
 		  paraMap.put("item_cnt", item_cnt);
 		  
-		  int n = cdao.addCart(paraMap);
+		  //int n = cdao.addCart(paraMap);
 		  
+		  System.out.println("확인용 n : " + n );
 		  if(n==1) {
 			request.setAttribute("message", "장바구니에 담겼습니다.");
 			request.setAttribute("loc", "/WEB-INF/kjs_cart/cart.jsp");
