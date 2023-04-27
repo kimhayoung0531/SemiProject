@@ -79,6 +79,9 @@
 				if($(e.target).val() == myMileage) {
 					$("input#useMileageAll").prop("checked",true);
 				}
+				
+				useMileageAndUpdate();
+				
 			});
 			
 			$("#zipcodeSearch").click(function() {
@@ -316,12 +319,35 @@
 				return;
 			}
 			
+			if(!$("input#payment_final_check").prop("checked")) {
+				alert("구매 진행에 동의해주세요");
+				$("input#payment_final_check").focus();
+			}
+			
 
 		}; // end of  function checkOrderDetail()
 		
 		function checkUseMileageAll() {
 			const myMileage = Number(${requestScope.mvo.mileage});
 			$("input#useMileage").val(myMileage);
+			
+			useMileageAndUpdate();
+		}
+		
+		function useMileageAndUpdate() {
+			
+			// 최종 결제 금액 갱신
+			var price = Number($("strong#total_price_plus_delivery_fee").val());
+			var result = price - Number($("input#useMileage").val());
+			if(result < 0) {
+				result = 0;
+				$("input#useMileage").val(price);
+			}
+			
+			$("strong#totalPrice").val(result);
+			$("strong#totalPrice").text(result);
+			$("span#totalPrice").val(result);
+			$("span#totalPrice").text(result);
 		}
 		
 	</script>
@@ -657,12 +683,12 @@
                                                     <div class="payment_final_total">
                                                         <dl>
                                                             <dt>최종 결제 금액</dt>
-                                                            <dd><span id="totalPrice"></span>원</dd>
+                                                            <dd><span id="totalPrice"></span>원</dd>                                                 
                                                         </dl>
                                                     </div>
 
                                                     <div class="payment_final_check">
-                                                        <input type="checkbox">
+                                                        <input id="payment_final_check" type="checkbox">
                                                         <strong>(필수)</strong> 
                                                         구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.
                                                     </div>
@@ -676,7 +702,7 @@
                                         </div>
                                     </div>
 
-
+									
                                 </div>
                                 <!-- order_wrapp 끝-->
                             </form>
