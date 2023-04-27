@@ -52,3 +52,21 @@ select * from tbl_category;
 -- 마일리지 업데이트
 update tbl_member set mileage = 10000 where user_id = 'test';
 commit;
+
+alter table tbl_order_detail add postcode VARCHAR2(5) not null;
+
+alter table tbl_order_detail drop column shipping_address;
+commit;
+
+select * from tbl_order_detail;
+
+insert into tbl_order_detail(order_details_num, order_num, product_num, order_name, order_quantity, product_selling_price, recipient_name, recipient_mobile, recipient_telephone, forwarded_message, orderer_mobile, delivery_status, payment_time, use_mileage, postcode, address, detailAddress, extraAddress)  
+values
+(seq_order_detail, 'test', 9, '이름', 1,  5000, '이름2', '01012341234', '', '', '01012341234', 0, sysdate, '11111', '테스트주소', '','','' );
+
+-- 테이블 데이터 타입 조회
+select COLUMN_NAME, DATA_TYPE
+from ALL_TAB_COLUMNS
+where TABLE_NAME = 'TBL_ORDER_DETAIL' ;
+
+select * from tbl_order_detail;

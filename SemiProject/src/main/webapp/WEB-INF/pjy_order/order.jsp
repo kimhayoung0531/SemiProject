@@ -40,6 +40,7 @@
 			}
 			$("span#earndeMileage").text(sumMileage.toLocaleString('en'));
 			$("span.save_mileage").text(sumMileage.toLocaleString('en'));
+			$("input#save_mileage").val(sumMileage);
 			
 			<%-- 테이블의 금액 총합 계산하기 --%>
 			var sumPrice = 0;
@@ -57,6 +58,7 @@
 			
 			$("strong#totalPrice").html( (Number($("strong#order_total_price").val()) + deliveryFee).toLocaleString('ko-KR') );
 			$("span#totalPrice").html( (Number($("strong#order_total_price").val()) + deliveryFee).toLocaleString('ko-KR') );
+			$("input#finalTotalPrice").val((Number($("strong#order_total_price").val()) + deliveryFee)); //  최종금액
 			
 			
 			$("button.btn_order_buy").bind("click", function() {
@@ -241,39 +243,41 @@
 			}
 			
 			const all_product_len = $("input.productMileage").length;
-			if(all_product_len != 1) {
-				// 장바구니로 구매한 경우 장바구니 id 도 전달한다. 삭제해야 하므로
-				const cartNo_arr =[];
-			}
+
 			
-			const productTitle_arr = [];
+			const productNum_arr = [];
 			const productCnt_arr = [];
 			const productPrice_arr = [];
 			const productMileage_arr = [];
-			const productEachPrice_arr = [];
+			const eachProductTotalPrice_arr = [];
+			const cartNo_arr =[];
+			
+
 			
 			for(let i = 0; i < all_product_len; i++) {
-				productTitle_arr.push( $("input.productTitle").eq(i).val());
+				productNum_arr.push( $("input.productNum").eq(i).val());
 				productCnt_arr.push( $("input.productCnt").eq(i).val());
 				productPrice_arr.push( $("input.productPrice").eq(i).val());
 				productMileage_arr.push( $("input.productMileage").eq(i).val());
-				productEachPrice_arr.push( $("input.productEachPrice").eq(i).val());
+				cartNo_arr.push($("input.cartNo").eq(i).val());
+				eachProductTotalPrice_arr.push( $("input.eachProductTotalPrice").eq(i).val());
 			}
 			
-			const productTitle_join = productTitle_arr.join();
+			const productNum_join = productNum_arr.join();
 			const productCnt_join = productCnt_arr.join();
 			const productPrice_join = productPrice_arr.join();
 			const productMileage_join = productMileage_arr.join();
-			const productEachPrice_join = productEachPrice_arr.join();
+			const eachProductTotalPrice_join = eachProductTotalPrice_arr.join();
+			const cartNo_join = cartNo_arr.join();
 			
 			/* var queryString = $("form#frmOrder").serialize(); */
 			var queryString = $("form#frmOrder").serializeArray();
-			queryString.push({name : "productTitle_join", value:productTitle_join });
+			queryString.push({name : "productNum_join", value:productNum_join });
 			queryString.push({name : "productCnt_join", value:productCnt_join });
 			queryString.push({name : "productPrice_join", value:productPrice_join });
 			queryString.push({name : "productMileage_join", value:productMileage_join });
-			queryString.push({name : "productEachPrice_join", value:productEachPrice_join });
-		
+			queryString.push({name : "eachProductTotalPrice_join", value:eachProductTotalPrice_join });
+			queryString.push({name : "cartNo_join", value:cartNo_join });
 			
 			console.log(queryString);
 			
@@ -313,7 +317,7 @@
 				result = 0;
 				$("input#useMileage").val(price);
 			}
-			
+			$("input#finalTotalPrice").val((Number($("strong#order_total_price").val()) + 3000)); //  최종금액
 			$("strong#totalPrice").val(result);
 			$("strong#totalPrice").text(result);
 			$("span#totalPrice").val(result);
@@ -415,7 +419,7 @@
                                                     <c:if test="${not empty requestScope.buyItem_map}">
                                                         <tr class="order_goods_layout">
                                                             <td>${requestScope.buyItem_map.product_title}
-                                                            <input class="productTitle" type="hidden" value="${requestScope.buyItem_map.product_title}" />
+                                                            <input class="productNum" type="hidden" value="${requestScope.buyItem_map.product_num}" />
                                                             </td>
                                                             
                                                             <td>${requestScope.buyItem_map.product_cnt}
@@ -435,7 +439,7 @@
                                                             <fmt:parseNumber var="cnt" integerOnly="true" value="${requestScope.buyItem_map.product_cnt}" />
                                                             <fmt:parseNumber var="price" integerOnly="true" value="${requestScope.buyItem_map.product_price}" />
                                                             <fmt:formatNumber value="${cnt*price}" pattern="#,###" />
-                                                            <input class="productEachPrice" type="hidden" value="${cnt*price}" />
+                                                            <input class="eachProductTotalPrice" type="hidden" value="${cnt*price}" />
                                                             </td>
                                                             
                                                         </tr>
@@ -562,13 +566,13 @@
                                                                 <th><span class="order_important">*받으실 곳</span></th>
                                                                 <td>
 																	<div class="address_postcode">
-																		<input type="text" id="postcode" placeholder="우편번호">
+																		<input type="text" id="postcode" name="postcode" placeholder="우편번호">
 																		<input type="button" id="zipcodeSearch" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 																	</div>
 																	<div class="address_input">
-																		<input type="text" id="address" placeholder="주소"><br>
-																		<input type="text" id="detailAddress" placeholder="상세주소">
-																		<input type="text" id="extraAddress" placeholder="참고항목">
+																		<input type="text" id="address" name="address" placeholder="주소"><br>
+																		<input type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소">
+																		<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목">
 																	</div>
                                                                 	
                                                                 </td>
@@ -616,6 +620,7 @@
                                                                     <ul class="order_benefit_list">
                                                                         <%-- <li>할인 : <span class="save_mileage"></span>원</li> --%>
                                                                         <li>마일리지 적립 : <span class="save_mileage"></span>원</li>
+                                                                        <input type="hidden" id="save_mileage" name="save_mileage" />
                                                                     </ul>
                                                                 </td>
                                                             </tr>
@@ -629,6 +634,7 @@
                                                             <tr>
                                                                 <th><span class="order_important">최종 결제 금액</span></th>
                                                                 <td>
+                                                                	<input type="hidden" id="" name="" />
                                                                     <strong id="totalPrice"></strong>원
                                                                 </td>
                                                             </tr>
@@ -660,7 +666,8 @@
                                                     <div class="payment_final_total">
                                                         <dl>
                                                             <dt>최종 결제 금액</dt>
-                                                            <dd><span id="totalPrice"></span>원</dd>                                                 
+                                                            <dd><span id="finalTotalPrice" name="finalTotalPrice"></span>원</dd>  
+                                                            <input type="hidden" id="finalTotalPrice" name="finalTotalPrice" />                                               
                                                         </dl>
                                                     </div>
 

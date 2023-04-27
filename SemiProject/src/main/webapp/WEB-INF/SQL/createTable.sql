@@ -59,7 +59,7 @@ create table tbl_login_history(
    ,login_date DATE       NOT NULL     -- ë¡œê·¸?¸?‚ 
    ,clientIp   varchar2(30) NOT NULL      -- ?•„?´?”¼ì£¼ì†Œ
     ,constraint FK_tbl_login_history_user_id foreign key(user_id) 
-                                references tbl_member(user_id) 
+    references tbl_member(user_id) 
 );
 
 
