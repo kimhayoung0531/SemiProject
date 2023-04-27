@@ -103,92 +103,7 @@
 		}); <%-- end of $(document).ready(function () --%>
 
 		
-		function checkOrderDetail() {
-			
-			if($("input#order_name").val().trim() == "" ) {
-				alert("주문하시는 분 정보를 입력해주세요");
-				$("input#order_name").focus();
-				return;
-			}
-			
-			var regExp = /^[가-힣]{2,6}$/;   		<%-- 이름은 2~6자로 이루어진 한글로 구성되어져 있는지 확인한다. --%>
-			const boolOrderName = regExp.test($("input#order_name").val());
-			if(!boolOrderName) {
-				alert("이름은 2~6자로 이루어진 한글로 구성되어 있어야 합니다");
-				$("input#order_name").focus();
-				return;
-			}
-			
-			if($("input#order_mobile").val().trim() == "" ) {
-				alert("주문하시는 분 휴대폰 번호를 입력해주세요");
-				$("input#order_mobile").focus();
-				return;
-			}
-			
-			var regExp= /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;   		<%-- 휴대폰번호 정규식 01로 시작하며 3번째 자리는 0,1,6,7,8,9 가 오며 - 는 있을수도 없을수도 있다. --%>
-			const boolOrderMobile = regExp.test($("input#order_mobile").val());
-			if(!boolOrderMobile) {
-				alert("휴대폰 형식이 맞지 않습니다");
-				$("input#order_mobile").focus();
-				return;
-			}
-			
-			if($("input#order_email").val().trim() == "" ) {
-				alert("주문하시는 분 이메일을 입력해주세요");
-				$("input#order_email").focus();
-				return;
-			}
-			
-			var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
-			const boolOrderEmail = regExp.test( $("input#order_email").val() );
-			if(!boolOrderEmail) {
-				alert("이메일 형식이 맞지 않습니다");
-				$("input#order_email").focus();
-				return;
-			}
-			
-			if($("input#receive_name").val().trim() == "" ) {
-				alert("받으시는 분 정보를 입력해주세요");
-				$("input#receive_name").focus();
-				return;
-			}
-			
-			var regExp = /^[가-힣]{2,6}$/;   		<%-- 이름은 2~6자로 이루어진 한글로 구성되어져 있는지 확인한다. --%>
-			const boolReceiveName = regExp.test($("input#receive_name").val());
-			if(!boolReceiveName) {
-				alert("이름은 2~6자로 이루어진 한글로 구성되어 있어야 합니다");
-				$("input#receive_name").focus();
-				return;
-			}
-			
-			if($("input#receive_mobile").val().trim() == "" ) {
-				alert("받으시는 분 휴대폰 번호를 입력해주세요");
-				$("input#receive_mobile").focus();
-				return;
-			}
-			
-			var regPhone= /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;   		<%-- 휴대폰번호 정규식 01로 시작하며 3번째 자리는 0,1,6,7,8,9 가 오며 - 는 있을수도 없을수도 있다. --%>
-			const boolReceiveMobile = regExp.test($("input#receive_mobile").val());
-			if(!boolReceiveMobile) {
-				alert("휴대폰 형식이 맞지 않습니다");
-				$("input#receive_mobile").focus();
-				return;
-			}
-			
-			if($("input#receive_email").val().trim() == "" ) {
-				alert("받으시는 분 이메일을 입력해주세요");
-				$("input#receive_email").focus();
-				return;
-			}
-			
-			var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
-			const boolReceiveEmail = regExp.test( $("input#receive_email").val() );
-			if(!boolOrderEmail) {
-				alert("이메일 형식이 맞지 않습니다");
-				$("input#receive_email").focus();
-				return;
-			}
-		}
+
 		
 		function email_domain_change() {
 			
@@ -227,7 +142,7 @@
 			}
 		};
 		
-		function checkOrderDetail() {
+		function checkOrderDetail() { // form 제출 시 실행
 			
 			var regName = /^[가-힣]{2,6}$/;  
 			var regMobile= /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
@@ -322,7 +237,62 @@
 			if(!$("input#payment_final_check").prop("checked")) {
 				alert("구매 진행에 동의해주세요");
 				$("input#payment_final_check").focus();
+				return;
 			}
+			
+			const all_product_len = $("input.productMileage").length;
+			if(all_product_len != 1) {
+				// 장바구니로 구매한 경우 장바구니 id 도 전달한다. 삭제해야 하므로
+				const cartNo_arr =[];
+			}
+			
+			const productTitle_arr = [];
+			const productCnt_arr = [];
+			const productPrice_arr = [];
+			const productMileage_arr = [];
+			const productEachPrice_arr = [];
+			
+			for(let i = 0; i < all_product_len; i++) {
+				productTitle_arr.push( $("input.productTitle").eq(i).val());
+				productCnt_arr.push( $("input.productCnt").eq(i).val());
+				productPrice_arr.push( $("input.productPrice").eq(i).val());
+				productMileage_arr.push( $("input.productMileage").eq(i).val());
+				productEachPrice_arr.push( $("input.productEachPrice").eq(i).val());
+			}
+			
+			const productTitle_join = productTitle_arr.join();
+			const productCnt_join = productCnt_arr.join();
+			const productPrice_join = productPrice_arr.join();
+			const productMileage_join = productMileage_arr.join();
+			const productEachPrice_join = productEachPrice_arr.join();
+			
+			/* var queryString = $("form#frmOrder").serialize(); */
+			var queryString = $("form#frmOrder").serializeArray();
+			queryString.push({name : "productTitle_join", value:productTitle_join });
+			queryString.push({name : "productCnt_join", value:productCnt_join });
+			queryString.push({name : "productPrice_join", value:productPrice_join });
+			queryString.push({name : "productMileage_join", value:productMileage_join });
+			queryString.push({name : "productEachPrice_join", value:productEachPrice_join });
+		
+			
+			console.log(queryString);
+			
+			$.ajax({
+				url:"<%= request.getContextPath()%>/orderEnd.ban",
+				type:"POST",
+				
+				data:
+				queryString,
+				
+				dataType:"",
+				success:function(json) {
+					console.log("성공");
+				},
+				error: function(request, status, error) {
+					alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+				}
+			
+			});
 			
 
 		}; // end of  function checkOrderDetail()
@@ -444,25 +414,32 @@
 
                                                     <c:if test="${not empty requestScope.buyItem_map}">
                                                         <tr class="order_goods_layout">
-                                                            <td>${requestScope.buyItem_map.product_title}</td>
+                                                            <td>${requestScope.buyItem_map.product_title}
+                                                            <input class="productTitle" type="hidden" value="${requestScope.buyItem_map.product_title}" />
+                                                            </td>
                                                             
-                                                            <td>${requestScope.buyItem_map.product_cnt}</td>
+                                                            <td>${requestScope.buyItem_map.product_cnt}
+                                                            <input class="productCnt" type="hidden" value="${requestScope.buyItem_map.product_cnt}" />
+                                                            </td>
                                                             
                                                             <td>
                                                             <fmt:formatNumber value="${requestScope.buyItem_map.product_price}" pattern="#,###" />
+                                                            <input class="productPrice" type="hidden" value="${requestScope.buyItem_map.product_price}" />
                                                             </td>
                                                             
                                                             <td><fmt:formatNumber value="${requestScope.buyItem_map.product_mileage}" pattern="#,###" />
-                                                            <input class="productMileage" type="hidden" value="${requestScope.buyItem_map.product_mileage}">
+                                                            <input class="productMileage" type="hidden" value="${requestScope.buyItem_map.product_mileage}" />
                                                             </td>
                                                             
                                                             <td class="priceMultiCountResult">
                                                             <fmt:parseNumber var="cnt" integerOnly="true" value="${requestScope.buyItem_map.product_cnt}" />
                                                             <fmt:parseNumber var="price" integerOnly="true" value="${requestScope.buyItem_map.product_price}" />
                                                             <fmt:formatNumber value="${cnt*price}" pattern="#,###" />
+                                                            <input class="productEachPrice" type="hidden" value="${cnt*price}" />
                                                             </td>
                                                             
                                                         </tr>
+                                                        
                                                         
                                                     </c:if>
 

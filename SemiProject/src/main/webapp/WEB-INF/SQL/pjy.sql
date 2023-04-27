@@ -46,3 +46,9 @@ create table tbl_product -- 상품 테이블
 
 delete from tbl_product where product_num = 3;
 alter table tbl_product modify main_image number(20);
+
+select * from tbl_category;
+
+-- 마일리지 업데이트
+update tbl_member set mileage = 10000 where user_id = 'test';
+commit;
