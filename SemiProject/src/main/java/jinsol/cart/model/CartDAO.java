@@ -10,8 +10,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import parkjuneyub.product.model.ProductVO;
-import sge.member.model.MemberVO;
 
 public class CartDAO implements InterCartDAO {
 
