@@ -67,6 +67,8 @@ public class FindPwdAction extends AbstractController {
 					//세션불러오기
 					HttpSession session = request.getSession();
 					session.setAttribute("certificationCode", certificationCode);
+					session.setAttribute("email", email);
+					
 					// 발급한 인증번호를 세션에 저장시킴 
 				
 					
@@ -79,8 +81,7 @@ public class FindPwdAction extends AbstractController {
 			}// end of if(isUserExist) 
 						
 			request.setAttribute("isUserExist", isUserExist);
-			request.setAttribute("userid", user_id);
-			request.setAttribute("email", email);
+			request.setAttribute("user_id", user_id);			
 			request.setAttribute("sendMailSuccess", sendMailSuccess);
 			
 			
@@ -91,10 +92,12 @@ public class FindPwdAction extends AbstractController {
 			
 		}// end of if ("POST".equalsIgnoreCase(method))
 		
-		request.setAttribute("method", method);
+		  request.setAttribute("method", method);
 		
-		super.setRedirect(false);
-		super.setViewPage("/WEB-INF/sge_login/findPwd.jsp");
+		
+		  super.setRedirect(false);
+		  super.setViewPage("/WEB-INF/sge_login/findPwd.jsp");
+		 
 		
 		
 		
