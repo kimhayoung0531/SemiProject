@@ -26,8 +26,8 @@ public class AddCartAction extends AbstractController {
 		  InterCartDAO cdao = new CartDAO();
 
 		  ProductVO pvo = new ProductVO();
-		  pvo.getProduct_num();
 		  String item_cnt = request.getParameter("item_cnt");
+		  String pnum = request.getParameter("pnum");
 		  
 		  //pvo.getProduct_num()
 
