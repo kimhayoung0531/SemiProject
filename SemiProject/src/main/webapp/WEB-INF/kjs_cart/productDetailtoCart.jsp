@@ -44,7 +44,7 @@
 	
 			
 			$("button.btn_confirm").bind("click", function goCart(){	//확인하면 장바구니로 이동
-	
+			
 		       // 주문개수가 1개 이상인 경우
 				frm.action = "<%= request.getContextPath()%>/cart.ban";
 				frm.method = "POST";

@@ -1,17 +1,12 @@
 package jinsol.cart.model;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-import parkjuneyub.product.model.ProductVO;
-import sge.member.model.MemberVO;
 
 public class CartDAO implements InterCartDAO {
 

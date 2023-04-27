@@ -35,6 +35,7 @@ public class AddCartAction extends AbstractController {
 		  
 		  int n = cdao.addCart(paraMap);
 		  
+		  System.out.println("확인용 n : " + n );
 		  if(n==1) {
 			request.setAttribute("message", "장바구니에 담겼습니다.");
 			request.setAttribute("loc", "/WEB-INF/kjs_cart/cart.jsp");
