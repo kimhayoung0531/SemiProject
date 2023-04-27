@@ -12,11 +12,11 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
-		
+	<%--	
        if(${not empty requestScope.item_cnt}) {
     	   $("input#cart_cnt").val("${requestScope.item_cnt}");
        }		
-		
+		--%>
 	});	//end of $(document).ready(function () -------------------------------------
 
 </script>
