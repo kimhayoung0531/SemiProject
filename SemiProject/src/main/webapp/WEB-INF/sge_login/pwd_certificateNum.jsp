@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%
 	String ctxPath = request.getContextPath();
 %>
@@ -83,17 +83,14 @@
                                  <input type="text" class="form-control" id="input_confirmCode"
                                      name="userCertificationCode" class="text" placeholder="인증번호 입력" />
 
-                                 <input type="text" id="user_id" name="user_id" value="${requestScope.user_id}" />
+                                 <input type="hidden" id="user_id" name="user_id" value="${requestScope.user_id}" />
                                   <c:if test="${sessionScope.certificationCode != null}">
                                   	 <p>남은 인증시간:<span id="timer">03:00</span></p>
                                   	 <span class="time_error">인증시간이 만료되었습니다</span>
                                   	 
                                   </c:if>
 
-                                  
-                                 <p>남은 인증시간:<span class="timer"></span></p>
-                               
-
+                              
                              </div><!-- // login_input_sec-->
 
                          </div><!--//member_login_box -->
