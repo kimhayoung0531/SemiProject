@@ -189,8 +189,8 @@
                                                     <tr>
                                                         <th><span class="important">아이디</span></th>
                                                         <td>
-                                                            <input type="hidden" name="memId" value="kim05hy31" />
-                                                            kim05hy31
+                                                            <input type="text" name="memId" value="${sessionScope.loginuser.userid}" readonly />
+                                                            
                                                         </td>
 
                                                     </tr>
@@ -221,7 +221,7 @@
                                                         <th><span>* 이메일</span></th>
                                                         <td class="member_email">
                                                             <div class="member_warning">
-                                                                <input type="text" name="email" id="email" value="kim05hy31@naver.com" tabindex="-1" />
+                                                                <input type="text" name="email" id="email" value="" tabindex="-1" />
                                                                 <button class=" btn_double_check"> 이메일 중복 체크</button>
                                                             </div>
                                                             
@@ -231,7 +231,7 @@
                                                         <th><span>* 휴대폰번호</span></th>
                                                         <td class="member_address">
                                                             <div class="address_postcode">
-                                                                <input type="text" id="cellPhone" name="cellPhone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" value="01090344977" />
+                                                                <input type="text" id="cellPhone" name="cellPhone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" value="" />
                                                             </div>
                                                             
                                                         </td>
