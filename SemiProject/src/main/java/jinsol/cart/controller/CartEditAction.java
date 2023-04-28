@@ -1,18 +1,15 @@
-package sge.member.controller;
+package jinsol.cart.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.controller.AbstractController;
 
-public class PwdCertificationAction extends AbstractController {
+public class CartEditAction  extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		String method = request.getMethod();
-			super.setRedirect(false);
-			super.setViewPage("/WEB-INF/sge_login/pwd_certification.jsp");
+		// TODO Auto-generated method stub
 		
 	}
 

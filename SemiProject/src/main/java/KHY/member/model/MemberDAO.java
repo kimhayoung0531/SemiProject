@@ -1,4 +1,4 @@
-package sge.member.model;
+package KHY.member.model;
 
 import java.io.UnsupportedEncodingException;
 
@@ -218,34 +218,34 @@ public class MemberDAO implements InterMemberDAO {
 						 
 						member.setRequirePwdChange(true); // 로그인시 암호를 변경해라는 alert 를 띄우도록 할때 사용한다.  
 				 }
-				 
-				 if ( rs.getInt(15) >= 12 ) { // 또는 rs.getInt("LASTLOGINGAP")
-					 // 마지막으로 로그인 한 날짜시간이 현재시각으로 부터 1년이 지났으면 휴면으로 지정  
-					 
-					 member.setIdle(1); 
-					 
-					 // === tbl_member 테이블의 idle 컬럼의 값을 1 로 변경하기 === //
-					 sql = " update tbl_member set idle = 1 "
-					 	 + " where user_id = ? "; 
-					 
-					 pstmt = conn.prepareStatement(sql); 
-					 pstmt.setString(1, paraMap.get("user_id"));
-					 
-					 pstmt.executeUpdate();
-				 }
-				 
-				 // === tbl_loginhistory(로그인기록) 테이블에 insert 하기 === // 
-				 if(member.getIdle() != 0) {
-				
-					 sql = " insert into tbl_login_history(fk_user_id, clientip) "
-					 	 + " values(?, ?) "; 
-					 
-					 pstmt = conn.prepareStatement(sql);
-					 pstmt.setString(1, paraMap.get("user_id"));
-					 pstmt.setString(2, paraMap.get("clientip"));
-					 
-					 pstmt.executeUpdate();
-				 }
+//				 
+//				 if ( rs.getInt(15) >= 12 ) { // 또는 rs.getInt("LASTLOGINGAP")
+//					 // 마지막으로 로그인 한 날짜시간이 현재시각으로 부터 1년이 지났으면 휴면으로 지정  
+//					 
+//					 member.setIdle(1); 
+//					 
+//					 // === tbl_member 테이블의 idle 컬럼의 값을 1 로 변경하기 === //
+//					 sql = " update tbl_member set idle = 1 "
+//					 	 + " where user_id = ? "; 
+//					 
+//					 pstmt = conn.prepareStatement(sql); 
+//					 pstmt.setString(1, paraMap.get("user_id"));
+//					 
+//					 pstmt.executeUpdate();
+//				 }
+//				 
+					/*
+					 * // === tbl_loginhistory(로그인기록) 테이블에 insert 하기 === // if(member.getIdle() !=
+					 * 0) {
+					 * 
+					 * sql = " insert into tbl_login_history(fk_user_id, clientip) " +
+					 * " values(?, ?) ";
+					 * 
+					 * pstmt = conn.prepareStatement(sql); pstmt.setString(1,
+					 * paraMap.get("user_id")); pstmt.setString(2, paraMap.get("clientip"));
+					 * 
+					 * pstmt.executeUpdate(); }
+					 */
 				
 			}
 			
@@ -293,64 +293,5 @@ public class MemberDAO implements InterMemberDAO {
 		
 		return user_id;
 	}
-
-	
-	// 비밀번호를 찾기위해서 있는 회원인지 알아보는 메소드
-	@Override
-	public boolean isUserExist(Map<String, String> paraMap) throws SQLException {
-		boolean isExist = false; 
-		
-		try {
-			conn = ds.getConnection();
-			String sql = " select user_id " +
-						 " from tbl_member " +
-						 " where status = 1 and user_id = ? and email = ? ";
-			
-			pstmt = conn.prepareStatement(sql);	
-			pstmt.setString(1, paraMap.get("user_id"));
-			pstmt.setString(2, aes.encrypt(paraMap.get("email")) );
-			
-			rs = pstmt.executeQuery();
-			
-			isExist = rs.next(); // 그러한 아이디의 존재유무
-			
-			
-		} catch (GeneralSecurityException | UnsupportedEncodingException e) {
-			
-			e.printStackTrace();
-		}finally {
-			close();
-		}
-
-		return isExist;
-	}
-
-	
-	// 비밀번호를 찾아주는 메소드
-	@Override
-	public int pwdUpdate(Map<String, String> paraMap) throws SQLException {
-		int result =0;
-		try {
-			conn = ds.getConnection();
-			
-			String sql = " update tbl_member set pwd = ? "
-					   + "       ,lastpwdchange = sysdate "
-					   + " where user_id = ? ";
-			pstmt = conn.prepareStatement(sql);
-			
-		
-			pstmt.setString(1, Sha256.encrypt(paraMap.get("pwd")) );
-			pstmt.setString(2, paraMap.get("user_id") );
-		
-			result = pstmt.executeUpdate();
-
-		} finally {	
-			close();
-		}
-		
-		return result;
-	}
-
-	
 
 }
