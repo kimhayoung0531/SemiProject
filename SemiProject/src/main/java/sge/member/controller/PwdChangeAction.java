@@ -20,14 +20,14 @@ public class PwdChangeAction extends AbstractController {
 		  String method = request.getMethod(); 
 		  String user_id = request.getParameter("user_id");
 		  
-		  System.out.println(user_id);
+		  System.out.println("ghkrdlsdyd" + user_id);
 			
 		  if("POST".equalsIgnoreCase(method)) { //암호변경하길을 클릭한 경우
 		      String message = "";
 		      String loc = "";
 		  
 			  String pwd = request.getParameter("pwd");
-			  System.out.println(pwd);
+			  System.out.println("새로운 비밀번호"+pwd);
 			  
 			  Map<String, String> paraMap = new HashMap<>(); 
 			  paraMap.put("pwd", pwd);
