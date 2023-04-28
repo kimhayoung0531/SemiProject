@@ -1,7 +1,6 @@
 package jinsol.cart.controller;
 
 
-
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +49,7 @@ public class AddCartAction extends AbstractController {
 		  
 		  if(n==1) {
 			request.setAttribute("message", "장바구니에 담겼습니다.");
-			request.setAttribute("loc", "cart.ban");
+			request.setAttribute("loc", "cartList.ban");
 		  }
 		  else {
 			request.setAttribute("message", "장바구니 담기에 실패하셨습니다.");
