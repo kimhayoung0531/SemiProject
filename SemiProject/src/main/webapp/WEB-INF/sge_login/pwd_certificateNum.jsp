@@ -26,6 +26,7 @@
 	             window.location.href = 'findPwd.ban?finish=1';
            }
 			else{
+				
 				let minute;
 				let second;
 				
