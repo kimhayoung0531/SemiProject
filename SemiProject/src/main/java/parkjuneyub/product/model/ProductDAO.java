@@ -44,7 +44,7 @@ public class ProductDAO implements InterProductDAO  {
 		try {
 			Context initContext = new InitialContext();
 			Context envContext  = (Context)initContext.lookup("java:/comp/env");
-			ds = (DataSource)envContext.lookup("semi_oracle");
+			ds = (DataSource)envContext.lookup("jdbc/semi_oracle");
 			
 		}
 		catch(NamingException e) {
