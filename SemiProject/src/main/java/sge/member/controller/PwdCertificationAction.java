@@ -11,8 +11,14 @@ public class PwdCertificationAction extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String method = request.getMethod();
+		
+	
+
 			super.setRedirect(false);
 			super.setViewPage("/WEB-INF/sge_login/pwd_certification.jsp");
+		
+		
+		
 		
 	}
 

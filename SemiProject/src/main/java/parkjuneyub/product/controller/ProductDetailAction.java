@@ -4,13 +4,11 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
 import parkjuneyub.product.model.InterProductDAO;
 import parkjuneyub.product.model.ProductDAO;
 import parkjuneyub.product.model.ProductVO;
-import sge.member.model.MemberVO;
 
 public class ProductDetailAction extends AbstractController {
 	

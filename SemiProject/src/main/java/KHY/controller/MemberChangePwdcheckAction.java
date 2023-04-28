@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
-import KHY.member.model.*;
+import sge.member.model.MemberVO;
 
 
 public class MemberChangePwdcheckAction extends AbstractController {
@@ -13,7 +13,9 @@ public class MemberChangePwdcheckAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		
+		super.setViewPage("/WEB-INF/KHY/mypage_memberchange_pwdcheck.jsp");
+		/*  로그인 확인유무 완성 다른 파트와 연결할 때 주석 풀 것
+		 
 		// 내정보(회원정보)를 수정하기위한 전제조건은 먼저 로그인을 해야한다.
 				if(super.checkLogin(request)) {
 					// 로그인을 했으면
@@ -57,7 +59,7 @@ public class MemberChangePwdcheckAction extends AbstractController {
 					
 					
 				}
-		
+		*/
 		
 	}
 

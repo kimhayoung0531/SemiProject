@@ -98,71 +98,6 @@
 	}
 	
 </style>
-<script type="text/javascript">
-    $(document).ready(function () {
-    	
-    	$("div.text_warning").hide();
-    	
-        $('.btn_cancle').click(function () {
-        	window.location.href = 'mypage.ban';
-        });
-        
-        $('.btn_register').click(function () {
-        	$(".text_warning").hide();
-        	let testpwd = 'qwer1234$';
-        	
-        	if( $("#findPassword").val() == testpwd) {
-        		window.location.href = 'mypageMemberChange.ban';
-        	}
-        	else {
-        		$(".text_warning").show();
-        	}
-        	
-        });
-        
-        
-        
-
-       /*  $('#formFind').validate({
-            dialog: false,
-            rules: {
-                findPassword: {
-                    required: true
-                }
-            },
-            messages: {
-                findPassword: {
-                    required: "패스워드를 입력해주세요"
-                }
-            }, submitHandler: function (form) {
-                var $target = $(':password#findPassword', form);
-                if (!_.isEmpty($target.val())) {
-                    var $ajax = $.ajax('../mypage/my_page_ps.php', {
-                        type: "post", data: {
-                            memPw: $target.val(),
-                            mode: "verifyPassword"
-                        }
-                    });
-                    $ajax.done(function (data, textStatus, jqXHR) {
-                        console.log('gd_member ajax', data, textStatus, jqXHR);
-                        var code = data.code;
-                        var message = data.message;
-                        if (_.isUndefined(code) && _.isUndefined(message)) {
-                            top.location.href = "../mypage/my_page.php";
-                        } else {
-                            $(form).find('.member_warning').addClass('prior_wrong');
-                            $(form).find('.text_warning').text(message);
-                        }
-                    });
-                }
-            } 
-        });*/
-
-
-    });
-    
-</script>
-
     
 </head>
 
@@ -236,7 +171,7 @@
 					<div class="id_pw_cont">
 					    <dl>
 					        <dt>아이디</dt>
-					        <dd><strong>test</strong></dd>
+					        <dd><strong>kim05hy31</strong></dd>
 					    </dl>
 					    <dl>
 					        <dt>비밀번호</dt>
@@ -245,7 +180,7 @@
 					                <input type="password" name="findPassword" id="findPassword"/>
 					                <div class="text_warning">
 					                    비밀번호가 일치하지 않습니다.
-					            	</div>
+					            </div>
 					            </div>
 					        </dd>
 					    </dl>

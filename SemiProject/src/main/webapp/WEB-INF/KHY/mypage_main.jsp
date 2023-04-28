@@ -61,20 +61,16 @@
 	    font-size: 12px;
 	}
 </style>
-
-<script>
-
-</script>
     
 </head>
-<%-- <input value='${sessionScope.loginuser.user_id}' /> --%>
+
 <div id="container" style="margin-left: 12%;">
     <div id="contents">
         <!-- 본문 시작 -->
-		
+
         <div class="location_wrap">
-            <div class="location_cont" >
-                <em><a href="#" class="local_home">HOME </a> > 마이페이지</em>
+            <div class="location_cont">
+                <em><a href="#" class="local_home">HOME</a> > 마이페이지</em>
             </div>
         </div>
         <!-- //location_wrap -->
