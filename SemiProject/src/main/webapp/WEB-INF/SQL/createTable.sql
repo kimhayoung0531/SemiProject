@@ -53,6 +53,9 @@ CREATE TABLE tbl_login (
                                 references tbl_member(user_id) 
 );
 
+select *
+from tbl_member;
+
 --로그인 기록
 create table tbl_login_history(
    user_id   VARCHAR2(40) NOT NULL  -- 아이디
