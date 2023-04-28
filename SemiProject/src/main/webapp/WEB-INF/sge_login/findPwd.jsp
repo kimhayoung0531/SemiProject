@@ -50,6 +50,8 @@
 			return;
 		}
 		
+		 sessionStorage.setItem("user_id", user_id);
+		 
 		 const frm = document.findPwdForm;
 		 frm.action = "<%= ctxPath%>/findPwd.ban";
 		 frm.method = "post";
