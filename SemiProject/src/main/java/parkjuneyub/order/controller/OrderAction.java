@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
 import jinsol.cart.model.CartVO;
@@ -19,7 +20,15 @@ public class OrderAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-		
+	      HttpSession session = request.getSession();
+	      MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
+	      
+	    if(loginuser == null) {
+	         super.setRedirect(false);
+	         super.setViewPage("/WEB-INF/sge_login/memberLogin.jsp");
+	         return;
+	    }
+	      
 		String method = request.getMethod();
 		
 		if("get".equalsIgnoreCase(method)) {
@@ -30,6 +39,7 @@ public class OrderAction extends AbstractController {
 			
 			super.setRedirect(false);
 			super.setViewPage("/WEB-INF/msg.jsp");
+			return;
 		}
 		
 		if("post".equalsIgnoreCase(method)) {
@@ -43,7 +53,7 @@ public class OrderAction extends AbstractController {
 			
 			// 1. 장바구니를 통해 넘어온 경우 유저 정보와 장바구니의 내용이 필요합니다.
 			// 유저정보 가져오기
-			String userid = "test";
+			String userid = loginuser.getUser_id();
 			
 			// 바로 구매한 아이템을 저장한 Map
 			Map<String, String> buyItem_map = new HashMap<>();
@@ -75,6 +85,7 @@ public class OrderAction extends AbstractController {
 
 			super.setRedirect(false);
 			super.setViewPage("WEB-INF/pjy_order/order.jsp");
+			return;
 		}
 		
 		
