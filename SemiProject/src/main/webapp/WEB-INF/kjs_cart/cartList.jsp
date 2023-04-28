@@ -20,36 +20,67 @@
 		
 		// 선택체크박스가 하나라도 해제되면 전체체크박스 체크해제하기
 		$(".chkboxpnum").click(function() {
-			var bool = confirm("정말 삭제하시겠습니까?");
-			
-			if(bool){
-				var checkArr = new Array();
-				
-				$("input[class='chkboxpnum']").each(function() {
-					checkArr.push
-				});
-			
-			}
-			
+
+	         var bFlag = false;
+	         $(".chkboxpnum").each(function(){
+	            var bChecked = $(this).prop("checked");
+	            if(!bChecked) {
+	               $("#allCheck").prop("checked",false);
+	               bFlag = true;
+	               return false;
+	            }
+	         });
+	         
+	         if(!bFlag) {
+	            $("#allCheck").prop("checked",true);
+	             }
 			
 		});	//end of $(".chkboxpnum").click(function(){} ----------------
 		  
 				
+				
 		// ======== 장바구니 선택상품 삭제하기 ========
 		$("button.btn_order_choice_del").click(function(){
-			var chk_bool = $(".chkboxpnum").is(":checked");
-			// true면 체크된 상태, false면 해제된 상태
-			const chk_num
-			if(chk_bool){
-				  goDel();
-			}
-			
-		}
+		    const checked_cnt = $("input:checkbox[name='pnum']:checked").length;
+			const ckArr = new Array();
+
+		    if(checked_cnt < 1) {
+		         alert("삭제하실 제품을 선택하세요.");
+		         return;  //종료
+		      }
+		    else{
+		    	const bool = confirm("정말 삭제하시겠습니까?");
+		    	if(bool){
+						$("input:checkbox[name='pnum']:checked").each(function() {
+							ckArr.push($(this).val());
+						});
+						
+						$.ajax({
+							url:"<%= ctxPath%>/cartDelete.ban", 
+						    type:"post",
+						    data:{"cart_num":ckArr}, <%-- request.getParameterValues("cart_num"); 은 타입이 String[] 으로 된다. --%>
+						<%-- 
+						    data:{"cart_num":ckArr.join(",") }, // request.getParameter("cart_num"); 은 타입이 String 으로 된다.  
+						                                           "5,7,10"
+						                                           '5','7','10'
+						                                           delete from 장바구니테이블 
+						                                           where 장바구니번호 in('5','7','10')  
+						--%>    
+						    dataType:"json",
+						    success:function(json){
+						    	
+						    },
+						    error: function(request, status, error){
+			                    alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+						    }
+						});	//end of $.ajax -----------------------------
+		    		}
+		    	else{
+				        alert("선택상품 삭제를 취소하셨습니다.");
+		    		}
+		     }
+		}	//end of $("button.btn_order_choice_del").click(function() -------------
 		
-			
-		}); //$("button.btn_order_choice_del").click(function)(){} ---------------------
-				
-				
 				
 	});	//end of $(document).ready(function () -------------------------------------
 
@@ -89,7 +120,7 @@
 		   }
 		   else{
 			   $.ajax({
-				   url: "<%= ctxPath%>/cartEdit.up",
+				   url: "<%= ctxPath%>/cartEdit.ban",
 				   type:"post",
 				   data:{
 					   "cart_num":cart_num,
@@ -110,6 +141,42 @@
 	   
 	   
 	   
+	   
+	   
+		// ======== 장바구니 선택상품 주문하기 ========
+			
+   		function goOrder() {
+
+   	      // 체크박스의 체크된 개수
+   	      const checked_cnt = $("input:checkbox[name='pnum']:checked").length;
+   	      
+   	      if(checked_cnt < 1){
+   	    	  alert("주문하실 제품을 선택하세요.");
+   	    	  return;
+   	      }
+   	      else{         
+   	    	  //체크가 된 것만 값을 읽어와서 배열에 넣어준다. 
+			const all_cnt = $("input:checkbox[name='pnum']").length;
+   	    	  
+            const pnum_arr = new Array();   
+            const cart_cnt_arr = new Array();  
+            const cart_num_arr = new Array();  
+            const totalPrice_arr = new Array(); 
+            const totalMileage_arr = new Array();  
+            
+            for(let i=0; i<all_cnt; i++){
+                if($("input:checkbox[name='pnum']").eq(i).prop("checked")) {   //eq.() : 끄집어 내자!
+                	pnum_arr.push($("input:checkbox[name='pnum']").eq(i).val());
+                	cart_cnt_arr($("input#cart_cnt").eq(i).val());
+                
+                }
+            }//end of for ------------------------------------------
+            
+   	      }
+		   
+	   }	//end of function goOrder() ----------------------
+
+
 	   
 </script>
 
@@ -188,7 +255,7 @@
                                     <c:if test="${not empty requestScope.cartList}">
                                     
                                      --%>
-                                    <c:if test="${empty requestScope.cartList}">
+                                    <c:if test="${requestScope.cartList}">
                                         <c:forEach var="cartvo" items="${requestScope.cartList}" varStatus="status"> 
 		                                    <tr>
 		                                        <td class="td_chk"> <%-- 선택상품 체크박스--%>  
@@ -244,6 +311,7 @@
 		                                        <%-- 상품 당 합계금액 --%>
 		                                        <td>
 		                                            <div class="allprice_won"><fmt:formatNumber value="${carvo.totalPrice}" pattern="###,###"/>원</div>
+		                                            <div class="allprice_mileage"><fmt:formatNumber value="${carvo.totalMileage}" pattern="###,###"/>마일리지</div>
 		                                        </td>
 		                                        <td class="td_delivery" rowspan="4">
 		                                            기본 - 금액별배송비<br>
