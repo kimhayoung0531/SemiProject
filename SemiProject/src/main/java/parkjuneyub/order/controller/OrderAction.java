@@ -5,7 +5,6 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
 import jinsol.cart.model.CartVO;
@@ -22,15 +21,18 @@ public class OrderAction extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		
 		String method = request.getMethod();
-		HttpSession session = request.getSession();
-		MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
 		
-		if(loginuser == null) {
+		if("get".equalsIgnoreCase(method)) {
+			String message = "비정상적인 경로로 들어왔습니다.";
+			String loc = "javascript:history.back()";
+			request.setAttribute("message", message);
+			request.setAttribute("loc", loc);
+			
 			super.setRedirect(false);
-			super.setViewPage("/WEB-INF/sge_login/memberLogin.jsp");
+			super.setViewPage("/WEB-INF/msg.jsp");
 		}
 		
-		if("post".equalsIgnoreCase(method) && loginuser != null) {
+		if("post".equalsIgnoreCase(method)) {
 			InterProductDAO pdao = new ProductDAO();
 			/*
 			System.out.println(request.getParameter("product_num"));
@@ -41,8 +43,8 @@ public class OrderAction extends AbstractController {
 			
 			// 1. 장바구니를 통해 넘어온 경우 유저 정보와 장바구니의 내용이 필요합니다.
 			// 유저정보 가져오기
-			String userid = loginuser.getUser_id();
-			System.out.println(userid);
+			String userid = "test";
+			
 			// 바로 구매한 아이템을 저장한 Map
 			Map<String, String> buyItem_map = new HashMap<>();
 
@@ -73,17 +75,6 @@ public class OrderAction extends AbstractController {
 
 			super.setRedirect(false);
 			super.setViewPage("WEB-INF/pjy_order/order.jsp");
-		}
-		
-		if("get".equalsIgnoreCase(method)) {
-			String message = "비정상적인 경로로 들어왔습니다.";
-			String loc = "javascript:history.back()";
-			request.setAttribute("message", message);
-			request.setAttribute("loc", loc);
-			
-			super.setRedirect(false);
-			super.setViewPage("/WEB-INF/msg.jsp");
-		
 		}
 		
 		
