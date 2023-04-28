@@ -24,7 +24,6 @@ public class PwdChangeAction extends AbstractController {
 		  if("POST".equalsIgnoreCase(method)) { //암호변경하길을 클릭한 경우
 		      String message = "";
 		      String loc = "";
-		      
 		  
 			  String pwd = request.getParameter("pwd");
 			  System.out.println(pwd);
