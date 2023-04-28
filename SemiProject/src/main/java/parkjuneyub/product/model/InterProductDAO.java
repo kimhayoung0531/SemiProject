@@ -1,9 +1,10 @@
 package parkjuneyub.product.model;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.List;
 
-import jinsol.cart.model.CartVO;
+import parkjuneyub.product.model.*;
 
 public interface InterProductDAO {
 	
@@ -12,6 +13,12 @@ public interface InterProductDAO {
 
 	// 유저아이디로 장바구니 내용물 가져오는 메소드
 	List<CartVO> getCartList(String userid) throws SQLException;
+	
+	// 주문코드를 위한 시퀀스 가져오기
+	int getSeq_tbl_order() throws SQLException;
+	
+	// 트랜잭션을 처리해주는 메소드
+	int orderAdd(HashMap<String, Object> paraMap) throws SQLException;
 	
 	
 	

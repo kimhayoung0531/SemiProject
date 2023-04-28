@@ -34,4 +34,11 @@ nominvalue
 nocycle
 nocache;
 
---
+-- "주문상세 일련번호 시퀀스" 생성
+create sequence seq_order_detail
+start with 1
+increment by 1
+nomaxvalue
+nominvalue
+nocycle
+nocache;
