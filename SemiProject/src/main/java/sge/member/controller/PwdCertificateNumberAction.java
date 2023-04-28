@@ -23,14 +23,12 @@ public class PwdCertificateNumberAction extends AbstractController {
 			//String user_id = request.getAttribute("user_id");
 			
 			System.out.println(userCertificationCode);
-			//System.out.println(user_id);
+			String user_id = request.getParameter("user_id");
+			System.out.println("두번째 아이디" + user_id);
 
 			//세션 불러오기 
 			
 			String certificationCode = (String)session.getAttribute("certificationCode");
-			String user_id = (String) request.getAttribute("user_id");
-			
-			System.out.println("두번쩨 유저아이디"+user_id);
 		
 			String message = "";
 			String loc = "";
