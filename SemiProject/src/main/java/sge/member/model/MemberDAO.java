@@ -336,8 +336,7 @@ public class MemberDAO implements InterMemberDAO {
 					   + "       ,lastpwdchange = sysdate "
 					   + " where user_id = ? ";
 			pstmt = conn.prepareStatement(sql);
-			
-		
+
 			pstmt.setString(1, Sha256.encrypt(paraMap.get("pwd")) );
 			pstmt.setString(2, paraMap.get("user_id") );
 		
