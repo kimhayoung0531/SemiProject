@@ -22,9 +22,6 @@ public interface InterMemberDAO {
 	
 	// 비밀번호를 찾기위해서 있는 회원인지 알아보는 메소드
 	boolean isUserExist(Map<String, String> paraMap)throws SQLException;
-
-	// 비밀번호 업데이트 메소드
-	int pwdUpdate(Map<String, String> paraMap)throws SQLException;
 	
 
 

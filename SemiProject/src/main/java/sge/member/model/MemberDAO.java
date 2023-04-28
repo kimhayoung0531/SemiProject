@@ -326,31 +326,5 @@ public class MemberDAO implements InterMemberDAO {
 	}
 
 	
-	// 비밀번호를 찾아주는 메소드
-	@Override
-	public int pwdUpdate(Map<String, String> paraMap) throws SQLException {
-		int result =0;
-		try {
-			conn = ds.getConnection();
-			
-			String sql = " update tbl_member set pwd = ? "
-					   + "       ,lastpwdchange = sysdate "
-					   + " where user_id = ? ";
-			pstmt = conn.prepareStatement(sql);
-			
-		
-			pstmt.setString(1, Sha256.encrypt(paraMap.get("pwd")) );
-			pstmt.setString(2, paraMap.get("user_id") );
-		
-			result = pstmt.executeUpdate();
-
-		} finally {	
-			close();
-		}
-		
-		return result;
-	}
-
-	
 
 }
