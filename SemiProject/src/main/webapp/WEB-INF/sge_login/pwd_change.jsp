@@ -64,7 +64,7 @@
                             <div class="js_input_pw">
                                 <div class="member_warning">
                                     <input type="password" class="form-control newPwd" id="pwd"
-                                        name="memPw" autocomplete="off" placeholder="새 비밀번호" />
+                                        name="pwd" autocomplete="off" placeholder="새 비밀번호" />
                                     
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                                 <div class="member_warning">
                                     <input type="password" class="form-control" id="pwd2"
                                         name="newPwRe" autocomplete="off" placeholder="새 비밀번호 확인" />
-                                  
+                                     <input type="text" id="user_id" name="user_id" value="${requestScope.user_id}" />
                                 </div>
                             </div>
                         </div><!--//member_login_box -->
