@@ -5,6 +5,17 @@
     //    /SemiProject
 %>  
   
+<script>
+
+$(document).ready(function(){
+	
+	
+	
+	
+}); // end of $(document).ready(function()
+
+</script>  
+
 
     <jsp:include page="../header.jsp" />
 		    
@@ -540,6 +551,8 @@
                     </div> <!-- ojh_sub_content -->
                 </div> <!-- content -->
              </div> <!-- container -->
+             
+             
              
 <jsp:include page="../footer.jsp" />
 
