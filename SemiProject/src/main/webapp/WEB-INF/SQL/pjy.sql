@@ -70,3 +70,4 @@ from ALL_TAB_COLUMNS
 where TABLE_NAME = 'TBL_ORDER_DETAIL' ;
 
 select * from tbl_order_detail;
+select * from tbl_category;
