@@ -25,7 +25,9 @@
 			if(bool){
 				var checkArr = new Array();
 				
-				$("")
+				$("input[class='chkboxpnum']").each(function() {
+					checkArr.push
+				});
 			
 			}
 			
@@ -41,7 +43,7 @@
 			if(chk_bool){
 				  goDel();
 			}
-				   
+			
 		}
 		
 			
