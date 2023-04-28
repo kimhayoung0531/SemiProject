@@ -286,5 +286,59 @@ public class ProductDAO implements InterProductDAO  {
 		System.out.println(isSuccess);
 		return isSuccess;
 	}
-	
+
+	@Override
+	public int updateLikeProduct(String user_id, String product_num) throws SQLException {
+		int n = 0;
+		try {
+			conn = ds.getConnection();
+			String sql = " select count(*) from tbl_product_like where user_id = ? and product_num = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setLong(2, Long.parseLong(product_num));
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			n = rs.getInt(1);
+			if(n == 0) {
+				sql = " insert into tbl_product_like(user_id, product_num) values(?, ?) ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, user_id);
+				pstmt.setLong(2, Long.parseLong(product_num));
+				n = pstmt.executeUpdate();
+			}
+			else {
+				sql = " delete from tbl_product_like where user_id = ? and product_num = ?  ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, user_id);
+				pstmt.setLong(2, Long.parseLong(product_num));
+				n = pstmt.executeUpdate();
+			}
+			
+		} finally {
+			close();
+		}
+		
+		return n;
+	}
+
+	@Override
+	public int checkLikeList(String user_id, String product_num) throws SQLException {
+		int n = 0;
+		try {
+			conn = ds.getConnection();
+			String sql = " select count(*) from tbl_product_like where user_id = ? and product_num = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setLong(2, Long.parseLong(product_num));
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			n = rs.getInt(1);
+			
+		} finally {
+			close();
+		}
+		return n;
+	}
 }

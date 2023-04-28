@@ -2135,7 +2135,7 @@ body #container #contents .order_sub_content .order_sub_content_box .order_cont 
     border-radius: 5px;
     background-color: white;
     border: 1px solid rgb(163, 62, 0);
-    color: rgb(163, 62, 0);;
+    color: rgb(163, 62, 0);
     vertical-align: middle;
     margin-right: 15px;
 }
@@ -2143,6 +2143,15 @@ body #container #contents .order_sub_content .order_sub_content_box .order_cont 
 .btn_choice_box .btn_add_wish .material-symbols-outlined {
     font-size: 35px;
 }
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
 
 .item_goods_tab {
     padding: 80px 0 0 0;
