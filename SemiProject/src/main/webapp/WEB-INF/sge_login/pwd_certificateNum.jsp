@@ -8,20 +8,22 @@
 <script>
 
 	$(document).ready(function(){
-
-	const timerDiv = document.querySelector("span.timer");// 타이머를 보여줄 장소
+		 $("span.time_error").hide();
+	 // const timerDiv = document.querySelector("span.timer");// 타이머를 보여줄 장소
 		
+	    const timerDiv = $("span#timer");// 타이머를 보여줄 장소
+	    
 		let time = 180;
 		
 		//타이머 함수 만들기
 		
 		
 		const timer = function(){
-			if(time == 0){
-	             alert("인증 시간이 만료되었습니다!");
-	             window.location.href = 'findPwd.ban';
+			if(time == -1){
 	             clearInterval(timer);
-	             
+	             //alert("인증 시간이 만료되었습니다!");
+	             $("span.time_error").show();
+	             window.location.href = 'findPwd.ban?finish=1';
            }
 			else{
 				let minute;
@@ -38,8 +40,8 @@
 				}
 			
 				
-				const html = minute + ":" + second;
-				timerDiv.innerHTML = html;
+				let html = minute + ":" + second;
+				timerDiv.html(html);
 				
 				time --;
 
@@ -79,10 +81,10 @@
                              <div class="member_warning">
                                  <input type="text" class="form-control" id="input_confirmCode"
                                      name="userCertificationCode" class="text" placeholder="인증번호 입력" />
-                                 <input type="text" id="user_id"
-                                     name="user_id" value="${requestScope.user_id}" />
+                                 <input type="text" id="user_id" name="user_id" value="${requestScope.user_id}" />
                                   <c:if test="${sessionScope.certificationCode != null}">
-                                  	 <p>남은 인증시간:<span class="timer" var="time">03:00</span></p>
+                                  	 <p>남은 인증시간:<span id="timer">03:00</span></p>
+                                  	 <span class="time_error">인증시간이 만료되었습니다</span>
                                   	 
                                   </c:if>
 
