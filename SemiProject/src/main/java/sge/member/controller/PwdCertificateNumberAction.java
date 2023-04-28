@@ -14,6 +14,8 @@ public class PwdCertificateNumberAction extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String method = request.getMethod();
+		
+		
 		HttpSession session = request.getSession();
 		
 		if("post".equalsIgnoreCase(method)) {
@@ -21,25 +23,19 @@ public class PwdCertificateNumberAction extends AbstractController {
 			//String user_id = request.getAttribute("user_id");
 			
 			System.out.println(userCertificationCode);
-			//System.out.println(user_id);
+			
 
 			//세션 불러오기 
 			
 			String certificationCode = (String)session.getAttribute("certificationCode");
-			String email = (String)session.getAttribute("email");
-			
-			
-			System.out.println(certificationCode);
 		
 			String message = "";
 			String loc = "";
 			
 			if( certificationCode.equals(userCertificationCode) ) {
 				message = "인증 성공 되었습니다";
-				loc = request.getContextPath()+"/pwdChange.ban?email=" + email;
+				loc = request.getContextPath()+"/pwdChange.ban";
 			}
-			
-			
 		    else { 
 		    	message = "발급된 인증 코드가 아닙니다.인증코드를 다시 발급받으세요!!"; 
 		        loc = request.getContextPath()+"/findPwd.ban";
@@ -47,6 +43,7 @@ public class PwdCertificateNumberAction extends AbstractController {
 			 
 			request.setAttribute("message", message);
 			request.setAttribute("loc", loc);
+		
 			
 			super.setRedirect(false);
 			super.setViewPage("/WEB-INF/msg.jsp");
@@ -60,8 +57,10 @@ public class PwdCertificateNumberAction extends AbstractController {
 
 		//!! 중요  !!
 		// 세션에 저장된 인증코드 삭제하기 
-		// session.removeAttribute("certificationCode");
-		
+		/*
+		 * if(session.getAttribute("certificationCode") != null) {
+		 * session.removeAttribute("certificationCode"); }
+		 */
 		
 	}
 
