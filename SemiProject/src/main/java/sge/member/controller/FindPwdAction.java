@@ -106,11 +106,7 @@ public class FindPwdAction extends AbstractController {
 		
 		  super.setRedirect(false);
 		  super.setViewPage("/WEB-INF/sge_login/findPwd.jsp");
-		 
-		
-		
-		
-		
+
 	}
 
 }
