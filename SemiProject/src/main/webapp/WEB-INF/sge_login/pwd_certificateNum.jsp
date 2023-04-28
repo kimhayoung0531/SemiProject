@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+    
 <%
 	String ctxPath = request.getContextPath();
 %>
@@ -9,48 +9,7 @@
 
 	$(document).ready(function(){
 
-	const timerDiv = document.querySelector("span.timer");// 타이머를 보여줄 장소
 		
-		let time = 180;
-		
-		//타이머 함수 만들기
-		
-		
-		const timer = function(){
-			if(time == 0){
-	             alert("인증 시간이 만료되었습니다!");
-	             window.location.href = 'findPwd.ban';
-	             clearInterval(timer);
-	             
-           }
-			else{
-				let minute;
-				let second;
-				
-				minute = Math.floor(time/60); // 소수부 말고 정수만 
-				
-				if(minute < 10){
-					minute = "0"+minute;
-				}
-				second = time%60;
-				if(second < 10){
-					second = "0"+second;
-				}
-			
-				
-				const html = minute + ":" + second;
-				timerDiv.innerHTML = html;
-				
-				time --;
-
-			}
-
-		};
-	
-		const setTimer = setInterval(timer, 1000);
-		
-		
-		 
 		// 인증하기 
 		$("button.btn_member_next").click(function(){
 			const frm = document.verifyCertificationFrm;
@@ -79,13 +38,9 @@
                              <div class="member_warning">
                                  <input type="text" class="form-control" id="input_confirmCode"
                                      name="userCertificationCode" class="text" placeholder="인증번호 입력" />
-                                 <input type="text" id="user_id"
-                                     name="user_id" value="${requestScope.user_id}" />
-                                  <c:if test="${sessionScope.certificationCode != null}">
-                                  	 <p>남은 인증시간:<span class="timer" var="time">03:00</span></p>
-                                  	 
-                                  </c:if>
-
+                                  
+                                 <p>남은 인증시간:<span class="timer"></span></p>
+                               
                              </div><!-- // login_input_sec-->
 
                          </div><!--//member_login_box -->
