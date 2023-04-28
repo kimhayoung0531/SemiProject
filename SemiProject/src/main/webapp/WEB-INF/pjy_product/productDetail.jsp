@@ -40,6 +40,10 @@
 				frm.submit();
 			});
 			
+			$("button.btn_add_wish").bind("click", function(this) {
+				
+			});
+			
 			
 
 			// ====== 장바구니 시작 ===== 김진솔 ==//
@@ -239,7 +243,7 @@
                                                 <button type="button" class="btn_add_wish">
                                                     <span class="material-symbols-outlined">
                                                         favorite
-                                                        </span>
+                                                     </span>
                                                 </button>
                                                 <button type="button" class="btn_add_cart" onclick="goCart();" >장바구니</button>
                                                 <button type="button" class="btn_add_order">바로 구매하기</button>
