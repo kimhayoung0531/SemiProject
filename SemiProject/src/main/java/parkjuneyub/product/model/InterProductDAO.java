@@ -20,6 +20,12 @@ public interface InterProductDAO {
 	// 트랜잭션을 처리해주는 메소드
 	int orderAdd(HashMap<String, Object> paraMap) throws SQLException;
 	
+	// 상품 좋아요 업데이트
+	int updateLikeProduct(String user_id, String product_num) throws SQLException;
+
+	// 좋아요를 눌렀는지 확인하기
+	int checkLikeList(String user_id, String product_num) throws SQLException;
+	
 	
 	
 }
