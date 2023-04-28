@@ -23,8 +23,7 @@ public class PwdCertificateNumberAction extends AbstractController {
 			//String user_id = request.getAttribute("user_id");
 			
 			System.out.println(userCertificationCode);
-			String user_id = request.getParameter("user_id");
-			System.out.println("두번째 아이디" + user_id);
+			
 
 			//세션 불러오기 
 			
@@ -44,7 +43,7 @@ public class PwdCertificateNumberAction extends AbstractController {
 			 
 			request.setAttribute("message", message);
 			request.setAttribute("loc", loc);
-			request.setAttribute("user_id", user_id);
+		
 			
 			super.setRedirect(false);
 			super.setViewPage("/WEB-INF/msg.jsp");
