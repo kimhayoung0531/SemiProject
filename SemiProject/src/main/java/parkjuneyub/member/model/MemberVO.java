@@ -1,4 +1,4 @@
-package parkjuneyub.member.controller;
+package parkjuneyub.member.model;
 
 public class MemberVO {
 	private String user_id;      		//아이디
