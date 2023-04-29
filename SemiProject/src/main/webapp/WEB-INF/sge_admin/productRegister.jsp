@@ -86,10 +86,10 @@ $(document).ready(function(){
                                        </tr>
                                        <tr>
                                            <th>
-                                               <span>제품 판매가</span>
+                                               <span>제품 마일리지</span>
                                            </th>
                                            <td >
-									         <input type="text" name="saleprice" class="box infoData" /> 원
+									         <input type="text" name="mileage" class="box infoData" /> 
 								
 									      </td>
                                        </tr>
