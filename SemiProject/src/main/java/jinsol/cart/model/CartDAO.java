@@ -1,12 +1,17 @@
 package jinsol.cart.model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import parkjuneyub.product.model.ProductVO;
 
 public class CartDAO implements InterCartDAO {
 
@@ -59,7 +64,7 @@ public class CartDAO implements InterCartDAO {
 	                  + " ( "
 	                  + " select cart_num, product_num, product_count, cart_date "
 	                  + " from tbl_cart "
-	                  + " where user_id = 'test' and product_num = ? "
+	                  + " where user_id = 'demo' and product_num = ? "
 	                  + " ) A "
 	                  + " join "
 	                  + " (select product_num, product_price from tbl_product ) B "
@@ -72,14 +77,14 @@ public class CartDAO implements InterCartDAO {
 	         
 	         if(rs.next()) {	
 	        	 // 어떤 제품을 추가로 장바구니에 넣고자 하는경우
-	        	  int cart_num = rs.getInt("cart_num");
+	        	 long cart_num = rs.getLong("cart_num");
 	        	  
 	        	  sql = " update tbl_cart set product_count = product_count + ? " +
 		                  " where cart_num = ? ";
 
 	        	  pstmt = conn.prepareStatement(sql);
-	        	  pstmt.setInt(1, Integer.parseInt(paraMap.get("item_cnt")) );         
-	        	  pstmt.setInt(2, cart_num);         
+	        	  pstmt.setLong(1, Long.parseLong(paraMap.get("item_cnt")) );         
+	        	  pstmt.setLong(2, cart_num);         
 	            
 	        	  n= pstmt.executeUpdate();
 	         }
@@ -91,12 +96,8 @@ public class CartDAO implements InterCartDAO {
 	        	 pstmt = conn.prepareStatement(sql);
 	        	 
 	        	 pstmt.setString(1, paraMap.get("user_id"));
-	        	 
-	        	 System.out.println("~~~~~~ 요기요 2 paraMap.get(\"pnum\") : " + paraMap.get("pnum"));
-	        	 
-	        	 pstmt.setString(1, paraMap.get("user_id"));
-		         pstmt.setInt(2, Integer.parseInt(paraMap.get("pnum")));  
-		         pstmt.setInt(3, Integer.parseInt(paraMap.get("item_cnt")) );         
+		         pstmt.setLong(2, Long.parseLong(paraMap.get("pnum")));  
+		         pstmt.setLong(3, Long.parseLong(paraMap.get("item_cnt")) );         
 	         
 	         
 		         n = pstmt.executeUpdate(); 
@@ -109,6 +110,108 @@ public class CartDAO implements InterCartDAO {
 		
 		return n;
 	}	//end of public int addCart(Map<String, String> paraMap) ----------------
+
+	
+	
+	// 로그인한 사용자의 장바구니 목록을 조회하기 
+	@Override
+	public List<CartVO> selectProductCart(String user_id) throws SQLException {
+
+		List<CartVO> cartList = null;		//장바구니에 아무것도 없을 경우
+	      
+	      try {
+	         conn = ds.getConnection();
+	         
+	         String sql = " select A.cart_num, A.user_id, A.product_num, "+
+	                    "  		   B.product_title, B.main_image, B.product_price, A.product_count "+
+	                    " from tbl_cart A join tbl_product B "+
+	                    " on A.product_num = B.product_num "+
+	                    " where A.user_id = ? "+
+	                    " order by A.cart_num desc ";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, user_id);
+	         
+	         rs = pstmt.executeQuery();
+	         
+	         int cnt = 0;
+	         while(rs.next()) {
+	            cnt++;
+	            
+	            if(cnt==1) {
+	               cartList = new ArrayList<>();
+	            }
+	            
+	            long cart_num = rs.getLong("cart_num");
+	            String fk_user_id = rs.getString("user_id");
+	            long product_num = rs.getLong("product_num");
+	            String product_title = rs.getString("product_title");
+	            long main_image = rs.getLong("main_image");
+	            long product_price = rs.getLong("product_price");
+	            long product_count = rs.getLong("product_count");  // 주문량 
+	                        
+	            ProductVO pvo = new ProductVO();
+	            pvo.setProduct_num(product_num);
+	            pvo.setProduct_title(product_title);
+	            pvo.setMain_image(main_image);
+	            pvo.setProduct_price(product_price);
+	            
+	            CartVO cvo = new CartVO();
+	            cvo.setCart_num(cart_num);
+	            cvo.setUser_id(fk_user_id);
+	            cvo.setProduct_num(product_num);
+	            cvo.setProduct_count(product_count);
+
+	            // **** !!!! 중요함 !!!! **** //
+	            cvo.setTotalPriceTotalMileage(product_count);
+	            // **** !!!! 중요함 !!!! **** //
+	            
+	            // 위에서 set 해온 prodvo들을 cvo에 set해줌
+	            cvo.setPvo(pvo);
+	            
+	            cartList.add(cvo);
+	         }// end of while---------------------------------
+	                  
+	      } finally {
+	         close();
+	      }
+	      
+	      return cartList;
+		
+	}	// end of public List<CartVO> selectProductCart(String user_id)-------------------
+
+	
+	
+	// 로그인한 사용자 장바구니에 담긴 주문총액 합계 알아오기
+	@Override
+	public HashMap<String, String> selectCartSumPricePoint(String user_id) throws SQLException{
+		
+		HashMap<String, String> sumMap = new HashMap<>();
+
+		   try {
+		         conn = ds.getConnection();
+		         
+		         // DB에서 그냥 계산해줌
+		         String sql =  "select nvl(sum(B.product_price *  A.product_count), 0) AS SUMTOTALPRICE "
+		         		+ " from tbl_cart A join tbl_product B "
+		         		+ " on A.product_num = B.product_num "
+		         		+ " where A.user_id = ? ";
+		         
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setString(1, user_id);
+		         
+		         rs = pstmt.executeQuery();
+		         rs.next();
+		         
+		         sumMap.put("SUMTOTALPRICE", rs.getString("SUMTOTALPRICE"));		//Map<String > 이기때문에 getString
+		                  
+		      } finally {
+		         close();
+		      }
+		      
+		
+		return sumMap;
+	}	// end of public HashMap<String, String> selectCartSumPricePoint(String user_id) ------------
 	
 	
 	
