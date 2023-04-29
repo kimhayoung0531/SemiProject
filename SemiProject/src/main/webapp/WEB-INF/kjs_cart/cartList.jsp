@@ -202,7 +202,7 @@
                 <div class="cart_cont">
         
                     <form id="frmCart" name="frmCart" method="post" target="ifrmProcess">
-                        <input type="hidden" name="mode" value="">
+                      <!--   <input type="hidden" name="mode" value="">
                         <input type="hidden" name="cart[cartSno]" value="">
                         <input type="hidden" name="cart[goodsNo]" value="">
                         <input type="hidden" name="cart[goodsCnt]" value="">
@@ -210,7 +210,7 @@
                         <input type="hidden" name="cart[addGoodsCnt]" value="">
                         <input type="hidden" name="cart[couponApplyNo]" value="">
                         <input type="hidden" name="useBundleGoods" value="1">
-                        <input type="hidden" name="ac_id" value="">
+                        <input type="hidden" name="ac_id" value=""> -->
                         <!-- 장바구니 상품리스트 시작 -->
                         
                         <div class="cart_cont_list">
