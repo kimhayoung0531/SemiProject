@@ -246,16 +246,12 @@
 
 
                                     <tbody>
-                                    <%--
-                                    <c:if test="${empty requestScope.cartList}">
-						                <form id="frmCart">
-						                      <p class="cart_no_data">장바구니에 담겨있는 상품이 없습니다.</p>
-						                </form>
-						            </c:if>   
-                                    <c:if test="${not empty requestScope.cartList}">
                                     
-                                     --%>
-                                    <c:if test="${requestScope.cartList}">
+                                    <c:if test="${empty requestScope.cartList}">
+						                      <p class="cart_no_data">장바구니에 담겨있는 상품이 없습니다.</p>
+						            </c:if>   
+						            
+                                    <c:if test="${not empty requestScope.cartList}">
                                         <c:forEach var="cartvo" items="${requestScope.cartList}" varStatus="status"> 
 		                                    <tr>
 		                                        <td class="td_chk"> <%-- 선택상품 체크박스--%>  
