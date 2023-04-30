@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Spliterator;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -55,7 +56,7 @@ public class CartDAO implements InterCartDAO {
 	@Override
 	public int addCart(Map<String, String> paraMap) throws SQLException {
 		int n = 0;
-		// user_id == user_id ,  product_count == item_cnt(int) , product_num == pnum(Long)
+
 		try {
 	         conn = ds.getConnection();
 	         
@@ -71,7 +72,7 @@ public class CartDAO implements InterCartDAO {
 	                  + " on A.product_num = B.product_num ";
 	         
 	         pstmt = conn.prepareStatement(sql);
-	         pstmt.setString(1, paraMap.get("pnum"));  
+	         pstmt.setString(1, paraMap.get("product_num"));  
 	         
 	         rs = pstmt.executeQuery();
 	         
@@ -83,7 +84,7 @@ public class CartDAO implements InterCartDAO {
 		                  " where cart_num = ? ";
 
 	        	  pstmt = conn.prepareStatement(sql);
-	        	  pstmt.setLong(1, Long.parseLong(paraMap.get("item_cnt")) );         
+	        	  pstmt.setLong(1, Long.parseLong(paraMap.get("cart_cnt")));
 	        	  pstmt.setLong(2, cart_num);         
 	            
 	        	  n= pstmt.executeUpdate();
@@ -96,8 +97,8 @@ public class CartDAO implements InterCartDAO {
 	        	 pstmt = conn.prepareStatement(sql);
 	        	 
 	        	 pstmt.setString(1, paraMap.get("user_id"));
-		         pstmt.setLong(2, Long.parseLong(paraMap.get("pnum")));  
-		         pstmt.setLong(3, Long.parseLong(paraMap.get("item_cnt")) );         
+		         pstmt.setLong(2, Long.parseLong(paraMap.get("product_num")));  
+		         pstmt.setLong(3, Long.parseLong(paraMap.get("cart_cnt")) );         
 	         
 	         
 		         n = pstmt.executeUpdate(); 
@@ -155,6 +156,10 @@ public class CartDAO implements InterCartDAO {
 	            pvo.setProduct_title(product_title);
 	            pvo.setMain_image(main_image);
 	            pvo.setProduct_price(product_price);
+
+	            // **** !!!! 중요함 !!!! **** //
+	            pvo.setTotalPriceTotalPoint((int)product_count);
+	            // **** !!!! 중요함 !!!! **** //
 	            
 	            CartVO cvo = new CartVO();
 	            cvo.setCart_num(cart_num);
@@ -162,10 +167,6 @@ public class CartDAO implements InterCartDAO {
 	            cvo.setProduct_num(product_num);
 	            cvo.setProduct_count(product_count);
 
-	            // **** !!!! 중요함 !!!! **** //
-	            cvo.setTotalPriceTotalMileage(product_count);
-	            // **** !!!! 중요함 !!!! **** //
-	            
 	            // 위에서 set 해온 prodvo들을 cvo에 set해줌
 	            cvo.setPvo(pvo);
 	            
@@ -212,7 +213,38 @@ public class CartDAO implements InterCartDAO {
 		
 		return sumMap;
 	}	// end of public HashMap<String, String> selectCartSumPricePoint(String user_id) ------------
+
 	
+	//장바구니 테이블에서 특정 제품을 삭제
+	@Override
+	public int deleteCart(String cart_num) throws SQLException {
+
+		int n = 0;
+		
+		   try {
+		         conn = ds.getConnection();
+		         
+		         String[] cart_num_arr = cart_num.split(",");
+		         
+		         String cart_num_join = String.join("','",cart_num_arr);    //["9","6","5"] 를 하나의 문자열로 합쳐준다. 
+
+		         cart_num_join = "'"+cart_num_join+"'";   //최종적으로 cart_num_join 은 "'9','6','5'" 와 같이 된다.
+
+		         String sql = " delete from tbl_cart "
+		         		+ " where cart_num in("+ cart_num_join +") ";
+		         
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setString(1, cart_num_join);
+		         
+		         n = pstmt.executeUpdate();
+		                  
+		      } finally {
+		         close();
+		      }
+		      
+		return n;
+		
+	}
 	
 	
 }
