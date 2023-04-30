@@ -16,181 +16,196 @@
 	<jsp:include page="../header.jsp" />
 	 
 	<style>
-	  
+	  a#writeReviewButton {
+	  	margin-right:75px;
+	  	cursor: pointer;
+	  }
 	</style> 
 	 
-	<script type="text/javascript">
-		$(document).ready(function(){
+<script type="text/javascript">
+	$(document).ready(function(){
 
-			$("div.add_cart_layer_popup").hide();		//팝업창 가리기
-			
-			
-			////////////////////준엽님 한 부분 ///////////////////
-			
-			const user_id = "<%= user_id%>";
-			const product_num = "${requestScope.pvo.product_num}";
-			// 좋아요 리스트에 등록되어 있는지 체크
-			$.ajax({
-		        	url:"<%= request.getContextPath()%>/product/checkLike.ban",
-		        	type:"POST",
-		        	data: {
-		        		"user_id":user_id,
-		        		"product_num":product_num
-		        	},
-		        	dataType: "JSON",
-		        	success:function(json){
-		        		if(json.n == '1') {
-		        			$("button.btn_add_wish").css("background-color","rgba(rgba(156, 84, 64, 0.62))");
-		        		}
-		        		if(json.n == '0') {
-		        			$("button.btn_add_wish").css("background-color","");
-		        		}
-		        	}, 	
-		            error: function(request, status, error){
-	                  alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-			          }
-		           });    
-			
-			
-			var count = Number($("input#item_cnt").val());
-			var price = ${requestScope.pvo.product_price};
-
-			$("input[name=product_price]").val(price);
-			var total_price = count * price; // 총 상품 금액
-			$("input[name=total_price]").val(total_price);
-			
-			$("input#product_cnt").val($("input#item_cnt").val());
-			
-			
-			
-			$("input#item_cnt").bind("change", function() {
-				count = Number($("input#item_cnt").val());
-				price = ${requestScope.pvo.product_price};
-				total_price = count * price;
-
-				$("strong.goods_total_price").text(total_price);
-				$("input#product_cnt").val(count);
-				
-			});
-			
-			$("button.btn_add_order").bind("click", function() {
-				const frm = document.itemFrmView;
-				frm.action = "<%= request.getContextPath() %>/order.ban";
-				frm.submit();
-			});
-			
-<%--
- 			$("button.btn_add_wish").toggle(function(){
-				$("button.btn_add_wish").css({"color": "rgb(163, 62, 0)"});
-			}, function() {
-				$("button.btn_add_wish").css({"color": "rgb(0, 0, 0)"});
-			}); 
---%>
-			
-			$("button.btn_add_wish").click(function(event){
-				if(user_id == '') {
-					alert("로그인하셔야만 좋아요를 누르실 수 있습니다");
-
-				}
-				else  {
-					$("button.btn_add_wish").toggleClass("changeCSSname");
-					
-					if( $(event.target).is(".material-symbols-outlined") ) { 
-						
-						if($(event.target).parent().is(".changeCSSname")) {	
-						   $("button.btn_add_wish").css("background-color","rgba(rgba(156, 84, 64, 0.62))");
-						}
-						else {
-							$("button.btn_add_wish").css("background-color","");
-						}
-					}
-					
-					else {
-		                
-						if($(event.target).is(".changeCSSname")) {	
-							$(event.target).css("background-color","rgba(rgba(156, 84, 64, 0.62))");
-						}
-						else {
-							$("button.btn_add_wish").css("background-color","");
-						}
-					}
-	            //	선택자.toggleClass("클래스명1");
-		        //  이것은 선택자에 "클래스명1" 이 이미 적용되어 있으면 선택자에 "클래스명1" 을 제거해주고,
-		        //  만약에 선택자에 "클래스명1" 이 적용되어 있지 않으면 선택자에 "클래스명1" 을 추가해주는 것.
-
-		        /* 한마디로 addClass("클래스명1") 와 removeClass("클래스명1") 를 합친 것 이라고 보면 된다. */
-	               
-		        
-		        $.ajax({
-		        	url:"<%= request.getContextPath()%>/product/addLike.ban",
-		        	type:"POST",
-		        	data: {
-		        		"user_id":user_id,
-		        		"product_num":product_num
-		        	},
-		        	dataType: "JSON",
-		        	success:function(json){
-		        		if(json.n == '1') {
-		        			
-		        		}
-		        	}, 	
-		            error: function(request, status, error){
-	                  alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-			          }
-		           });    
-				}
-
-	        
-	    	}); // end of $("div#firstDiv").find("label").click(function(event)
-			
-			
-
-			// ====== 장바구니 시작 ===== 김진솔 ==//
-			$("button.btn_add_cart").bind("click", function(){
-				
-				// 주문수량에 대한 유효성 검사 //
-				const frm = document.itemFrmView;
+		$("div.add_cart_layer_popup").hide();		//팝업창 가리기
 		
-				const regExp = /^[1-9]+$/;  // 숫자(1-9)만 체크하는 정규표현식
-				const item_cnt = $("input#item_cnt").val();		//주문수량
-				const bool = regExp.test(item_cnt);
-				
-				if(!bool){	//숫자 이외의 값 들어온 경우
-			         alert("주문 개수는 1개 이상이어야 합니다.");
-			         frm.item_cnt.value = "1";
-			         frm.item_cnt.focus();
-			         return; // 종료 
-				}
-				else{
-				}
 		
-				$("div.add_cart_layer_popup").show();	// '장바구니 바로 확인?' 팝업창
+		////////////////////준엽님 한 부분 ///////////////////
 		
-				
-				$("button.btn_cancel").bind("click", function(){
-					$("div.add_cart_layer_popup").hide();	// 취소하면 팝업창 닫음
-				});
+		const user_id = "<%= user_id%>";
+		const product_num = "${requestScope.pvo.product_num}";
+		// 좋아요 리스트에 등록되어 있는지 체크
+		$.ajax({
+	        	url:"<%= request.getContextPath()%>/product/checkLike.ban",
+	        	type:"POST",
+	        	data: {
+	        		"user_id":user_id,
+	        		"product_num":product_num
+	        	},
+	        	dataType: "JSON",
+	        	success:function(json){
+	        		if(json.n == '1') {
+	        			$("button.btn_add_wish").css("background-color","rgba(rgba(156, 84, 64, 0.62))");
+	        		}
+	        		if(json.n == '0') {
+	        			$("button.btn_add_wish").css("background-color","");
+	        		}
+	        	}, 	
+	            error: function(request, status, error){
+                  alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+		          }
+	           });    
 		
-				
-				$("button.btn_confirm").bind("click", function goCart(){	//확인하면 장바구니로 이동
-				
-			       // 주문개수가 1개 이상인 경우
-					frm.action = "<%= request.getContextPath()%>/cart.ban";
-					frm.method = "POST";
-					frm.submit();
-					
-					$("div.add_cart_layer_popup").hide();
-				 });	
-				
-			});	//end of $("button.btn_add_cart").bind("click", function()---------------------------
-			// ====== 장바구니 끝 =======//
-					
-					
-			
+		
+		var count = Number($("input#item_cnt").val());
+		var price = ${requestScope.pvo.product_price};
+
+		$("input[name=product_price]").val(price);
+		var total_price = count * price; // 총 상품 금액
+		$("input[name=total_price]").val(total_price);
+		
+		$("input#product_cnt").val($("input#item_cnt").val());
+		
+		
+		
+		$("input#item_cnt").bind("change", function() {
+			count = Number($("input#item_cnt").val());
+			price = ${requestScope.pvo.product_price};
+			total_price = count * price;
+
+			$("strong.goods_total_price").text(total_price);
+			$("input#product_cnt").val(count);
 			
 		});
 		
-	</script>
+		$("button.btn_add_order").bind("click", function() {
+			const frm = document.itemFrmView;
+			frm.action = "<%= request.getContextPath() %>/order.ban";
+			frm.submit();
+		});
+		
+		// ==== 상품 좋아요 기능
+		$("button.btn_add_wish").click(function(event){
+			if(user_id == '') {
+				alert("로그인하셔야만 좋아요를 누르실 수 있습니다");
+
+			}
+			else  {
+				$("button.btn_add_wish").toggleClass("changeCSSname");
+				
+				if( $(event.target).is(".material-symbols-outlined") ) { 
+					
+					if($(event.target).parent().is(".changeCSSname")) {	
+					   $("button.btn_add_wish").css("background-color","rgba(rgba(156, 84, 64, 0.62))");
+					}
+					else {
+						$("button.btn_add_wish").css("background-color","");
+					}
+				}
+				
+				else {
+	                
+					if($(event.target).is(".changeCSSname")) {	
+						$(event.target).css("background-color","rgba(rgba(156, 84, 64, 0.62))");
+					}
+					else {
+						$("button.btn_add_wish").css("background-color","");
+					}
+				}
+            //	선택자.toggleClass("클래스명1");
+	        //  이것은 선택자에 "클래스명1" 이 이미 적용되어 있으면 선택자에 "클래스명1" 을 제거해주고,
+	        //  만약에 선택자에 "클래스명1" 이 적용되어 있지 않으면 선택자에 "클래스명1" 을 추가해주는 것.
+
+	        /* 한마디로 addClass("클래스명1") 와 removeClass("클래스명1") 를 합친 것 이라고 보면 된다. */
+               
+	        
+	        $.ajax({
+	        	url:"<%= request.getContextPath()%>/product/addLike.ban",
+	        	type:"POST",
+	        	data: {
+	        		"user_id":user_id,
+	        		"product_num":product_num
+	        	},
+	        	dataType: "JSON",
+	        	success:function(json){
+	        		if(json.n == '1') {
+	        			
+	        		}
+	        	}, 	
+	            error: function(request, status, error){
+                  alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+		          }
+	           });    
+			};
+
+        
+    	}); // end of $("div#firstDiv").find("label").click(function(event)
+    	// ==== 상품 좋아요 기능 끝
+
+		// ====== 장바구니 시작 ===== 김진솔 ==//
+		$("button.btn_add_cart").bind("click", function(){
+			
+			// 주문수량에 대한 유효성 검사 //
+			const frm = document.itemFrmView;
+	
+			const regExp = /^[1-9]+$/;  // 숫자(1-9)만 체크하는 정규표현식
+			const item_cnt = $("input#item_cnt").val();		//주문수량
+			const bool = regExp.test(item_cnt);
+			
+			if(!bool){	//숫자 이외의 값 들어온 경우
+		         alert("주문 개수는 1개 이상이어야 합니다.");
+		         frm.item_cnt.value = "1";
+		         frm.item_cnt.focus();
+		         return; // 종료 
+			}
+			else{
+			}
+	
+			$("div.add_cart_layer_popup").show();	// '장바구니 바로 확인?' 팝업창
+	
+			
+			$("button.btn_cancel").bind("click", function(){
+				$("div.add_cart_layer_popup").hide();	// 취소하면 팝업창 닫음
+			});
+	
+			
+			$("button.btn_confirm").bind("click", function goCart(){	//확인하면 장바구니로 이동
+			
+		       // 주문개수가 1개 이상인 경우
+				frm.action = "<%= request.getContextPath()%>/cart.ban";
+				frm.method = "POST";
+				frm.submit();
+				
+				$("div.add_cart_layer_popup").hide();
+			 });	
+			
+		});	//end of $("button.btn_add_cart").bind("click", function()---------------------------
+		// ====== 장바구니 끝 =======//
+				
+				
+		
+		
+	});
+	// ==== 리뷰 작성 페이지 이동 ==== 	
+	function writeReview(userid) {
+		product_num = "${requestScope.pvo.product_num}";
+		if(userid == "") {
+			alert("로그인을 해주세요");
+			return;
+		}
+		
+		url = "<%= request.getContextPath()%>/board/writeReview.ban?userid="+userid+"&product_num="+product_num;
+		// 나의 정보 수정하기 팝업창 띄우기
+		// 너비 800, 높이 680 인 팝업창을 화면 가운데 위치시키기
+		const pop_width = 580;
+		const pop_height = 500;
+		const pop_left = Math.ceil((window.screen.width - pop_width)/2); <%-- 정수로 만듦 --%>
+						// ( 2000 - 800 ) / 2 = 600
+		const pop_top = Math.ceil((window.screen.height - pop_height)/2);
+		window.open(url, "writeReview", "left="+pop_left+", top="+pop_top+" , width="+pop_width+", height="+pop_height);
+
+	}
+	// ==== 리뷰 작성 페이지 이동 끝 ==== 
+	
+</script>
 
 
             <div id="container">
@@ -482,6 +497,7 @@
                                                 <span class="title">REVIEW</span>
                                             </div>
                                             <div class="review_header_description">
+                                            	<a id="writeReviewButton" class="review_header_description_link" onclick="writeReview('<%=user_id%>')">리뷰 작성</a>
                                                 <a class="review_header_description_link" href="#">전체 상품 리뷰 보기</a>
                                             </div>
                                         </div>
@@ -536,6 +552,7 @@
                                                 <span class="title">상품문의</span>
                                             </div>
                                             <div class="review_header_description">
+                                            	
                                                 <a class="review_header_description_link" href="#">전체 상품 문의 보기</a>
                                             </div>
                                         </div>
