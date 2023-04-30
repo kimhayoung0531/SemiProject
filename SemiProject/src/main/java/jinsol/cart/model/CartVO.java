@@ -144,10 +144,10 @@ public class CartVO{
 
 	/////////////////////////////////////////////////
 	// *** 제품의 총판매가(실제판매가 * 주문량) 구해오기 ***
-	public void setTotalPriceTotalMileage(long item_cnt) {   
+	public void setTotalPriceTotalMileage(long product_count) {   
 	
-		totalPrice = pvo.getProduct_price() * item_cnt; // 판매당시의 제품판매가 * 주문량
-		totalMileage = pvo.getMileage() * item_cnt;     // 판매당시의 포인트점수 * 주문량 
+		totalPrice = pvo.getProduct_price() * product_count; // 판매당시의 제품판매가 * 주문량
+		totalMileage = pvo.getMileage() * product_count;     // 판매당시의 포인트점수 * 주문량 
 	}
 	
 	public long getTotalPrice() {
