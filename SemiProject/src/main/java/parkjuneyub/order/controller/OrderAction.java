@@ -9,8 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
 import jinsol.cart.model.CartVO;
-import parkjuneyub.member.controller.InterMemberDAO;
-import parkjuneyub.member.controller.MemberDAO;
+import parkjuneyub.member.model.InterMemberDAO;
+import parkjuneyub.member.model.MemberDAO;
 import parkjuneyub.product.model.InterProductDAO;
 import parkjuneyub.product.model.ProductDAO;
 import parkjuneyub.product.model.ProductVO;

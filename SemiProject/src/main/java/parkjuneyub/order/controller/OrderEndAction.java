@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.controller.AbstractController;
-import parkjuneyub.member.controller.MemberVO;
+import parkjuneyub.member.model.MemberVO;
 import parkjuneyub.product.model.InterProductDAO;
 import parkjuneyub.product.model.ProductDAO;
 

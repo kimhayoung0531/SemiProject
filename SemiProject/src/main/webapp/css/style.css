@@ -2237,6 +2237,37 @@ table.review_table tbody td:first-child, td:last-child {
     text-align: center;
 }
 
+	.review_poppup_form {
+		padding:15px;
+		margin-top: 30px;
+	}
+	
+	.review_poppup_form .review_poppup_body {
+		margin-top: 30px;
+		
+	}
+	
+	.review_poppup_form .review_poppup_body .review_title_poppup {
+		margin-top: 20px;
+		font-size: 15px
+	}
+	
+	.review_poppup_form .review_poppup_body .writing_part_poppup {
+		width:100%;
+		height:230px;
+		padding:10px;
+	}
+	
+	.review_poppup_form .review_poppup_body .review_title_bottom {
+		text-align: center;
+	}
+	
+	.review_poppup_form .review_poppup_body .review_title_bottom .btn_review_submit {
+		width:115px;
+		height:35px;
+		margin-top: 20px
+	}
+
 
 /* 박준엽 끝------------------------------------------------------------------------------------------ */
 

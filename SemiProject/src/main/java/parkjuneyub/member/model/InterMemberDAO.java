@@ -1,4 +1,4 @@
-package parkjuneyub.member.controller;
+package parkjuneyub.member.model;
 
 import java.sql.SQLException;
 
