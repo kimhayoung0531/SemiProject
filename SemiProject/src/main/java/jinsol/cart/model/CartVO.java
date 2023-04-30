@@ -38,7 +38,6 @@ public class CartVO{
     해당 제품의 판매총액과 포인트부여 총액은 판매당시의 제품판매가와 포인트 점수로 구해와야 한다.  
 	 */
 	private long totalPrice;         // 판매당시의 한 제품에 대한 제품판매가 * 주문량
-	private long totalMileage;         // 판매당시의 한 제품에 대한 마일리지 * 주문량 
 
 
 
@@ -144,18 +143,14 @@ public class CartVO{
 
 	/////////////////////////////////////////////////
 	// *** 제품의 총판매가(실제판매가 * 주문량) 구해오기 ***
-	public void setTotalPriceTotalMileage(long product_count) {   
-	
-		totalPrice = pvo.getProduct_price() * product_count; // 판매당시의 제품판매가 * 주문량
-		totalMileage = pvo.getMileage() * product_count;     // 판매당시의 포인트점수 * 주문량 
+	public void setTotalPriceTotalMileage(long oqty) {   
+		totalPrice = pvo.getProduct_price() * oqty; // 판매당시의 제품판매가 * 주문량
 	}
 	
 	public long getTotalPrice() {
 		return totalPrice;
 	}
 	
-	public long getTotalMileage() {
-		return totalMileage;
-	}
+	
 	
 }

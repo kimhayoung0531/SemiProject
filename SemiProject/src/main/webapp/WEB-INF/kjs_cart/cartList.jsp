@@ -12,11 +12,11 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
-	<%--	
+		<!--
        if(${not empty requestScope.item_cnt}) {
     	   $("input#cart_cnt").val("${requestScope.item_cnt}");
        }		
-		--%>
+		-->
 		
 		// 선택체크박스가 하나라도 해제되면 전체체크박스 체크해제하기
 		$(".chkboxpnum").click(function() {
@@ -39,10 +39,10 @@
 		  
 				
 				
-		// ======== 장바구니 선택상품 삭제하기 ========
+				
 		$("button.btn_order_choice_del").click(function(){
 		    const checked_cnt = $("input:checkbox[name='pnum']:checked").length;
-			const ckArr = new Array();
+			const cartCkArr = new Array();
 
 		    if(checked_cnt < 1) {
 		         alert("삭제하실 제품을 선택하세요.");
@@ -52,23 +52,26 @@
 		    	const bool = confirm("정말 삭제하시겠습니까?");
 		    	if(bool){
 						$("input:checkbox[name='pnum']:checked").each(function() {
-							ckArr.push($(this).val());
+							cartCkArr.push($(this).val());
 						});
+						
+				    	console.log("~~~확인용 cartCkArr: " + cartCkArr);
+
 						
 						$.ajax({
 							url:"<%= ctxPath%>/cartDelete.ban", 
 						    type:"post",
-						    data:{"cart_num":ckArr}, <%-- request.getParameterValues("cart_num"); 은 타입이 String[] 으로 된다. --%>
-						<%-- 
-						    data:{"cart_num":ckArr.join(",") }, // request.getParameter("cart_num"); 은 타입이 String 으로 된다.  
-						                                           "5,7,10"
-						                                           '5','7','10'
-						                                           delete from 장바구니테이블 
-						                                           where 장바구니번호 in('5','7','10')  
-						--%>    
+						    data:{"cart_num":cartCkArr}, 				
 						    dataType:"json",
 						    success:function(json){
+						    	console.log("~~~확인용 : " + JSON.stringify(json) );
 						    	
+						    	// ~~~확인용 : {"n":1}
+						    	
+						    	if(json.n == 1){
+						    		// 장바구니 보기 페이지로 감
+						    		location.href = "cartList.up";
+						    	}
 						    },
 						    error: function(request, status, error){
 			                    alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
@@ -79,9 +82,15 @@
 				        alert("선택상품 삭제를 취소하셨습니다.");
 		    		}
 		     }
-		}	//end of $("button.btn_order_choice_del").click(function() -------------
-		
+		});	//end of $("button.btn_order_choice_del").click(function(){})-----------------
 				
+		 /*
+	    data:{"cart_num":cartCkArr.join(",") }, // request.getParameter("cart_num"); 은 타입이 String 으로 된다.  
+	                                          "5,7,10"
+	                                           '5','7','10'
+	                                           delete from 장바구니테이블 
+	                                           where 장바구니번호 in('5','7','10')  */
+		
 	});	//end of $(document).ready(function () -------------------------------------
 
 			
@@ -140,6 +149,9 @@
 	   } //end of function goOqtyEdit(btn_obj) -----------------
 	   
 	   
+	   
+		// ======== 장바구니 선택상품 삭제하기 ========
+
 	   
 	   
 	   
@@ -232,7 +244,7 @@
                                     <tr>
                                         <th>        <!-- 전체선택 체크박스 allCheck-->
                                             <div class="form_element">
-                                                <input type="checkbox" id="allCheck" class="gd_select_all_goods" onClick="allCheckBox();" />
+                                                <input type="checkbox" id="allCheck" class="gd_select_all_goods" onClick="allCheckBox();" checked="checked" />
                                             </div>
                                         </th>
                                         <th>상품/옵션 정보</th>
@@ -262,7 +274,7 @@
 					                                  status.count 는 1 부터 시작한다. 
 					                             --%>   
 		                                            <div class="form_element">
-		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}" /><label for="pnum${status.index}">${cartvo.product_num}</label>   
+		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}"  checked="checked"/><label for="pnum${status.index}">${cartvo.product_num}</label>   
 		                                            </div>
 		                                        </td>
 		
@@ -283,11 +295,11 @@
 		                                        <td class="td_order_amount">   
 		                                            <div class="order_goods_num">
 		                                                <div class="btn_gray_list">
-		                                                    <p><label for="number"></label><input type="number" id="cart_cnt" min="1"  max="50" step="1" value="1" /></p>
+		                                                    <p><label for="number"></label><input type="number" id="cart_cnt" min="1"  max="50" step="1" value="${cartvo.product_count}" /></p>
 		                                                </div>        
 		                                                <button class="btn btn-outline-secondary btn-sm updateBtn" type="button" onclick="goOqtyEdit(this)">수정</button>
 							                              <%-- 장바구니 테이블에서 특정제품의 현재주문수량을 변경하여 적용하려면 먼저 장바구니번호(시퀀스)를 알아야 한다 --%>
-							                            <input type="hidden" class="cartno" value="${cartvo.cart_num}" /> 
+							                            <input type="text" class="cartno" value="${cartvo.cart_num}" /> 
 		                                            </div>
 		                                        </td>
 		                                        
@@ -308,15 +320,16 @@
 		                                        <td>
 		                                            <div class="allprice_won"><fmt:formatNumber value="${carvo.totalPrice}" pattern="###,###"/>원</div>
 		                                            <div class="allprice_mileage"><fmt:formatNumber value="${carvo.totalMileage}" pattern="###,###"/>마일리지</div>
-		                                        </td>
-		                                        <td class="td_delivery" rowspan="4">
+			                                    </td>
+			                            </c:forEach>
+			                                    
+			                                    <td class="td_delivery" rowspan="${cartvo.cart_num}" style="border: solid 1px red;">
 		                                            기본 - 금액별배송비<br>
 		                                            3,000원
 		                                            <br>
 		                                            (택배-선결제)
 		                                        </td>
 		                                    </tr>
-		                                </c:forEach>
                                     </c:if>
         
                                     </tbody>
