@@ -1,0 +1,181 @@
+package parkjuneyub.board.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import parkjuenyub.order.model.OrderDeatailVO;
+import parkjuenyub.order.model.OrderVO;
+import parkjuneyub.member.model.*;
+
+public class BoardDAO implements InterBoardDAO {
+	private DataSource ds;
+	private Connection conn;
+	private PreparedStatement pstmt;
+	private ResultSet rs;
+	
+	private void close() {
+		try {
+			if(rs != null) {
+				rs.close();
+				rs=null;
+			}
+			
+			if(pstmt != null) {
+				pstmt.close();
+				pstmt=null;
+			}
+			
+			if(conn != null) {
+				conn.close();
+				conn=null;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public BoardDAO() {
+		try {
+			Context initContext = new InitialContext();
+			Context envContext  = (Context)initContext.lookup("java:/comp/env");
+			ds = (DataSource)envContext.lookup("jdbc/semi_oracle");
+			
+		}
+		catch(NamingException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<ReviewVO> getReivewList(String product_num) throws SQLException {
+		
+		List<ReviewVO> reviewList = new ArrayList<>();
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " select * from tbl_purchase_review where product_num = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, product_num);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ReviewVO rvo = new ReviewVO();
+				
+				rvo.setPurchase_review_id(rs.getInt("purchase_review_id"));
+				
+				MemberVO mvo = new MemberVO();
+				mvo.setUser_id(rs.getString("userid"));
+				rvo.setMvo(mvo);
+				
+				rvo.setOrder_details_num(rs.getLong("order_details_num"));
+				rvo.setReview_content(rs.getString("review_content"));
+				rvo.setReview_rating(rs.getInt("review_rating"));
+				rvo.setReview_date(rs.getString("review_date"));
+				
+				reviewList.add(rvo);
+			}
+			
+			
+		} finally {
+			close();
+		}
+		return reviewList;
+	}
+
+	@Override
+	public int insertReview(Map<String, Object> map) throws SQLException {
+		int result = 0;
+		try {
+			conn = ds.getConnection();
+			String sql = " select order_details_num from tbl_order_detail where order_num = ? and product_num = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, (String)map.get("select_order_num"));
+			pstmt.setLong(2, (Long)map.get("product_id"));
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			Long order_details_num = rs.getLong("order_details_num");
+			
+			sql = " select purchase_review_id from tbl_purchase_review where order_details_num = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, order_details_num);
+			
+			rs = pstmt.executeQuery();
+			if(!rs.next()) {
+				
+				sql = " insert into tbl_purchase_review "
+						+ " (purchase_review_id, userid, order_details_num, product_num, "
+						+ " review_content, review_rating, review_date) "
+						+ " values(seq_purchase_review.nextval, ?, ?, ?, ?, ?, sysdate) ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, (String)map.get("user_id"));
+				pstmt.setLong(2, order_details_num);
+				pstmt.setLong(3, (Long)map.get("product_id"));
+				pstmt.setString(4, (String)map.get("review_contents"));
+				pstmt.setInt(5, (Integer)map.get("review_rating"));
+				
+				result = pstmt.executeUpdate();
+			}
+			
+		} finally {
+			close();
+		}
+		return result;
+	}
+
+	@Override
+	public List<OrderVO> getOrderDeatailList(String user_id, String product_num) throws SQLException {
+		List<OrderVO> odrDeatailList = new ArrayList<>();
+		
+		try {
+			conn = ds.getConnection();
+			String sql = " select A.order_num, to_char(A.order_date, 'yyyy-MM-dd')"+
+					" from ( "+
+					" select order_num, user_id, order_date "+
+					" from tbl_order "+
+					" where user_id = ? "+
+					" ) A "+
+					" join\n"+
+					" ( "+
+					" select order_num, product_num, order_quantity "+
+					" from tbl_order_detail "+
+					" where product_num = ? "+
+					" ) B "+
+					" on A.order_num = B.order_num "+
+					" order by order_date asc ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setLong(2, Long.parseLong(product_num));
+			
+			rs =  pstmt.executeQuery();
+			
+			while(rs.next()) {
+				OrderVO ovo = new OrderVO();
+				ovo.setOrder_num(rs.getString(1));
+				ovo.setOrder_date(rs.getString(2));
+				odrDeatailList.add(ovo);
+			}
+			
+		} finally {
+			close();
+		}
+		
+		
+		return odrDeatailList;
+	}
+
+}

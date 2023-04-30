@@ -2239,7 +2239,7 @@ table.review_table tbody td:first-child, td:last-child {
 
 	.review_poppup_form {
 		padding:15px;
-		margin-top: 30px;
+		
 	}
 	
 	.review_poppup_form .review_poppup_body {
@@ -2263,7 +2263,7 @@ table.review_table tbody td:first-child, td:last-child {
 	}
 	
 	.review_poppup_form .review_poppup_body .review_title_bottom .btn_review_submit {
-		width:115px;
+		width:135px;
 		height:35px;
 		margin-top: 20px
 	}
