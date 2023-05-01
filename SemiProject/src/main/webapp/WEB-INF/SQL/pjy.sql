@@ -85,12 +85,35 @@ where user_id = 'demo'
 ) A
 join
 (
-select order_num, product_num, order_quantity
+select order_details_num, order_num, product_num, order_quantity
 from tbl_order_detail
-where product_num = 9
+where product_num = 9 and order_details_num not in (
+select order_details_num from tbl_purchase_review where product_num = 9
+)
 ) B
 on A.order_num = B.order_num
 order by order_date asc;
+-----------------------------------
+select * from tbl_purchase_review where product_num = 9
+select order_details_num from tbl_order_detail where order_num = ? and product_num = 9
 
+-------------------------------------
+--페이징 처리
+  SELECT RNO, purchase_review_id, userid, review_content, review_rating, review_date
+  FROM 
+  (
+      select rownum AS RNO, purchase_review_id, userid, order_details_num, product_num, review_content, review_rating, review_date
+      from 
+      (
+        select *
+        from tbl_purchase_review
+        where product_num = 9
+        order by review_date desc
+      ) V
+  ) T
+  WHERE RNO between 1 and 10;
+  
+-- 한 상품의 전체 페이지 가져오기
+select ceil(count(*) / 10 ) from tbl_purchase_review where product_num = 9;
 
 
