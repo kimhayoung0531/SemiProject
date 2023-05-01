@@ -6,48 +6,14 @@
 <jsp:include page="../header.jsp" />
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("span.emptyVal").hide();
 		
-		// 아이디
-		$("input#loginId").blur( (e) => {
-			if( $(e.target).val().trim() == ""){
-				//입력하지 않거나 공백만 입력했을 경우 에러메시지 보이게
-				//그리고 나머지 form태그들은 입력안되게 막음
-			
-				$("table#tblMemberRegister :input").prop("disabled",true);
-				$(e.target).prop("disabled",false);
-				
-				//$(e.target).next().show();
-				//또는
-				
-				$(e.target).parent().find("span#emptyId").show();
-				$(e.target).focus();
-
+		if( ${empty sessionScope.loginuser }){
+			const loginUser_id = localStorage.getItem("saveId");
+			if(loginUser_id != null){
+				$("input#loginId").val(loginUser_id);
+				$("input:checkbox[id='saveId']").prop("checked", true);
 			}
-			else{
-				// 공백만이 아닌 글자를 입력했을 경우
-				$("table#tblMemberRegister :input").prop("disabled",false);
-				
-				//$(e.target).next().show();
-				//또는
-				
-				$(e.target).parent().find("span#emptyId").hide();
-				
-			}
-		 }); 
-		
-		//비밀번호
-		$("input#loginPwd").blur( (e) => {
-			if( $(e.target).val().trim() == ""){
-				
-				$(e.target).parent().find("span#emptyPwd").show();
-				$(e.target).focus();
-			}
-			else{
-				$(e.target).parent().find("span#emptyPwd").hide();	
-			}
-		 }); 
-		
+		}
 
 		$("button#goLogin1").click(function(){
 			goLogin();
@@ -57,7 +23,7 @@
 			if(e.keyCode == 13){// !!keycode 아니고 keyCode이다 암호입력란에 enter을 했을 경우
 				goLogin();
 			}
-		});
+		});// end of $("button#goLogin1").click
 	
 	});// end of $(document).ready(function()
 
@@ -66,6 +32,27 @@
 	// 로그인 처리를 하는 함수
 	function goLogin(){
 		
+		const loginUserid = $("input#loginId").val().trim();
+		const loginPwd = $("input#loginPwd").val().trim();
+		
+		if(loginUserid == ""){ // 아이디값이 공백인 경우
+			
+			alert("아이디를 입력하세요!")
+			$("input#loginUserid").val("");
+			$("input#loginUserid").focus();
+			return;
+
+		}
+		
+		if(loginPwd == ""){ // 비밀번호값 공백인 경우
+			
+			alert("비밀번호를 입력하세요!")
+			$("input#loginPwd").val("");
+			$("input#loginPwd").focus();
+			return;
+
+		}
+		
 		//아이디저장을 한 경우 
 		if( $("input:checkbox[id='saveId']").prop("checked")){
 			localStorage.setItem("saveId", $("input#loginId").val());
@@ -73,8 +60,7 @@
 		else{
 			localStorage.removeItem("saveId");
 		}
-		
-		
+
 		const frm = document.formLogin;
 		frm.action = "<%= ctxPath%>/login.ban";
 		frm.method = "post";
@@ -113,10 +99,10 @@
                               <div id="inputIdPwd">
                                   <input type="text" class="form-control" id="loginId" name="user_id"
                                       value="" placeholder="아이디" >
-                                      <span class="emptyVal" id="emptyId" style="color:red;">아이디를 입력하세요</span>
+                
                                   <input type="password" class="form-control" id="loginPwd"
                                       name="pwd" value="" placeholder="비밀번호" >
-                                      <span class="emptyVal"  id="emptyPwd" style="color:red;">비밀번호를 입력하세요</span>
+                                    
                                       
                               </div>
                               <button type="button" id="goLogin1" class="member_login_order_btn">로그인</button>
