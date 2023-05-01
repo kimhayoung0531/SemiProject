@@ -63,7 +63,11 @@
 </style>
     
 </head>
+<<<<<<< HEAD
 
+=======
+<input style="display: none;" name='user_id' value='${sessionScope.loginuser.user_id}' />
+>>>>>>> refs/heads/KHY
 <div id="container" style="margin-left: 12%;">
     <div id="contents">
         <!-- 본문 시작 -->
