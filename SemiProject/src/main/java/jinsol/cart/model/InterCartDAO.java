@@ -20,7 +20,10 @@ public interface InterCartDAO {
 	HashMap<String, String> selectCartSumPricePoint(String user_id) throws SQLException;
 
 	//장바구니 테이블에서 특정 제품을 삭제
-	int deleteCart(String cart_num)throws SQLException;
+	int deleteCart(String[] cart_ck_arr)throws SQLException;
+
+	//장바구니 테이블에서 특정 제품의 주문량 변경
+	int updateCart(String cart_num, String cart_cnt)throws SQLException;
 	
 	
 }
