@@ -1,15 +1,20 @@
 package KHY.product.model;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import parkjuenyub.order.model.OrderDeatailVO;
+import parkjuenyub.order.model.OrderVO;
 import parkjuneyub.product.model.CartVO;
 import parkjuneyub.product.model.ProductVO;
 
@@ -114,6 +119,7 @@ public class ProductDAO implements InterProductDAO  {
 				
 				CartVO cvo = new CartVO();
 				ProductVO pvo = new ProductVO();
+				
 				pvo.setProduct_num(rs.getLong("product_num"));
 				pvo.setProduct_price(rs.getLong("product_price"));;
 				cvo.setCart_num(rs.getLong("cart_num"));
@@ -288,6 +294,207 @@ public class ProductDAO implements InterProductDAO  {
 				
 		System.out.println(isSuccess);
 		return isSuccess;
+	}
+
+	// 주문한 상품 내역 조회하기
+	@Override
+	public List<OrderDeatailVO> selectOrderList(String user_id) throws SQLException {
+		
+		List<OrderDeatailVO> orderList = new ArrayList<>();
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "select order_details_num, A.order_num as order_num, order_date, B.product_num as product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
+						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
+						"        orderer_mobile, payment_time, use_mileage, product_title\n"+
+						"       \n"+
+						"from\n"+
+						"(\n"+
+						"select order_num, order_date\n"+
+						"from tbl_order \n"+
+						"where user_id = ? AND sysdate-30 <= order_date AND order_date < sysdate+1 "+
+						") A \n"+
+						"join \n"+
+						"(select order_details_num, order_num, product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
+						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
+						"        orderer_mobile, payment_time, use_mileage\n"+
+						"from tbl_order_detail ) B\n"+
+						"on A.order_num = B.order_num\n"+
+						"join\n"+
+						"(select product_num, product_title from tbl_product) C\n"+
+						"on B.product_num = C.product_num ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				OrderDeatailVO odvo = new OrderDeatailVO();
+				odvo.setOrder_details_num(rs.getLong("order_details_num"));
+				odvo.setOrder_name(rs.getString("order_name"));
+				odvo.setOrder_quantity(rs.getInt("order_quantity"));
+				odvo.setProduct_selling_price(rs.getInt("product_selling_price"));
+				odvo.setProduct_main_image(rs.getString("product_main_image"));
+				odvo.setRecipient_name(rs.getString("recipient_name"));
+				odvo.setRecipient_mobile(rs.getString("recipient_mobile"));
+				odvo.setRecipient_telephone(rs.getString("recipient_telephone"));
+				odvo.setForwarded_message(rs.getString("forwarded_message"));
+				odvo.setDelivery_status(rs.getString("delivery_status"));
+				odvo.setOrderer_mobile(rs.getString("orderer_mobile"));
+				odvo.setPayment_time(rs.getString("payment_time"));
+				odvo.setUse_mileage(rs.getInt("use_mileage"));
+				
+				
+				OrderVO ovo = new OrderVO();
+				ovo.setOrder_num(rs.getString("order_num"));
+				ovo.setOrder_date( (rs.getString("order_date")).substring(0, 11) );
+				odvo.setOvo(ovo);
+				
+				ProductVO pvo = new ProductVO();
+				pvo.setProduct_title(rs.getString("product_title"));
+				pvo.setProduct_num(rs.getLong("product_num"));
+				odvo.setPvo(pvo);
+				
+				orderList.add(odvo);
+				
+				
+			}
+		} finally {
+			close();
+		}
+		return orderList;
+	}
+
+	//페이징 처리를 위한 회원의 주문에 대한 총페이지 알아오기
+	@Override
+	public int getTotalPageOrder(Map<String, String> paraMap) throws SQLException {
+		
+		int totalPage = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+
+			String sql = "select ceil( count(*) / 10 ) "+
+						"from\n"+
+						"(\n"+
+						"select order_num, order_date\n"+
+						"from tbl_order \n"+
+						"where user_id = ? AND ? <= order_date AND order_date < ? "+
+						") A \n"+
+						"join \n"+
+						"(select order_details_num, order_num, product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
+						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
+						"        orderer_mobile, payment_time, use_mileage\n"+
+						"from tbl_order_detail ) B\n"+
+						"on A.order_num = B.order_num\n"+
+						"join\n"+
+						"(select product_num, product_title from tbl_product) C\n"+
+						"on B.product_num = C.product_num ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, paraMap.get("user_id"));
+			pstmt.setString(2, paraMap.get("startdate"));
+			pstmt.setString(3, paraMap.get("enddate"));
+			
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			totalPage = rs.getInt(1);
+			
+			
+			
+		}  finally {
+			close();
+		}
+		
+		return totalPage;
+		
+	}//end of public int getTotalPageOrder(Map<String, String> paraMap) throws SQLException 
+
+	//페이징 처리를 한 회원의 주문 목록 알아오기
+	@Override
+	public List<OrderDeatailVO> selectPagingOrderList(Map<String, String> paraMap) throws SQLException {
+		
+		List<OrderDeatailVO> orderList = new ArrayList<>();
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "select order_details_num, A.order_num as order_num, order_date, B.product_num as product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
+						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
+						"        orderer_mobile, payment_time, use_mileage, product_title\n"+
+						"       \n"+
+						"from\n"+
+						"(\n"+
+						"select rownum AS RNO, order_num, order_date\n"+
+						"from tbl_order \n"+
+						"where user_id = ? AND ? <= order_date AND order_date < ? "+
+						") A \n"+
+						"join \n"+
+						"(select order_details_num, order_num, product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
+						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
+						"        orderer_mobile, payment_time, use_mileage\n"+
+						"from tbl_order_detail ) B\n"+
+						"on A.order_num = B.order_num\n"+
+						"join\n"+
+						"(select product_num, product_title from tbl_product) C\n"+
+						"on B.product_num = C.product_num " +
+						"WHERE RNO between ? and ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			int currentShowPageNO = Integer.parseInt(paraMap.get("currentShowPageNO")); // 조회하고자하는 페이지번호
+			
+			pstmt.setString(1, paraMap.get("user_id"));
+			pstmt.setString(2, paraMap.get("startdate"));
+			pstmt.setString(3, paraMap.get("enddate"));
+			pstmt.setInt(4, (currentShowPageNO * 10) - (10-1));
+			pstmt.setInt(5, (currentShowPageNO * 10));
+			
+			
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				OrderDeatailVO odvo = new OrderDeatailVO();
+				odvo.setOrder_details_num(rs.getLong("order_details_num"));
+				odvo.setOrder_name(rs.getString("order_name"));
+				odvo.setOrder_quantity(rs.getInt("order_quantity"));
+				odvo.setProduct_selling_price(rs.getInt("product_selling_price"));
+				odvo.setProduct_main_image(rs.getString("product_main_image"));
+				odvo.setRecipient_name(rs.getString("recipient_name"));
+				odvo.setRecipient_mobile(rs.getString("recipient_mobile"));
+				odvo.setRecipient_telephone(rs.getString("recipient_telephone"));
+				odvo.setForwarded_message(rs.getString("forwarded_message"));
+				odvo.setDelivery_status(rs.getString("delivery_status"));
+				odvo.setOrderer_mobile(rs.getString("orderer_mobile"));
+				odvo.setPayment_time(rs.getString("payment_time"));
+				odvo.setUse_mileage(rs.getInt("use_mileage"));
+				
+				
+				OrderVO ovo = new OrderVO();
+				ovo.setOrder_num(rs.getString("order_num"));
+				ovo.setOrder_date( (rs.getString("order_date")).substring(0, 11) );
+				odvo.setOvo(ovo);
+				
+				ProductVO pvo = new ProductVO();
+				pvo.setProduct_title(rs.getString("product_title"));
+				pvo.setProduct_num(rs.getLong("product_num"));
+				odvo.setPvo(pvo);
+				
+				orderList.add(odvo);
+				
+				
+			}
+		} finally {
+			close();
+		}
+		return orderList;
 	}
 	
 }
