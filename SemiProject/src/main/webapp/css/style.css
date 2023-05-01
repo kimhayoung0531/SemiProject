@@ -2267,6 +2267,22 @@ table.review_table tbody td:first-child, td:last-child {
 		height:35px;
 		margin-top: 20px
 	}
+	
+	#reviews > nav > div > ul > li > a.page-link {
+	width : 35px;
+	text-align: center;
+	} 
+	
+	#reviews > nav > div > ul > li:first-child > a {
+	width : 50px;
+	text-align: center;
+	}
+	
+	#reviews > nav > div > ul > li:last-child > a {
+	width : 50px;
+	text-align: center;
+	}
+	
 
 
 /* 박준엽 끝------------------------------------------------------------------------------------------ */
