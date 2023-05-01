@@ -42,6 +42,17 @@ public class CartEditAction extends AbstractController {
 			super.setViewPage("/WEB-INF/jsonview.jsp");
 			
 		}
+		else {
+			//GET방식이라면 
+			String message = "비정상적인 경로로 들어왔습니다.";
+		    String loc = "javascript:history.back()";
+		      
+		   request.setAttribute("message", message);
+		   request.setAttribute("loc", loc);
+		      
+		   super.setViewPage("/WEB-INF/msg.jsp");
+		   return;
+		}
 		
 	}	//end of public void execute(HttpServletRequest request, HttpServletResponse response)  --------------
 
