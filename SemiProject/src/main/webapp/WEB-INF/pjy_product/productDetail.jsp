@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import= "sge.member.model.MemberVO" %>    
 <%
@@ -512,15 +513,32 @@
                                             </thead>
 
                                             <tbody>
-                                                <tr>
-                                                    <td>테스트1</td>
-                                                    <td>테스트 내용</td>
-                                                    <td>태스트 날짜</td>
-                                                </tr>
+
+                                                <c:if test="${not empty requestScope.reviewList}">
+													<c:forEach var="rvo" items="${requestScope.reviewList}">
+														<tr>
+											              <td class="userid"><span>${rvo.mvo.user_id}</span></td>
+											              <td>${rvo.review_content}</td>
+											              <td>${rvo.review_date}</td>
+											              
+											           </tr>
+													</c:forEach>
+											 	 </c:if>
+												<c:if test="${empty requestScope.reviewList}">
+													<tr>
+														<td colspan="3">작성된 리뷰가 없습니다.</td>
+													</tr>
+												</c:if>
+                                                
                                             </tbody>
                                         </table>
 
                                     </div>
+                                    	<nav class="my-5">
+									        <div style='display:flex;'>
+									          <ul class="pagination" style='margin:auto;'>${requestScope.pageBar}</ul>
+									       </div>
+									    </nav>
                                     
                                 </div>
                                 <!-- 리뷰 끝 -->
