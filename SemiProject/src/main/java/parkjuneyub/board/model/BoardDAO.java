@@ -135,7 +135,8 @@ public class BoardDAO implements InterBoardDAO {
 		}
 		return result;
 	}
-
+	
+	// 아이디랑 상품번호로 주문번호를 조회해오는 메소드
 	@Override
 	public List<OrderVO> getOrderDeatailList(String user_id, String product_num) throws SQLException {
 		List<OrderVO> odrDeatailList = new ArrayList<>();
