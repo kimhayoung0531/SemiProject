@@ -12,43 +12,85 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
-	<%--	
+		<!--
        if(${not empty requestScope.item_cnt}) {
     	   $("input#cart_cnt").val("${requestScope.item_cnt}");
        }		
-		--%>
+		-->
 		
 		// 선택체크박스가 하나라도 해제되면 전체체크박스 체크해제하기
 		$(".chkboxpnum").click(function() {
-			var bool = confirm("정말 삭제하시겠습니까?");
-			
-			if(bool){
-				var checkArr = new Array();
-				
-				$("")
-			
-			}
-			
+
+	         var bFlag = false;
+	         $(".chkboxpnum").each(function(){
+	            var bChecked = $(this).prop("checked");
+	            if(!bChecked) {
+	               $("#allCheck").prop("checked",false);
+	               bFlag = true;
+	               return false;
+	            }
+	         });
+	         
+	         if(!bFlag) {
+	            $("#allCheck").prop("checked",true);
+	             }
 			
 		});	//end of $(".chkboxpnum").click(function(){} ----------------
 		  
 				
-		// ======== 장바구니 선택상품 삭제하기 ========
+				
+				
 		$("button.btn_order_choice_del").click(function(){
-			var chk_bool = $(".chkboxpnum").is(":checked");
-			// true면 체크된 상태, false면 해제된 상태
-			const chk_num
-			if(chk_bool){
-				  goDel();
-			}
-				   
-		}
+		    const checked_cnt = $("input:checkbox[name='pnum']:checked").length;
+			const cartCkArr = new Array();
+
+		    if(checked_cnt < 1) {
+		         alert("삭제하실 제품을 선택하세요.");
+		         return;  //종료
+		      }
+		    else{
+		    	const bool = confirm("정말 삭제하시겠습니까?");
+		    	if(bool){
+						$("input:checkbox[name='pnum']:checked").each(function() {
+							cartCkArr.push($(this).val());
+						});
+						
+				    	console.log("~~~확인용 cartCkArr: " + cartCkArr);
+
+						
+						$.ajax({
+							url:"<%= ctxPath%>/cartDelete.ban", 
+						    type:"post",
+						    data:{"cart_num":cartCkArr}, 				
+						    dataType:"json",
+						    success:function(json){
+						    	console.log("~~~확인용 : " + JSON.stringify(json) );
+						    	
+						    	// ~~~확인용 : {"n":1}
+						    	
+						    	if(json.n == 1){
+						    		// 장바구니 보기 페이지로 감
+						    		location.href = "cartList.up";
+						    	}
+						    },
+						    error: function(request, status, error){
+			                    alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+						    }
+						});	//end of $.ajax -----------------------------
+		    		}
+		    	else{
+				        alert("선택상품 삭제를 취소하셨습니다.");
+		    		}
+		     }
+		});	//end of $("button.btn_order_choice_del").click(function(){})-----------------
+				
+		 /*
+	    data:{"cart_num":cartCkArr.join(",") }, // request.getParameter("cart_num"); 은 타입이 String 으로 된다.  
+	                                          "5,7,10"
+	                                           '5','7','10'
+	                                           delete from 장바구니테이블 
+	                                           where 장바구니번호 in('5','7','10')  */
 		
-			
-		}); //$("button.btn_order_choice_del").click(function)(){} ---------------------
-				
-				
-				
 	});	//end of $(document).ready(function () -------------------------------------
 
 			
@@ -87,7 +129,7 @@
 		   }
 		   else{
 			   $.ajax({
-				   url: "<%= ctxPath%>/cartEdit.up",
+				   url: "<%= ctxPath%>/cartEdit.ban",
 				   type:"post",
 				   data:{
 					   "cart_num":cart_num,
@@ -108,6 +150,45 @@
 	   
 	   
 	   
+		// ======== 장바구니 선택상품 삭제하기 ========
+
+	   
+	   
+	   
+		// ======== 장바구니 선택상품 주문하기 ========
+			
+   		function goOrder() {
+
+   	      // 체크박스의 체크된 개수
+   	      const checked_cnt = $("input:checkbox[name='pnum']:checked").length;
+   	      
+   	      if(checked_cnt < 1){
+   	    	  alert("주문하실 제품을 선택하세요.");
+   	    	  return;
+   	      }
+   	      else{         
+   	    	  //체크가 된 것만 값을 읽어와서 배열에 넣어준다. 
+			const all_cnt = $("input:checkbox[name='pnum']").length;
+   	    	  
+            const pnum_arr = new Array();   
+            const cart_cnt_arr = new Array();  
+            const cart_num_arr = new Array();  
+            const totalPrice_arr = new Array(); 
+            const totalMileage_arr = new Array();  
+            
+            for(let i=0; i<all_cnt; i++){
+                if($("input:checkbox[name='pnum']").eq(i).prop("checked")) {   //eq.() : 끄집어 내자!
+                	pnum_arr.push($("input:checkbox[name='pnum']").eq(i).val());
+                	cart_cnt_arr($("input#cart_cnt").eq(i).val());
+                
+                }
+            }//end of for ------------------------------------------
+            
+   	      }
+		   
+	   }	//end of function goOrder() ----------------------
+
+
 	   
 </script>
 
@@ -133,7 +214,7 @@
                 <div class="cart_cont">
         
                     <form id="frmCart" name="frmCart" method="post" target="ifrmProcess">
-                        <input type="hidden" name="mode" value="">
+                      <!--   <input type="hidden" name="mode" value="">
                         <input type="hidden" name="cart[cartSno]" value="">
                         <input type="hidden" name="cart[goodsNo]" value="">
                         <input type="hidden" name="cart[goodsCnt]" value="">
@@ -141,7 +222,7 @@
                         <input type="hidden" name="cart[addGoodsCnt]" value="">
                         <input type="hidden" name="cart[couponApplyNo]" value="">
                         <input type="hidden" name="useBundleGoods" value="1">
-                        <input type="hidden" name="ac_id" value="">
+                        <input type="hidden" name="ac_id" value=""> -->
                         <!-- 장바구니 상품리스트 시작 -->
                         
                         <div class="cart_cont_list">
@@ -163,7 +244,7 @@
                                     <tr>
                                         <th>        <!-- 전체선택 체크박스 allCheck-->
                                             <div class="form_element">
-                                                <input type="checkbox" id="allCheck" class="gd_select_all_goods" onClick="allCheckBox();" />
+                                                <input type="checkbox" id="allCheck" class="gd_select_all_goods" onClick="allCheckBox();" checked="checked" />
                                             </div>
                                         </th>
                                         <th>상품/옵션 정보</th>
@@ -177,16 +258,12 @@
 
 
                                     <tbody>
-                                    <%--
-                                    <c:if test="${empty requestScope.cartList}">
-						                <form id="frmCart">
-						                      <p class="cart_no_data">장바구니에 담겨있는 상품이 없습니다.</p>
-						                </form>
-						            </c:if>   
-                                    <c:if test="${not empty requestScope.cartList}">
                                     
-                                     --%>
                                     <c:if test="${empty requestScope.cartList}">
+						                      <p class="cart_no_data">장바구니에 담겨있는 상품이 없습니다.</p>
+						            </c:if>   
+						            
+                                    <c:if test="${not empty requestScope.cartList}">
                                         <c:forEach var="cartvo" items="${requestScope.cartList}" varStatus="status"> 
 		                                    <tr>
 		                                        <td class="td_chk"> <%-- 선택상품 체크박스--%>  
@@ -197,7 +274,7 @@
 					                                  status.count 는 1 부터 시작한다. 
 					                             --%>   
 		                                            <div class="form_element">
-		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}" /><label for="pnum${status.index}">${cartvo.product_num}</label>   
+		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}"  checked="checked"/><label for="pnum${status.index}">${cartvo.product_num}</label>   
 		                                            </div>
 		                                        </td>
 		
@@ -218,11 +295,11 @@
 		                                        <td class="td_order_amount">   
 		                                            <div class="order_goods_num">
 		                                                <div class="btn_gray_list">
-		                                                    <p><label for="number"></label><input type="number" id="cart_cnt" min="1"  max="50" step="1" value="1" /></p>
+		                                                    <p><label for="number"></label><input type="number" id="cart_cnt" min="1"  max="50" step="1" value="${cartvo.product_count}" /></p>
 		                                                </div>        
 		                                                <button class="btn btn-outline-secondary btn-sm updateBtn" type="button" onclick="goOqtyEdit(this)">수정</button>
 							                              <%-- 장바구니 테이블에서 특정제품의 현재주문수량을 변경하여 적용하려면 먼저 장바구니번호(시퀀스)를 알아야 한다 --%>
-							                            <input type="hidden" class="cartno" value="${cartvo.cart_num}" /> 
+							                            <input type="text" class="cartno" value="${cartvo.cart_num}" /> 
 		                                            </div>
 		                                        </td>
 		                                        
@@ -242,15 +319,17 @@
 		                                        <%-- 상품 당 합계금액 --%>
 		                                        <td>
 		                                            <div class="allprice_won"><fmt:formatNumber value="${carvo.totalPrice}" pattern="###,###"/>원</div>
-		                                        </td>
-		                                        <td class="td_delivery" rowspan="4">
+		                                            <div class="allprice_mileage"><fmt:formatNumber value="${carvo.totalMileage}" pattern="###,###"/>마일리지</div>
+			                                    </td>
+			                            </c:forEach>
+			                                    
+			                                    <td class="td_delivery" rowspan="${cartvo.cart_num}" style="border: solid 1px red;">
 		                                            기본 - 금액별배송비<br>
 		                                            3,000원
 		                                            <br>
 		                                            (택배-선결제)
 		                                        </td>
 		                                    </tr>
-		                                </c:forEach>
                                     </c:if>
         
                                     </tbody>

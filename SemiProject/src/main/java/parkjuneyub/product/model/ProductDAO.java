@@ -168,7 +168,7 @@ public class ProductDAO implements InterProductDAO  {
 			pstmt.setLong(4, Long.parseLong((String)paraMap.get("useMileage")) );
 			
 			n1 = pstmt.executeUpdate();
-			System.out.println("n1 " +  n1);
+			//System.out.println("n1 " +  n1);
 			// 2. 주문 상세 테이블에 주문 id 와 그 이외에 데이터 넣기
 			if(n1 == 1) {
 				String[] productNum_arr = (String[]) paraMap.get("productNum_arr"); 
@@ -210,7 +210,7 @@ public class ProductDAO implements InterProductDAO  {
 					n2 = 1;
 				}
 			}
-			System.out.println("n2 " +  n2);
+			//System.out.println("n2 " +  n2);
 			// 3. 제품 테이블 재고량 업데이트하기
 			if(n2 == 1) {
 				String[] productNum_arr = (String[]) paraMap.get("productNum_arr"); 
@@ -232,7 +232,7 @@ public class ProductDAO implements InterProductDAO  {
 					n3 = 1;
 				}
 			}
-			System.out.println("n3 " +  n3);
+			//System.out.println("n3 " +  n3);
 			// 4. cartno가 null이 아니면 장바구니 테이블에서 해당 행들을 삭제하기
 			if(n3 == 1) {
 				if(paraMap.get("carno_arr") != null & n3 == 1) {
@@ -248,7 +248,7 @@ public class ProductDAO implements InterProductDAO  {
 					n4 = 1;
 				}
 			}
-			System.out.println("n4 " +  n4);
+			//System.out.println("n4 " +  n4);
 			if(n4 > 0) {
 				sql = " update tbl_member set mileage = mileage - ? + ? "
 						+ " where user_id = ? ";
@@ -265,7 +265,7 @@ public class ProductDAO implements InterProductDAO  {
 				conn.commit();
 				conn.setAutoCommit(true);
 				
-				System.out.println("주문 완료");
+				//System.out.println("주문 완료");
 				isSuccess = 1;
 			}
 			
@@ -283,8 +283,62 @@ public class ProductDAO implements InterProductDAO  {
 		}
 				
 				
-		System.out.println(isSuccess);
+		//System.out.println(isSuccess);
 		return isSuccess;
 	}
-	
+
+	@Override
+	public int updateLikeProduct(String user_id, String product_num) throws SQLException {
+		int n = 0;
+		try {
+			conn = ds.getConnection();
+			String sql = " select count(*) from tbl_product_like where user_id = ? and product_num = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setLong(2, Long.parseLong(product_num));
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			n = rs.getInt(1);
+			if(n == 0) {
+				sql = " insert into tbl_product_like(user_id, product_num) values(?, ?) ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, user_id);
+				pstmt.setLong(2, Long.parseLong(product_num));
+				n = pstmt.executeUpdate();
+			}
+			else {
+				sql = " delete from tbl_product_like where user_id = ? and product_num = ?  ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, user_id);
+				pstmt.setLong(2, Long.parseLong(product_num));
+				n = pstmt.executeUpdate();
+			}
+			
+		} finally {
+			close();
+		}
+		
+		return n;
+	}
+
+	@Override
+	public int checkLikeList(String user_id, String product_num) throws SQLException {
+		int n = 0;
+		try {
+			conn = ds.getConnection();
+			String sql = " select count(*) from tbl_product_like where user_id = ? and product_num = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setLong(2, Long.parseLong(product_num));
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			n = rs.getInt(1);
+			
+		} finally {
+			close();
+		}
+		return n;
+	}
 }

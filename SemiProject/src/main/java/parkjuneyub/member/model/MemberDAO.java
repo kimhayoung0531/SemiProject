@@ -1,4 +1,4 @@
-package parkjuneyub.member.controller;
+package parkjuneyub.member.model;
 
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
@@ -50,7 +50,7 @@ public class MemberDAO implements InterMemberDAO {
 		try {
 			Context initContext = new InitialContext();
 			Context envContext  = (Context)initContext.lookup("java:/comp/env");
-			ds = (DataSource)envContext.lookup("semi_oracle");
+			ds = (DataSource)envContext.lookup("jdbc/semi_oracle");
 			aes = new AES256(SecretMyKey.KEY);
 		}
 		catch(NamingException | UnsupportedEncodingException e) {

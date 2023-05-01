@@ -1,6 +1,6 @@
 package parkjuneyub.product.model;
 
-import parkjuneyub.member.controller.MemberVO;
+import parkjuneyub.member.model.MemberVO;
 import parkjuneyub.product.model.ProductVO;
 
 public class CartVO {
@@ -11,9 +11,7 @@ public class CartVO {
 	private long product_price;
 	private String cart_date;
 
-	// select용
-	private MemberVO user_id;
-
+	// select
 	private MemberVO mvo;
 	private ProductVO pvo; 
 	public CartVO() {}
@@ -70,16 +68,11 @@ public class CartVO {
 		this.cart_date = cart_date;
 	}
 
-	public MemberVO getUser_id() {
-		return user_id;
-	}
+
 	public MemberVO getMvo() {
 		return mvo;
 	}
 
-	public void setUser_id(MemberVO user_id) {
-		this.user_id = user_id;
-	}
 	public void setMvo(MemberVO mvo) {
 		this.mvo = mvo;
 	}

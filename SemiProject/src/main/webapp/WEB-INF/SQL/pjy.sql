@@ -70,3 +70,27 @@ from ALL_TAB_COLUMNS
 where TABLE_NAME = 'TBL_ORDER_DETAIL' ;
 
 select * from tbl_order_detail;
+select * from tbl_category;
+
+
+select * from tbl_order;
+select * from tbl_order_detail;
+
+-- 아이디랑 상품번호로 주문번호 가져오기
+select A.order_num, A.order_date
+from (
+select order_num, user_id, order_date
+from tbl_order
+where user_id = 'demo'
+) A
+join
+(
+select order_num, product_num, order_quantity
+from tbl_order_detail
+where product_num = 9
+) B
+on A.order_num = B.order_num
+order by order_date asc;
+
+
+
