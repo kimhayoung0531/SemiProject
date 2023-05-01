@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%
 	String ctxPath = request.getContextPath();
 	
@@ -63,11 +64,9 @@
 </style>
     
 </head>
-<<<<<<< HEAD
 
-=======
 <input style="display: none;" name='user_id' value='${sessionScope.loginuser.user_id}' />
->>>>>>> refs/heads/KHY
+
 <div id="container" style="margin-left: 12%;">
     <div id="contents">
         <!-- 본문 시작 -->
@@ -87,9 +86,8 @@
                     <ul class="sub_menu_mypage">
                         <li>쇼핑정보
                             <ul class="sub_depth1">
-                                <li><a href="../mypage/order_list.php">- 주문목록/배송조회</a></li>
-                                <li><a href="../mypage/cancel_list.php">- 취소/반품/교환 내역</a></li>
-                                <li><a href="../mypage/refund_list.php">- 환불/입금 내역</a></li>
+                                <li><a href="<%= ctxPath%>/mypageOrderList.ban">- 주문목록/배송조회</a></li>
+                                <li><a href="../mypage/cancel_list.php">- 주문취소</a></li>
                                 <li><a href="../mypage/wish_list.php">- 좋아요리스트</a></li>
                             </ul>
                         </li>
@@ -216,7 +214,7 @@
                                     <thead>
                                         <tr>
                                             <th>날짜/주문번호</th>
-                                            <th>상품명/옵션</th>
+                                            <th>상품명</th>
                                             <th>상품금액/수량</th>
                                             <th>주문상태</th>
                                             <th>
@@ -225,12 +223,51 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
-                                        <tr>
-                                            <td colspan="6">
-                                                <p class="no_data">조회내역이 없습니다.</p>
-                                            </td>
-                                        </tr>
+										<c:if test="${empty requestScope.orderList}">	
+	                                        <tr>
+	                                            <td colspan="6">
+	                                                <p class="no_data">조회내역이 없습니다.</p>
+	                                            </td>
+	                                        </tr>
+	                                    </c:if>
+	                                     
+	                                    <c:if test="${not empty requestScope.orderList}">
+							               <c:forEach var="odvo" items="${requestScope.orderList}" varStatus="status"> 
+							                   <tr>
+							                        <td> <%-- 체크박스 및 제품번호 --%>
+							                             <%-- c:forEach 에서 선택자 id를 고유하게 사용하는 방법  
+							                                  varStatus="status" 을 이용하면 된다.
+							                                  status.index 은 0 부터 시작하고,
+							                                  status.count 는 1 부터 시작한다. 
+							                             --%>  <%-- 날짜 및 주문번호 --%> 
+							                            <span class="product_title">${odvo.ovo.order_date}</span><br>
+							                            <span class="product_title">${odvo.order_details_num}</span>
+							                        </td>
+							                        <td align="center"> <%-- 상품명 --%> 
+							                           <a href="/MyMVC/shop/prodView.up?pnum=${cartvo.pnum}"><!-- 제품상세페이지 링크 -->
+							                              <img src="/MyMVC/images/${cartvo.prod.pimage1}" class="img-thumbnail" width="130px" height="100px" />
+							                           </a> 
+							                           <br/><span class="product_title">${odvo.pvo.product_title}</span> 
+							                        </td>
+							                        <td align="center"> 
+							                            <%-- 상품 금액 및 주문 수량 --%>
+							                              <fmt:formatNumber value="${odvo.product_selling_price}" pattern="###,###" /> 원<br>
+							                              <span class="order_quantity">${odvo.order_quantity}</span> 개
+							                              
+							                        </td>
+							                        <td align="right"> <%-- 주문상태 --%> 
+							                            <span class="order_quantity">${odvo.delivery_status}</span>
+							                            
+							                        </td>
+							                        <td align="right"> <%-- 리뷰 --%> 
+							                            
+							                            <%-- 리뷰 작성한거 끌어오기 안썼으면 작성하기 버튼 생성 --%>
+							                            
+							                        </td>
+							                      </tr>
+							                 </c:forEach>
+							            </c:if>    
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -242,22 +279,7 @@
                     </div>
                     <!-- //mypage_lately_info -->
 
-                    <div class="mypage_lately_goods">
-                        <div class="mypage_zone_tit">
-                            <h3>최근 본 상품<span>김하영님께서 본 최근 상품입니다.</span></h3>
-                        </div>
-                        <div class="goods_list_cont">
-                            <div class="item_gallery_type">
-                                <div class="goods_no_data"><strong>상품이 존재하지 않습니다.</strong></div>
-                            </div>
-                            <!-- //item_gallery_type -->
-
-
-                        </div>
-                        <!-- //goods_list_cont -->
-
-                    </div>
-                    <!-- //mypage_lately_goods -->
+                    
 
                 </div>
                 <!-- //mypage_main -->
