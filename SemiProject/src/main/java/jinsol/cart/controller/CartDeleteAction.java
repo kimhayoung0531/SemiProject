@@ -16,14 +16,17 @@ public class CartDeleteAction extends AbstractController{
 		
 		String method = request.getMethod();
 		
-		if(!"POST".equalsIgnoreCase(method)) {
+		if("POST".equalsIgnoreCase(method)) {
 			
-			String cart_num = request.getParameter("cart_num");
+			String cart_ck_join = request.getParameter("cart_ck_join");
 
+			String[] cart_ck_arr = cart_ck_join.split("\\,");
+			
+			
 			InterCartDAO cdao = new CartDAO();
 			
 			//장바구니 테이블에서 특정 제품을 삭제
-			int n = cdao.deleteCart(cart_num);
+			int n = cdao.deleteCart(cart_ck_arr);
 			
 			JSONObject jsobj = new JSONObject();		// {} jsobj은 자바스크립트 객체
 			jsobj.put("n", n);			//{"n" : 1}		{key, value}

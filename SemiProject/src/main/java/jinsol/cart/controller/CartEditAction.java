@@ -13,14 +13,18 @@ public class CartEditAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		/*
+
 		String method = request.getMethod();
 		
-		if(!"POST".equalsIgnoreCase(method)) {
-			
+		if("POST".equalsIgnoreCase(method)) {
+
 			String cart_num = request.getParameter("cart_num");
 			String cart_cnt = request.getParameter("cart_cnt");
 			//cartList.jsp ajax에서 넘어온 두 값
+			
+			System.out.println("~~확인용 cart_num :" + cart_num);
+			System.out.println("~~확인용 cart_cnt :" + cart_cnt);
+			
 			
 			InterCartDAO cdao = new CartDAO();
 			
@@ -38,7 +42,7 @@ public class CartEditAction extends AbstractController {
 			super.setViewPage("/WEB-INF/jsonview.jsp");
 			
 		}
-		*/
+		
 	}	//end of public void execute(HttpServletRequest request, HttpServletResponse response)  --------------
 
 }
