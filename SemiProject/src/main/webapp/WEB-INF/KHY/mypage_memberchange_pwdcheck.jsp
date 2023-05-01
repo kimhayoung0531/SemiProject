@@ -107,65 +107,44 @@
         	window.location.href = 'mypage.ban';
         });
         
-        $('.btn_register').click(function () {
-        	$(".text_warning").hide();
-        	let testpwd = 'qwer1234$';
-        	
-        	if( $("#findPassword").val() == testpwd) {
-        		window.location.href = 'mypageMemberChange.ban';
-        	}
-        	else {
-        		$(".text_warning").show();
-        	}
-        	
-        });
         
-        
-        
+        $("input#findPassword").blur( (e) => {
+			if( $(e.target).val().trim() == ""){
+				
+				$(e.target).parent().find(".text_warning").show();
+				$(e.target).focus();
+			}
+			else{
+				$(e.target).parent().find(".text_warning").hide();	
+			}
+		 }); 
+		
 
-       /*  $('#formFind').validate({
-            dialog: false,
-            rules: {
-                findPassword: {
-                    required: true
-                }
-            },
-            messages: {
-                findPassword: {
-                    required: "패스워드를 입력해주세요"
-                }
-            }, submitHandler: function (form) {
-                var $target = $(':password#findPassword', form);
-                if (!_.isEmpty($target.val())) {
-                    var $ajax = $.ajax('../mypage/my_page_ps.php', {
-                        type: "post", data: {
-                            memPw: $target.val(),
-                            mode: "verifyPassword"
-                        }
-                    });
-                    $ajax.done(function (data, textStatus, jqXHR) {
-                        console.log('gd_member ajax', data, textStatus, jqXHR);
-                        var code = data.code;
-                        var message = data.message;
-                        if (_.isUndefined(code) && _.isUndefined(message)) {
-                            top.location.href = "../mypage/my_page.php";
-                        } else {
-                            $(form).find('.member_warning').addClass('prior_wrong');
-                            $(form).find('.text_warning').text(message);
-                        }
-                    });
-                }
-            } 
-        });*/
+		
+		$("input#findPassword").bind("keydown",function(e){
+			if(e.keyCode == 13){// !!keycode 아니고 keyCode이다 암호입력란에 enter을 했을 경우
+				goLogin();
+			}
+		});
+        
+		$("button#goToRegis").click(function(){
+			
+			const frm = document.formFind;
+			frm.action = "<%= ctxPath%>/mypageMemberChange.ban";
+			frm.method = "post";
+			frm.submit();
+			
+		});
+       
 
 
-    });
+    }); // end of documnet
     
 </script>
 
     
 </head>
-
+<input style="display: none;" name='user_id' value='${sessionScope.loginuser.user_id}' />
 <div id="container" style="margin-left: 12%;">
     <div id="contents">
         <!-- 본문 시작 -->
@@ -232,11 +211,11 @@
 					
 					<p><strong>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해 주세요.</strong></p>
 					
-					<form id="formFind">
+					<form id="formFind" name="formFind">
 					<div class="id_pw_cont">
 					    <dl>
 					        <dt>아이디</dt>
-					        <dd><strong>test</strong></dd>
+					        <dd><strong>${sessionScope.loginuser.user_id}</strong></dd>
 					    </dl>
 					    <dl>
 					        <dt>비밀번호</dt>
@@ -244,7 +223,7 @@
 					            <div class="member_warning">
 					                <input type="password" name="findPassword" id="findPassword"/>
 					                <div class="text_warning">
-					                    비밀번호가 일치하지 않습니다.
+					                    비밀번호를 입력해주세요.
 					            	</div>
 					            </div>
 					        </dd>
@@ -252,7 +231,7 @@
 					</div>
 					<div class="btn_center_box">
 					    <button type="button" id="btnReset" class="btn_cancle">취소</button>
-					    <button type="button" id="goToRegis" onclick="goPwdCheck();" class="btn_register">인증하기</button>
+					    <button type="button" id="goToRegis" class="btn_register">인증하기</button>
 					</div>
 					</form>
 					

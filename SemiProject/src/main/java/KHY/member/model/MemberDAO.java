@@ -294,4 +294,42 @@ public class MemberDAO implements InterMemberDAO {
 		return user_id;
 	}
 
+	// 마이페이지 회원정보 변경시 패스워드 확인 메소드
+	@Override
+	public boolean mypageMemberPwdCheck(Map<String, String> paraMap) throws SQLException {
+		
+		boolean bool = false;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " select user_id " +
+						 " from tbl_member " +
+						 " where user_id = ? and pwd = ? ";
+			
+			pstmt = conn.prepareStatement(sql);	
+			
+			pstmt.setString(1, paraMap.get("user_id"));
+			pstmt.setString(2, aes.encrypt(paraMap.get("pwd")));
+		
+			System.out.println(aes.encrypt(paraMap.get("pwd")));
+			
+			rs = pstmt.executeQuery();
+			//행이없으면 false;
+			
+			bool = rs.next();
+			
+		} catch (GeneralSecurityException | UnsupportedEncodingException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return bool;
+	}
+
+	
+	
+
 }

@@ -20,4 +20,10 @@ public interface InterMemberDAO {
 	// 회원의 아이디를 찾아주는 메소드 
 	String findUserId(Map<String, String> paraMap)throws SQLException;
 
+	// 마이페이지 회원정보 변경시 패스워드 확인 메소드
+	boolean mypageMemberPwdCheck(Map<String, String> paraMap) throws SQLException;
+
+	
+	
+
 }

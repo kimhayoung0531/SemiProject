@@ -67,7 +67,7 @@
 </script>
     
 </head>
-<%-- <input value='${sessionScope.loginuser.user_id}' /> --%>
+<input style="display: none;" name='user_id' value='${sessionScope.loginuser.user_id}' />
 <div id="container" style="margin-left: 12%;">
     <div id="contents">
         <!-- 본문 시작 -->

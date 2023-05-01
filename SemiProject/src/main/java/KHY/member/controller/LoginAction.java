@@ -16,11 +16,13 @@ public class LoginAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
         String method = request.getMethod();
-		
+        
+        
         if("GET".equalsIgnoreCase(method)) { 
 			this.setRedirect(false);
 			super.setViewPage("/WEB-INF/KHY_member/memberLogin.jsp");
 		}
+        
         else{
 		//Post 방식으로 넘어온 것이라면 
 		String user_id = request.getParameter("user_id");
@@ -68,7 +70,7 @@ public class LoginAction extends AbstractController {
 			  
 			  if(loginuser.isRequirePwdChange() == true) {
 				  String message = "비밀번호를 변경하신지 3개월이 지났습니다. 암호를 변경하세요!!";
-				  String loc = request.getContextPath()+"/passwordChange.up";
+				  String loc = request.getContextPath()+"/passwordChange.ban";
 
 				  request.setAttribute("message", message);
 				  request.setAttribute("loc", loc);
@@ -82,10 +84,8 @@ public class LoginAction extends AbstractController {
 				  super.setViewPage("/WEB-INF/msg.jsp");
 			  }
 			  
-			
-			  
 			  super.setRedirect(true);
-			  super.setViewPage(request.getContextPath()+"/mypage.ban");
+			  super.setViewPage(request.getContextPath()+"/mypage.ban?user_id="+loginuser.getUser_id());
 			  //super.setViewPage("/WEB-INF/KHY/mypage_main.jsp");
 			  
 		}
