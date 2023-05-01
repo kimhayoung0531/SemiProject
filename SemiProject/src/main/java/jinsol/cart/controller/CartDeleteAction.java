@@ -16,7 +16,7 @@ public class CartDeleteAction extends AbstractController{
 		
 		String method = request.getMethod();
 		
-		if(!"POST".equalsIgnoreCase(method)) {
+		if("POST".equalsIgnoreCase(method)) {
 			
 			String cart_num = request.getParameter("cart_num");
 
@@ -35,6 +35,7 @@ public class CartDeleteAction extends AbstractController{
 			super.setRedirect(false);
 			super.setViewPage("/WEB-INF/jsonview.jsp");
 
+			
 		}
 		
 	}	//end of public void execute ------------------------------------
