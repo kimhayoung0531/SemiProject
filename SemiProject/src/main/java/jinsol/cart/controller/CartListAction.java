@@ -11,7 +11,6 @@ import common.controller.AbstractController;
 import jinsol.cart.model.CartDAO;
 import jinsol.cart.model.CartVO;
 import jinsol.cart.model.InterCartDAO;
-import parkjuneyub.product.model.ProductVO;
 import sge.member.model.MemberVO;
 
 
@@ -38,8 +37,14 @@ public class CartListAction extends AbstractController {
         request.setAttribute("cartList", cartList);
         request.setAttribute("sumMap", sumMap);
 
+        String sumPrice = sumMap.get("SUMTOTALPRICE");
+        
+        long sumPriceDelivery = Long.parseLong(sumPrice) +  3000;
+        request.setAttribute("sumPriceDelivery", sumPriceDelivery);
+        
         System.out.println("~~확인용 cartList:" +cartList);
-		super.setRedirect(false);
+
+        super.setRedirect(false);
 		super.setViewPage("/WEB-INF/kjs_cart/cartList.jsp");
 		
 	}
