@@ -37,12 +37,12 @@
 			
 		});	//end of $(".chkboxpnum").click(function(){} ----------------
 		  
-				
-				
-				
+			
+		<%--
+		// ======== 장바구니 선택상품 삭제하기 ========
 		$("button.btn_order_choice_del").click(function(){
 		    const checked_cnt = $("input:checkbox[name='pnum']:checked").length;
-			const cartCkArr = new Array();
+			const cart_ck_arr = new Array();
 
 		    if(checked_cnt < 1) {
 		         alert("삭제하실 제품을 선택하세요.");
@@ -52,16 +52,17 @@
 		    	const bool = confirm("정말 삭제하시겠습니까?");
 		    	if(bool){
 						$("input:checkbox[name='pnum']:checked").each(function() {
-							cartCkArr.push($(this).val());
+							cart_ck_arr.push($(this).val());
 						});
+						const cart_ck_join = cart_ck_arr.join();
 						
-				    	console.log("~~~확인용 cartCkArr: " + cartCkArr);
+				    	console.log("~~~확인용 cart_ck_join: " + cart_ck_join);
 
 						
 						$.ajax({
 							url:"<%= ctxPath%>/cartDelete.ban", 
 						    type:"post",
-						    data:{"cart_num":cartCkArr}, 				
+						    data:{"cart_ck_join":cart_ck_join}, 				
 						    dataType:"json",
 						    success:function(json){
 						    	console.log("~~~확인용 : " + JSON.stringify(json) );
@@ -83,9 +84,9 @@
 		    		}
 		     }
 		});	//end of $("button.btn_order_choice_del").click(function(){})-----------------
-				
-		 /*
-	    data:{"cart_num":cartCkArr.join(",") }, // request.getParameter("cart_num"); 은 타입이 String 으로 된다.  
+				--%>
+									 /*
+								    data:{"cart_num":cartCkArr.join(",") }, // request.getParameter("cart_num"); 은 타입이 String 으로 된다.  
 	                                          "5,7,10"
 	                                           '5','7','10'
 	                                           delete from 장바구니테이블 
@@ -118,42 +119,84 @@
 		   const regExp = /^[0-9]+$/g;							//숫자만 체크하는 정규표현식을 만들어야 한다.
 		   const bool = regExp.test(cart_cnt);
 			  
-		   if(!bool){
+	    	console.log("~~~확인용 cart_num: " + cart_num );	//42	
+	    	console.log("~~~확인용 cart_cnt: " + cart_cnt );	//2
+		   
+	    	if(!bool){
 			   alert("주문수량은 1개이상이어야 합니다.");
 			   location.href="javascript:history.go(0)";	//수량 원상복구
 			   return;
 		   }
-		   
+	    	
 		   if(cart_cnt == 0){
 			   goDel(cart_num);
 		   }
 		   else{
-			   $.ajax({
-				   url: "<%= ctxPath%>/cartEdit.ban",
-				   type:"post",
-				   data:{
-					   "cart_num":cart_num,
-					   "cart_cnt":cart_cnt
-				   },
-				   dataType:"json",
-				   success:function(json){
-
-				   },
-				   error: function(request, status, error){
+			//alert("장바구니 번호 "+cart_num + "번을 "+ cart_cnt +"개로 수정합니다");
+			$.ajax({
+			 		url:"<%= request.getContextPath()%>/cartEdit.ban",
+			 		type:"POST",
+			 		data:{"cart_num":cart_num,
+			 			"cart_cnt":cart_cnt},
+			 		dataType:"JSON",
+			 		success:function(json){
+			 			console.log("~~~확인용:" + JSON.stringify(json) );
+			 			if(json.n == 1){
+			 				// 장바구니 보기 페이지로 감
+				    		alert("주문수량이 변경되었습니다.");
+				    		location.href = "cartList.ban";
+			 			}
+			 		},
+			 		 error: function(request, status, error){
 		                  alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-				   }
-			   });	//end of $.ajax
-		   } //end of else-------------------------------------
-			alert("장바구니 번호 "+cart_num + "번을 "+ cart_cnt +"개로 수정합니다");
-		   
+				    }
+			 		
+			 });	//end of $.ajax --------------------------------
+		   }
+			   
+			   
 	   } //end of function goOqtyEdit(btn_obj) -----------------
 	   
 	   
-	   
-		// ======== 장바구니 선택상품 삭제하기 ========
 
-	   
-	   
+	   // === 장바구니에서 특정 제품을 비우기 === //  
+	   function goDel(cart_num) {
+		   
+		   const pname = $("span.cart_pname").text();		
+		   console.log("확인용:"+pname);
+		   
+		   const bool = confirm( "해당 상품을 장바구니에서 제거하시겠습니까?")  		
+		   
+		   
+		   if(bool) {	   		  
+			   
+			   $.ajax({
+					url:"<%= request.getContextPath()%>/cartDelete.ban",   
+				    type:"post",
+				    data:{"cart_num":cart_num},
+				    dataType:"json",
+				    success:function(json){
+				    	console.log("~~~확인용 : " + JSON.stringify(json) );
+				    	// ~~~확인용 : {"n":1}
+				    	
+				    	if(json.n == 1){
+				    		// 장바구니 보기 페이지로 감
+				    		location.href = "cartList.ban";
+				    	}
+				    	
+				    },
+				    error: function(request, status, error){
+	                    alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+				    }
+			   });
+		   
+		   }
+		   else {
+		        alert("상품 삭제를 취소하셨습니다.");
+		   }
+		       
+	   }// end of function goDel(cartno)---------------------------
+
 	   
 		// ======== 장바구니 선택상품 주문하기 ========
 			
@@ -177,14 +220,74 @@
             const totalMileage_arr = new Array();  
             
             for(let i=0; i<all_cnt; i++){
+            	
                 if($("input:checkbox[name='pnum']").eq(i).prop("checked")) {   //eq.() : 끄집어 내자!
                 	pnum_arr.push($("input:checkbox[name='pnum']").eq(i).val());
-                	cart_cnt_arr($("input#cart_cnt").eq(i).val());
-                
+                	cart_cnt_arr.push($("input#cart_cnt").eq(i).val());
+                    cart_num_arr.push($("input.cartno").eq(i).val());
+                    totalPrice_arr.push($("input.totalPrice").eq(i).val());
+                    totalMileage_arr.push($("input.totalMileage").eq(i).val());
+                   
                 }
             }//end of for ------------------------------------------
+
+            const pnum_join = pnum_arr.join();
+            const cart_cnt_join = cart_cnt_arr.join();
+            const cart_num_join = cart_num_arr.join();
+            const totalPrice_join = totalPrice_arr.join();
+            const totalMileage_join = totalMileage_arr.join();
             
-   	      }
+            let sum_totalPrice = 0;
+            for(let i=0; i<totalPrice_arr.length; i++) {
+               sum_totalPrice += Number(totalPrice_arr[i]);
+            }
+            sum_totalPrice += 3000;
+
+            
+            let sum_totalMileage = 0;
+            for(let i=0; i<totalMileage_arr.length; i++) {
+               sum_totalMileage += Number(totalMileage_arr[i]);
+            }
+            
+            console.log("~~~ 확인용 pnum_join : "+pnum_join);
+            console.log("~~~ 확인용 cart_cnt_join : "+cart_cnt_join);
+            console.log("~~~ 확인용 cart_num_join : "+cart_num_join);
+            console.log("~~~ 확인용 totalPrice_join : "+totalPrice_join);
+            console.log("~~~ 확인용 totalMileage_join : "+totalMileage_join);
+            console.log("~~~ 확인용 sum_totalPrice : "+sum_totalPrice);
+            console.log("~~~ 확인용 sum_totalMileage : "+sum_totalMileage);
+            
+            
+            if(confirm("총주문액 : "+sum_totalPrice.toLocaleString('en')+"원 결제하시겠습니까?")) {
+                
+                $.ajax({
+                   url:"<%= request.getContextPath()%>/order.ban",
+                   type:"post",
+                   data:{"sum_totalPrice":sum_totalPrice,
+                       "sum_totalMileage":sum_totalMileage,
+                       "pnum_join":pnum_join,
+                       "cart_cnt_join":cart_cnt_join,
+                       "cart_num_join":cart_num_join,
+                       "totalPrice_join":totalPrice_join
+                       },
+                   dataType:"json",
+                   success:function(json) {
+                      // json 은 {"isSuccess":1} 또는 {"isSuccess":0} 이다.
+                      if(json.isSuccess == 1){
+                     	 location.href="<%= request.getContextPath()%>/orderList.ban";
+                      }
+                      else{
+                     	 location.href="<%= request.getContextPath()%>/orderError.ban";
+                      }
+                   },
+                    error: function(request, status, error){
+                         alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+                      }
+                });	//end of $.ajax ------------------------------------------
+             }//end of if --------------------------------------
+            
+            
+   	      }// end of else --------------------------------------------
 		   
 	   }	//end of function goOrder() ----------------------
 
@@ -236,7 +339,7 @@
                                         <col style="width:10%"> <!-- 상품금액 -->
                                         <col style="width:13%"> <!-- 마일리지 -->
                                         <col style="width:10%"> <!-- 합계금액 -->
-                                        <col style="width:10%"> <!-- 배송비 -->
+                                        <col style="width:10%"> <!-- 삭제 -->
                                     </colgroup>
                                   
                                   
@@ -252,7 +355,7 @@
                                         <th>상품금액</th>
                                         <th>적립 마일리지</th>
                                         <th>합계금액</th>
-                                        <th>배송비</th>
+                                        <th>삭제</th>
                                     </tr>
                                     </thead>
 
@@ -274,7 +377,7 @@
 					                                  status.count 는 1 부터 시작한다. 
 					                             --%>   
 		                                            <div class="form_element">
-		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}"  checked="checked"/><label for="pnum${status.index}">${cartvo.product_num}</label>   
+		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}" checked="checked"/><label for="pnum${status.index}"></label>   
 		                                            </div>
 		                                        </td>
 		
@@ -299,37 +402,43 @@
 		                                                </div>        
 		                                                <button class="btn btn-outline-secondary btn-sm updateBtn" type="button" onclick="goOqtyEdit(this)">수정</button>
 							                              <%-- 장바구니 테이블에서 특정제품의 현재주문수량을 변경하여 적용하려면 먼저 장바구니번호(시퀀스)를 알아야 한다 --%>
-							                            <input type="text" class="cartno" value="${cartvo.cart_num}" /> 
+							                            <input type="hidden" class="cartno" name="cartno" value="${cartvo.cart_num}" /> 
 		                                            </div>
 		                                        </td>
 		                                        
 		                                        <%-- 상품 금액 --%>
 		                                        <td>  
-		                                            <div class="order_sum_txt price" ><fmt:formatNumber value="${cartvo.pvo.product_price}" pattern="###,###"/>원</div>
+		                                            <span class="order_sum_txt price" style="font-weight:bold;"><fmt:formatNumber value="${cartvo.product_price}" pattern="###,###" /></span> 원
 		                                        </td>
 		
 												 <%-- 마일리지 --%>
 		                                        <td class="td_mileage">    
 		                                                <ul class="mileage_list">
 		                                                    <li class="mileage_mileage">
-																<strong value="${cartvo.pvo.mileage}"></strong>마일리지
+																<strong class="cart_mileage" name="cart_mileage" value="${cartvo.totalMileage}">${cartvo.totalMileage}</strong> 마일리지
 		                                                    </li>
 		                                                </ul>
 		                                        </td>
 		                                        <%-- 상품 당 합계금액 --%>
+		                                        <%-- 
 		                                        <td>
-		                                            <div class="allprice_won"><fmt:formatNumber value="${carvo.totalPrice}" pattern="###,###"/>원</div>
+		                                            <div class="allprice_won"><fmt:formatNumber value="${carvo.totalPrice}" pattern="###,###" />원</div>
 		                                            <div class="allprice_mileage"><fmt:formatNumber value="${carvo.totalMileage}" pattern="###,###"/>마일리지</div>
 			                                    </td>
-			                            </c:forEach>
-			                                    
-			                                    <td class="td_delivery" rowspan="${cartvo.cart_num}" style="border: solid 1px red;">
-		                                            기본 - 금액별배송비<br>
-		                                            3,000원
-		                                            <br>
-		                                            (택배-선결제)
-		                                        </td>
-		                                    </tr>
+			                                    --%>
+			                                    <td>
+			                                    	<strong><fmt:formatNumber value="${cartvo.totalPrice}" pattern="###,###" /> 원</strong>
+		                                           <input type="hidden" class="totalPrice" value="${cartvo.totalPrice}" />
+                            						<input type="hidden" class="totalMileage" value="${cartvo.totalMileage}" />
+			                                    </td>
+			                                    <%-- 상품 삭제 --%>
+			                                    <td>
+                          							  <button type="button" class="btn btn-outline-danger btn-sm" onclick="goDel('${cartvo.cart_num}')">삭제</button>  
+			                                    </td>
+			                                </tr>
+			                            </c:forEach>    
+			                            	
+		                                    
                                     </c:if>
         
                                     </tbody>
@@ -347,7 +456,7 @@
                     </form>
         
                     <div class="btn_left_box">
-                        <a href="<%= ctxPath%>/homebread.ban" class="shop_go_link"><span>&lt; 쇼핑 계속하기</span></a>
+                        <a href="<%= request.getContextPath() %>/homebread.ban" class="shop_go_link"><span>&lt; 쇼핑 계속하기</span></a>
                     </div>
         
                     <div class="price_sum">
@@ -379,13 +488,13 @@
                                     <div class = "allprice_head">
                                         합계
                                     </div>
-                                    <div class="allprice_won"><fmt:formatNumber value="" pattern="###,###"/>원</div>
+                                    <div class="allprice_won"><fmt:formatNumber value="${requestScope.sumPriceDelivery}" pattern="###,###"/>원</div>
                                 </div>
                                 
                             </div>
-
+						 
                         <div id="deliveryChargeText" class="tobe_mileage"></div>
-                        <div class="tobe_mileage">적립예정 마일리지 : <span id="totalGoodsMileage">${requestScope.sumMap.SUMTOTALMILEAGE}</span>원</div>
+                       <div class="tobe_mileage">총 마일리지 : <span id="totalGoodsMileage"></span></div>
                         </div>
                         <!-- //price_sum_cont -->
                     </div>
@@ -396,8 +505,7 @@
                             <button type="button" class="btn_order_choice_del">선택 상품 삭제</button>
                         </div>
                         <div class="btn_order_box">
-                            <button type="button" class="btn_order_choice_buy" onclick="goOrder()">선택 상품 주문</button>
-                            <button type="button" class="btn_order_whole_buy" onclick="goOrder()">전체 상품 주문</button>
+                            <button type="button" class="btn_order_whole_buy" onclick="goOrder()">선택 상품 주문</button>
                         </div>
                     </div>
                     <div class="chk_none"> ※ 주문서 작성단계에서 마일리지 적용을 하실 수 있습니다.</div>                    

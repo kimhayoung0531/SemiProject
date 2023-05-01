@@ -135,7 +135,8 @@ public class BoardDAO implements InterBoardDAO {
 		}
 		return result;
 	}
-
+	
+	// 아이디랑 상품번호로 주문번호를 조회해오는 메소드
 	@Override
 	public List<OrderVO> getOrderDeatailList(String user_id, String product_num) throws SQLException {
 		List<OrderVO> odrDeatailList = new ArrayList<>();
@@ -150,9 +151,10 @@ public class BoardDAO implements InterBoardDAO {
 					" ) A "+
 					" join\n"+
 					" ( "+
-					" select order_num, product_num, order_quantity "+
+					" select order_details_num, order_num, product_num, order_quantity "+
 					" from tbl_order_detail "+
-					" where product_num = ? "+
+					" where product_num = ? and order_details_num not in ( "
+					+ " select order_details_num from tbl_purchase_review where product_num = ? ) "+
 					" ) B "+
 					" on A.order_num = B.order_num "+
 					" order by order_date asc ";
@@ -160,6 +162,7 @@ public class BoardDAO implements InterBoardDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
 			pstmt.setLong(2, Long.parseLong(product_num));
+			pstmt.setLong(3, Long.parseLong(product_num));
 			
 			rs =  pstmt.executeQuery();
 			

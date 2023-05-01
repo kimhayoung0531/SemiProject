@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Spliterator;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -157,16 +156,18 @@ public class CartDAO implements InterCartDAO {
 	            pvo.setMain_image(main_image);
 	            pvo.setProduct_price(product_price);
 
-	            // **** !!!! 중요함 !!!! **** //
-	            pvo.setTotalPriceTotalPoint((int)product_count);
-	            // **** !!!! 중요함 !!!! **** //
+	            //pvo.setTotalPriceTotalPoint((int)product_count); 
 	            
 	            CartVO cvo = new CartVO();
 	            cvo.setCart_num(cart_num);
 	            cvo.setUser_id(fk_user_id);
 	            cvo.setProduct_num(product_num);
 	            cvo.setProduct_count(product_count);
-
+	            cvo.setProduct_price(product_price);
+	            cvo.setMain_image(main_image);
+	            
+	            cvo.setTotalPriceTotalMileage(product_count);
+	            
 	            // 위에서 set 해온 prodvo들을 cvo에 set해줌
 	            cvo.setPvo(pvo);
 	            
@@ -193,7 +194,7 @@ public class CartDAO implements InterCartDAO {
 		         conn = ds.getConnection();
 		         
 		         // DB에서 그냥 계산해줌
-		         String sql =  "select nvl(sum(B.product_price *  A.product_count), 0) AS SUMTOTALPRICE "
+		         String sql =  " select nvl(sum(B.product_price *  A.product_count), 0) AS SUMTOTALPRICE "
 		         		+ " from tbl_cart A join tbl_product B "
 		         		+ " on A.product_num = B.product_num "
 		         		+ " where A.user_id = ? ";
@@ -222,19 +223,13 @@ public class CartDAO implements InterCartDAO {
 		int n = 0;
 		
 		   try {
-		         conn = ds.getConnection();
+			   conn = ds.getConnection();
 		         
-		         String[] cart_num_arr = cart_num.split(",");
-		         
-		         String cart_num_join = String.join("','",cart_num_arr);    //["9","6","5"] 를 하나의 문자열로 합쳐준다. 
-
-		         cart_num_join = "'"+cart_num_join+"'";   //최종적으로 cart_num_join 은 "'9','6','5'" 와 같이 된다.
-
 		         String sql = " delete from tbl_cart "
-		         		+ " where cart_num in("+ cart_num_join +") ";
+		         		+ " where cart_num = ? ";
 		         
 		         pstmt = conn.prepareStatement(sql);
-		         pstmt.setString(1, cart_num_join);
+		         pstmt.setString(1, cart_num);
 		         
 		         n = pstmt.executeUpdate();
 		                  
@@ -244,6 +239,33 @@ public class CartDAO implements InterCartDAO {
 		      
 		return n;
 		
+	}
+	
+	
+	
+	//장바구니 테이블에서 특정 제품의 주문량 변경
+	@Override
+	public int updateCart(String cart_num, String cart_cnt)throws SQLException {
+
+		int n = 0;
+		
+		   try {
+		         conn = ds.getConnection();
+		         
+		         String sql = " update tbl_cart set product_count = ? "
+		         		+ " where cart_num = ? ";
+		         
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setString(1, cart_cnt);
+		         pstmt.setString(2, cart_num);
+		         
+		         n = pstmt.executeUpdate();
+		                  
+		      } finally {
+		         close();
+		      }
+		      
+		return n;
 	}
 	
 	
