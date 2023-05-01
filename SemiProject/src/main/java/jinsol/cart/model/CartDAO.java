@@ -218,22 +218,18 @@ public class CartDAO implements InterCartDAO {
 	
 	//장바구니 테이블에서 특정 제품을 삭제
 	@Override
-	public int deleteCart(String[] cart_ck_arr) throws SQLException {
+	public int deleteCart(String cart_num) throws SQLException {
 
 		int n = 0;
 		
 		   try {
-		         conn = ds.getConnection();
+			   conn = ds.getConnection();
 		         
-				String cart_nums = String.join(",", cart_ck_arr);
-
-		         cart_nums = "'"+cart_nums+"'";   //최종적으로 cart_num_join 은 "'9','6','5'" 와 같이 된다.
-
 		         String sql = " delete from tbl_cart "
-		         		+ " where cart_num in("+ cart_nums +") ";
+		         		+ " where cart_num = ? ";
 		         
 		         pstmt = conn.prepareStatement(sql);
-	
+		         pstmt.setString(1, cart_num);
 		         
 		         n = pstmt.executeUpdate();
 		                  
