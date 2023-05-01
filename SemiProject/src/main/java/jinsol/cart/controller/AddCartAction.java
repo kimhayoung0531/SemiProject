@@ -18,10 +18,22 @@ public class AddCartAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-		
+	
 		String method = request.getMethod();
 		
 		if("GET".equalsIgnoreCase(method)) {
+			
+			HttpSession session = request.getSession();
+	        MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
+
+
+			  ////////////////////////테스트용///////////////////////////////////
+			  
+			  loginuser = new MemberVO();
+			  loginuser.setUser_id("demo");
+			  
+			  //////////////////////////////////////////////////////////////////
+			  
 			
 		  String cart_cnt = request.getParameter("cart_cnt");
 		  String product_num = request.getParameter("product_num");
@@ -29,23 +41,13 @@ public class AddCartAction extends AbstractController {
 		  System.out.println("~~~~~~ AddCartAction.java 에서1 cart_cnt : " + cart_cnt);
 		  System.out.println("~~~~~~ AddCartAction.java 에서1 pnum : " + product_num);
 		  
-		  HttpSession session = request.getSession();
-		  MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
-		  
-		  ////////////////////////테스트용///////////////////////////////////
-		  
-		  loginuser = new MemberVO();
-		  loginuser.setUser_id("demo");
-		  
-		  //////////////////////////////////////////////////////////////////
-		  
-		  InterCartDAO cdao = new CartDAO();
-
 		  Map<String, String> paraMap = new HashMap<>();
 		  paraMap.put("user_id", loginuser.getUser_id());
 		  paraMap.put("product_num", product_num);
 		  paraMap.put("cart_cnt", cart_cnt);
-		  
+	      
+		  InterCartDAO cdao = new CartDAO(); 
+
 		  int n = cdao.addCart(paraMap);
 		  
 		  if(n==1) {
@@ -62,7 +64,7 @@ public class AddCartAction extends AbstractController {
 		}
 		
 		else {
-			//GET방식이라면 
+			//post방식이라면 
 			String message = "비정상적인 경로로 들어왔습니다.";
 		    String loc = "javascript:history.back()";
 		      
@@ -73,7 +75,6 @@ public class AddCartAction extends AbstractController {
 		   super.setViewPage("/WEB-INF/msg.jsp");
 		}
 			 
-				 
 	} //end of public void execute ---------------------------------------
 
 	
