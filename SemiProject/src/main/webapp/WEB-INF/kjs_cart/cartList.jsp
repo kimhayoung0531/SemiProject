@@ -167,11 +167,7 @@
 		   
 		   const bool = confirm( "해당 상품을 장바구니에서 제거하시겠습니까?")  		
 		   
-		   <%-- true가 되어지면 지우는데, DB로 가야한다. insert되어진 cart_table에 특정 행을 delete해야함 ==> 
-				class를 사용하지 않고 페이지이동을 안하면서 delete 해줘야함 ==> 
-				$.ajax() 사용 (기본은 비동기방식, 동기방식: 결과물을 가지고 또 뭘 해야할때) 
-				JSON.stringify()은 문자열로 바꿔서 나온다. 걍 찍으면 object 객체 나온다.
-				--%>   
+		   
 		   if(bool) {	   		  
 			   
 			   $.ajax({
@@ -351,7 +347,7 @@
                                     <tr>
                                         <th>        <!-- 전체선택 체크박스 allCheck-->
                                             <div class="form_element">
-                                                <input type="checkbox" id="allCheck" class="gd_select_all_goods" onClick="allCheckBox();" />
+                                                <input type="checkbox" id="allCheck" class="gd_select_all_goods" onClick="allCheckBox();" checked="checked" />
                                             </div>
                                         </th>
                                         <th>상품/옵션 정보</th>
@@ -381,7 +377,7 @@
 					                                  status.count 는 1 부터 시작한다. 
 					                             --%>   
 		                                            <div class="form_element">
-		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}" /><label for="pnum${status.index}"></label>   
+		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}" checked="checked"/><label for="pnum${status.index}"></label>   
 		                                            </div>
 		                                        </td>
 		
