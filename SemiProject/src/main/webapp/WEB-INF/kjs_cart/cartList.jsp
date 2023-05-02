@@ -262,7 +262,7 @@
             
             
             if(confirm("총주문액 : "+sum_totalPrice.toLocaleString('en')+"원 결제하시겠습니까?")) {
-                
+               <%-- 
                 $.ajax({
                    url:"<%= request.getContextPath()%>/order.ban",
                    type:"post",
@@ -287,6 +287,13 @@
                          alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
                       }
                 });	//end of $.ajax ------------------------------------------
+                
+                --%>
+                const frm = document.frmCart;
+        		frm.action = "<%= request.getContextPath()%>/order.ban";
+        		frm.method = "post";
+        		frm.submit();
+                
              }//end of if --------------------------------------
             
             
@@ -381,6 +388,7 @@
 					                             --%>   
 		                                            <div class="form_element">
 		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}" checked="checked"/><label for="pnum${status.index}">${cartvo.product_num}</label>   
+		                                                <input type="hidden" name="productNum" value="${cartvo.product_num}" />
 		                                            </div>
 		                                        </td>
 		
@@ -405,12 +413,14 @@
 		                                                <button class="btn btn-outline-secondary btn-sm updateBtn" type="button" style="margin-top:3px;" onclick="goOqtyEdit(this)">수정</button>
 							                              <%-- 장바구니 테이블에서 특정제품의 현재주문수량을 변경하여 적용하려면 먼저 장바구니번호(시퀀스)를 알아야 한다 --%>
 							                            <input type="hidden" class="cartno" name="cartno" value="${cartvo.cart_num}" /> 
+							                            <input type="hidden" name="cartNum" value="${cartvo.cart_num}" /> 
 		                                            </div>
 		                                        </td>
 		                                        
 		                                        <%-- 상품 금액 --%>
 		                                        <td>  
 		                                            <span class="order_sum_txt price" style="font-weight:bold;"><fmt:formatNumber value="${cartvo.product_price}" pattern="###,###" /></span> 원
+							                        <input type="hidden" name="product_price" value="${cartvo.product_price}" /> 
 		                                        </td>
 		
 												 <%-- 마일리지 --%>
@@ -469,6 +479,8 @@
                                         총 상품 금액
                                     </div>
                                     <div class="allprice_won"><fmt:formatNumber value="${requestScope.sumMap.SUMTOTALPRICE}" pattern="###,###"/>원</div>
+                                    <input type="hidden" name="sumTotalPrice" value="${requestScope.sumMap.SUMTOTALPRICE}" />
+                                    
                                 </div>
 
                                 <span><img src="https://cdn-pro-web-250-118.cdn-nhncommerce.com/cafenotr1984_godomall_com/data/skin/front/moment_cafenoli_N/img/order/order_price_plus.png" alt="더하기"></span>
