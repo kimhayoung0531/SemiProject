@@ -3510,4 +3510,394 @@ body .add_cart_layer_popup .view .btn_box .btn_confirm{
 
 
 /* 박주진 ------------------------------------------------------------------------------------------- */
+
+/*** 공지사항 페이지 ***/
+#pjj_container {
+    margin: 0 20px 0 120px;
+    border-top: none;
+    width: 90%;
+    display: block;
+}
+
+#pjj_contents {
+    min-height: 600px;
+    padding: 40px 0 0 0;
+    display: block;
+    margin: 0px 0px 120px 50px  
+}
+
+.pjj_container {
+    margin-top: -1px;
+    border-top: 1px solid #cccccc;
+}
+
+.pjj_side_cont .pjj_sub_menu_box {
+    min-height: 40px;
+    padding: 100px 95px 120px 0;
+}
+
+.pjj_sub_menu_box > h2 {
+    margin: 0 0 13px 7px;
+}
+
+.pjj_board_zone_tit > h2 {
+    font-size: 25px;
+}
+
+.pjj_sub_content .pjj_side_cont {
+    float: left;
+    width: 200px;
+    height: 200px;
+}
+
+.pjj_info_box {
+    padding: 50px 0 10px 0px;
+}
+
+.pjj_side_cont .pjj_sub_menu_box .pjj_sub_menu a:hover, .pjj_side_cont .pjj_sub_menu_box .pjj_sub_menu .pjj_active {
+    font-weight: bold;
+    background: #f8f8f8;
+    border-top: 2px solid #cccccc;
+    border-bottom: 2px solid #cccccc;
+}    
+
+.pjj_side_cont .pjj_sub_menu_box .pjj_sub_menu a {
+    display: block;
+    padding: 8px 41px 6px 10px;
+    font-size: 14px;
+}
+
+.pjj_side_cont .pjj_info_box dt {
+    padding: 8px 0 10px 0;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.pjj_board_list_table {
+    margin: 0px 0px 0px 200px;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-top: 1px solid #999999;
+    text-align: center;
+    
+}
+
+.pjj_board_list_table > thead > tr {
+    height: 10px;
+}
+
+.pjj_board_zone_tit {
+    margin: 0 20px 0 0;
+}
+
+.pjj_noticeInfo > td {
+    text-align: center;
+}
+
+.pjj_board_list_table th {
+    padding: 10px 15px 10px 14px;
+    border-bottom: 1px solid #dbdbdb;
+    background: #fbfbfb;
+}
+.pjj_board_list_table td {
+    padding: 13px 10px 15px 10px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.pjj_pagination {
+    margin: 20px 0 0 0;
+}
+
+.pjj_pagination ul {
+    padding: 20px 0 20px 0;
+    text-align: center;
+    margin: 0;
+}
+
+.pjj_pagination .pjj_on {
+    color: #4c4c4c;
+}
+
+.pjj_pagination li {
+    display: inline-block;
+    min-width: 26px;
+    vertical-align: middle;
+}
+
+.pjj_pagination li.pjj_on span {
+    font-weight: bold;
+    color: #fff;
+    background: #7a7d81;
+    border-radius: 20px;
+}
+
+.pjj_pagination li a, .pjj_pagination li span {
+    display: block;
+    height: 30px;
+    width: 50px;
+    color: #888;
+    font-size: 11px;
+    line-height: 30px;
+}
+
+.pjj_search{
+    margin: 20px 195px 30px 195px;
+    padding: 10px 10px 10px 10px;
+    border-top: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    background: #f7f7f7;
+    text-align: center;
+}
+
+.pjj_btn{
+    padding: 2px; 
+    background-color:#888;
+    font-size: 16px;
+}
+
+
+
+/*** 상품문의 페이지 ***/
+.pjj_searchlist {
+    margin: 20px 0 0 350px;
+    display: block;
+}
+
+.pjj_searchlist ul {
+    padding: 20px 0 0 0;
+    margin: 20px 300px 0 0;
+    text-align: center;
+}
+
+.pjj_searchlist li.on span {
+    font-weight: bold;
+    color: #fff;
+    background: #7a7d81;
+    border-radius: 20px;
+}
+
+.pjj_searchlist li a, .pjj_searchlist li span {
+    display: block;
+    padding: 0 !important;
+    height: 30px;
+    width: 40px;
+    color: #888;
+    font-size: 11px;
+    line-height: 30px;
+    text-align: middle;
+}
+
+.pjj_searchlist li {
+    display: inline-block;
+    min-width: 26px;
+    vertical-align: middle;
+}
+
+/*** 상품문의 페이지 기간 조회 ***/
+.pjj_date_check_box {
+    margin: 0 215px 10px 200px;
+    padding: 50px 50px 80px 50px;
+    border: 3px solid #eeeeee;
+}
+.pjj_date_check_box > h3 {
+    font-size: 15px;
+    padding: 6px 12px 0 0;
+    float: left;
+    color: #777777;
+}
+
+.pjj_date_check_calendar {
+    position: relative;
+    float: left;
+    width: 50%;
+}
+
+.pjj_date_check_calendar .pjj_anniversary {
+    width: 25%;
+}
+.pjj_btn_date_check > em {
+    font-size: 15px;
+    
+}
+
+.pjj_btn_date_check {
+    border: 1px solid #4c4c4c;
+    background: #4c4c4c;
+    font-size: 20px;
+    color: white;
+    padding: 0 10px 3px 10px;
+}
+
+.pjj_btn_write {
+    right: 0px;
+    min-width: 90px;
+    margin: 0 0 10px 808px;
+    line-height: 29px;
+    color: #ffffff;
+    font-size: 12px;
+    
+    background: #979797;
+}
+
+.pjj_board_zone_list > h2 {
+    font-size: 26px;
+    margin: 0 0 10px 0;
+}
+
+
+/*** 상품문의 > 1:1 문의하기 페이지 ***/
+
+.pjj_notice {
+    width: 70%;
+    min-height: 500px;
+    padding: 0;
+    margin: 0 0 20px 250px;
+}
+
+.pjj_notice_zone_sec {
+    position: relative;
+}
+
+.pjj_notice_zone_tit {
+    margin: 0 0 10px 0;
+    padding: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.pjj_notice_zone_tit > h2 {
+    display: block;
+    margin: 50px 0 10px 0;
+}
+
+.pjj_notice_zone_cont > input {
+    font-size: 15px;
+    font-family: 'Noto Sans KR', sans-serif, AppleGothic,Dotum,"돋움",sans-serif;
+    letter-spacing: -0.5px;
+    color: #000;
+    vertical-align: middle;
+    overflow: visible;
+}
+
+.pjj_notice_write_table {
+    width: 100%;
+    margin: 0 0 20px 0;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-top: 1px solid #999999;
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 2px;
+    display: table;
+}
+
+.pjj_notice_write_table col {
+    display: table-column;
+}
+
+.pjj_notice_write_table tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.pjj_notice_write_table tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.pjj_notice_write_table th {
+    padding: 13px 0 7px 25px;
+    font-weight: bold;
+    border-bottom: 1px solid #dbdbdb;
+    background: #fbfbfb;
+    text-align: left;
+    vertical-align: top;
+}
+
+.pjj_notice_write_table td {
+    height: 32px;
+    margin: 0;
+    padding: 7px 20px 7px 15px;
+    border-bottom: 1px solid #dbdbdb;
+    background: #ffffff;
+    text-align: left;
+}
+
+.pjj_btn_center_box {
+    text-align: center;
+}
+
+.pjj_btn_before {
+    display: inline-block;
+    width: 100px;
+    height: 42px;
+    padding: 0 5px 0 5px;
+    color: #3e3d3c;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    text-align: center;
+    cursor: pointer;
+}
+.pjj_btn_write_ok {
+    border: 1px solid #4c4c4c;
+    background: #4c4c4c;
+    min-width: 100px;
+    display: inline-block;
+    min-width: 90px;
+    height: 42px;
+    padding: 0 10px 0 10px;
+    color: #ffffff;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pjj_btn_goods_select {
+    display: inline-block;
+    width: 80px;
+    height: 26px;
+    margin: 0 0 0 5px;
+    line-height: 24px;
+    color: #ffffff;
+    font-size: 12px;
+    border: 1px solid #979797;
+    background: #979797;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.pjj_tune {
+    font-size: 15px;
+}
+
+.pjj_file_upload_sec .pjj_file_text {
+    float: left;
+    width: 230px;
+}
+
+.pjj_file_upload_sec {
+    overflow: hidden;
+    position: relative;
+    float: left;
+    width: 150px;
+    padding: 0 0 0 30px;
+}
+
+.pjj_file_upload_sec .pjj_btn_upload_box .pjj_file {
+    position: absolute;
+    top: 0;
+    right: 76px;
+    height: 31px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+ #pjj_editor{
+    width: 100%;
+    margin-top: 10px;
+    min-height: 300px;
+}
+
 /* 박주진 끝 ------------------------------------------------------------------------------------------- */
