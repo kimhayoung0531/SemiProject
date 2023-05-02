@@ -395,11 +395,11 @@
 		                                        <td class="td_left">    <%-- 상품 이미지 정보 (클릭시 이동) 및 제품명 --%>
 		                                            <div class="pick_add_cont"> 
 		                                                <div class="pick_add_img_info"> 
-		                                                    <a href="/SemiProject/productDeatail.ban?pnum=${cartvo.pvo.product_num}">
+		                                                    <a href="/SemiProject/productDeatail.ban?product_num=${cartvo.pvo.product_num}">
 		                                                    <img src="/SemiProject/image/item_main/${cartvo.pvo.main_image}.jpg" width="60"
 		                                                        alt="${cartvo.pvo.product_title}" title="${cartvo.pvo.product_title}" />
 		                                                    </a>
-		                                                <span class="cart_pname"><a href="/SemiProject/productDeatail.ban?pnum=${cartvo.pvo.product_num}">${cartvo.pvo.product_title}</a></span>
+		                                                <span class="cart_pname"><a href="/SemiProject/productDeatail.ban?product_num=${cartvo.pvo.product_num}">${cartvo.pvo.product_title}</a></span>
 		                                                </div>
 		                                            </div>
 		                                        </td>
@@ -432,12 +432,6 @@
 		                                                </ul>
 		                                        </td>
 		                                        <%-- 상품 당 합계금액 --%>
-		                                        <%-- 
-		                                        <td>
-		                                            <div class="allprice_won"><fmt:formatNumber value="${carvo.totalPrice}" pattern="###,###" />원</div>
-		                                            <div class="allprice_mileage"><fmt:formatNumber value="${carvo.totalMileage}" pattern="###,###"/>마일리지</div>
-			                                    </td>
-			                                    --%>
 			                                    <td>
 			                                    	<strong><fmt:formatNumber value="${cartvo.totalPrice}" pattern="###,###" /> 원</strong>
 		                                           <input type="hidden" class="totalPrice" value="${cartvo.totalPrice}" />
