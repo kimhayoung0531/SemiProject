@@ -6,10 +6,14 @@ import sge.member.model.MemberVO;
 public class CartVO{
 	
 	// * insert 용 * 
-	private int cart_num;
-	private int product_count;
-	private int main_image;
-	private String cart_date;
+	private long cart_num;		//장바구니 번호
+	private String user_id;		//사용자 ID(fk)
+	private long product_num;	//제품 번호
+	private long product_count;	//제품 수량
+	private long main_image;	//제품 이미지
+	private String cart_date;	//장바구니 날짜
+	private long product_price;
+	
 
 	// * select용 *
 	private MemberVO mvo;
@@ -17,48 +21,79 @@ public class CartVO{
 	
 
 	/* 기본생성자 */
-	public CartVO() {}
+	public CartVO() { }
+	
+	public CartVO(long cart_num, String user_id, long product_num, long product_count ,
+			long main_image, String cart_date,MemberVO mvo, ProductVO pvo) {
+		this.cart_num = cart_num;
+		this.user_id = user_id;
+		this.product_num = product_num;
+		this.product_count = product_count;
+		this.main_image = main_image;
+		this.cart_date = cart_date;
+		this.mvo = mvo;
+		this.pvo = pvo;
+	}
 
 	/*
     제품판매가와 포인트점수 컬럼의 값은 관리자에 의해서 변경(update)될 수 있으므로
     해당 제품의 판매총액과 포인트부여 총액은 판매당시의 제품판매가와 포인트 점수로 구해와야 한다.  
 	 */
-	private int totalPrice;         // 판매당시의 한 제품에 대한 제품판매가 * 주문량
-	private int totalMileage;         // 판매당시의 한 제품에 대한 마일리지 * 주문량 
-
-
+	private long totalPrice;         // 판매당시의 한 제품에 대한 제품판매가 * 주문량
+	private long totalMileage;
 
 
 	///////////////////////////////////////////////////
 	// GETTER SETTER
 	
-	
-	public int getCart_num() {
+
+
+	public long getCart_num() {
 		return cart_num;
 	}
 
 
-	public void setCart_num(int cart_num) {
+	public void setCart_num(long cart_num) {
 		this.cart_num = cart_num;
 	}
 
 
-	public int getProduct_count() {
+	public String getUser_id() {
+		return user_id;
+	}
+
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+
+	public long getProduct_num() {
+		return product_num;
+	}
+
+
+	public void setProduct_num(long product_num) {
+		this.product_num = product_num;
+	}
+
+
+	public long getProduct_count() {
 		return product_count;
 	}
 
 
-	public void setProduct_count(int product_count) {
+	public void setProduct_count(long product_count) {
 		this.product_count = product_count;
 	}
 
 
-	public int getMain_image() {
+	public long getMain_image() {
 		return main_image;
 	}
 
 
-	public void setMain_image(int main_image) {
+	public void setMain_image(long main_image) {
 		this.main_image = main_image;
 	}
 
@@ -92,24 +127,20 @@ public class CartVO{
 		this.pvo = pvo;
 	}
 
-
-	public int getTotalMileage() {
-		return totalMileage;
+	public long getProduct_price() {
+		return product_price;
 	}
 
-
-	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
+	public void setProduct_price(long product_price) {
+		this.product_price = product_price;
 	}
-
-
 
 	///////////////////////////////////////////////////
 
-	// *** 제품의 마일리지 (1%)  ***
-	public int getmileage() {
+	// *** 제품의 마일리지 (1%) 구하기 ***
+	public long getMileagePercent() {
 		
-		int mileage =  (int)(pvo.getProduct_price() / 100);
+		long mileage = product_price / 100;
 		
 		return mileage;
 	}
@@ -118,20 +149,20 @@ public class CartVO{
 	/////////////////////////////////////////////////
 	
 
+	/////////////////////////////////////////////////
 	// *** 제품의 총판매가(실제판매가 * 주문량) 구해오기 ***
-	public void setTotalMileage(int item_cnt) {   
-		// int oqty 이 주문량이다.
-	
-		totalPrice = (int)pvo.getProduct_price() * item_cnt; // 판매당시의 제품판매가 * 주문량
-		totalMileage = (int)pvo.getMileage() * item_cnt;     // 판매당시의 포인트점수 * 주문량 
+	public void setTotalPriceTotalMileage(long oqty) {   
+		totalPrice = product_price * oqty;
+		totalMileage = getMileagePercent() * oqty;
 	}
 	
-	public int getTotalPrice() {
+	public long getTotalPrice() {
 		return totalPrice;
 	}
 	
-	public int getTotalPoint() {
+	public long getTotalMileage() {
 		return totalMileage;
 	}
+	
 	
 }

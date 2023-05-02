@@ -1,6 +1,7 @@
-package parkjuneyub.member.controller;
+package KHY.model;
 
 public class MemberVO {
+	
 	private String user_id;      		//아이디
 	private String user_name;    		//이름
 	private String pwd;          		//비밀번호
@@ -194,4 +195,16 @@ public class MemberVO {
 	public void setRequirePwdChange(boolean requirePwdChange) {
 		this.requirePwdChange = requirePwdChange;
 	}
+	
+	
+
+
+
+
+
+
+
+
 }
+
+

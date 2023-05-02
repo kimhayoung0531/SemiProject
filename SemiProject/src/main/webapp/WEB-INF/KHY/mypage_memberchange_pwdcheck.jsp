@@ -98,9 +98,56 @@
 	}
 	
 </style>
+<<<<<<< HEAD
+=======
+<script type="text/javascript">
+    $(document).ready(function () {
+    	
+    	$("div.text_warning").hide();
+    	
+        $('.btn_cancle').click(function () {
+        	window.location.href = 'mypage.ban';
+        });
+        
+        
+        $("input#findPassword").blur( (e) => {
+			if( $(e.target).val().trim() == ""){
+				
+				$(e.target).parent().find(".text_warning").show();
+				$(e.target).focus();
+			}
+			else{
+				$(e.target).parent().find(".text_warning").hide();	
+			}
+		 }); 
+		
+
+		
+		$("input#findPassword").bind("keydown",function(e){
+			if(e.keyCode == 13){// !!keycode 아니고 keyCode이다 암호입력란에 enter을 했을 경우
+				goLogin();
+			}
+		});
+        
+		$("button#goToRegis").click(function(){
+			
+			const frm = document.formFind;
+			frm.action = "<%= ctxPath%>/mypageMemberChange.ban";
+			frm.method = "post";
+			frm.submit();
+			
+		});
+       
+
+
+    }); // end of documnet
+    
+</script>
+
+>>>>>>> refs/heads/KHY
     
 </head>
-
+<input style="display: none;" name='user_id' value='${sessionScope.loginuser.user_id}' />
 <div id="container" style="margin-left: 12%;">
     <div id="contents">
         <!-- 본문 시작 -->
@@ -167,11 +214,15 @@
 					
 					<p><strong>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해 주세요.</strong></p>
 					
-					<form id="formFind">
+					<form id="formFind" name="formFind">
 					<div class="id_pw_cont">
 					    <dl>
 					        <dt>아이디</dt>
+<<<<<<< HEAD
 					        <dd><strong>kim05hy31</strong></dd>
+=======
+					        <dd><strong>${sessionScope.loginuser.user_id}</strong></dd>
+>>>>>>> refs/heads/KHY
 					    </dl>
 					    <dl>
 					        <dt>비밀번호</dt>
@@ -179,15 +230,20 @@
 					            <div class="member_warning">
 					                <input type="password" name="findPassword" id="findPassword"/>
 					                <div class="text_warning">
+<<<<<<< HEAD
 					                    비밀번호가 일치하지 않습니다.
 					            </div>
+=======
+					                    비밀번호를 입력해주세요.
+					            	</div>
+>>>>>>> refs/heads/KHY
 					            </div>
 					        </dd>
 					    </dl>
 					</div>
 					<div class="btn_center_box">
 					    <button type="button" id="btnReset" class="btn_cancle">취소</button>
-					    <button type="button" id="goToRegis" onclick="goPwdCheck();" class="btn_register">인증하기</button>
+					    <button type="button" id="goToRegis" class="btn_register">인증하기</button>
 					</div>
 					</form>
 					

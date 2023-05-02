@@ -1,93 +1,212 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
+<%@ page import= "sge.member.model.MemberVO" %>    
 <%
 	String ctxPath = request.getContextPath();
 	// SemiProject
+	MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
+	String user_id = "";
+	if(loginuser != null) {
+		user_id = loginuser.getUser_id();
+	}
+	
 %>    
 	<jsp:include page="../header.jsp" />
 	 
-	<script>
-		$(document).ready(function(){
+	<style>
+	  a#writeReviewButton {
+	  	margin-right:75px;
+	  	cursor: pointer;
+	  }
+	</style> 
+	 
+<script type="text/javascript">
+	$(document).ready(function(){
 
-			$("div.add_cart_layer_popup").hide();		//팝업창 가리기
-			
-			////////////////////준엽님 한 부분 ///////////////////
-			
-			var count = Number($("input#item_cnt").val());
-			var price = ${requestScope.pvo.product_price};
-			$("input[name=product_price]").val(price);
-			var total_price = count * price;
-			$("input[name=total_price]").val(total_price);
-			
-			$("input#product_cnt").val($("input#item_cnt").val());
-			
-			$("input#item_cnt").bind("change", function() {
-				count = Number($("input#item_cnt").val());
-				price = ${requestScope.pvo.product_price};
-				total_price = count * price;
+		$("div.add_cart_layer_popup").hide();		//팝업창 가리기
+		
+		
+		////////////////////준엽님 한 부분 ///////////////////
+		
+		const user_id = "<%= user_id%>";
+		const product_num = "${requestScope.pvo.product_num}";
+		// 좋아요 리스트에 등록되어 있는지 체크
+		$.ajax({
+	        	url:"<%= request.getContextPath()%>/product/checkLike.ban",
+	        	type:"POST",
+	        	data: {
+	        		"user_id":user_id,
+	        		"product_num":product_num
+	        	},
+	        	dataType: "JSON",
+	        	success:function(json){
+	        		if(json.n == '1') {
+	        			$("button.btn_add_wish").css("background-color","rgba(rgba(156, 84, 64, 0.62))");
+	        		}
+	        		if(json.n == '0') {
+	        			$("button.btn_add_wish").css("background-color","");
+	        		}
+	        	}, 	
+	            error: function(request, status, error){
+                  alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+		          }
+	           });    
+		
+		
+		var count = Number($("input#item_cnt").val());
+		var price = ${requestScope.pvo.product_price};
 
-				$("strong.goods_total_price").text(total_price);
-				$("input#product_cnt").val(count);
-				
-			});
-			
-			$("button.btn_add_order").bind("click", function() {
-				const frm = document.itemFrmView;
-				frm.action = "<%= request.getContextPath() %>/order.ban";
-				frm.submit();
-			});
-			
-			
+		$("input[name=product_price]").val(price);
+		var total_price = count * price; // 총 상품 금액
+		$("input[name=total_price]").val(total_price);
+		
+		$("input#product_cnt").val($("input#item_cnt").val());
+		
+		
+		
+		$("input#item_cnt").bind("change", function() {
+			count = Number($("input#item_cnt").val());
+			price = ${requestScope.pvo.product_price};
+			total_price = count * price;
 
-			// ====== 장바구니 시작 ===== 김진솔 ==//
-			$("button.btn_add_cart").bind("click", function(){
-				
-				// 주문수량에 대한 유효성 검사 //
-				const frm = document.itemFrmView;
-		
-				const regExp = /^[1-9]+$/;  // 숫자(1-9)만 체크하는 정규표현식
-				const item_cnt = $("input#item_cnt").val();		//주문수량
-				const bool = regExp.test(item_cnt);
-				
-				if(!bool){	//숫자 이외의 값 들어온 경우
-			         alert("주문 개수는 1개 이상이어야 합니다.");
-			         frm.item_cnt.value = "1";
-			         frm.item_cnt.focus();
-			         return; // 종료 
-				}
-				else{
-				}
-		
-				$("div.add_cart_layer_popup").show();	// '장바구니 바로 확인?' 팝업창
-		
-				
-				$("button.btn_cancel").bind("click", function(){
-					$("div.add_cart_layer_popup").hide();	// 취소하면 팝업창 닫음
-				});
-		
-				
-				$("button.btn_confirm").bind("click", function goCart(){	//확인하면 장바구니로 이동
-				
-			       // 주문개수가 1개 이상인 경우
-					frm.action = "<%= request.getContextPath()%>/cart.ban";
-					frm.method = "POST";
-					frm.submit();
-					
-					$("div.add_cart_layer_popup").hide();
-				 });	
-				
-			});	//end of $("button.btn_add_cart").bind("click", function()---------------------------
-			// ====== 장바구니 끝 =======//
-					
-					
-			
+			$("strong.goods_total_price").text(total_price);
+			$("input#product_cnt").val(count);
 			
 		});
 		
-	</script>
+		$("button.btn_add_order").bind("click", function() {
+			const frm = document.itemFrmView;
+			frm.action = "<%= request.getContextPath() %>/order.ban";
+			frm.submit();
+		});
+		
+		// ==== 상품 좋아요 기능
+		$("button.btn_add_wish").click(function(event){
+			if(user_id == '') {
+				alert("로그인하셔야만 좋아요를 누르실 수 있습니다");
+
+			}
+			else  {
+				$("button.btn_add_wish").toggleClass("changeCSSname");
+				
+				if( $(event.target).is(".material-symbols-outlined") ) { 
+					
+					if($(event.target).parent().is(".changeCSSname")) {	
+					   $("button.btn_add_wish").css("background-color","rgba(rgba(156, 84, 64, 0.62))");
+					}
+					else {
+						$("button.btn_add_wish").css("background-color","");
+					}
+				}
+				
+				else {
+	                
+					if($(event.target).is(".changeCSSname")) {	
+						$(event.target).css("background-color","rgba(rgba(156, 84, 64, 0.62))");
+					}
+					else {
+						$("button.btn_add_wish").css("background-color","");
+					}
+				}
+            //	선택자.toggleClass("클래스명1");
+	        //  이것은 선택자에 "클래스명1" 이 이미 적용되어 있으면 선택자에 "클래스명1" 을 제거해주고,
+	        //  만약에 선택자에 "클래스명1" 이 적용되어 있지 않으면 선택자에 "클래스명1" 을 추가해주는 것.
+
+	        /* 한마디로 addClass("클래스명1") 와 removeClass("클래스명1") 를 합친 것 이라고 보면 된다. */
+               
+	        
+	        $.ajax({
+	        	url:"<%= request.getContextPath()%>/product/addLike.ban",
+	        	type:"POST",
+	        	data: {
+	        		"user_id":user_id,
+	        		"product_num":product_num
+	        	},
+	        	dataType: "JSON",
+	        	success:function(json){
+	        		if(json.n == '1') {
+	        			
+	        		}
+	        	}, 	
+	            error: function(request, status, error){
+                  alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+		          }
+	           });    
+			};
+
+        
+    	}); // end of $("div#firstDiv").find("label").click(function(event)
+    	// ==== 상품 좋아요 기능 끝
+
+		// ====== 장바구니 시작 ===== 김진솔 ==//
+		$("button.btn_add_cart").bind("click", function(){
+			
+			// 주문수량에 대한 유효성 검사 //
+			const frm = document.itemFrmView;
+	
+			const regExp = /^[1-9]+$/;  // 숫자(1-9)만 체크하는 정규표현식
+			const item_cnt = $("input#item_cnt").val();		//주문수량
+			const bool = regExp.test(item_cnt);
+			
+			if(!bool){	//숫자 이외의 값 들어온 경우
+		         alert("주문 개수는 1개 이상이어야 합니다.");
+		         frm.item_cnt.value = "1";
+		         frm.item_cnt.focus();
+		         return; // 종료 
+			}
+			else{
+			}
+	
+			$("div.add_cart_layer_popup").show();	// '장바구니 바로 확인?' 팝업창
+	
+			
+			$("button.btn_cancel").bind("click", function(){
+				$("div.add_cart_layer_popup").hide();	// 취소하면 팝업창 닫음
+			});
+	
+			
+			$("button.btn_confirm").bind("click", function goCart(){	//확인하면 장바구니로 이동
+			
+		       // 주문개수가 1개 이상인 경우
+				frm.action = "<%= request.getContextPath()%>/cart.ban";
+				frm.method = "POST";
+				frm.submit();
+				
+				$("div.add_cart_layer_popup").hide();
+			 });	
+			
+		});	//end of $("button.btn_add_cart").bind("click", function()---------------------------
+		// ====== 장바구니 끝 =======//
+				
+				
+		
+		
+	});
+	// ==== 리뷰 작성 페이지 이동 ==== 	
+	function writeReview(userid) {
+		product_num = "${requestScope.pvo.product_num}";
+		if(userid == "") {
+			alert("로그인을 해주세요");
+			return;
+		}
+		
+		url = "<%= request.getContextPath()%>/board/writeReview.ban?userid="+userid+"&product_num="+product_num;
+		// 나의 정보 수정하기 팝업창 띄우기
+		// 너비 800, 높이 680 인 팝업창을 화면 가운데 위치시키기
+		const pop_width = 580;
+		const pop_height = 500;
+		const pop_left = Math.ceil((window.screen.width - pop_width)/2); <%-- 정수로 만듦 --%>
+						// ( 2000 - 800 ) / 2 = 600
+		const pop_top = Math.ceil((window.screen.height - pop_height)/2);
+		window.open(url, "writeReview", "left="+pop_left+", top="+pop_top+" , width="+pop_width+", height="+pop_height);
+
+	}
+	// ==== 리뷰 작성 페이지 이동 끝 ==== 
+	
+</script>
 
 
             <div id="container">
@@ -140,34 +259,7 @@
                                 <!-- item_photo_view_box -->
 
                                 <form name="itemFrmView" id="itemFrmView" method="post">
-<%--                                     <input type="hidden" name="mode" value="get_benefit">
-                                    <input type="hidden" name="scmNo" value="1">
-                                    <input type="hidden" name="cartMode" value="">
-                                    <input type="hidden" name="set_goods_price" value="21000">
-                                    <input type="hidden" id="set_goods_fixedPrice" name="set_goods_fixedPrice" value="0.00">
-                                    <input type="hidden" name="set_goods_mileage" value="0">
-                                    <input type="hidden" name="set_goods_stock" value="∞">
-                                    <input type="hidden" name="set_coupon_dc_price" value="21000.00">
-                                    <input type="hidden" id="set_goods_total_price" name="set_goods_total_price" value="0">
-                                    <input type="hidden" id="set_option_price" name="set_option_price" value="0">
-                                    <input type="hidden" id="set_option_text_price" name="set_option_text_price" value="0">
-                                    <input type="hidden" id="set_add_goods_price" name="set_add_goods_price" value="0">
-                                    <input type="hidden" name="set_total_price" value="21000">
-                                    <input type="hidden" name="mileageFl" value="c">
-                                    <input type="hidden" name="mileageGoods" value="0.00">
-                                    <input type="hidden" name="mileageGoodsUnit" value="percent">
-                                    <input type="hidden" name="goodsDiscountFl" value="y">
-                                    <input type="hidden" name="goodsDiscount" value="0.00">
-                                    <input type="hidden" name="goodsDiscountUnit" value="percent">
-                                    <input type="hidden" name="taxFreeFl" value="t">
-                                    <input type="hidden" name="taxPercent" value="10.0">
-                                    <input type="hidden" name="scmNo" value="1">
-                                    <input type="hidden" name="brandCd" value="">
-                                    <input type="hidden" name="cateCd" value="023001">
-                                    <input type="hidden" id="set_dc_price" value="0">
-                                    <input type="hidden" id="goodsOptionCnt" value="1">
-                                    <input type="hidden" name="optionFl" value="n">
-                                    <input type="hidden" name="useBundleGoods" value="1"> --%>
+
                                     <input type="hidden" name="product_num" value=${requestScope.pvo.product_num} />
                                     <input type="hidden" name="product_title" value="${requestScope.pvo.product_title}" />
                                     <input type="hidden" id="product_cnt" name="product_cnt" value=""/>
@@ -237,9 +329,7 @@
                                             </div>
                                             <div class="btn_choice_box">
                                                 <button type="button" class="btn_add_wish">
-                                                    <span class="material-symbols-outlined">
-                                                        favorite
-                                                        </span>
+                                                    <span class="material-symbols-outlined">favorite</span> 
                                                 </button>
                                                 <button type="button" class="btn_add_cart" onclick="goCart();" >장바구니</button>
                                                 <button type="button" class="btn_add_order">바로 구매하기</button>
@@ -408,6 +498,7 @@
                                                 <span class="title">REVIEW</span>
                                             </div>
                                             <div class="review_header_description">
+                                            	<a id="writeReviewButton" class="review_header_description_link" onclick="writeReview('<%=user_id%>')">리뷰 작성</a>
                                                 <a class="review_header_description_link" href="#">전체 상품 리뷰 보기</a>
                                             </div>
                                         </div>
@@ -422,15 +513,32 @@
                                             </thead>
 
                                             <tbody>
-                                                <tr>
-                                                    <td>테스트1</td>
-                                                    <td>테스트 내용</td>
-                                                    <td>태스트 날짜</td>
-                                                </tr>
+
+                                                <c:if test="${not empty requestScope.reviewList}">
+													<c:forEach var="rvo" items="${requestScope.reviewList}">
+														<tr>
+											              <td class="userid"><span>${rvo.mvo.user_id}</span></td>
+											              <td>${rvo.review_content}</td>
+											              <td>${rvo.review_date}</td>
+											              
+											           </tr>
+													</c:forEach>
+											 	 </c:if>
+												<c:if test="${empty requestScope.reviewList}">
+													<tr>
+														<td colspan="3">작성된 리뷰가 없습니다.</td>
+													</tr>
+												</c:if>
+                                                
                                             </tbody>
                                         </table>
 
                                     </div>
+                                    	<nav class="my-5">
+									        <div style='display:flex;'>
+									          <ul class="pagination" style='margin:auto;'>${requestScope.pageBar}</ul>
+									       </div>
+									    </nav>
                                     
                                 </div>
                                 <!-- 리뷰 끝 -->
@@ -462,6 +570,7 @@
                                                 <span class="title">상품문의</span>
                                             </div>
                                             <div class="review_header_description">
+                                            	
                                                 <a class="review_header_description_link" href="#">전체 상품 문의 보기</a>
                                             </div>
                                         </div>

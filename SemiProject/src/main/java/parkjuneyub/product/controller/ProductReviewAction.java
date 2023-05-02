@@ -1,13 +1,15 @@
-package KHY.model;
+package parkjuneyub.product.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MypageDAO implements InterMypageDAO {
+import common.controller.AbstractController;
+
+public class ProductReviewAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

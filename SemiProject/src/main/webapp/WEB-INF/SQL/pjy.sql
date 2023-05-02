@@ -70,3 +70,50 @@ from ALL_TAB_COLUMNS
 where TABLE_NAME = 'TBL_ORDER_DETAIL' ;
 
 select * from tbl_order_detail;
+select * from tbl_category;
+
+
+select * from tbl_order;
+select * from tbl_order_detail;
+
+-- 아이디랑 상품번호로 주문번호 가져오기
+select A.order_num, A.order_date
+from (
+select order_num, user_id, order_date
+from tbl_order
+where user_id = 'demo'
+) A
+join
+(
+select order_details_num, order_num, product_num, order_quantity
+from tbl_order_detail
+where product_num = 9 and order_details_num not in (
+select order_details_num from tbl_purchase_review where product_num = 9
+)
+) B
+on A.order_num = B.order_num
+order by order_date asc;
+-----------------------------------
+select * from tbl_purchase_review where product_num = 9
+select order_details_num from tbl_order_detail where order_num = ? and product_num = 9
+
+-------------------------------------
+--페이징 처리
+  SELECT RNO, purchase_review_id, userid, review_content, review_rating, review_date
+  FROM 
+  (
+      select rownum AS RNO, purchase_review_id, userid, order_details_num, product_num, review_content, review_rating, review_date
+      from 
+      (
+        select *
+        from tbl_purchase_review
+        where product_num = 9
+        order by review_date desc
+      ) V
+  ) T
+  WHERE RNO between 1 and 10;
+  
+-- 한 상품의 전체 페이지 가져오기
+select ceil(count(*) / 10 ) from tbl_purchase_review where product_num = 9;
+
+

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%
 	String ctxPath = request.getContextPath();
 %>
@@ -9,7 +9,51 @@
 
 	$(document).ready(function(){
 
+		 $("span.time_error").hide();
+	 // const timerDiv = document.querySelector("span.timer");// 타이머를 보여줄 장소
+
+	    const timerDiv = $("span#timer");// 타이머를 보여줄 장소
+	    
+		let time = 180;
 		
+		//타이머 함수 만들기
+		
+		
+		const timer = function(){
+			if(time == -1){
+	             clearInterval(timer);
+	             //alert("인증 시간이 만료되었습니다!");
+	             $("span.time_error").show();
+	             window.location.href = 'findPwd.ban?finish=1';
+           }
+			else{
+				
+				let minute;
+				let second;
+				
+				minute = Math.floor(time/60); // 소수부 말고 정수만 
+				
+				if(minute < 10){
+					minute = "0"+minute;
+				}
+				second = time%60;
+				if(second < 10){
+					second = "0"+second;
+				}
+			
+				
+				let html = minute + ":" + second;
+				timerDiv.html(html);
+				
+				time --;
+
+			}
+
+		};
+	
+		const setTimer = setInterval(timer, 1000);
+		
+
 		// 인증하기 
 		$("button.btn_member_next").click(function(){
 			const frm = document.verifyCertificationFrm;
@@ -38,9 +82,15 @@
                              <div class="member_warning">
                                  <input type="text" class="form-control" id="input_confirmCode"
                                      name="userCertificationCode" class="text" placeholder="인증번호 입력" />
-                                  
-                                 <p>남은 인증시간:<span class="timer"></span></p>
-                               
+
+                                 <input type="hidden" id="user_id" name="user_id" value="${requestScope.user_id}" />
+                                  <c:if test="${sessionScope.certificationCode != null}">
+                                  	 <p>남은 인증시간:<span id="timer">03:00</span></p>
+                                  	 <span class="time_error">인증시간이 만료되었습니다</span>
+                                  	 
+                                  </c:if>
+
+                              
                              </div><!-- // login_input_sec-->
 
                          </div><!--//member_login_box -->
@@ -55,3 +105,5 @@
          </div><!-- //  member_wrap-->
      </div>
 </div><!-- // sub_content-->
+
+

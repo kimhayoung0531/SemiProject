@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
 <%
 	String ctxPath = request.getContextPath();
 	
@@ -76,7 +77,7 @@ $(document).ready(function(){
     $(function() {
         //모든 datepicker에 대한 공통 옵션 설정
         $.datepicker.setDefaults({
-             dateFormat: 'yy-mm-dd' //Input Display Format 변경
+             dateFormat: 'yy/mm/dd' //Input Display Format 변경
             ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
             ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
             ,changeYear: true //콤보박스에서 년 선택 가능
@@ -110,6 +111,8 @@ $(document).ready(function(){
  
 	$(".date_check_list button").click(function(e){
 		
+       
+        
 		$('.date_check_list button').removeClass('on');
         $(this).addClass('on');
 
@@ -136,6 +139,11 @@ $(document).ready(function(){
         }
         
         $('input#toDate').datepicker('setDate', 'sysdate');
+       
+        var startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
+        var enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
+	
+       
         
 	});
  
@@ -146,12 +154,30 @@ $(document).ready(function(){
          startDate = new Date(startDate[0], startDate[1], startDate[2]);
          var endDate = ($($chekcInputDate[1]).val()).split('-');
          endDate = new Date(endDate[0], endDate[1], endDate[2]);
+         
+         var startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
+         var enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
+         
+         document.querySelector("#fromDate").value = startdate;
+         document.querySelector("#toDate").value = enddate;
+         
+         
 
+         
          if (startDate > endDate) {
              alert('종료 날짜가 시작 날짜보다 빠릅니다.\n확인 후 검색기간을 다시 선택해주세요.');
              return false;
          }
-     });
+         else{
+        
+ 				const frm = document.frmDateSearch;
+ 				frm.action = "<%= ctxPath%>/mypageOrderList.ban";
+ 				frm.method = "get";
+ 				frm.submit();
+ 		
+         }
+	 
+	 });
  
  
  
@@ -180,8 +206,7 @@ $(document).ready(function(){
                         <li>쇼핑정보
                             <ul class="sub_depth1">
                                 <li><a href="../mypage/order_list.php">- 주문목록/배송조회</a></li>
-                                <li><a href="../mypage/cancel_list.php">- 취소/반품/교환 내역</a></li>
-                                <li><a href="../mypage/refund_list.php">- 환불/입금 내역</a></li>
+                                <li><a href="../mypage/cancel_list.php">- 주문취소</a></li>
                                 <li><a href="../mypage/wish_list.php">- 좋아요리스트</a></li>
                             </ul>
                         </li>
@@ -235,7 +260,7 @@ $(document).ready(function(){
                                 </div>
                                 <!-- //date_check_list -->
                                 <div class="date_check_calendar">
-                                    <input type="text" id="fromDate" name="wDate[]" class="anniversary" value="" /> ~ <input type="text" id="toDate" name="wDate[]" class="anniversary" value="" />
+                                    <input type="text" id="fromDate" name="wDate[] wDate1" class="anniversary" value="" /> ~ <input type="text" id="toDate" name="wDate[] wDate2" class="anniversary" value="" />
                                 </div>
                                 <!-- //date_check_calendar -->
 
@@ -252,6 +277,8 @@ $(document).ready(function(){
                             </span>
 
                             <!-- 주문상품 리스트 -->
+                            <div class="mypage_lately_info_cont">
+                            <!-- 주문상품 리스트 -->
                             <div class="mypage_table_type">
                                 <table>
                                     <colgroup>
@@ -264,7 +291,7 @@ $(document).ready(function(){
                                     <thead>
                                         <tr>
                                             <th>날짜/주문번호</th>
-                                            <th>상품명/옵션</th>
+                                            <th>상품명</th>
                                             <th>상품금액/수량</th>
                                             <th>주문상태</th>
                                             <th>
@@ -273,11 +300,51 @@ $(document).ready(function(){
                                         </tr>
                                     </thead>
                                     <tbody>
-										<tr>
-                                            <td colspan="6">
-                                                <p class="no_data">조회내역이 없습니다.</p>
-                                            </td>
-                                        </tr>
+										<c:if test="${empty requestScope.orderList}">	
+	                                        <tr>
+	                                            <td colspan="6">
+	                                                <p class="no_data">조회내역이 없습니다.</p>
+	                                            </td>
+	                                        </tr>
+	                                    </c:if>
+	                                     
+	                                    <c:if test="${not empty requestScope.orderList}">
+							               <c:forEach var="odvo" items="${requestScope.orderList}" varStatus="status"> 
+							                   <tr>
+							                        <td> <%-- 체크박스 및 제품번호 --%>
+							                             <%-- c:forEach 에서 선택자 id를 고유하게 사용하는 방법  
+							                                  varStatus="status" 을 이용하면 된다.
+							                                  status.index 은 0 부터 시작하고,
+							                                  status.count 는 1 부터 시작한다. 
+							                             --%>  <%-- 날짜 및 주문번호 --%> 
+							                            <span class="product_title">${odvo.ovo.order_date}</span><br>
+							                            <span class="product_title">${odvo.order_details_num}</span>
+							                        </td>
+							                        <td align="center"> <%-- 상품명 --%> 
+							                           <a href="/MyMVC/shop/prodView.up?pnum=${cartvo.pnum}"><!-- 제품상세페이지 링크 -->
+							                              <img src="/MyMVC/images/${cartvo.prod.pimage1}" class="img-thumbnail" width="130px" height="100px" />
+							                           </a> 
+							                           <br/><span class="product_title">${odvo.pvo.product_title}</span> 
+							                        </td>
+							                        <td align="center"> 
+							                            <%-- 상품 금액 및 주문 수량 --%>
+							                              <fmt:formatNumber value="${odvo.product_selling_price}" pattern="###,###" /> 원<br>
+							                              <span class="order_quantity">${odvo.order_quantity}</span> 개
+							                              
+							                        </td>
+							                        <td align="right"> <%-- 주문상태 --%> 
+							                            <span class="order_quantity">${odvo.delivery_status}</span>
+							                            
+							                        </td>
+							                        <td align="right"> <%-- 리뷰 --%> 
+							                            
+							                            <%-- 리뷰 작성한거 끌어오기 안썼으면 작성하기 버튼 생성 --%>
+							                            
+							                        </td>
+							                      </tr>
+							                 </c:forEach>
+							            </c:if>    
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -292,7 +359,7 @@ $(document).ready(function(){
 
                     <div class="pagination">
                         <div class="pagination">
-                            <ul></ul>
+                            <ul class="pagination" style='margin:auto;'>${requestScope.pageBar}</ul>
                         </div>
                     </div>
                     <!-- //pagination -->

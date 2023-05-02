@@ -1,7 +1,6 @@
 package jinsol.cart.controller;
 
 
-
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,38 +18,41 @@ public class AddCartAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-		
+	
 		String method = request.getMethod();
 		
 		if("GET".equalsIgnoreCase(method)) {
 			
-		  String item_cnt = request.getParameter("item_cnt");
-		  String pnum = request.getParameter("product_num");
-		  
-		  System.out.println("~~~~~~ AddCartAction.java 에서1 pnum : " + pnum);
-		  
-		  HttpSession session = request.getSession();
-		  MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
-		  
-		  ////////////////////////테스트용///////////////////////////////////
-		  
-		  loginuser = new MemberVO();
-		  loginuser.setUser_id("demo");
-		  
-		  //////////////////////////////////////////////////////////////////
-		  
-		  InterCartDAO cdao = new CartDAO();
+			HttpSession session = request.getSession();
+	        MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 
+
+			  ////////////////////////테스트용///////////////////////////////////
+			  
+			  loginuser = new MemberVO();
+			  loginuser.setUser_id("demo");
+			  
+			  //////////////////////////////////////////////////////////////////
+			  
+			
+		  String cart_cnt = request.getParameter("cart_cnt");
+		  String product_num = request.getParameter("product_num");
+		  
+		  System.out.println("~~~~~~ AddCartAction.java 에서1 cart_cnt : " + cart_cnt);
+		  System.out.println("~~~~~~ AddCartAction.java 에서1 pnum : " + product_num);
+		  
 		  Map<String, String> paraMap = new HashMap<>();
 		  paraMap.put("user_id", loginuser.getUser_id());
-		  paraMap.put("pnum", pnum);
-		  paraMap.put("item_cnt", item_cnt);
-		  
+		  paraMap.put("product_num", product_num);
+		  paraMap.put("cart_cnt", cart_cnt);
+	      
+		  InterCartDAO cdao = new CartDAO(); 
+
 		  int n = cdao.addCart(paraMap);
 		  
 		  if(n==1) {
 			request.setAttribute("message", "장바구니에 담겼습니다.");
-			request.setAttribute("loc", "cart.ban");
+			request.setAttribute("loc", "cartList.ban");
 		  }
 		  else {
 			request.setAttribute("message", "장바구니 담기에 실패하셨습니다.");
@@ -62,7 +64,7 @@ public class AddCartAction extends AbstractController {
 		}
 		
 		else {
-			//GET방식이라면 
+			//post방식이라면 
 			String message = "비정상적인 경로로 들어왔습니다.";
 		    String loc = "javascript:history.back()";
 		      
@@ -73,7 +75,6 @@ public class AddCartAction extends AbstractController {
 		   super.setViewPage("/WEB-INF/msg.jsp");
 		}
 			 
-				 
 	} //end of public void execute ---------------------------------------
 
 	

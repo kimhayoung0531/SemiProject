@@ -7,15 +7,17 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
-import parkjuneyub.member.controller.MemberVO;
+import sge.member.model.MemberVO;
 import parkjuneyub.product.model.InterProductDAO;
 import parkjuneyub.product.model.ProductDAO;
 
 public class OrderEndAction extends AbstractController {
 
 	InterProductDAO pdao = new ProductDAO();
+	
 	
 	private String getOderNum() throws SQLException {
 		// 주문코드 형식 : s+날짜+sequence ==> s20220503-1 , s20220503-2 , s20220503-3
@@ -33,6 +35,8 @@ public class OrderEndAction extends AbstractController {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		HttpSession session = request.getSession();
+		MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
 		
 		String order_name = request.getParameter("order_name");
 		String order_phone = request.getParameter("order_phone");
@@ -62,7 +66,7 @@ public class OrderEndAction extends AbstractController {
 		
 		// 주문테이블에 insert 할 데이터들
 		paraMap.put("oderNum", oderNum);
-		paraMap.put("userid", "test");	// 유저아이디 테스트용
+		paraMap.put("userid", loginuser.getUser_id());	// 유저아이디 테스트용
 		if(useMileage.isEmpty()) {
 			useMileage = "0";
 		}

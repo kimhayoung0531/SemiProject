@@ -23,7 +23,7 @@
 			const frm = document.itemFrmView;
 	
 			const regExp = /^[1-9]+$/;  // 숫자(1-9)만 체크하는 정규표현식
-			const item_cnt = $("input#item_cnt").val();		//주문수량
+			const cart_cnt = $("input#item_cnt").val();		//주문수량
 			const bool = regExp.test(item_cnt);
 			
 			if(!bool){	//숫자 이외의 값 들어온 경우
