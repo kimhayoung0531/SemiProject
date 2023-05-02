@@ -2,6 +2,7 @@ package parkjuneyub.order.controller;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
+import parkjuenyub.order.model.OrderVO;
 import sge.member.model.MemberVO;
 import parkjuneyub.product.model.InterProductDAO;
 import parkjuneyub.product.model.ProductDAO;
@@ -37,7 +39,7 @@ public class OrderEndAction extends AbstractController {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		HttpSession session = request.getSession();
 		MemberVO loginuser = (MemberVO)session.getAttribute("loginuser");
-		
+		System.out.println(request.getParameter("order_name"));
 		String order_name = request.getParameter("order_name");
 		String order_phone = request.getParameter("order_phone");
 		String order_mobile = request.getParameter("order_mobile");
@@ -63,10 +65,16 @@ public class OrderEndAction extends AbstractController {
 		HashMap<String, Object> paraMap = new HashMap<>();
 		
 		String oderNum = getOderNum();
+		System.out.println("order_name " + order_name);
+		System.out.println("receive_phone " + receive_phone);
+		System.out.println("productNum_join " + productNum_join);
+		System.out.println("productCnt_join " + productCnt_join);
+		System.out.println("productMileage_join " + productMileage_join);
+		
 		
 		// 주문테이블에 insert 할 데이터들
 		paraMap.put("oderNum", oderNum);
-		paraMap.put("userid", loginuser.getUser_id());	// 유저아이디 테스트용
+		paraMap.put("userid", loginuser.getUser_id());
 		if(useMileage.isEmpty()) {
 			useMileage = "0";
 		}
@@ -106,10 +114,26 @@ public class OrderEndAction extends AbstractController {
 		
 		int isSuccess = pdao.orderAdd(paraMap);
 		
+		if(isSuccess == 1) {
+			OrderVO ovo = new OrderVO();
+			ovo.setOrder_num(oderNum);
+			ovo.setOrder_mileage_total(Long.parseLong(useMileage));
+			ovo.setOrder_price_total(Long.parseLong(finalTotalPrice));
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date now = new Date();
+			String orderTime = sdf.format(now);
+			ovo.setOrder_date(orderTime);
+			
+			
+			String recipt_address = "우편번호("+postcode + ") " + postcode + " " + detailAddress + " " + extraAddress;
+			request.setAttribute("ovo", ovo);
+			request.setAttribute("recipt_address", recipt_address);
+			request.setAttribute("save_mileage", save_mileage);
+			request.setAttribute("order_name", order_name);
 		
-		
-		
-		
+		}
+
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/pjy_order/orderEnd.jsp");
 		
