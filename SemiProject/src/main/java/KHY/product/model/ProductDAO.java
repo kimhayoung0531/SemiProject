@@ -432,7 +432,7 @@ public class ProductDAO implements InterProductDAO  {
 						"(\n"+
 						"select rownum AS RNO, order_num, order_date\n"+
 						"from tbl_order \n"+
-						"where user_id = ? AND ? <= order_date AND order_date < ? "+
+						"where user_id = ? AND ? <= order_date AND order_date < to_date(?) + 1 "+
 						") A \n"+
 						"join \n"+
 						"(select order_details_num, order_num, product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
@@ -495,6 +495,54 @@ public class ProductDAO implements InterProductDAO  {
 			close();
 		}
 		return orderList;
+	}
+
+	//조회 기간 내에 주문 내역 수 알아오기 
+	@Override
+	public int selectOrderListCount(Map<String, String> paraMap) throws SQLException {
+		int n = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "select count(*)"+
+						"       \n"+
+						"from\n"+
+						"(\n"+
+						"select rownum AS RNO, order_num, order_date\n"+
+						"from tbl_order \n"+
+						"where user_id = ? AND ? <= order_date AND order_date < to_date(?) + 1 "+
+						") A \n"+
+						"join \n"+
+						"(select order_details_num, order_num, product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
+						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
+						"        orderer_mobile, payment_time, use_mileage\n"+
+						"from tbl_order_detail ) B\n"+
+						"on A.order_num = B.order_num\n"+
+						"join\n"+
+						"(select product_num, product_title from tbl_product) C\n"+
+						"on B.product_num = C.product_num ";
+						
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, paraMap.get("user_id"));
+			pstmt.setString(2, paraMap.get("startdate"));
+			pstmt.setString(3, paraMap.get("enddate"));
+			
+			
+			
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			n = rs.getInt(1);
+			
+		} finally {
+			close();
+		}
+		return n;
 	}
 	
 }

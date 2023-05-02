@@ -188,8 +188,8 @@ $(document).ready(function(){
          document.querySelector("#fromDate").value = startdate;
          document.querySelector("#toDate").value = enddate;
          
-         localStorage.setItem('startdate2', startdate);
-         localStorage.setItem('enddate2', enddate);
+         localStorage.setItem('startdate', startdate);
+         localStorage.setItem('enddate', enddate);
        
          //alert(document.querySelector("#toDate").value);
          //alert(document.querySelector("#fromDate").value);
@@ -275,7 +275,7 @@ $(document).ready(function(){
 
                      <div class="mypage_lately_info">
                         <div class="mypage_zone_tit">
-                            <h3>주문목록/배송조회</h3>
+                            <h3>마일리지</h3>
                         </div>
 
                         <div class="date_check_box">
@@ -304,34 +304,33 @@ $(document).ready(function(){
                         
 
                             <span class="pick_list_num">
-                                주문목록 / 배송조회 내역 총 <strong>${requestScope.count}</strong> 건
+                                좋아요 내역 총 <strong>${requestScope.count}</strong> 건
                             </span>
 
-                            <!-- 주문상품 리스트 -->
+                            <!-- 좋아요 리스트 -->
                             <div class="mypage_lately_info_cont">
-                            <!-- 주문상품 리스트 -->
+                            <!-- 좋아요 리스트 -->
                             <div class="mypage_table_type">
                                 <table>
                                     <colgroup>
-                                        <col style="width:15%"> <!-- 날짜/주문번호 -->
-                                        <col> <!-- 상품명/옵션 -->
-                                        <col style="width:15%"> <!-- 상품금액/수량 -->
-                                        <col style="width:15%"> <!-- 주문상태 -->
-                                        <col style="width:15%"> <!-- 확인/리뷰 -->
+                                        <col style="width:12%">	<!-- 날짜 -->
+			                            <col style="width:12%"> <!-- 유형 -->
+			                            <col>					<!-- 내용 -->
+			                            <col style="width:18%"> <!-- 유효기간 -->
+			                            <col style="width:10%"> <!-- 마일리지 내역 -->
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th>날짜/주문번호</th>
-                                            <th>상품명</th>
-                                            <th>상품금액/수량</th>
-                                            <th>주문상태</th>
-                                            <th>
-                                                확인/리뷰
-                                            </th>
+                                            <th>날짜</th>
+				                            <th>유형</th>
+				                            <th>내용</th>
+				                            <th>유효기간</th>
+				                            <th class="td_cash"><span>마일리지 내역</span></th>
+				                            <th class="td_cash"><span>잔여 마일리지</span></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-										<c:if test="${empty requestScope.orderList}">	
+										<c:if test="${empty requestScope.likeList}">	
 	                                        <tr>
 	                                            <td colspan="6">
 	                                                <p class="no_data">조회내역이 없습니다.</p>
@@ -339,8 +338,8 @@ $(document).ready(function(){
 	                                        </tr>
 	                                    </c:if>
 	                                     
-	                                    <c:if test="${not empty requestScope.orderList}">
-							               <c:forEach var="odvo" items="${requestScope.orderList}" varStatus="status"> 
+	                                    <c:if test="${not empty requestScope.likeList}">
+							               <c:forEach var="odvo" items="${requestScope.likeList}" varStatus="status"> 
 							                   <tr>
 							                        <td> <%-- 체크박스 및 제품번호 --%>
 							                             <%-- c:forEach 에서 선택자 id를 고유하게 사용하는 방법  
