@@ -255,7 +255,7 @@ public class CartDAO implements InterCartDAO {
 		         pstmt = conn.prepareStatement(sql);
 		         
 		         n = pstmt.executeUpdate();
-		                  
+		         
 		      } finally {
 		         close();
 		      }

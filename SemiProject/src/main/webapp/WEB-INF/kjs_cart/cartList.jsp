@@ -66,14 +66,11 @@
 						    data:{"cart_ck_join":cart_ck_join}, 				
 						    dataType:"json",
 						    success:function(json){
-						    	console.log("~~~확인용 : " + JSON.stringify(json) );
-						    	
-						    	// ~~~확인용 : {"n":1}
 						    	
 						    	if(json.n > 0){
 						    		// 장바구니 보기 페이지로 감
 						    		alert("선택상품이 삭제되었습니다.");
-						    		location.href = "cartList.up";
+						    		location.href = "cartList.ban";
 
 						    	}
 						    },
@@ -88,12 +85,16 @@
 		     }
 		});	//end of $("button.btn_order_choice_del").click(function(){})-----------------
 			
-									 /*
-								    data:{"cart_num":cartCkArr.join(",") }, // request.getParameter("cart_num"); 은 타입이 String 으로 된다.  
-	                                          "5,7,10"
-	                                           '5','7','10'
-	                                           delete from 장바구니테이블 
-	                                           where 장바구니번호 in('5','7','10')  */
+		
+		
+		// ======== 장바구니에 담긴 총 마일리지 합계 ========
+			let sum = 0;
+			$("strong.cart_mileage").each(function(index, item) {
+				sum += parseInt($(item).text());
+			});
+			
+			$("#totalGoodsMileage").text(sum.toLocaleString('en'));
+		 	
 		
 	});	//end of $(document).ready(function () -------------------------------------
 
@@ -162,7 +163,7 @@
 	   
 	   
 
-	   // === 장바구니에서 특정 제품을 비우기 === //  
+	   // === 장바구니에서 특정 제품을 삭제하기 === //  
 	   function goDel(cart_num) {
 		   
 		   const pname = $("span.cart_pname").text();		
@@ -358,7 +359,7 @@
                                         <th>상품금액</th>
                                         <th>적립 마일리지</th>
                                         <th>합계금액</th>
-                                        <th>삭제</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
 
@@ -405,7 +406,7 @@
 		                                                </div>        
 		                                                <button class="btn btn-outline-secondary btn-sm updateBtn" type="button" onclick="goOqtyEdit(this)">수정</button>
 							                              <%-- 장바구니 테이블에서 특정제품의 현재주문수량을 변경하여 적용하려면 먼저 장바구니번호(시퀀스)를 알아야 한다 --%>
-							                            <input type="hidden" class="cartno" name="cartno" value="${cartvo.cart_num}" /> 
+							                            <input type="text" class="cartno" name="cartno" value="${cartvo.cart_num}" /> 
 		                                            </div>
 		                                        </td>
 		                                        
@@ -418,7 +419,7 @@
 		                                        <td class="td_mileage">    
 		                                                <ul class="mileage_list">
 		                                                    <li class="mileage_mileage">
-																<strong class="cart_mileage" name="cart_mileage" value="${cartvo.totalMileage}">${cartvo.totalMileage}</strong> 마일리지
+																<strong class="cart_mileage" name="cart_mileage">${cartvo.totalMileage}</strong> 마일리지
 		                                                    </li>
 		                                                </ul>
 		                                        </td>
