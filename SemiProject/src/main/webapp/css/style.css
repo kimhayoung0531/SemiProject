@@ -3278,7 +3278,7 @@ body .cart_cont .price_sum{
 
 .cart_content_box .order_table_type td{
     height:28px; 
-    padding:30px 10px;
+    padding:24px 10px;
     border-bottom:1px solid #dbdbdb; 
     /* border-left:1px dotted #ededed; */
     background:#ffffff;
@@ -3302,8 +3302,18 @@ body .cart_cont .price_sum{
 }
 
 .cart_content_box .order_table_type .td_left a{
-    margin: 10px;
+    margin: 25px;
 }
+
+.cart_content_box .order_table_type .td_left .cart_pname{
+    /* border: solid 1px red; */
+    padding-top: 30px;
+}
+
+.cart_content_box .order_table_type .td_left .pick_add_cont{
+    display: block;
+}
+
 
 .cart_content_box .btn_left_box{
     /* border: solid 1px rebeccapurple; */
