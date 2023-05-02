@@ -30,6 +30,9 @@ public interface InterProductDAO {
 
 	//페이징 처리를 한 회원의 주문 목록 알아오기
 	List<OrderDeatailVO> selectPagingOrderList(Map<String, String> paraMap) throws SQLException;
+
+	//조회 기간 내에 주문 내역 수 알아오기 
+	int selectOrderListCount(Map<String, String> paraMap) throws SQLException;
 	
 	
 	
