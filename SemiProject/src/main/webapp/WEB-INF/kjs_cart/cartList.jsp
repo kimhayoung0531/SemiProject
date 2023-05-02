@@ -262,7 +262,7 @@
             
             
             if(confirm("총주문액 : "+sum_totalPrice.toLocaleString('en')+"원 결제하시겠습니까?")) {
-                
+               <%-- 
                 $.ajax({
                    url:"<%= request.getContextPath()%>/order.ban",
                    type:"post",
@@ -287,6 +287,13 @@
                          alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
                       }
                 });	//end of $.ajax ------------------------------------------
+                
+                --%>
+                const frm = document.frmCart;
+        		frm.action = "<%= request.getContextPath()%>/order.ban";
+        		frm.method = "post";
+        		frm.submit();
+                
              }//end of if --------------------------------------
             
             
@@ -338,10 +345,10 @@
                                     <colgroup>
                                         <col style="width:3%">  <!-- 체크박스 -->
                                         <col>					<!-- 상품명/옵션 -->
-                                        <col style="width: 8%">  <!-- 수량 -->
-                                        <col style="width:10%"> <!-- 상품금액 -->
+                                        <col style="width:12%">  <!-- 수량 -->
+                                        <col style="width:12%"> <!-- 상품금액 -->
                                         <col style="width:13%"> <!-- 마일리지 -->
-                                        <col style="width:10%"> <!-- 합계금액 -->
+                                        <col style="width:12%"> <!-- 합계금액 -->
                                         <col style="width:10%"> <!-- 삭제 -->
                                     </colgroup>
                                   
@@ -381,6 +388,7 @@
 					                             --%>   
 		                                            <div class="form_element">
 		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}" checked="checked"/><label for="pnum${status.index}">${cartvo.product_num}</label>   
+		                                                <input type="hidden" name="productNum" value="${cartvo.product_num}" />
 		                                            </div>
 		                                        </td>
 		
@@ -388,11 +396,10 @@
 		                                            <div class="pick_add_cont"> 
 		                                                <div class="pick_add_img_info"> 
 		                                                    <a href="/SemiProject/productDeatail.ban?pnum=${cartvo.pvo.product_num}">
-		                                                    <img src="/SemiProject/images/${cartvo.pvo.main_image} }" width="60"
-		                                                        alt="${cartvo.pvo.product_title}" title="${cartvo.pvo.product_title}">
-		                                                    </a> 
-		                                                    
-		                                                    <span class="cart_pname"><a href="/SemiProject/productDeatail.ban">${cartvo.pvo.product_title}</a></span>
+		                                                    <img src="/SemiProject/image/item_main/${cartvo.pvo.main_image}.jpg" width="60"
+		                                                        alt="${cartvo.pvo.product_title}" title="${cartvo.pvo.product_title}" />
+		                                                    </a>
+		                                                <span class="cart_pname"><a href="/SemiProject/productDeatail.ban?pnum=${cartvo.pvo.product_num}">${cartvo.pvo.product_title}</a></span>
 		                                                </div>
 		                                            </div>
 		                                        </td>
@@ -402,16 +409,18 @@
 		                                            <div class="order_goods_num">
 		                                                <div class="btn_gray_list">
 		                                                    <p><label for="number"></label><input type="number" id="cart_cnt" min="1"  max="50" step="1" value="${cartvo.product_count}" /></p>
-		                                                </div>        
-		                                                <button class="btn btn-outline-secondary btn-sm updateBtn" type="button" onclick="goOqtyEdit(this)">수정</button>
+		                                                </div>   
+		                                                <button class="btn btn-outline-secondary btn-sm updateBtn" type="button" style="margin-top:3px;" onclick="goOqtyEdit(this)">수정</button>
 							                              <%-- 장바구니 테이블에서 특정제품의 현재주문수량을 변경하여 적용하려면 먼저 장바구니번호(시퀀스)를 알아야 한다 --%>
-							                            <input type="text" class="cartno" name="cartno" value="${cartvo.cart_num}" /> 
+							                            <input type="hidden" class="cartno" name="cartno" value="${cartvo.cart_num}" /> 
+							                            <input type="hidden" name="cartNum" value="${cartvo.cart_num}" /> 
 		                                            </div>
 		                                        </td>
 		                                        
 		                                        <%-- 상품 금액 --%>
 		                                        <td>  
 		                                            <span class="order_sum_txt price" style="font-weight:bold;"><fmt:formatNumber value="${cartvo.product_price}" pattern="###,###" /></span> 원
+							                        <input type="hidden" name="product_price" value="${cartvo.product_price}" /> 
 		                                        </td>
 		
 												 <%-- 마일리지 --%>
@@ -456,7 +465,7 @@
                         <%-- 장바구니 상품리스트 끝 --%>
         
         
-                    </form>
+                   
         
                     <div class="btn_left_box">
                         <a href="<%= request.getContextPath() %>/homebread.ban" class="shop_go_link"><span>&lt; 쇼핑 계속하기</span></a>
@@ -470,6 +479,8 @@
                                         총 상품 금액
                                     </div>
                                     <div class="allprice_won"><fmt:formatNumber value="${requestScope.sumMap.SUMTOTALPRICE}" pattern="###,###"/>원</div>
+                                    <input type="hidden" name="sumTotalPrice" value="${requestScope.sumMap.SUMTOTALPRICE}" />
+                                    
                                 </div>
 
                                 <span><img src="https://cdn-pro-web-250-118.cdn-nhncommerce.com/cafenotr1984_godomall_com/data/skin/front/moment_cafenoli_N/img/order/order_price_plus.png" alt="더하기"></span>
@@ -503,6 +514,7 @@
                     </div>
                     <!-- //price_sum -->
         
+        			</form>
                     <div class="btn_order_whole_box">
                         <div class="btn_delete_box">
                             <button type="button" class="btn_order_choice_del">선택 상품 삭제</button>

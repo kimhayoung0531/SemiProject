@@ -1,5 +1,7 @@
 package parkjuneyub.product.model;
 
+import parkjuneyub.member.model.MemberVO;
+
 public class ProductVO {
 	
 	private long product_num;
@@ -19,6 +21,9 @@ public class ProductVO {
 	public ProductVO() {
 		
 	}
+	
+	//select용
+	private MemberVO mvo;
 	
 	public ProductVO(long product_num, long category_num, String product_title, long main_image, long product_price,
 			String product_detail, long product_inventory, String product_date, int sale_count) {
