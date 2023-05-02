@@ -170,10 +170,7 @@
 			
 			$("button.btn_confirm").bind("click", function goCart(){	//확인하면 장바구니로 이동
 			
-		       // 주문개수가 1개 이상인 경우
-				frm.action = "<%= request.getContextPath()%>/cart.ban";
-				frm.method = "POST";
-				frm.submit();
+				location.href = "<%= ctxPath%>/cart.ban?cart_cnt=" + item_cnt +"&product_num="+product_num;
 				
 				$("div.add_cart_layer_popup").hide();
 			 });	
@@ -310,7 +307,7 @@
                                                     <dl class="item_detail_each">
                                                         <dt>개수</dt>
                                                         <dd>
-                                                            <input id="item_cnt" type="number" class="form-control" min="1" value="1">
+                                                            <input id="item_cnt" name="item_cnt" type="number" class="form-control" min="1" value="1">
                                                         </dd>
                                                     </dl>
                                                 </div>

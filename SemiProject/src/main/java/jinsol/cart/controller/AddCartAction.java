@@ -22,19 +22,18 @@ public class AddCartAction extends AbstractController {
 		String method = request.getMethod();
 		
 		if("GET".equalsIgnoreCase(method)) {
-			
-			HttpSession session = request.getSession();
-	        MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
+		
+		 HttpSession session = request.getSession();
+         MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 
 
-			  ////////////////////////테스트용///////////////////////////////////
-			  
-			  loginuser = new MemberVO();
-			  loginuser.setUser_id("demo");
-			  
-			  //////////////////////////////////////////////////////////////////
-			  
-			
+		  ////////////////////////테스트용///////////////////////////////////
+		  
+		  loginuser = new MemberVO();
+		  loginuser.setUser_id("demo");
+		  
+		  //////////////////////////////////////////////////////////////////
+		  
 		  String cart_cnt = request.getParameter("cart_cnt");
 		  String product_num = request.getParameter("product_num");
 		  

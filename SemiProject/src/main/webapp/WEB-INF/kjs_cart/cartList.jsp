@@ -12,11 +12,10 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
-		<!--
+		
        if(${not empty requestScope.item_cnt}) {
     	   $("input#cart_cnt").val("${requestScope.item_cnt}");
        }		
-		-->
 		
 		// 선택체크박스가 하나라도 해제되면 전체체크박스 체크해제하기
 		$(".chkboxpnum").click(function() {
