@@ -38,9 +38,6 @@ public class AddCartAction extends AbstractController {
 		  String cart_cnt = request.getParameter("cart_cnt");
 		  String product_num = request.getParameter("product_num");
 		  
-		  System.out.println("~~~~~~ AddCartAction.java 에서1 cart_cnt : " + cart_cnt);
-		  System.out.println("~~~~~~ AddCartAction.java 에서1 pnum : " + product_num);
-		  
 		  Map<String, String> paraMap = new HashMap<>();
 		  paraMap.put("user_id", loginuser.getUser_id());
 		  paraMap.put("product_num", product_num);
