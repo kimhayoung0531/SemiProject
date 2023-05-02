@@ -12,11 +12,10 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
-		<!--
+		
        if(${not empty requestScope.item_cnt}) {
     	   $("input#cart_cnt").val("${requestScope.item_cnt}");
        }		
-		-->
 		
 		// 선택체크박스가 하나라도 해제되면 전체체크박스 체크해제하기
 		$(".chkboxpnum").click(function() {
@@ -38,11 +37,10 @@
 		});	//end of $(".chkboxpnum").click(function(){} ----------------
 		  
 			
-		<%--
+		
 		// ======== 장바구니 선택상품 삭제하기 ========
 		$("button.btn_order_choice_del").click(function(){
 		    const checked_cnt = $("input:checkbox[name='pnum']:checked").length;
-			const cart_ck_arr = new Array();
 
 		    if(checked_cnt < 1) {
 		         alert("삭제하실 제품을 선택하세요.");
@@ -50,28 +48,29 @@
 		      }
 		    else{
 		    	const bool = confirm("정말 삭제하시겠습니까?");
+				const cart_ck_arr = new Array();
+
 		    	if(bool){
 						$("input:checkbox[name='pnum']:checked").each(function() {
-							cart_ck_arr.push($(this).val());
+							cart_ck_arr.push($(this).val());		//product_num
 						});
 						const cart_ck_join = cart_ck_arr.join();
 						
 				    	console.log("~~~확인용 cart_ck_join: " + cart_ck_join);
-
+						// ~~~확인용 cart_ck_join: 12,5,4
 						
 						$.ajax({
-							url:"<%= ctxPath%>/cartDelete.ban", 
+							url:"<%= request.getContextPath()%>/cartChoiseDelete.ban", 
 						    type:"post",
 						    data:{"cart_ck_join":cart_ck_join}, 				
 						    dataType:"json",
 						    success:function(json){
-						    	console.log("~~~확인용 : " + JSON.stringify(json) );
 						    	
-						    	// ~~~확인용 : {"n":1}
-						    	
-						    	if(json.n == 1){
+						    	if(json.n > 0){
 						    		// 장바구니 보기 페이지로 감
-						    		location.href = "cartList.up";
+						    		alert("선택상품이 삭제되었습니다.");
+						    		location.href = "cartList.ban";
+
 						    	}
 						    },
 						    error: function(request, status, error){
@@ -84,13 +83,17 @@
 		    		}
 		     }
 		});	//end of $("button.btn_order_choice_del").click(function(){})-----------------
-				--%>
-									 /*
-								    data:{"cart_num":cartCkArr.join(",") }, // request.getParameter("cart_num"); 은 타입이 String 으로 된다.  
-	                                          "5,7,10"
-	                                           '5','7','10'
-	                                           delete from 장바구니테이블 
-	                                           where 장바구니번호 in('5','7','10')  */
+			
+		
+		
+		// ======== 장바구니에 담긴 총 마일리지 합계 ========
+			let sum = 0;
+			$("strong.cart_mileage").each(function(index, item) {
+				sum += parseInt($(item).text());
+			});
+			
+			$("#totalGoodsMileage").text(sum.toLocaleString('en'));
+		 	
 		
 	});	//end of $(document).ready(function () -------------------------------------
 
@@ -159,7 +162,7 @@
 	   
 	   
 
-	   // === 장바구니에서 특정 제품을 비우기 === //  
+	   // === 장바구니에서 특정 제품을 삭제하기 === //  
 	   function goDel(cart_num) {
 		   
 		   const pname = $("span.cart_pname").text();		
@@ -177,10 +180,10 @@
 				    dataType:"json",
 				    success:function(json){
 				    	console.log("~~~확인용 : " + JSON.stringify(json) );
-				    	// ~~~확인용 : {"n":1}
 				    	
 				    	if(json.n == 1){
 				    		// 장바구니 보기 페이지로 감
+				    		alert("선택상품이 삭제되었습니다.");
 				    		location.href = "cartList.ban";
 				    	}
 				    	
@@ -335,10 +338,10 @@
                                     <colgroup>
                                         <col style="width:3%">  <!-- 체크박스 -->
                                         <col>					<!-- 상품명/옵션 -->
-                                        <col style="width: 8%">  <!-- 수량 -->
-                                        <col style="width:10%"> <!-- 상품금액 -->
+                                        <col style="width:12%">  <!-- 수량 -->
+                                        <col style="width:12%"> <!-- 상품금액 -->
                                         <col style="width:13%"> <!-- 마일리지 -->
-                                        <col style="width:10%"> <!-- 합계금액 -->
+                                        <col style="width:12%"> <!-- 합계금액 -->
                                         <col style="width:10%"> <!-- 삭제 -->
                                     </colgroup>
                                   
@@ -355,7 +358,7 @@
                                         <th>상품금액</th>
                                         <th>적립 마일리지</th>
                                         <th>합계금액</th>
-                                        <th>삭제</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
 
@@ -377,7 +380,7 @@
 					                                  status.count 는 1 부터 시작한다. 
 					                             --%>   
 		                                            <div class="form_element">
-		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}" checked="checked"/><label for="pnum${status.index}"></label>   
+		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}" checked="checked"/><label for="pnum${status.index}">${cartvo.product_num}</label>   
 		                                            </div>
 		                                        </td>
 		
@@ -385,11 +388,10 @@
 		                                            <div class="pick_add_cont"> 
 		                                                <div class="pick_add_img_info"> 
 		                                                    <a href="/SemiProject/productDeatail.ban?pnum=${cartvo.pvo.product_num}">
-		                                                    <img src="/SemiProject/images/${cartvo.pvo.main_image} }" width="60"
-		                                                        alt="${cartvo.pvo.product_title}" title="${cartvo.pvo.product_title}">
-		                                                    </a> 
-		                                                    
-		                                                    <span class="cart_pname"><a href="/SemiProject/productDeatail.ban">${cartvo.pvo.product_title}</a></span>
+		                                                    <img src="/SemiProject/image/item_main/${cartvo.pvo.main_image}.jpg" width="60"
+		                                                        alt="${cartvo.pvo.product_title}" title="${cartvo.pvo.product_title}" />
+		                                                    </a>
+		                                                <span class="cart_pname"><a href="/SemiProject/productDeatail.ban?pnum=${cartvo.pvo.product_num}">${cartvo.pvo.product_title}</a></span>
 		                                                </div>
 		                                            </div>
 		                                        </td>
@@ -399,8 +401,8 @@
 		                                            <div class="order_goods_num">
 		                                                <div class="btn_gray_list">
 		                                                    <p><label for="number"></label><input type="number" id="cart_cnt" min="1"  max="50" step="1" value="${cartvo.product_count}" /></p>
-		                                                </div>        
-		                                                <button class="btn btn-outline-secondary btn-sm updateBtn" type="button" onclick="goOqtyEdit(this)">수정</button>
+		                                                </div>   
+		                                                <button class="btn btn-outline-secondary btn-sm updateBtn" type="button" style="margin-top:3px;" onclick="goOqtyEdit(this)">수정</button>
 							                              <%-- 장바구니 테이블에서 특정제품의 현재주문수량을 변경하여 적용하려면 먼저 장바구니번호(시퀀스)를 알아야 한다 --%>
 							                            <input type="hidden" class="cartno" name="cartno" value="${cartvo.cart_num}" /> 
 		                                            </div>
@@ -415,7 +417,7 @@
 		                                        <td class="td_mileage">    
 		                                                <ul class="mileage_list">
 		                                                    <li class="mileage_mileage">
-																<strong class="cart_mileage" name="cart_mileage" value="${cartvo.totalMileage}">${cartvo.totalMileage}</strong> 마일리지
+																<strong class="cart_mileage" name="cart_mileage">${cartvo.totalMileage}</strong> 마일리지
 		                                                    </li>
 		                                                </ul>
 		                                        </td>
@@ -453,7 +455,7 @@
                         <%-- 장바구니 상품리스트 끝 --%>
         
         
-                    </form>
+                   
         
                     <div class="btn_left_box">
                         <a href="<%= request.getContextPath() %>/homebread.ban" class="shop_go_link"><span>&lt; 쇼핑 계속하기</span></a>
@@ -500,6 +502,7 @@
                     </div>
                     <!-- //price_sum -->
         
+        			</form>
                     <div class="btn_order_whole_box">
                         <div class="btn_delete_box">
                             <button type="button" class="btn_order_choice_del">선택 상품 삭제</button>

@@ -42,7 +42,6 @@ public class CartListAction extends AbstractController {
         long sumPriceDelivery = Long.parseLong(sumPrice) +  3000;
         request.setAttribute("sumPriceDelivery", sumPriceDelivery);
         
-        System.out.println("~~확인용 cartList:" +cartList);
 
         super.setRedirect(false);
 		super.setViewPage("/WEB-INF/kjs_cart/cartList.jsp");
