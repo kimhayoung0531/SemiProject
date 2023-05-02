@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import= "sge.member.model.MemberVO" %>    
+<%@ page import= "parkjuneyub.board.model.ReviewVO" %>    
+<%@ page import= "parkjuneyub.member.model.*" %> 
 <%
 	String ctxPath = request.getContextPath();
 	// SemiProject
@@ -25,7 +27,6 @@
 	 
 <script type="text/javascript">
 	$(document).ready(function(){
-
 		$("div.add_cart_layer_popup").hide();		//팝업창 가리기
 		
 		
@@ -200,9 +201,33 @@
 		const pop_top = Math.ceil((window.screen.height - pop_height)/2);
 		window.open(url, "writeReview", "left="+pop_left+", top="+pop_top+" , width="+pop_width+", height="+pop_height);
 
-	}
+	};
 	// ==== 리뷰 작성 페이지 이동 끝 ==== 
 	
+	function deleteReview(purchase_review_id) {
+		$.ajax({
+        	url:"<%= request.getContextPath()%>/board/deleteReview.ban",
+        	type:"POST",
+        	data: {
+        		"purchase_review_id":purchase_review_id
+        	},
+        	dataType: "JSON",
+        	success:function(json){
+        		if(json.n == '1') {
+        			alert("정상적으로 삭제되었습니다");
+        			window.location.reload();
+        		}
+        		if(json.n == '0') {
+        			alert("후기 삭제과정에서 오류가 발생했습니다");
+        		}
+        	}, 	
+            error: function(request, status, error){
+              alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+	          }
+		});
+	}
+		
+		
 </script>
 
 
@@ -500,12 +525,13 @@
                                             </div>
                                         </div>
 
-                                        <table class="review_table table table-hover">
+                                        <table class="review_table table ">
                                             <thead>
                                                 <tr>
-                                                    <th>작성자</th>
-                                                    <th>내용</th>
-                                                    <th>작성일</th>
+                                                    <th style="width:8%">작성자</th>
+                                                    <th style="width:67%">내용</th>
+                                                    <th style="width:15%">작성일</th>
+                                                    
                                                 </tr>
                                             </thead>
 
@@ -517,6 +543,16 @@
 											              <td class="userid"><span>${rvo.mvo.user_id}</span></td>
 											              <td>${rvo.review_content}</td>
 											              <td>${rvo.review_date}</td>
+															
+											              <% 
+											              	ReviewVO rvo =(ReviewVO) pageContext.getAttribute("rvo");
+											              	parkjuneyub.member.model.MemberVO mvo = rvo.getMvo();
+											              	String tmp = mvo.getUser_id();
+											                if(tmp.equals(user_id)) {
+											                %>
+											              
+											               <td><button type="button" class="btn btn-light" onclick="deleteReview('${rvo.purchase_review_id}')">삭제</button><td> 
+															<% } %>
 											              
 											           </tr>
 													</c:forEach>
