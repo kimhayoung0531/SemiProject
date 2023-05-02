@@ -216,7 +216,7 @@ public class CartDAO implements InterCartDAO {
 	}	// end of public HashMap<String, String> selectCartSumPricePoint(String user_id) ------------
 
 	
-	//장바구니 테이블에서 특정 제품을 삭제
+	//장바구니 테이블에서 개별 제품을 삭제
 	@Override
 	public int deleteCart(String cart_num) throws SQLException {
 
@@ -230,6 +230,29 @@ public class CartDAO implements InterCartDAO {
 		         
 		         pstmt = conn.prepareStatement(sql);
 		         pstmt.setString(1, cart_num);
+		         
+		         n = pstmt.executeUpdate();
+		                  
+		      } finally {
+		         close();
+		      }
+		      
+		return n;
+		
+	}
+	
+	//장바구니 테이블에서 선택 제품을 삭제
+	@Override
+	public int choiseDeleteCart(String pnumes) throws SQLException {
+		int n = 0;
+		
+		   try {
+			   conn = ds.getConnection();
+		         
+		         String sql = " delete from tbl_cart "
+			               + " where product_num in ("+pnumes+") ";
+		         
+		         pstmt = conn.prepareStatement(sql);
 		         
 		         n = pstmt.executeUpdate();
 		                  
@@ -267,6 +290,6 @@ public class CartDAO implements InterCartDAO {
 		      
 		return n;
 	}
-	
+
 	
 }
