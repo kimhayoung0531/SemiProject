@@ -14,14 +14,11 @@ import KHY.product.model.ProductDAO;
 import common.controller.AbstractController;
 import parkjuenyub.order.model.OrderDeatailVO;
 
-
-
-public class MypageOrderListAction extends AbstractController {
+public class LikeListAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		
+
 		HttpSession session = request.getSession();
 		MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 		
@@ -38,7 +35,7 @@ public class MypageOrderListAction extends AbstractController {
 		if(loginuser != null)  {
 			// 로그인을 했으면
 			super.setRedirect(false);
-			super.setViewPage("/WEB-INF/KHY/mypage_order_list.jsp");
+			super.setViewPage("/WEB-INF/KHY/mypage_like_list.jsp");
 				InterProductDAO pdao = new ProductDAO(); 
 				
 				if(currentShowPageNO == null) {
@@ -86,9 +83,9 @@ public class MypageOrderListAction extends AbstractController {
 				////////////////////////////////////////////////
 				
 				// **** [맨처음][이전] 만들기 **** //
-				pageBar += "<div class='pagi'><li class='page-item'><a class='page-link' href='mypageOrderList.ban?currentShowPageNO=1'>[맨처음]</a></li>";
+				pageBar += "<div class='pagi'><li class='page-item'><a class='page-link' href='mypageLikeList.ban?currentShowPageNO=1'>[맨처음]</a></li>";
 				if(pageNo != 1) {
-					pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?currentShowPageNO="+(pageNo-1)+"'>[이전]</a></li>";
+					pageBar += "<li class='page-item'><a class='page-link' href='mypageLikeList.ban?currentShowPageNO="+(pageNo-1)+"'>[이전]</a></li>";
 				}
 				
 				
@@ -100,7 +97,7 @@ public class MypageOrderListAction extends AbstractController {
 						pageBar += "<li class='page-item active'><a class='page-link' href='#'>"+pageNo+"</a></li>"; // 부트스트랩에 있는 네비게이션 페이지바 사용하는거임
 					}
 					else {
-						pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?currentShowPageNO="+pageNo+"'>"+pageNo+"</a></li>"; // 부트스트랩에 있는 네비게이션 페이지바 사용하는거임
+						pageBar += "<li class='page-item'><a class='page-link' href='mypageLikeList.ban?currentShowPageNO="+pageNo+"'>"+pageNo+"</a></li>"; // 부트스트랩에 있는 네비게이션 페이지바 사용하는거임
 					}
 					loop++;   // 1 2 3 4 5 6 7 8 9 10
 					
@@ -115,10 +112,10 @@ public class MypageOrderListAction extends AbstractController {
 				// pageNo => 11
 				// pageNo => 21
 				if(pageNo <= totalPage) {
-					pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?currentShowPageNO="+pageNo+"'>[다음]</a></li>";
+					pageBar += "<li class='page-item'><a class='page-link' href='mypageLikeList.ban?currentShowPageNO="+pageNo+"'>[다음]</a></li>";
 						
 				}
-				pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?currentShowPageNO="+totalPage+"'>[마지막]</a></li></div>";
+				pageBar += "<li class='page-item'><a class='page-link' href='mypageLikeList.ban?currentShowPageNO="+totalPage+"'>[마지막]</a></li></div>";
 				
 				
 				
@@ -127,7 +124,7 @@ public class MypageOrderListAction extends AbstractController {
 			
 				// 로그인한 사용자가 자신의 마이페이지를 보는 경우
 				super.setRedirect(false);
-				super.setViewPage("/WEB-INF/KHY/mypage_order_list.jsp");
+				super.setViewPage("/WEB-INF/KHY/mypage_like_list.jsp");
 
 			
 			
@@ -147,6 +144,6 @@ public class MypageOrderListAction extends AbstractController {
 			
 		}
 		
-	
 	}
+
 }
