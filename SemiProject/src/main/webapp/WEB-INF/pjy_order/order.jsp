@@ -59,7 +59,7 @@
 			$("strong#totalPrice").html( (Number($("strong#order_total_price").val()) + deliveryFee).toLocaleString('ko-KR') );
 			$("span#totalPrice").html( (Number($("strong#order_total_price").val()) + deliveryFee).toLocaleString('ko-KR') );
 			$("input#finalTotalPrice").val((Number($("strong#order_total_price").val()) + deliveryFee)); //  최종금액
-			
+			$("span#finalTotalPrice").text( (Number($("strong#order_total_price").val()) + deliveryFee).toLocaleString('ko-KR') );
 			
 			$("button.btn_order_buy").bind("click", function() {
 				checkOrderDetail();
@@ -270,33 +270,27 @@
 			const eachProductTotalPrice_join = eachProductTotalPrice_arr.join();
 			const cartNo_join = cartNo_arr.join();
 			
+			$("input#productNum_join").val(productNum_join);
+			$("input#productCnt_join").val(productCnt_join);
+			$("input#productPrice_join").val(productPrice_join);
+			$("input#productMileage_join").val(productMileage_join);
+			$("input#eachProductTotalPrice_join").val(eachProductTotalPrice_join);
+			$("input#cartNo_join").val(cartNo_join);
+			
+
+			const frm = document.frmOrder;
+			frm.method="POST";
+			frm.action="<%= request.getContextPath()%>/orderEnd.ban";
+			
 			/* var queryString = $("form#frmOrder").serialize(); */
-			var queryString = $("form#frmOrder").serializeArray();
+/* 			var queryString = $("form#frmOrder").serializeArray();
 			queryString.push({name : "productNum_join", value:productNum_join });
 			queryString.push({name : "productCnt_join", value:productCnt_join });
 			queryString.push({name : "productPrice_join", value:productPrice_join });
 			queryString.push({name : "productMileage_join", value:productMileage_join });
 			queryString.push({name : "eachProductTotalPrice_join", value:eachProductTotalPrice_join });
-			queryString.push({name : "cartNo_join", value:cartNo_join });
-			
-			console.log(queryString);
-			
-			$.ajax({
-				url:"<%= request.getContextPath()%>/orderEnd.ban",
-				type:"POST",
-				
-				data:
-				queryString,
-				
-				dataType:"",
-				success:function(json) {
-					console.log("성공");
-				},
-				error: function(request, status, error) {
-					alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-				}
-			
-			});
+			queryString.push({name : "cartNo_join", value:cartNo_join }); */
+			frm.submit();
 			
 
 		}; // end of  function checkOrderDetail()
@@ -385,7 +379,15 @@
                     <div class="order_sub_content">
                         <div class="order_sub_content_box">
                             <form id="frmOrder" name="frmOrder" >
-
+								
+								<input type="hidden" id="productNum_join" name="productNum_join" />
+								<input type="hidden" id="productCnt_join" name="productCnt_join" />
+								<input type="hidden" id="productPrice_join" name="productPrice_join" />
+								<input type="hidden" id="productMileage_join" name="productMileage_join" />
+								<input type="hidden" id="eachProductTotalPrice_join" name="eachProductTotalPrice_join" />
+								<input type="hidden" id="cartNo_join" name="cartNo_join" />
+								
+								
                                 <div class="order_wrap">
                                     <div class="order_tit">
                                         <h2 class="title_h2">주문서작성/결제</h2>
@@ -680,6 +682,8 @@
                                                     <div class="payment_btn_center_box">
                                                         <button class="btn_order_buy" type="button">결제하기</button>
                                                     </div>
+                                                    
+                                                    
                                                 </div>
                                             </div>
 

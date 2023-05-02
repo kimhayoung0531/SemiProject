@@ -220,4 +220,23 @@ int totalPage = 0;
 		
 	}
 
+	@Override
+	public int deleteReviewByReviewId(String purchase_review_id) throws SQLException {
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " delete from tbl_purchase_review where purchase_review_id = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(purchase_review_id));
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			
+		}
+		return result;
+	}
+
 }

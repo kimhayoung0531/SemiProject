@@ -54,53 +54,43 @@
                                                                 <th><span class="order_important">결제수단</span></th>
                                                                 <td>
                                                                     <ul class="order_summary_information">
-                                                                        <li>입금은행 :</li>
-                                                                        <li>입금계좌 :</li>
-                                                                        <li>예금주명 :</li>
-                                                                        <li>입금금액 :</li>
-                                                                        <li>입금자명 :</li>
+                                                                        <li>신용카드</li>
+
                                                                     </ul>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">주문번호</span></th>
-                                                                <td></td>
+                                                                <td>${requestScope.ovo.order_num}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">주문일자</span></th>
-                                                                <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th><span class="order_important">주문상품</span></th>
-                                                                <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+                                                                <td>${requestScope.ovo.order_date}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">주문자명</span></th>
-                                                                <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+                                                                <td>${requestScope.order_name}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">배송정보</span></th>
-                                                                <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <th><span class="order_important">상품 금액</span></th>
-                                                                <td><strong>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</strong></td>
+                                                                <td>${requestScope.recipt_address}</td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">배송비</span></th>
-                                                                <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+                                                                <td>3,000</td>
                                                             </tr>
                                                             <tr>
-                                                                <th><span class="order_important">할인 및 적립</span></th>
-                                                                <td>                                                                    <ul class="order_benefit_list">
-                                                                    <li>할인 : <span class="save_mileage">###원</span></li>
-                                                                    <li>마일리지 사용 : <span class="save_mileage">###원</span></li>
+                                                                <th><span class="order_important">마일리지 적립/사용</span></th>
+                                                                <td>                                                                    
+                                                                <ul class="order_benefit_list"> 
+                                                                    <li>마일리지 적립 : <span class="save_mileage">${requestScope.save_mileage}</span>원</li>
+                                                                    <li>마일리지 사용 : <span class="save_mileage">${requestScope.ovo.order_mileage_total}</span>원</li>
                                                                 </ul>
                                                             </td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">총 결제금액</span></th>
-                                                                <td><strong>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</strong></td>
+                                                                <td><strong>${requestScope.ovo.order_price_total}</strong></td>
                                                             </tr>
 
 
@@ -116,7 +106,7 @@
                                 <!-- order_wrapp 끝-->
                             </form>
                             <div class="payment_btn_center_box">
-                                <button class="btn_order_buy" type="button">확인</button>
+                                <button class="btn_order_buy" type="button" onclick = "location.href = '<%=ctxPath%>/home.ban' ">확인</button>
                             </div>
 
                         </div>
