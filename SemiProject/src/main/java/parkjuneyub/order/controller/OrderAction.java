@@ -66,9 +66,9 @@ public class OrderAction extends AbstractController {
 				
 				request.setAttribute("buyItem_map", buyItem_map);
 			}
-
+			
 			if(request.getParameter("pnum_join") != null && !request.getParameter("pnum_join").isEmpty() ) {	// 장바구니를 통한 주문의 경우
-				
+
 				String[] pnum_join = request.getParameter("pnum_join").split(",");
 				String[] cart_num_join = request.getParameter("cart_num_join").split(",");
 				String[] cart_cnt_join = request.getParameter("cart_cnt_join").split(",");
@@ -76,18 +76,18 @@ public class OrderAction extends AbstractController {
 				String[] totalMileage_join = request.getParameter("totalMileage_join").split(",");
 				String sum_totalPrice = request.getParameter("sum_totalPrice");
 				String sum_totalMileage = request.getParameter("sum_totalMileage");	
-				
+
 				List<ProductVO> pvoList = pdao.getPvoListByPnum(pnum_join);
-				
+
 				List<CartVO> cartList = new ArrayList<>();
 				for(int i = 0; i < pnum_join.length; i++) {
-					
+
 					CartVO cvo = new CartVO();
 					cvo.setCart_num(Integer.parseInt(cart_num_join[i]));
 					cvo.setProduct_count(Integer.parseInt(cart_cnt_join[i]));
-					
+
 					pvoList.get(i).setProduct_price((Integer.parseInt(totalPrice_join[i])/Integer.parseInt(cart_cnt_join[i])));
-					
+
 					cvo.setTotalMileage(Long.parseLong(totalMileage_join[i]));
 					cvo.setPvo(pvoList.get(i));
 					cartList.add(cvo);
@@ -96,7 +96,7 @@ public class OrderAction extends AbstractController {
 				request.setAttribute("sum_totalPrice", sum_totalPrice);
 				request.setAttribute("sum_totalMileage", sum_totalMileage);
 			}
-
+			
 			// 구매자 정보
 			InterMemberDAO mdao = new MemberDAO();
 			MemberVO mvo = mdao.getUserInfo(userid);

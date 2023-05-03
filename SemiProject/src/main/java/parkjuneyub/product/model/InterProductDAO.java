@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 
-import parkjuenyub.order.model.OrderVO;
 import parkjuneyub.product.model.*;
 import sge.admin.controller.CategoryVO;
 
@@ -38,8 +37,9 @@ public interface InterProductDAO {
 	int productInsert(ProductVO pvo)throws SQLException;
 
 	// 상품번호 리스트로 상품의 메인이미지, 상품 타이틀, 상품 번호 가져오기
-	List<ProductVO> getPvoListByPnum(String[] pnum_join) throws SQLException;
+	List<ProductVO> getPvoListByPnum(String[] productNum_arr) throws SQLException;
 
+	
 	
 	
 }

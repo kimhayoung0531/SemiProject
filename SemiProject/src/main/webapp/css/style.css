@@ -2162,7 +2162,7 @@ body #container #contents .order_sub_content .order_sub_content_box .order_cont 
 
 .item_goods_tab ul {
     float: none;
-    width: 900px;
+    width: 700px;
     padding: 5px 0 0 0;
     height: 48px;
     margin: 0 auto;
@@ -2285,8 +2285,13 @@ table.review_table tbody td:first-child, td:last-child {
 	text-align: center;
 	}
 	
+	#reviews > div.reviews_cont > table > tbody > tr > td:nth-child(4) {
+	width:10%;
+	}
 
-
+	#reviews > div.reviews_cont > table > thead > tr > th:nth-child(1) {
+	width:10%;
+	}
 /* 박준엽 끝------------------------------------------------------------------------------------------ */
 
 /* 성가은 ------------------------------------------------------------------------------------------- */

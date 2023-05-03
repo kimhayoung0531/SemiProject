@@ -62,11 +62,11 @@
                                                             </tr>
                                                             <tr>
 	                                                            <th><span class="order_important">주문상품</span></th>
-	                                                            <c:foreach var="pvo" items="${requestScope.productList}">
+	                                                            <c:forEach var="pvo" items="${requestScope.productList}">
 	                                                            <td>
 	                                                            	<li>${pvo.product_title}</li>
 	                                                            </td>
-	                                                            </c:foreach>
+	                                                            </c:forEach>
                                                             </tr>
                                                             
                                                             <tr>

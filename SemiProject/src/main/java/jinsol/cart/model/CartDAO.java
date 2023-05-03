@@ -147,7 +147,7 @@ public class CartDAO implements InterCartDAO {
 	            String fk_user_id = rs.getString("user_id");
 	            long product_num = rs.getLong("product_num");
 	            String product_title = rs.getString("product_title");
-	            long main_image = rs.getLong("main_image");
+	            String main_image = rs.getString("main_image");
 	            long product_price = rs.getLong("product_price");
 	            long product_count = rs.getLong("product_count");  // 주문량 
 	                        
