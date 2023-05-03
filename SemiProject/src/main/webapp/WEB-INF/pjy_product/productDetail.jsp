@@ -26,6 +26,7 @@
 <script type="text/javascript">
 	
 	$(document).ready(function(){
+
 		$("div.add_cart_layer_popup").hide();		//팝업창 가리기
 		
 		
@@ -58,6 +59,7 @@
 		
 		var count = Number($("input#item_cnt").val());
 		var price = ${requestScope.pvo.product_price};
+
 		$("input[name=product_price]").val(price);
 		var total_price = count * price; // 총 상품 금액
 		$("input[name=total_price]").val(total_price);
@@ -70,6 +72,7 @@
 			count = Number($("input#item_cnt").val());
 			price = ${requestScope.pvo.product_price};
 			total_price = count * price;
+
 			$("strong.goods_total_price").text(total_price);
 			$("input#product_cnt").val(count);
 			
@@ -85,6 +88,7 @@
 		$("button.btn_add_wish").click(function(event){
 			if(user_id == '') {
 				alert("로그인하셔야만 좋아요를 누르실 수 있습니다");
+
 			}
 			else  {
 				$("button.btn_add_wish").toggleClass("changeCSSname");
@@ -111,6 +115,7 @@
             //	선택자.toggleClass("클래스명1");
 	        //  이것은 선택자에 "클래스명1" 이 이미 적용되어 있으면 선택자에 "클래스명1" 을 제거해주고,
 	        //  만약에 선택자에 "클래스명1" 이 적용되어 있지 않으면 선택자에 "클래스명1" 을 추가해주는 것.
+
 	        /* 한마디로 addClass("클래스명1") 와 removeClass("클래스명1") 를 합친 것 이라고 보면 된다. */
                
 	        
@@ -132,6 +137,7 @@
 		          }
 	           });    
 			};
+
         
     	}); // end of $("div#firstDiv").find("label").click(function(event)
     	// ==== 상품 좋아요 기능 끝
@@ -156,36 +162,16 @@
 						// ( 2000 - 800 ) / 2 = 600
 		const pop_top = Math.ceil((window.screen.height - pop_height)/2);
 		window.open(url, "writeReview", "left="+pop_left+", top="+pop_top+" , width="+pop_width+", height="+pop_height);
+
 	}
 	// ==== 리뷰 작성 페이지 이동 끝 ==== 
-
-	function deleteReview(purchase_review_id) {
-		$.ajax({
-        	url:"<%= request.getContextPath()%>/board/deleteReview.ban",
-        	type:"POST",
-        	data: {
-        		"purchase_review_id":purchase_review_id
-        	},
-        	dataType: "JSON",
-        	success:function(json){
-        		if(json.n == '1') {
-        			alert("정상적으로 삭제되었습니다");
-        			window.location.reload();
-        		}
-        		if(json.n == '0') {
-        			alert("후기 삭제과정에서 오류가 발생했습니다");
-        		}
-        	}, 	
-            error: function(request, status, error){
-              alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-	          }
-		});
-	}
+	
 		
 	// 장바구니 버튼 클릭시 호출되는 함수	
 	function goCart(){
 		// 주문수량에 대한 유효성 검사 //
 		const frm = document.itemFrmView;
+
 		const regExp = /^[1-9]+$/;  // 숫자(1-9)만 체크하는 정규표현식
 		const item_cnt = $("input#item_cnt").val();		//주문수량
 		const bool = regExp.test(item_cnt);
@@ -197,48 +183,7 @@
 	         return; // 종료 
 		}
 		else{
-	function writeReview(userid) {
-		product_num = "${requestScope.pvo.product_num}";
-		if(userid == "") {
-			alert("로그인을 해주세요");
-			return;
-		}
-		
-		url = "<%= request.getContextPath()%>/board/writeReview.ban?userid="+userid+"&product_num="+product_num;
-		// 나의 정보 수정하기 팝업창 띄우기
-		// 너비 800, 높이 680 인 팝업창을 화면 가운데 위치시키기
-		const pop_width = 580;
-		const pop_height = 500;
-		const pop_left = Math.ceil((window.screen.width - pop_width)/2); <%-- 정수로 만듦 --%>
-						// ( 2000 - 800 ) / 2 = 600
-		const pop_top = Math.ceil((window.screen.height - pop_height)/2);
-		window.open(url, "writeReview", "left="+pop_left+", top="+pop_top+" , width="+pop_width+", height="+pop_height);
-	};
-	// ==== 리뷰 작성 페이지 이동 끝 ==== 
 	
-	function deleteReview(purchase_review_id) {
-		$.ajax({
-        	url:"<%= request.getContextPath()%>/board/deleteReview.ban",
-        	type:"POST",
-        	data: {
-        		"purchase_review_id":purchase_review_id
-        	},
-        	dataType: "JSON",
-        	success:function(json){
-        		if(json.n == '1') {
-        			alert("정상적으로 삭제되었습니다");
-        			window.location.reload();
-        		}
-        		if(json.n == '0') {
-        			alert("후기 삭제과정에서 오류가 발생했습니다");
-        		}
-        	}, 	
-            error: function(request, status, error){
-              alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-	          }
-		});
-	}
-
 			$("div.add_cart_layer_popup").show();	// '장바구니 바로 확인?' 팝업창
 	
 			
@@ -256,6 +201,7 @@
 	                  alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
 			        }
 				});
+
 			});	//end of $("button.btn_cancel").bind("click", function() ------------------
 	
 			
@@ -270,7 +216,6 @@
 		}//end of else		
 	}// end of function goCart()--------------------------------	
 	
-
 </script>
 
 
@@ -686,9 +631,10 @@
                		<!--   장바구니 클릭시 뜨는 팝업창 끝   -->
                 
                 
-                
+                \
                 </div>
             </div>
             <!-- // container --> 
 
 <jsp:include page="../footer.jsp" />
+             
