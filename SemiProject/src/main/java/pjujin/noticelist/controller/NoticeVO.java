@@ -113,9 +113,7 @@ public class NoticeVO {
 	}
 	
 	
-	
-	
-	
+
 	public int getInquiry_num() {
 		return inquiry_num;
 	}
