@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import parkjuenyub.order.model.OrderDeatailVO;
-import parkjuneyub.product.model.*;
+import KHY.model.ReviewVO;
+
+
 
 public interface InterProductDAO {
 	
@@ -33,6 +34,21 @@ public interface InterProductDAO {
 
 	//조회 기간 내에 주문 내역 수 알아오기 
 	int selectOrderListCount(Map<String, String> paraMap) throws SQLException;
+
+	//페이징 처리를 위한 회원의 상품 좋아요에 대한 총페이지 알아오기
+	int getTotalPageLike(Map<String, String> paraMap) throws SQLException;
+
+	//페이징 처리를 한 회원의 좋아요 목록 알아오기
+	List<ProductVO> selectPagingLikeList(Map<String, String> paraMap) throws SQLException;
+	
+	//좋아요 한 총 내역 수 알아오기
+	int selectLikeListCount(Map<String, String> paraMap) throws SQLException;
+
+	//페이징 처리를 위한 회원의 상품 후기에 대한 총페이지 알아오기
+	int getTotalPageReview(Map<String, String> paraMap) throws SQLException;
+
+	//페이징 처리를 한 회원의 리뷰 목록 알아오기
+	List<ReviewVO> selectPagingReviewList(Map<String, String> paraMap) throws SQLException;
 	
 	
 	
