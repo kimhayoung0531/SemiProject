@@ -440,6 +440,38 @@ public class ProductDAO implements InterProductDAO  {
 		
 	}
 
+	@Override
+	public List<ProductVO> getPvoListByPnum(String[] pnum_join) throws SQLException {
+		List<ProductVO> pvoList = new ArrayList<>();
+
+		for(int i = 0; i<pnum_join.length; i++) {
+			try {
+				conn = ds.getConnection();
+
+		         String sql = " select product_num, product_title, main_image "
+		         		+ " from tbl_product where product_num = ? ";
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setString(1, pnum_join[i]);
+		         rs = pstmt.executeQuery();
+
+		         ProductVO pvo = new ProductVO();
+		         rs.next();
+		         pvo.setProduct_num(rs.getLong(1));
+		         pvo.setProduct_title(rs.getString(2));
+		         pvo.setMain_image((rs.getString(3)));
+
+		         pvoList.add(pvo);
+
+			} finally {
+				close();
+			}
+		}
+
+
+		return pvoList;
+	}
+
+
 	
 	
 }
