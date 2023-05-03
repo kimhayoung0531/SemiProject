@@ -94,7 +94,10 @@
 			
 			$("#totalGoodsMileage").text(sum.toLocaleString('en'));
 		 	
-		
+		// ================================================
+			
+			
+				
 	});	//end of $(document).ready(function () -------------------------------------
 
 			
@@ -253,8 +256,8 @@
                sum_totalPrice += Number(totalPrice_arr[i]);
             }
             
-            if(${empty requestScope.cartList}){
-            	
+            if(${not empty requestScope.cartList}){
+            	sum_totalPriceDelivery = sum_totalPrice + 3000;
             }
             
             
@@ -263,7 +266,7 @@
                sum_totalMileage += Number(totalMileage_arr[i]);
             }
             
-            
+           
             
             if(confirm("총주문액 : "+sum_totalPriceDelivery.toLocaleString('en')+"원 결제하시겠습니까?")) {
 
@@ -286,7 +289,7 @@
             
    	      }// end of else --------------------------------------------
 		   
-	   }	//end of function goOrder() ----------------------
+	   }//end of function goOrder() ----------------------
 
 
 	   
