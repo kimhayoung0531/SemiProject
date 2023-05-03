@@ -135,7 +135,6 @@ public class ProductRegisterAction extends AbstractController {
 	            
 	            request.setAttribute("message", message);
 	            request.setAttribute("loc", loc);
-	            
 
 	            super.setRedirect(false);
 	            super.setViewPage("/WEB-INF/msg.jsp");
