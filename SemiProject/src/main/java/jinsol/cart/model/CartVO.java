@@ -10,7 +10,7 @@ public class CartVO{
 	private String user_id;		//사용자 ID(fk)
 	private long product_num;	//제품 번호
 	private long product_count;	//제품 수량
-	private long main_image;	//제품 이미지
+	private String main_image;	//제품 이미지
 	private String cart_date;	//장바구니 날짜
 	private long product_price;
 	
@@ -24,7 +24,7 @@ public class CartVO{
 	public CartVO() { }
 	
 	public CartVO(long cart_num, String user_id, long product_num, long product_count ,
-			long main_image, String cart_date,MemberVO mvo, ProductVO pvo) {
+			String main_image, String cart_date,MemberVO mvo, ProductVO pvo) {
 		this.cart_num = cart_num;
 		this.user_id = user_id;
 		this.product_num = product_num;
@@ -92,12 +92,12 @@ public class CartVO{
 	}
 
 
-	public long getMain_image() {
+	public String getMain_image() {
 		return main_image;
 	}
 
 
-	public void setMain_image(long main_image) {
+	public void setMain_image(String main_image) {
 		this.main_image = main_image;
 	}
 
