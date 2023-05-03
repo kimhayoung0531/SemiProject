@@ -241,6 +241,12 @@
             const totalMileage_join = totalMileage_arr.join();
             
             
+           	console.log("~~~확인용 pnum_join:" + pnum_join);
+           	console.log("~~~확인용 cart_cnt_join:" + cart_cnt_join);
+           	console.log("~~~확인용 cart_num_join:" + cart_num_join);
+           	console.log("~~~확인용 totalPrice_join:" + totalPrice_join);
+           	console.log("~~~확인용 totalMileage_join:" + totalMileage_join);
+            
             let sum_totalPrice = 0;
             let sum_totalPriceDelivery = 0;
             for(let i=0; i<totalPrice_arr.length; i++) {
@@ -408,6 +414,8 @@
 		                                        <%-- 상품 당 합계금액 --%>
 			                                    <td>
 			                                    	<strong><fmt:formatNumber value="${cartvo.totalPrice}" pattern="###,###" /> 원</strong>
+			                                    	<input type="hidden" class="totalPrice" value="${cartvo.totalPrice}" />
+                            						<input type="hidden" class="totalMileage" value="${cartvo.totalMileage}" />
 			                                    </td>
 			                                    <%-- 상품 삭제 --%>
 			                                    <td>
