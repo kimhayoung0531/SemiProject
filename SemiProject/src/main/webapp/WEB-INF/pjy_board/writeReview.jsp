@@ -103,11 +103,12 @@
 				dataType:"JSON",
 				success:function(json) {
 					if(json.n == 1) {
-						alert("리뷰가 정상적으로 작성되었습니다.")
+						alert("구매 후기가 정상적으로 작성되었습니다.")
+						opener.location.reload();
 						window.close();
 					}
 					if(json.n == 0) {
-						alert("이미 리뷰를 작성하셨습니다.")
+						alert("구매 후기 작성과정에서 오류가 발생했습니다.")
 					}
 					
 				},

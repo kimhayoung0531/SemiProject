@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 		description = "사용자가 웹에서 *.ban 을 했을 경우 이 서블릿이 응답을 해주도록 한다.",
 		urlPatterns = { "*.ban" }, 
 		initParams = { 
-				@WebInitParam(name = "propertyConfig", value = "C:/Users/user/git/SemiProject/SemiProject/src/main/webapp/WEB-INF/Command.properties", description = "*.ban 에 대한 클래스의 매핑파일")
+				@WebInitParam(name = "propertyConfig", value = "C:/Users/sist/git/SemiProject/SemiProject/src/main/webapp/WEB-INF/Command.properties", description = "*.ban 에 대한 클래스의 매핑파일")
 		})													    
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

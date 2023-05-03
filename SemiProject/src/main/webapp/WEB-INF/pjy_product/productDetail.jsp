@@ -166,6 +166,30 @@
 	}
 	// ==== 리뷰 작성 페이지 이동 끝 ==== 
 	
+<<<<<<< HEAD
+
+	function deleteReview(purchase_review_id) {
+		$.ajax({
+        	url:"<%= request.getContextPath()%>/board/deleteReview.ban",
+        	type:"POST",
+        	data: {
+        		"purchase_review_id":purchase_review_id
+        	},
+        	dataType: "JSON",
+        	success:function(json){
+        		if(json.n == '1') {
+        			alert("정상적으로 삭제되었습니다");
+        			window.location.reload();
+        		}
+        		if(json.n == '0') {
+        			alert("후기 삭제과정에서 오류가 발생했습니다");
+        		}
+        	}, 	
+            error: function(request, status, error){
+              alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+	          }
+		});
+	}
 		
 	// 장바구니 버튼 클릭시 호출되는 함수	
 	function goCart(){
@@ -183,7 +207,49 @@
 	         return; // 종료 
 		}
 		else{
+	function writeReview(userid) {
+		product_num = "${requestScope.pvo.product_num}";
+		if(userid == "") {
+			alert("로그인을 해주세요");
+			return;
+		}
+		
+		url = "<%= request.getContextPath()%>/board/writeReview.ban?userid="+userid+"&product_num="+product_num;
+		// 나의 정보 수정하기 팝업창 띄우기
+		// 너비 800, 높이 680 인 팝업창을 화면 가운데 위치시키기
+		const pop_width = 580;
+		const pop_height = 500;
+		const pop_left = Math.ceil((window.screen.width - pop_width)/2); <%-- 정수로 만듦 --%>
+						// ( 2000 - 800 ) / 2 = 600
+		const pop_top = Math.ceil((window.screen.height - pop_height)/2);
+		window.open(url, "writeReview", "left="+pop_left+", top="+pop_top+" , width="+pop_width+", height="+pop_height);
+
+	};
+	// ==== 리뷰 작성 페이지 이동 끝 ==== 
 	
+	function deleteReview(purchase_review_id) {
+		$.ajax({
+        	url:"<%= request.getContextPath()%>/board/deleteReview.ban",
+        	type:"POST",
+        	data: {
+        		"purchase_review_id":purchase_review_id
+        	},
+        	dataType: "JSON",
+        	success:function(json){
+        		if(json.n == '1') {
+        			alert("정상적으로 삭제되었습니다");
+        			window.location.reload();
+        		}
+        		if(json.n == '0') {
+        			alert("후기 삭제과정에서 오류가 발생했습니다");
+        		}
+        	}, 	
+            error: function(request, status, error){
+              alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+	          }
+		});
+	}
+=======
 			$("div.add_cart_layer_popup").show();	// '장바구니 바로 확인?' 팝업창
 	
 			
@@ -216,6 +282,7 @@
 		}//end of else		
 	}// end of function goCart()--------------------------------	
 	
+>>>>>>> refs/heads/main
 </script>
 
 
@@ -631,7 +698,7 @@
                		<!--   장바구니 클릭시 뜨는 팝업창 끝   -->
                 
                 
-                \
+                
                 </div>
             </div>
             <!-- // container --> 

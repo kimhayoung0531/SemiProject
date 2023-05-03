@@ -23,7 +23,7 @@ public class AddCartAction extends AbstractController {
 		boolean isLogin = super.checkLogin(request);
 		
 		if(!isLogin) {	
-			  	 request.setAttribute("message", "장바구니에 담으려면 먼저 로그인부터 하세요!!");
+			  	 request.setAttribute("message", "장바구니에 담으려면 먼저 로그인부터 하세요.");
 		         request.setAttribute("loc", "javascript:history.back()");
 		            
 		         //   super.setRedirect(false);

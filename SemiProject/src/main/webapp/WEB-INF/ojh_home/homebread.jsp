@@ -87,12 +87,7 @@
                                               <button type="button" class="btn" id="sortAbc">원래대로</button>
                                               	 
                                                  <div class="ojh_choice_num view">
-                                                     <select class="ojh_chosen-select" name="pageNum" style="display:none;">
-                                                        <option value="10" selected="selected">10개씩보기</option>
-                                                        <option value="20">20개씩보기</option>
-                                                        <option value="30">30개씩보기</option>
-                                                        <option value="40">40개씩보기</option>
-                                                     </select> 
+                                                    
                                                      <div class="ojh_chosen_container chosen_container_single " style="width: 120px;">
                                                         <a class="ojs_chosen_single">
                                                             <div>
