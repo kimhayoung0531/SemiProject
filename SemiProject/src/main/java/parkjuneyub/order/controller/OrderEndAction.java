@@ -225,6 +225,7 @@ public class OrderEndAction extends AbstractController {
 			
 		}
 
+		
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/pjy_order/orderEnd.jsp");
 		
