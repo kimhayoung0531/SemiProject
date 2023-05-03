@@ -87,10 +87,25 @@ public class HomeDAO implements InterHomeDAO {
 		return pvoList;
 	}
 
+	@Override
+	public List<ProductVO> getBestItemBysalecount() throws SQLException {
+		
+		List pvohomeList = new ArrayList<>();
+		
+		try {
+			conn = ds.getConnection();
+			String sql = " select Rank() over (Order by product_title desc) Rank "
+					   + " from tbl_product "
+					   + " where Rank<=6 ";
+			
+		} finally {
+			close();
+		}
+		
+		
+		
+	} // end of public List<ProductVO> getBestItemBysalecount()
 
-	   
-	
-	   
 	   
 	
 }
