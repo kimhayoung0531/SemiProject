@@ -122,6 +122,10 @@ public class ProductinquiryAction extends AbstractController {
 
 		request.setAttribute("pageBar", pageBar);
 		
+		
+		
+		
+		
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/pjujin_cs/productinquiry.jsp");
 		
