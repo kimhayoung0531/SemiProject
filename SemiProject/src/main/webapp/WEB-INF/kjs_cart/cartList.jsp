@@ -482,7 +482,7 @@
                             </div>
 						 
                         <div id="deliveryChargeText" class="tobe_mileage"></div>
-                       <div class="tobe_mileage">총 마일리지 : <span id="totalGoodsMileage"></span></div>
+                       <div class="tobe_mileage">장바구니 총 마일리지 : <span id="totalGoodsMileage"></span></div>
                         </div>
                         <!-- //price_sum_cont -->
                     </div>
