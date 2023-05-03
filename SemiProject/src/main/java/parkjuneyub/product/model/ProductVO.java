@@ -13,8 +13,7 @@ public class ProductVO {
 	private long product_inventory;
 	private String product_date;
 	private int sale_count;
-	private long mileage;
-	
+	private long mileage; 
 	private long totalPrice;
 	private long totalMileage;
 	
@@ -24,7 +23,9 @@ public class ProductVO {
 	
 	//select용
 	private MemberVO mvo;
-	
+	private AddImageVO aivo;
+
+
 	public ProductVO(long product_num, long category_num, String product_title, String main_image, long product_price,
 			String product_detail, long product_inventory, String product_date, int sale_count) {
 		super();
@@ -129,7 +130,13 @@ public class ProductVO {
 		return mvo;
 	}
 
+	public AddImageVO getAivo() {
+		return aivo;
+	}
 
+	public void setAivo(AddImageVO aivo) {
+		this.aivo = aivo;
+	}
 	
 	
 	

@@ -62,7 +62,7 @@ public class ProductDAO implements InterProductDAO  {
 		ProductVO pvo = new ProductVO();
 		
 		try {
-			String sql = " select * from tbl_product where product_num = ? ";
+			String sql = " select * from tbl_product A join tbl_addimage B on A.product_num= B.product_num where A.product_num = ? ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,  product_num);
@@ -79,6 +79,10 @@ public class ProductDAO implements InterProductDAO  {
 			pvo.setProduct_inventory(rs.getLong("product_inventory"));
 			pvo.setProduct_date(rs.getString("product_date"));
 			pvo.setSale_count(rs.getInt("sale_count"));
+			
+			AddImageVO aivo = new AddImageVO();
+			aivo.setImage_name(rs.getString("image_name"));
+			pvo.setAivo(aivo);
 			
 		}
 		finally {
