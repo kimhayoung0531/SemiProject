@@ -77,145 +77,6 @@
 
 <script type="text/javascript">
 
-$(document).ready(function(){
-	
-	var startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
-    var enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
-    
-    
-    
-    // === 전체 datepicker 옵션 일괄 설정하기 ===
-    // 한번의 설정으로 $("input#fromDate") , $("input#toDate") 의 옵션을 모두 설정할 수 있다.
-    $(function() {
-        //모든 datepicker에 대한 공통 옵션 설정
-        $.datepicker.setDefaults({
-             dateFormat: 'yy-mm-dd' //Input Display Format 변경
-            ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-            ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
-            ,changeYear: true //콤보박스에서 년 선택 가능
-            ,changeMonth: true //콤보박스에서 월 선택 가능                
-         // ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시됨. both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시됨.  
-         // ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
-         // ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
-         // ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
-            ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
-            ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
-            ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
-            ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
-            ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
-            ,minDate: "-1Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-            ,maxDate: "today" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                    
-        });
-
-        //input을 datepicker로 선언
-        $("input#fromDate").datepicker();                    
-        $("input#toDate").datepicker();
-        
-        //From의 초기값을 오늘 날짜로 설정
-        
-        
-        $('input#fromDate').datepicker('setDate', '-7D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
-        
-        //To의 초기값을 3일후로 설정
-        $('input#toDate').datepicker('setDate', 'sysdate'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
-    
-        if( localStorage.getItem('startdate') != null) {
-       
-            document.querySelector("#fromDate").value = localStorage.getItem('startdate');
-            document.querySelector("#toDate").value = localStorage.getItem('enddate');
-        }
-        
-	
-    
-    });
-	
- // 검색 기간을 정하는 버튼
- 	
- 
-	$(".date_check_list button").click(function(e){
-		
-       
-        
-		$('.date_check_list button').removeClass('on');
-        $(this).addClass('on');
-
-        
-        switch( $(this).val() ){
-        case "sysdate" :
-        	$('input#fromDate').datepicker('setDate', 'sysdate');
-        	break;
-        case "-7D" :
-        	$('input#fromDate').datepicker('setDate', '-7D');
-        	break;
-		case "-15D" :
-	    	$('input#fromDate').datepicker('setDate', '-15D');
-	    	break;
-		case "-1M" :
-	    	$('input#fromDate').datepicker('setDate', '-1M');
-	    	break;
-		case "-3M" :
-			$('input#fromDate').datepicker('setDate', '-3M');
-			break
-		case "-1Y" :
-			$('input#fromDate').datepicker('setDate', '-1Y');
-			break;
-        }
-        
-        $('input#toDate').datepicker('setDate', 'sysdate');
-       
-       startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
-       enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
-	
-       
-       
-        
-	});
- 
-	//$(".date_check_calendar").change
- 
- 
-	 $('form[name="frmDateSearch"]').submit(function(e){ 
-
-		 /* $chekcInputDate = $('input[name="wDate[]"]');
-         var startDate = ($($chekcInputDate[0]).val()).split('-');
-         startDate = new Date(startDate[0], startDate[1], startDate[2]);
-         var endDate = ($($chekcInputDate[1]).val()).split('-');
-         endDate = new Date(endDate[0], endDate[1], endDate[2]); */
-         
-         var startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
-         var enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
-       
-         document.querySelector("#fromDate").value = startdate;
-         document.querySelector("#toDate").value = enddate;
-         
-         localStorage.setItem('startdate', startdate);
-         localStorage.setItem('enddate', enddate);
-       
-         //alert(document.querySelector("#toDate").value);
-         //alert(document.querySelector("#fromDate").value);
-         
-         
-         if (startdate > enddate) {
-             alert('종료 날짜가 시작 날짜보다 빠릅니다.\n확인 후 검색기간을 다시 선택해주세요.');
-             return false;
-         }
-         else {
-        
- 				const frm = document.frmDateSearch;
- 				frm.action = "<%= ctxPath%>/mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate;
- 				frm.method = "get";
- 				frm.submit();
- 		
-         }
-	 
-	 });
- 
- 
- 
-});
-
-
-
 </script>
      
      
@@ -275,35 +136,10 @@ $(document).ready(function(){
 
                      <div class="mypage_lately_info">
                         <div class="mypage_zone_tit">
-                            <h3>마일리지</h3>
+                            <h3>좋아요 내역</h3>
                         </div>
 
-                        <div class="date_check_box">
-                            <form method="get" name="frmDateSearch">
-                                <h3> 조회기간 </h3>
-                                <div class="date_check_list">
-                                    <button type="button" value="sysdate">오늘</button>
-                                    <button type="button" value="-7D" >7일</button>
-                                    <button type="button" value="-15D">15일</button>
-                                    <button type="button" value="-1M">1개월</button>
-                                    <button type="button" value="-3M">3개월</button>
-                                    <button type="button" value="-1Y">1년</button>
-                                </div>
-                                <!-- //date_check_list -->
-                                <div class="date_check_calendar">
-                                    <input type="text" id="fromDate" name="wDate1" class="anniversary" value="" /> ~ <input type="text" id="toDate" name="wDate2" class="anniversary" value="" />
-                                </div>
-                                <!-- //date_check_calendar -->
-
-                                <button type="submit" class="btn_date_check"><em>조회</em></button>
-                            </form>
-
-                        </div>
-                        <!-- //date_check_box -->
-
-                        
-
-                            <span class="pick_list_num">
+						    <span class="pick_list_num">
                                 좋아요 내역 총 <strong>${requestScope.count}</strong> 건
                             </span>
 
@@ -313,21 +149,18 @@ $(document).ready(function(){
                             <div class="mypage_table_type">
                                 <table>
                                     <colgroup>
-                                        <col style="width:12%">	<!-- 날짜 -->
-			                            <col style="width:12%"> <!-- 유형 -->
-			                            <col>					<!-- 내용 -->
-			                            <col style="width:18%"> <!-- 유효기간 -->
-			                            <col style="width:10%"> <!-- 마일리지 내역 -->
+                                        <col> <!-- 상품명 -->
+                                        <col style="width:19%"> <!-- 상품금액-->
+                                        <col style="width:19%"> <!-- 재고 -->
+                                        <col style="width:19%"> <!-- 적립마일리지 -->
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th>날짜</th>
-				                            <th>유형</th>
-				                            <th>내용</th>
-				                            <th>유효기간</th>
-				                            <th class="td_cash"><span>마일리지 내역</span></th>
-				                            <th class="td_cash"><span>잔여 마일리지</span></th>
-                                        </tr>
+                                            <th>상품명</th>
+				                            <th>상품금액</th>
+				                            <th>재고</th>
+				                            <th>적립마일리지</th>
+				                        </tr>
                                     </thead>
                                     <tbody>
 										<c:if test="${empty requestScope.likeList}">	
@@ -339,37 +172,28 @@ $(document).ready(function(){
 	                                    </c:if>
 	                                     
 	                                    <c:if test="${not empty requestScope.likeList}">
-							               <c:forEach var="odvo" items="${requestScope.likeList}" varStatus="status"> 
+							               <c:forEach var="pvo" items="${requestScope.likeList}" varStatus="status"> 
 							                   <tr>
 							                        <td> <%-- 체크박스 및 제품번호 --%>
 							                             <%-- c:forEach 에서 선택자 id를 고유하게 사용하는 방법  
 							                                  varStatus="status" 을 이용하면 된다.
 							                                  status.index 은 0 부터 시작하고,
 							                                  status.count 는 1 부터 시작한다. 
-							                             --%>  <%-- 날짜 및 주문번호 --%> 
-							                            <span class="product_title">${odvo.ovo.order_date}</span><br>
-							                            <span class="product_title">${odvo.order_details_num}</span>
-							                        </td>
-							                        <td align="center"> <%-- 상품명 --%> 
-							                           <a href="/MyMVC/shop/prodView.up?pnum=${cartvo.pnum}"><!-- 제품상세페이지 링크 -->
+							                             --%>  <%-- 상품명 --%> 
+							                            <a href="/MyMVC/shop/prodView.up?pnum=${cartvo.pnum}"><!-- 제품상세페이지 링크 -->
 							                              <img src="/MyMVC/images/${cartvo.prod.pimage1}" class="img-thumbnail" width="130px" height="100px" />
 							                           </a> 
-							                           <br/><span class="product_title">${odvo.pvo.product_title}</span> 
+							                           <br/><span class="product_title">${pvo.product_title}</span> 
+							                        </td>
+							                        <td align="center"> <%-- 상품금액 --%> 
+							                           <fmt:formatNumber value="${pvo.product_price}" pattern="###,###" /> 원<br>
 							                        </td>
 							                        <td align="center"> 
-							                            <%-- 상품 금액 및 주문 수량 --%>
-							                              <fmt:formatNumber value="${odvo.product_selling_price}" pattern="###,###" /> 원<br>
-							                              <span class="order_quantity">${odvo.order_quantity}</span> 개
-							                              
+							                            <%-- 재고--%>
+							                              <span class="order_quantity">${pvo.product_inventory}</span> 개
 							                        </td>
-							                        <td align="right"> <%-- 주문상태 --%> 
-							                            <span class="order_quantity">${odvo.delivery_status}</span>
-							                            
-							                        </td>
-							                        <td align="right"> <%-- 리뷰 --%> 
-							                            
-							                            <%-- 리뷰 작성한거 끌어오기 안썼으면 작성하기 버튼 생성 --%>
-							                            
+							                       <td align="center"> <%-- 적립마일리지 --%> 
+							                            <fmt:formatNumber value="${pvo.product_price*0.01}" pattern="###,###" /> 원<br>
 							                        </td>
 							                      </tr>
 							                 </c:forEach>
