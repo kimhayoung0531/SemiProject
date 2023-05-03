@@ -128,14 +128,10 @@
 	    	console.log("~~~확인용 cart_num: " + cart_num );	//42	
 	    	console.log("~~~확인용 cart_cnt: " + cart_cnt );	//2
 		   
-	    	if(!bool){
+	    	if(!bool || cart_cnt == 0){
 			   alert("주문수량은 1개이상이어야 합니다.");
 			   location.href="javascript:history.go(0)";	//수량 원상복구
 			   return;
-		   }
-	    	
-		   if(cart_cnt == 0){
-			   goDel(cart_num);
 		   }
 		   else{
 			//alert("장바구니 번호 "+cart_num + "번을 "+ cart_cnt +"개로 수정합니다");
