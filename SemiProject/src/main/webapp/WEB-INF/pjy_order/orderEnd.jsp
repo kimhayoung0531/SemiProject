@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String ctxPath = request.getContextPath();
 	// SemiProject
@@ -60,6 +61,15 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
+	                                                            <th><span class="order_important">주문상품</span></th>
+	                                                            <c:foreach var="pvo" items="${requestScope.productList}">
+	                                                            <td>
+	                                                            	<li>${pvo.product_title}</li>
+	                                                            </td>
+	                                                            </c:foreach>
+                                                            </tr>
+                                                            
+                                                            <tr>
                                                                 <th><span class="order_important">주문번호</span></th>
                                                                 <td>${requestScope.ovo.order_num}</td>
                                                             </tr>
@@ -77,20 +87,20 @@
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">배송비</span></th>
-                                                                <td>3,000</td>
+                                                                <td>3,000원</td>
                                                             </tr>
                                                             <tr>
                                                                 <th><span class="order_important">마일리지 적립/사용</span></th>
                                                                 <td>                                                                    
                                                                 <ul class="order_benefit_list"> 
-                                                                    <li>마일리지 적립 : <span class="save_mileage">${requestScope.save_mileage}</span>원</li>
-                                                                    <li>마일리지 사용 : <span class="save_mileage">${requestScope.ovo.order_mileage_total}</span>원</li>
+                                                                    <li>마일리지 적립 : <span class="save_mileage"><fmt:formatNumber value="${requestScope.save_mileage}" pattern="#,###" /></span>원</li>
+                                                                    <li>마일리지 사용 : <span class="save_mileage"><fmt:formatNumber value="${requestScope.ovo.order_mileage_total}" pattern="#,###" /></span>원</li>
                                                                 </ul>
                                                             </td>
                                                             </tr>
                                                             <tr>
-                                                                <th><span class="order_important">총 결제금액</span></th>
-                                                                <td><strong>${requestScope.ovo.order_price_total}</strong></td>
+                                                                <th><span class="order_important">총 결제금액(배송비 포함)</span></th>
+                                                                <td><strong><fmt:formatNumber value="${requestScope.ovo.order_price_total}" pattern="#,###" /></strong></td>
                                                             </tr>
 
 

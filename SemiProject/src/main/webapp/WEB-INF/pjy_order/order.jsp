@@ -58,7 +58,7 @@
 			
 			$("strong#totalPrice").html( (Number($("strong#order_total_price").val()) + deliveryFee).toLocaleString('ko-KR') );
 			$("span#totalPrice").html( (Number($("strong#order_total_price").val()) + deliveryFee).toLocaleString('ko-KR') );
-			$("input#finalTotalPrice").val((Number($("strong#order_total_price").val()) + deliveryFee)); //  최종금액
+			$("input#finalTotalPrice").val((Number($("strong#order_total_price").val()) + deliveryFee)); //  최종 결제 금액 출력
 			$("span#finalTotalPrice").text( (Number($("strong#order_total_price").val()) + deliveryFee).toLocaleString('ko-KR') );
 			
 			$("button.btn_order_buy").bind("click", function() {
@@ -277,11 +277,14 @@
 			$("input#eachProductTotalPrice_join").val(eachProductTotalPrice_join);
 			$("input#cartNo_join").val(cartNo_join);
 			
-
-			const frm = document.frmOrder;
-			frm.method="POST";
-			frm.action="<%= request.getContextPath()%>/orderEnd.ban";
+			console.log($("input#productNum_join").val());
+			console.log($("input#productCnt_join").val());
+			console.log($("input#productPrice_join").val());
+			console.log($("input#productMileage_join").val());
+			console.log($("input#eachProductTotalPrice_join").val());
+			console.log($("input#cartNo_join").val());
 			
+			goPurchaseEnd();
 			/* var queryString = $("form#frmOrder").serialize(); */
 /* 			var queryString = $("form#frmOrder").serializeArray();
 			queryString.push({name : "productNum_join", value:productNum_join });
@@ -290,7 +293,7 @@
 			queryString.push({name : "productMileage_join", value:productMileage_join });
 			queryString.push({name : "eachProductTotalPrice_join", value:eachProductTotalPrice_join });
 			queryString.push({name : "cartNo_join", value:cartNo_join }); */
-			frm.submit();
+			
 			
 
 		}; // end of  function checkOrderDetail()
@@ -313,9 +316,27 @@
 			}
 			$("input#finalTotalPrice").val((Number($("strong#order_total_price").val()) + 3000)); //  최종금액
 			$("strong#totalPrice").val(result);
-			$("strong#totalPrice").text(result);
+			$("strong#totalPrice").text(result.toLocaleString('ko-KR'));
 			$("span#totalPrice").val(result);
-			$("span#totalPrice").text(result);
+			$("span#totalPrice").text(result.toLocaleString('ko-KR'));
+			$("input#finalTotalPrice").val(result);
+			$("span#finalTotalPrice").text(result.toLocaleString('ko-KR'));
+		}
+		
+		function goPurchaseEnd() {
+			
+			const finalTotalPrice = $("input#finalTotalPrice").val();
+			const userid = '${requestScope.mvo.user_id}';
+			const url = "<%= request.getContextPath()%>/order/productPurchaseEnd.ban?finalTotalPrice="+finalTotalPrice+"&userid="+userid;	
+			window.open(url, "productPurchaseEnd", "left=350px, top=100px, width=1000px, height=600px");
+		}
+		
+		function goOrderEnd() {
+			
+			const frm = document.frmOrder;
+			frm.method="POST";
+			frm.action="<%= request.getContextPath()%>/orderEnd.ban";
+			frm.submit();
 		}
 		
 	</script>
@@ -327,6 +348,9 @@
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+                
+                
+                
                 // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                 var addr = ''; // 주소 변수
@@ -445,10 +469,49 @@
                                                             </td>
                                                             
                                                         </tr>
-                                                        
-                                                        
                                                     </c:if>
-
+                                                    
+                                                    <c:if test="${not empty requestScope.cartList}">
+	                                                    <c:forEach var="cartvo" items="${cartList}" varStatus="status">
+	                                                        <tr class="order_goods_layout">
+	                                                        
+	                                                        	<td class="td_left">    <%-- 상품 이미지 정보 (클릭시 이동) 및 제품명 --%>
+						                                            <div class="pick_add_cont"> 
+						                                                <div class="pick_add_img_info"> 
+						                                                    <a href="/SemiProject/productDeatail.ban?product_num=${cartvo.pvo.product_num}">
+						                                                    <img src="/SemiProject/image/item_main/${cartvo.pvo.main_image}.jpg" width="60"
+						                                                        alt="${cartvo.pvo.product_title}" title="${cartvo.pvo.product_title}" />
+						                                                    </a>
+						                                                <span class="cart_pname"><a href="/SemiProject/productDeatail.ban?product_num=${cartvo.pvo.product_num}">${cartvo.pvo.product_title}</a></span>
+						                                                </div>
+						                                            </div>
+						                                            <input class="productNum" type="hidden" value="${cartvo.pvo.product_num}" />
+						                                        </td>
+	                              
+	                                                            <td>${cartvo.product_count}
+	                                                            <input class="productCnt" type="hidden" value="${cartvo.product_count}" />
+	                                                            </td>
+	                                                            
+	                                                            <td>
+	                                                            <fmt:formatNumber value="${cartvo.pvo.product_price}" pattern="#,###" />
+	                                                            <input class="productPrice" type="hidden" value="${cartvo.pvo.product_price}" />
+	                                                            </td>
+	                                                            
+	                                                            <td><fmt:formatNumber value="${cartvo.totalMileage}" pattern="#,###" /> 마일리지
+	                                                            <input class="productMileage" type="hidden" value="${cartvo.totalMileage}" />
+	                                                            </td>
+	                                                            
+	                                                            <td class="priceMultiCountResult">
+	                                                            <fmt:parseNumber var="cnt" integerOnly="true" value="${cartvo.product_count}" />
+	                                                            <fmt:parseNumber var="price" integerOnly="true" value="${cartvo.pvo.product_price}" />
+	                                                            <fmt:formatNumber value="${cnt*price}" pattern="#,###" />
+	                                                            <input class="eachProductTotalPrice" type="hidden" value="${cnt*price}" />
+	                                                            </td>
+	                                                            
+	                                                        </tr>
+                                                        </c:forEach>
+                                                    </c:if>
+								
                                                     </tbody>
                                                 </table>
                                                 <!--장바구니 상품리스트 끝 -->
