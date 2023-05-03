@@ -15,7 +15,7 @@ public class NoticeAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		InterNoticeDAO ndao = new NoticeDAO();
+		 InterNoticeDAO ndao = new NoticeDAO();
 		
 		/*** 페이징처리 ***/
 		String searchType = request.getParameter("searchType");

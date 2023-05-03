@@ -46,7 +46,7 @@ public class NoticeVO {
 		this.inquiry_answer_time = inquiry_answer_time;
 		this.inquiry_view_count = inquiry_view_count;
 	}
-	///////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////
 	
 	public int getNotice_num() {
 		return notice_num;

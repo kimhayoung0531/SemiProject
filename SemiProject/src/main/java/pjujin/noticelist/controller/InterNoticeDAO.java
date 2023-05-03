@@ -18,7 +18,7 @@ public interface InterNoticeDAO {
 	// 페이징 처리를 한 모든 상품문의 또는 검색한 상품문의 목록 보여주기
 	List<NoticeVO> selectinquiryPaging(Map<String, String> paraMap) throws SQLException;
 
-	// 상품문의 페이지에 문의 등록하기
+	// 상품문의 페이지에 문의 등록하기 
 	int inquiryInsert(NoticeVO nvo) throws SQLException;
 
 	
