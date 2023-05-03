@@ -3300,14 +3300,16 @@ body .cart_cont .price_sum{
     text-align: left;
     margin: 0;
 }
-
-.cart_content_box .order_table_type .td_left a{
-    margin: 25px;
+.cart_content_box .order_table_type .pick_add_img_info{
+	display: inline-block;
 }
 
 .cart_content_box .order_table_type .td_left .cart_pname{
     /* border: solid 1px red; */
-    padding-top: 30px;
+    float: right;
+	margin: 25px 0 0 28px;
+	
+    font-size: bold;
 }
 
 .cart_content_box .order_table_type .td_left .pick_add_cont{
