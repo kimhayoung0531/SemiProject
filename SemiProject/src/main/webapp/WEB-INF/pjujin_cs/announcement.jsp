@@ -2,6 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+
+<%
+   String ctxPath = request.getContextPath();
+         
+%>
 
 <jsp:include page="../header.jsp" />
 
@@ -40,12 +46,8 @@ $(document).ready(function(){
 		frm.method = "get";
 		frm.submit();
 	}			
-
-	function goNotice() {
-		
-		
-		
-	}
+	
+	
 	
 	
 </script>
@@ -125,10 +127,10 @@ $(document).ready(function(){
 						
 			              <td class="notice_num">${nvo.notice_num}</td>
 			              <td>${nvo.notice_head}</td>
-			              <td><button class="admin_notice" style="font-size: 13pt" onclick="goNotice();">${nvo.notice_title}</button></td>
+			              <td><button class="admin_notice" id="admin_notice" style="font-size: 13pt" onclick="location.href='http://localhost:9090/SemiProject/noticeview.ban'">${nvo.notice_title}</button></td>
 			              <td>${nvo.notice_date}</td>
 			              <td>${nvo.notice_writer}</td>
-			              <td>${nvo.notice_viewcount}</td>
+			              <td id="admin_noticecnt">${nvo.notice_viewcount}</td>
 			           	
 			           </tr>
 			            
@@ -169,9 +171,9 @@ $(document).ready(function(){
 						
 						<span style="color: red; font-weight: bold; font-size: 12pt;">공지사항 개수</span>
 				     	 <select id="sizePerPage" name="sizePerPage" style="font-size: 12pt">
+					         <option value="10">10개</option>
+					         <option value="5">5개</option>
 					         <option value="3">3개</option>
-					         <option value="2">2개</option>
-					         <option value="1">1개</option>
 				      	 </select>
 
                     </form>
