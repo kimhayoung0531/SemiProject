@@ -157,36 +157,13 @@
                                 <div class="switch">전체 카테고리
                                     <div class="switch_submenu">
                                         <ul class ="switch_detail_submenu" >
-                                              <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homebread.ban">빵</a>
-                                                <ul class="sub_delth1" >
-                                                   <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breadnomal.ban">식빵</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breadhealth.ban">건강빵</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breaddonut.ban">도넛/고로케</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/breadpastry.ban">패스트리</a></li>
-                                                </ul>
+                                            <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homebread.ban">빵</a>
                                             </li>                                           
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homecake.ban">케이크</a>
-                                                <ul class="sub_delth1">
-                                                   <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakecream.ban">생크림 케이크</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakeclassic.ban">클래식 케이크</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/cakecharacter.ban">캐릭터 케이커</a></li>
-                                                </ul>
                                             </li>
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedessert.ban">디저트</a>
-                                                <ul class="sub_delth1">
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/desscok.ban">쿠키</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/desscho.ban">초코/캔디</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/dessice.ban">아이스</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/dessmac.ban">마카롱</a></li>
-                                                </ul>
                                             </li>
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedrink.ban">음료</a>
-                                                <ul class="sub_delth1">
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/drimil.ban">우유</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/dricof.ban">커피</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/driade.ban">에이드/TEA</a></li>
-                                                    <li class="ojh_li"><a href="http://localhost:9090/SemiProject/drismo.ban">스무디/쉐이크</a></li>
-                                                </ul>
                                             </li>
                                              
                                         </ul>
