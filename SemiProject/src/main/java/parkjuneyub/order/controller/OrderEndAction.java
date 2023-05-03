@@ -106,10 +106,7 @@ public class OrderEndAction extends AbstractController {
 		
 		int isSuccess = pdao.orderAdd(paraMap);
 		
-		
-		
-		
-		
+
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/pjy_order/orderEnd.jsp");
 		

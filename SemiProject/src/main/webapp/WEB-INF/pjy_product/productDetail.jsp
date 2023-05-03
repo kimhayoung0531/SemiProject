@@ -3,6 +3,8 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import= "parkjuneyub.board.model.ReviewVO" %>    
+<%@ page import= "parkjuneyub.member.model.*" %> 
 <%@ page import= "sge.member.model.MemberVO" %>    
 <%
 	String ctxPath = request.getContextPath();
@@ -530,7 +532,17 @@
 											              <td class="userid"><span>${rvo.mvo.user_id}</span></td>
 											              <td>${rvo.review_content}</td>
 											              <td>${rvo.review_date}</td>
-											              
+
+											              <% 
+											              	ReviewVO rvo =(ReviewVO) pageContext.getAttribute("rvo");
+											              	parkjuneyub.member.model.MemberVO mvo = rvo.getMvo();
+											              	String tmp = mvo.getUser_id();
+											                if(tmp.equals(user_id)) {
+											                %>
+
+											               <td><button type="button" class="btn btn-light" onclick="deleteReview('${rvo.purchase_review_id}')">삭제</button><td> 
+															<% } %>
+
 											           </tr>
 													</c:forEach>
 											 	 </c:if>
