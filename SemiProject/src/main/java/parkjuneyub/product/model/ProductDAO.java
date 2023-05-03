@@ -410,8 +410,8 @@ public class ProductDAO implements InterProductDAO  {
 	      try {
 	         conn = ds.getConnection();
 	         
-	         String sql = " insert into tbl_product(product_num, category_num, product_title, main_image, product_price, product_detail, product_inventory,product_date, sale_count) " +  
-	                    " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	         String sql = " insert into tbl_product_test(product_num, category_num, product_title, main_image, product_price, product_detail, product_inventory,product_date, sale_count) " +  
+	                      " values(?,?,?,?,?,?,?,?,?)";
 	         
 	         pstmt = conn.prepareStatement(sql);
 	         
@@ -428,7 +428,10 @@ public class ProductDAO implements InterProductDAO  {
 	            
 	         result = pstmt.executeUpdate();
 	         
+	      } catch(NumberFormatException e){
+	    	 
 	      } finally {
+	      
 	         close();
 	      }
 	      

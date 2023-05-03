@@ -5,6 +5,8 @@
     //    /SemiProject
 %>  
   
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+  
 
     <jsp:include page="../header.jsp" />
 		    
@@ -23,35 +25,41 @@
                           
                             <div class="ojh_container relative clearfix" style="position: relative;" width: 1240px; margin: 0 auto;>
                            
+                           
                                 <div class="ojh_left_wing">
+                                
                                     <div class="ojh_current-cate" >
                                         <h3 class="ojh_li" style="line-height: 40px;"> 케이크 </h3>
                                     </div>
-
-                                   <div class="ojh_category-box" >
+                                    <div class="ojh_category-box" >
                                         <ul>
-                                           <li class="ojh_li"> 
-                                                <a href="http://localhost:9090/SemiProject/cakecream.ban">
-                                                <span> 생크림 케이크</span>
+                                            <li class="ojh_li"> 
+                                                <a href="http://localhost:9090/SemiProject/homebread.ban">
+                                                <span> 빵</span>
                                                 </a>
                                             </li>
                                             <li class="ojh_li"> 
-                                                <a href="http://localhost:9090/SemiProject/cakeclassic.ban">
-                                                <span> 클래식 케이크</span>
+                                                <a href="http://localhost:9090/SemiProject/homecake.ban">
+                                                <span> 케이크</span>
                                                 </a>
                                             </li>
                                             <li class="ojh_li"> 
-                                                <a href="http://localhost:9090/SemiProject/cakecharacter.ban">
-                                                <span> 캐릭터 케이크</span>
+                                                <a href="http://localhost:9090/SemiProject/homedessert.ban">
+                                                <span> 디저트</span>
+                                                </a>
+                                            </li>
+                                            <li class="ojh_li"> 
+                                                <a href="http://localhost:9090/SemiProject/homedrink.ban">
+                                                <span> 음료</span>
                                                 </a>
                                             </li>
                                         </ul>
                                     </div>
-                                </div> <!-- end of ojh_left_wing -->
-                                
-
+								</div> <!-- end of ojh_left_wing -->
+								
+								
                                 <div class="ojh_right_content goods_list">
-                                    <div class="ojh_addition_zone" style="padding: 0px 0px 20px 0px;">
+                                     <div class="ojh_addition_zone" style="padding: 0px 0px 20px 0px;">
                            
                                         <p style="text-align: center;" >
                                             <img src="<%=ctxPath%>/image/homecake.jpg" style="width: 900px; height: 300px;">
@@ -63,29 +71,10 @@
                                             <input type="hidden" name="ojh_cateCd" value="023">
                                               <div class="ojh_pick_list_box">
                                                   <span class="ojh_pick_list_num pull_left" style="padding: 0px 0px 0px 63px;">
-                                                      상품
-                                                      <strong>100000000</strong>
-                                                      개
+                                                      
+                                                      <strong></strong>
+                                                      
                                                   </span>
-
-                                                  <ul class="ojh_pick_list" style="margin: 0px -57px 0px 0px;" ">
-                                                  
-                                                    <li class="ojh_li">
-                                                        <input type="radio" id="sort2" class="ojh_radio" name="sort" value>
-                                                        <label for="sort2" >판매인기순</label>
-                                                    </li>
-
-                                                    <li class="ojh_li">
-                                                        <input type="radio" id="sort3" class="ojh_radio" name="sort" value>
-                                                        <label for="sort3" >낮은가격순</label>
-                                                    </li>
-
-                                                    <li class="ojh_li">
-                                                        <input type="radio" id="sort1" class="ojh_radio" name="sort" value>
-                                                        <label for="sort1" >높은가격순</label>
-                                                    </li>
-                                                    
-                                                  </ul>
 
                                                   <div class="ojh_choice_num view">
                                                      <select class="ojh_chosen-select" name="pageNum" style="display:none;">
@@ -106,436 +95,56 @@
                                               </div>  
                                           </form>
                                     </div> <!-- end of ojh_good_pick_list -->
-                                    <div class="ojh_goods_list basic_product">
-                                        <div class="ojh_goods_list_cont" style="display: inline-block;
-                                                                              text-align: center;
-                                                                              margin: 10px 0px 0px 36px;">  
-                                        <div class="ojh_item_gallery_type">
-                                        <ul>
-                                                <li class="ojh_li" style="width: 33%;">
-
-                                                    <div class="ojh_imte_cont">
-                                                        <div class="ojh_photo_box">
-                                                            <a href="#">
-                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-                                                            </a>
-
-                                                        </div>
-                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-                                                                <a href="#">
-                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-                                                                </a>
-                                                            <div class="imem_money_box">
-                                                                <span class="precent" style="display: none;">15%</span>
-                                                                <strong class="item_price">
-                                                                    <span >3,500원 </span>
-                                                                    <span style="color: #888; text-decoration: line-through;">
-                                                                    </span>
-                                                                </strong>
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                </li>
-                                                
-                                                <li class="ojh_li" style="width: 33%;">
-
-                                                    <div class="ojh_imte_cont">
-                                                        <div class="ojh_photo_box">
-                                                            <a href="#">
-                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-                                                            </a>
-
-                                                        </div>
-                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-                                                                <a href="#">
-                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-                                                                </a>
-                                                            <div class="imem_money_box">
-                                                                <span class="precent" style="display: none;">15%</span>
-                                                                <strong class="item_price">
-                                                                    <span >3,500원 </span>
-                                                                    <span style="color: #888; text-decoration: line-through;">
-                                                                    </span>
-                                                                </strong>
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                </li>
-                                           
-                                           		<li class="ojh_li" style="width: 33%;">
-
-                                                    <div class="ojh_imte_cont">
-                                                        <div class="ojh_photo_box">
-                                                            <a href="#">
-                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-                                                            </a>
-
-                                                        </div>
-                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-                                                                <a href="#">
-                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-                                                                </a>
-                                                            <div class="imem_money_box">
-                                                                <span class="precent" style="display: none;">15%</span>
-                                                                <strong class="item_price">
-                                                                    <span >3,500원 </span>
-                                                                    <span style="color: #888; text-decoration: line-through;">
-                                                                    </span>
-                                                                </strong>
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                </li>
-                                           		
-                                           		<li class="ojh_li" style="width: 33%;">
-
-                                                    <div class="ojh_imte_cont">
-                                                        <div class="ojh_photo_box">
-                                                            <a href="#">
-                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-                                                            </a>
-
-                                                        </div>
-                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-                                                                <a href="#">
-                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-                                                                </a>
-                                                            <div class="imem_money_box">
-                                                                <span class="precent" style="display: none;">15%</span>
-                                                                <strong class="item_price">
-                                                                    <span >3,500원 </span>
-                                                                    <span style="color: #888; text-decoration: line-through;">
-                                                                    </span>
-                                                                </strong>
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                </li>
-                                           	
-                                           		<li class="ojh_li" style="width: 33%;">
-
-                                                    <div class="ojh_imte_cont">
-                                                        <div class="ojh_photo_box">
-                                                            <a href="#">
-                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-                                                            </a>
-
-                                                        </div>
-                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-                                                                <a href="#">
-                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-                                                                </a>
-                                                            <div class="imem_money_box">
-                                                                <span class="precent" style="display: none;">15%</span>
-                                                                <strong class="item_price">
-                                                                    <span >3,500원 </span>
-                                                                    <span style="color: #888; text-decoration: line-through;">
-                                                                    </span>
-                                                                </strong>
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                </li>
-                                           
-                                           <li class="ojh_li" style="width: 33%;">
-
-                                                    <div class="ojh_imte_cont">
-                                                    	<div class="ojh_photo_box">
-                                                            <a href="#">
-                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-                                                            </a>
-                                                       
-                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-                                                                <a href="#">
-                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-                                                                </a>
-                                                            <div class="imem_money_box">
-                                                                <span class="precent" style="display: none;">15%</span>
-                                                                <strong class="item_price">
-                                                                    <span >3,500원 </span>
-                                                                    <span style="color: #888; text-decoration: line-through;">
-                                                                    </span>
-                                                                </strong>
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                </li>
-                                           
-                                           <li class="ojh_li" style="width: 33%;">
-
-                                                    <div class="ojh_imte_cont">
-                                                        <div class="ojh_photo_box">
-                                                            <a href="#">
-                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-                                                            </a>
-
-                                                        </div>
-                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-                                                                <a href="#">
-                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-                                                                </a>
-                                                            <div class="imem_money_box">
-                                                                <span class="precent" style="display: none;">15%</span>
-                                                                <strong class="item_price">
-                                                                    <span >3,500원 </span>
-                                                                    <span style="color: #888; text-decoration: line-through;">
-                                                                    </span>
-                                                                </strong>
-                                                            </div>
-                                                        </div> 
-                                                    </div>
-                                                </li>
-	                                           
-	                                           <li class="ojh_li" style="width: 33%;">
-	
-	                                                    <div class="ojh_imte_cont">
-	                                                        <div class="ojh_photo_box">
-	                                                            <a href="#">
-	                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-	                                                            </a>
-	
-	                                                        </div>
-	                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-	                                                                <a href="#">
-	                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-	                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-	                                                                </a>
-	                                                            <div class="imem_money_box">
-	                                                                <span class="precent" style="display: none;">15%</span>
-	                                                                <strong class="item_price">
-	                                                                    <span >3,500원 </span>
-	                                                                    <span style="color: #888; text-decoration: line-through;">
-	                                                                    </span>
-	                                                                </strong>
-	                                                            </div>
-	                                                        </div> 
-	                                                    </div>
-	                                                </li>
-	                                           
-	                                           <li class="ojh_li" style="width: 33%;">
-	
-	                                                    <div class="ojh_imte_cont">
-	                                                        <div class="ojh_photo_box">
-	                                                            <a href="#">
-	                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-	                                                            </a>
-	
-	                                                        </div>
-	                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-	                                                                <a href="#">
-	                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-	                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-	                                                                </a>
-	                                                            <div class="imem_money_box">
-	                                                                <span class="precent" style="display: none;">15%</span>
-	                                                                <strong class="item_price">
-	                                                                    <span >3,500원 </span>
-	                                                                    <span style="color: #888; text-decoration: line-through;">
-	                                                                    </span>
-	                                                                </strong>
-	                                                            </div>
-	                                                        </div> 
-	                                                    </div>
-	                                                </li>
-	                                           
-	                                           <li class="ojh_li" style="width: 33%;">
-	
-	                                                    <div class="ojh_imte_cont">
-	                                                        <div class="ojh_photo_box">
-	                                                            <a href="#">
-	                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-	                                                            </a>
-	
-	                                                        </div>
-	                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-	                                                                <a href="#">
-	                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-	                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-	                                                                </a>
-	                                                            <div class="imem_money_box">
-	                                                                <span class="precent" style="display: none;">15%</span>
-	                                                                <strong class="item_price">
-	                                                                    <span >3,500원 </span>
-	                                                                    <span style="color: #888; text-decoration: line-through;">
-	                                                                    </span>
-	                                                                </strong>
-	                                                            </div>
-	                                                        </div> 
-	                                                    </div>
-	                                                </li>
-	                                           
-	                                           <li class="ojh_li" style="width: 33%;">
-	
-	                                                    <div class="ojh_imte_cont">
-	                                                        <div class="ojh_photo_box">
-	                                                            <a href="#">
-	                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-	                                                            </a>
-	
-	                                                        </div>
-	                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-	                                                                <a href="#">
-	                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-	                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-	                                                                </a>
-	                                                            <div class="imem_money_box">
-	                                                                <span class="precent" style="display: none;">15%</span>
-	                                                                <strong class="item_price">
-	                                                                    <span >3,500원 </span>
-	                                                                    <span style="color: #888; text-decoration: line-through;">
-	                                                                    </span>
-	                                                                </strong>
-	                                                            </div>
-	                                                        </div> 
-	                                                    </div>
-	                                                </li>
-	                                           
-	                                           <li class="ojh_li" style="width: 33%;">
-	
-	                                                    <div class="ojh_imte_cont">
-	                                                        <div class="ojh_photo_box">
-	                                                            <a href="#">
-	                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-	                                                            </a>
-	
-	                                                        </div>
-	                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-	                                                                <a href="#">
-	                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-	                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-	                                                                </a>
-	                                                            <div class="imem_money_box">
-	                                                                <span class="precent" style="display: none;">15%</span>
-	                                                                <strong class="item_price">
-	                                                                    <span >3,500원 </span>
-	                                                                    <span style="color: #888; text-decoration: line-through;">
-	                                                                    </span>
-	                                                                </strong>
-	                                                            </div>
-	                                                        </div> 
-	                                                    </div>
-	                                                </li>
-	                                           
-	                                           <li class="ojh_li" style="width: 33%;">
-	
-	                                                    <div class="ojh_imte_cont">
-	                                                        <div class="ojh_photo_box">
-	                                                            <a href="#">
-	                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-	                                                            </a>
-	
-	                                                        </div>
-	                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-	                                                                <a href="#">
-	                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-	                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-	                                                                </a>
-	                                                            <div class="imem_money_box">
-	                                                                <span class="precent" style="display: none;">15%</span>
-	                                                                <strong class="item_price">
-	                                                                    <span >3,500원 </span>
-	                                                                    <span style="color: #888; text-decoration: line-through;">
-	                                                                    </span>
-	                                                                </strong>
-	                                                            </div>
-	                                                        </div> 
-	                                                    </div>
-	                                                </li>
-	                                           
-	                                           <li class="ojh_li" style="width: 33%;">
-	
-	                                                    <div class="ojh_imte_cont">
-	                                                        <div class="ojh_photo_box">
-	                                                            <a href="#">
-	                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-	                                                            </a>
-	
-	                                                        </div>
-	                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-	                                                                <a href="#">
-	                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-	                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-	                                                                </a>
-	                                                            <div class="imem_money_box">
-	                                                                <span class="precent" style="display: none;">15%</span>
-	                                                                <strong class="item_price">
-	                                                                    <span >3,500원 </span>
-	                                                                    <span style="color: #888; text-decoration: line-through;">
-	                                                                    </span>
-	                                                                </strong>
-	                                                            </div>
-	                                                        </div> 
-	                                                    </div>
-	                                                </li>
-	                                           
-	                                           <li class="ojh_li" style="width: 33%;">
-	
-	                                                    <div class="ojh_imte_cont">
-	                                                        <div class="ojh_photo_box">
-	                                                            <a href="#">
-	                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-	                                                            </a>
-	
-	                                                        </div>
-	                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-	                                                                <a href="#">
-	                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-	                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-	                                                                </a>
-	                                                            <div class="imem_money_box">
-	                                                                <span class="precent" style="display: none;">15%</span>
-	                                                                <strong class="item_price">
-	                                                                    <span >3,500원 </span>
-	                                                                    <span style="color: #888; text-decoration: line-through;">
-	                                                                    </span>
-	                                                                </strong>
-	                                                            </div>
-	                                                        </div> 
-	                                                    </div>
-	                                                </li>
-	                                           
-	                                           <li class="ojh_li" style="width: 33%;">
-	
-	                                                    <div class="ojh_imte_cont">
-	                                                        <div class="ojh_photo_box">
-	                                                            <a href="#">
-	                                                                <img src="<%=ctxPath%>/image/item_main/2.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-	                                                            </a>
-	
-	                                                        </div>
-	                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 20px 0px 20px 24px;">
-	                                                                <a href="#">
-	                                                                <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-	                                                                <span class="ojh_item_name_explain">부드럽고 담백한 카스테라</span>
-	                                                                </a>
-	                                                            <div class="imem_money_box">
-	                                                                <span class="precent" style="display: none;">15%</span>
-	                                                                <strong class="item_price">
-	                                                                    <span >3,500원 </span>
-	                                                                    <span style="color: #888; text-decoration: line-through;">
-	                                                                    </span>
-	                                                                </strong>
-	                                                            </div>
-	                                                        </div> 
-	                                                    </div>
-	                                                </li>
-                                                
-                                        </ul>
                                     
+                                   
+                                 
+                                  <div class="ojh_goods_list basic_product">
+                                     <div class="ojh_goods_list_cont" > 
+                                       
+                                                                                  
+                                       <div class="ojh_item_gallery_type" style="display: inline-block;
+                                                                              text-align: center;
+                                                                              margin: 10px 0px 0px 36px;">
+                                        	<ul>
+                                        	    <li class="ojh_li" style="width: 93%;">
+                                        	    
+												  <c:forEach var="pvo" items="${pvoList}" varStatus="status">		
+                                                    <div class="ojh_imte_cont" style="display: inline-block;">
+                                                        <div class="ojh_photo_box" style="display: inline-block">
+                                                            <a href="<%= request.getContextPath()%>/productDeatail.ban?product_num=${pvo.product_num}">
+                                                                <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " >
+                                                            </a>
 
+                                                        </div>
+                                                        <div class="item-info-cont" style="display:block; text-align: left; margin: 15px 0px 15px 0px;">
+                                                                <a href="#">
+                                                                <strong class="item_name" style="direction: ltr;">${pvo.product_title}</strong>
+                                                                
+                                                                <span class="ojh_item_name_explain" style="color: #a8a8a8;">쫀득쫀득 알밤</span>
+                                                                </a>
+                                                            <div class="imem_money_box">
+                                                                <span class="precent" style="display: none;">15%</span>
+                                                                <strong class="item_price">
+                                                                    <span >3,500원 </span>
+                                                                    <span style="color: #888; text-decoration: line-through;">
+                                                                    </span>
+                                                                </strong>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                  </c:forEach>  
+                                                </li>
+                                        	</ul>
                                         </div> <!-- ojh_item_gallery_type -->
-
-                                        </div> <!-- ojh_goods_list_cont -->
-                                    </div> <!-- ojh_goods_list basic_product -->
-                                </div> <!-- ojh_right_content goods_list -->
-                          </div> <!-- end of ojh_container relative clearfix -->
+                                       </div>
+                                      </div>
+                                        
+                               		
+									
+                                   </div> <!-- ojh_goods_list_cont -->
+                                </div> <!-- ojh_goods_list basic_product -->
+                             </div> <!-- ojh_right_content goods_list -->
+                           </div> <!-- end of ojh_container relative clearfix -->
                         </div> <!-- ojh_content -->
                     </div> <!-- ojh_sub_content -->
                 </div> <!-- content -->

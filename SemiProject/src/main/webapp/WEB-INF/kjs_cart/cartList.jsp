@@ -240,53 +240,47 @@
             const totalPrice_join = totalPrice_arr.join();
             const totalMileage_join = totalMileage_arr.join();
             
+            
+           	console.log("~~~확인용 pnum_join:" + pnum_join);
+           	console.log("~~~확인용 cart_cnt_join:" + cart_cnt_join);
+           	console.log("~~~확인용 cart_num_join:" + cart_num_join);
+           	console.log("~~~확인용 totalPrice_join:" + totalPrice_join);
+           	console.log("~~~확인용 totalMileage_join:" + totalMileage_join);
+            
             let sum_totalPrice = 0;
+            let sum_totalPriceDelivery = 0;
             for(let i=0; i<totalPrice_arr.length; i++) {
                sum_totalPrice += Number(totalPrice_arr[i]);
             }
-            sum_totalPrice += 3000;
-
+            
+            if(${empty requestScope.cartList}){
+            	
+            }
+            
             
             let sum_totalMileage = 0;
             for(let i=0; i<totalMileage_arr.length; i++) {
                sum_totalMileage += Number(totalMileage_arr[i]);
             }
             
-            console.log("~~~ 확인용 pnum_join : "+pnum_join);
-            console.log("~~~ 확인용 cart_cnt_join : "+cart_cnt_join);
-            console.log("~~~ 확인용 cart_num_join : "+cart_num_join);
-            console.log("~~~ 확인용 totalPrice_join : "+totalPrice_join);
-            console.log("~~~ 확인용 totalMileage_join : "+totalMileage_join);
-            console.log("~~~ 확인용 sum_totalPrice : "+sum_totalPrice);
-            console.log("~~~ 확인용 sum_totalMileage : "+sum_totalMileage);
             
             
-            if(confirm("총주문액 : "+sum_totalPrice.toLocaleString('en')+"원 결제하시겠습니까?")) {
+            if(confirm("총주문액 : "+sum_totalPriceDelivery.toLocaleString('en')+"원 결제하시겠습니까?")) {
+
+                $("input[name='product_price']").val("${cartvo.product_price}");
+                $("input[name='pnum_join']").val(pnum_join);
+                $("input[name='cart_cnt_join']").val(cart_cnt_join);
+                $("input[name='cart_num_join']").val(cart_num_join);
+                $("input[name='totalPrice_join']").val(totalPrice_join);		//상품 당 총 가격
+                $("input[name='totalMileage_join']").val(totalMileage_join);
+                $("input[name='sum_totalPrice']").val(sum_totalPrice);			//결제할 총 가격
+
                 
-                $.ajax({
-                   url:"<%= request.getContextPath()%>/order.ban",
-                   type:"post",
-                   data:{"sum_totalPrice":sum_totalPrice,
-                       "sum_totalMileage":sum_totalMileage,
-                       "pnum_join":pnum_join,
-                       "cart_cnt_join":cart_cnt_join,
-                       "cart_num_join":cart_num_join,
-                       "totalPrice_join":totalPrice_join
-                       },
-                   dataType:"json",
-                   success:function(json) {
-                      // json 은 {"isSuccess":1} 또는 {"isSuccess":0} 이다.
-                      if(json.isSuccess == 1){
-                     	 location.href="<%= request.getContextPath()%>/orderList.ban";
-                      }
-                      else{
-                     	 location.href="<%= request.getContextPath()%>/orderError.ban";
-                      }
-                   },
-                    error: function(request, status, error){
-                         alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-                      }
-                });	//end of $.ajax ------------------------------------------
+                const frm = document.frmCart;
+        		frm.action = "<%= request.getContextPath()%>/order.ban";
+        		frm.method = "post";
+        		frm.submit();
+                
              }//end of if --------------------------------------
             
             
@@ -320,15 +314,14 @@
                 <div class="cart_cont">
         
                     <form id="frmCart" name="frmCart" method="post" target="ifrmProcess">
-                      <!--   <input type="hidden" name="mode" value="">
-                        <input type="hidden" name="cart[cartSno]" value="">
-                        <input type="hidden" name="cart[goodsNo]" value="">
-                        <input type="hidden" name="cart[goodsCnt]" value="">
-                        <input type="hidden" name="cart[addGoodsNo]" value="">
-                        <input type="hidden" name="cart[addGoodsCnt]" value="">
-                        <input type="hidden" name="cart[couponApplyNo]" value="">
-                        <input type="hidden" name="useBundleGoods" value="1">
-                        <input type="hidden" name="ac_id" value=""> -->
+		                <input type="hidden" name="pnum_join" value="" />
+						<input type="hidden" name="product_price" value="" /> 
+						<input type="hidden" name="cart_cnt_join" value="" /> 
+						<input type="hidden" name="cart_num_join" value="" /> 
+						<input type="hidden" name="totalPrice_join" value="" /> 
+						<input type="hidden" name="totalMileage_join" value="" /> 
+  						<input type="hidden" name="sum_totalPrice" value="" />
+                        
                         <!-- 장바구니 상품리스트 시작 -->
                         
                         <div class="cart_cont_list">
@@ -346,31 +339,29 @@
                                     </colgroup>
                                   
                                   
-                                    <thead>
-                                    <tr>
-                                        <th>        <!-- 전체선택 체크박스 allCheck-->
-                                            <div class="form_element">
-                                                <input type="checkbox" id="allCheck" class="gd_select_all_goods" onClick="allCheckBox();" checked="checked" />
-                                            </div>
-                                        </th>
-                                        <th>상품/옵션 정보</th>
-                                        <th>수량</th>
-                                        <th>상품금액</th>
-                                        <th>적립 마일리지</th>
-                                        <th>합계금액</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-
-
-                                    <tbody>
-                                    
                                     <c:if test="${empty requestScope.cartList}">
 						                      <p class="cart_no_data">장바구니에 담겨있는 상품이 없습니다.</p>
 						            </c:if>   
 						            
                                     <c:if test="${not empty requestScope.cartList}">
-                                        <c:forEach var="cartvo" items="${requestScope.cartList}" varStatus="status"> 
+	                                    <thead>
+	                                    <tr>
+	                                        <th>        <!-- 전체선택 체크박스 allCheck-->
+	                                            <div class="form_element">
+	                                                <input type="checkbox" id="allCheck" class="gd_select_all_goods" onClick="allCheckBox();" checked="checked" />
+	                                            </div>
+	                                        </th>
+	                                        <th>상품/옵션 정보</th>
+	                                        <th>수량</th>
+	                                        <th>상품금액</th>
+	                                        <th>적립 마일리지</th>
+	                                        <th>합계금액</th>
+	                                        <th></th>
+	                                    </tr>
+	                                    </thead>
+	
+	                                    <c:forEach var="cartvo" items="${requestScope.cartList}" varStatus="status"> 
+	                                    <tbody>
 		                                    <tr>
 		                                        <td class="td_chk"> <%-- 선택상품 체크박스--%>  
 		                                        <%-- 체크박스 및 제품번호 --%>
@@ -387,11 +378,11 @@
 		                                        <td class="td_left">    <%-- 상품 이미지 정보 (클릭시 이동) 및 제품명 --%>
 		                                            <div class="pick_add_cont"> 
 		                                                <div class="pick_add_img_info"> 
-		                                                    <a href="/SemiProject/productDeatail.ban?pnum=${cartvo.pvo.product_num}">
+		                                                    <a href="/SemiProject/productDeatail.ban?product_num=${cartvo.pvo.product_num}">
 		                                                    <img src="/SemiProject/image/item_main/${cartvo.pvo.main_image}.jpg" width="60"
 		                                                        alt="${cartvo.pvo.product_title}" title="${cartvo.pvo.product_title}" />
 		                                                    </a>
-		                                                <span class="cart_pname"><a href="/SemiProject/productDeatail.ban?pnum=${cartvo.pvo.product_num}">${cartvo.pvo.product_title}</a></span>
+		                                                   <p class="cart_pname"><a href="/SemiProject/productDeatail.ban?product_num=${cartvo.pvo.product_num}">${cartvo.pvo.product_title}</a></p>
 		                                                </div>
 		                                            </div>
 		                                        </td>
@@ -422,15 +413,9 @@
 		                                                </ul>
 		                                        </td>
 		                                        <%-- 상품 당 합계금액 --%>
-		                                        <%-- 
-		                                        <td>
-		                                            <div class="allprice_won"><fmt:formatNumber value="${carvo.totalPrice}" pattern="###,###" />원</div>
-		                                            <div class="allprice_mileage"><fmt:formatNumber value="${carvo.totalMileage}" pattern="###,###"/>마일리지</div>
-			                                    </td>
-			                                    --%>
 			                                    <td>
 			                                    	<strong><fmt:formatNumber value="${cartvo.totalPrice}" pattern="###,###" /> 원</strong>
-		                                           <input type="hidden" class="totalPrice" value="${cartvo.totalPrice}" />
+			                                    	<input type="hidden" class="totalPrice" value="${cartvo.totalPrice}" />
                             						<input type="hidden" class="totalMileage" value="${cartvo.totalMileage}" />
 			                                    </td>
 			                                    <%-- 상품 삭제 --%>
@@ -438,12 +423,9 @@
                           							  <button type="button" class="btn btn-outline-danger btn-sm" onclick="goDel('${cartvo.cart_num}')">삭제</button>  
 			                                    </td>
 			                                </tr>
-			                            </c:forEach>    
-			                            	
-		                                    
-                                    </c:if>
-        
-                                    </tbody>
+                                    	</tbody>
+			                        </c:forEach>
+                                   	</c:if>
         
         
                                 </table>
@@ -469,6 +451,8 @@
                                         총 상품 금액
                                     </div>
                                     <div class="allprice_won"><fmt:formatNumber value="${requestScope.sumMap.SUMTOTALPRICE}" pattern="###,###"/>원</div>
+                                    <input type="hidden" name="sumTotalPrice" value="${requestScope.sumMap.SUMTOTALPRICE}" />
+                                    
                                 </div>
 
                                 <span><img src="https://cdn-pro-web-250-118.cdn-nhncommerce.com/cafenotr1984_godomall_com/data/skin/front/moment_cafenoli_N/img/order/order_price_plus.png" alt="더하기"></span>
@@ -490,13 +474,21 @@
                                     <div class = "allprice_head">
                                         합계
                                     </div>
-                                    <div class="allprice_won"><fmt:formatNumber value="${requestScope.sumPriceDelivery}" pattern="###,###"/>원</div>
+                                    
+                                    <c:if test="${empty requestScope.cartList}">
+                                    <div class="allprice_won"><fmt:formatNumber value="${requestScope.sumPrice}" pattern="###,###"/>원</div>
+                                	</c:if>
+                                	
+                                	<c:if test="${not empty requestScope.cartList}">
+                                	<div class="allprice_won"><fmt:formatNumber value="${requestScope.sumPriceDelivery}" pattern="###,###"/>원</div>
+                                	</c:if>
+                                	
                                 </div>
                                 
                             </div>
 						 
                         <div id="deliveryChargeText" class="tobe_mileage"></div>
-                       <div class="tobe_mileage">총 마일리지 : <span id="totalGoodsMileage"></span></div>
+                       <div class="tobe_mileage">장바구니 총 마일리지 : <span id="totalGoodsMileage"></span></div>
                         </div>
                         <!-- //price_sum_cont -->
                     </div>
