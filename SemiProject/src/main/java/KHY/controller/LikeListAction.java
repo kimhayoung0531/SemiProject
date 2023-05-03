@@ -8,11 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import KHY.model.MemberVO;
+
 import KHY.product.model.InterProductDAO;
 import KHY.product.model.ProductDAO;
+import KHY.product.model.ProductVO;
 import common.controller.AbstractController;
-import parkjuenyub.order.model.OrderDeatailVO;
+import sge.member.model.MemberVO;
+
 
 public class LikeListAction extends AbstractController {
 
@@ -22,13 +24,11 @@ public class LikeListAction extends AbstractController {
 		HttpSession session = request.getSession();
 		MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 		
-		String startdate = request.getParameter("wDate1");
-		String enddate = request.getParameter("wDate2");
+		
 		String currentShowPageNO = request.getParameter("currentShowPageNO");
 		Map<String, String> paraMap = new HashMap<>();
 		paraMap.put("user_id", loginuser.getUser_id());
-		paraMap.put("startdate", startdate);
-		paraMap.put("enddate", enddate);
+		
 		
 		
 		
@@ -53,7 +53,7 @@ public class LikeListAction extends AbstractController {
 				
 				paraMap.put("currentShowPageNO", currentShowPageNO); //조회하고자하는 페이지번호
 		         
-				int totalPage = pdao.getTotalPageOrder(paraMap);
+				int totalPage = pdao.getTotalPageLike(paraMap);
 				
 				if( Integer.parseInt(currentShowPageNO) > totalPage) {
 					  currentShowPageNO = "1";
@@ -61,11 +61,11 @@ public class LikeListAction extends AbstractController {
 				  }
 				
 
-				List<OrderDeatailVO> orderList = pdao.selectPagingOrderList(paraMap);
+				List<ProductVO> likeList = pdao.selectPagingLikeList(paraMap);
 				
-				int count = pdao.selectOrderListCount(paraMap);
+				int count = pdao.selectLikeListCount(paraMap);
 				
-		        request.setAttribute("orderList", orderList);
+		        request.setAttribute("likeList", likeList);
 		        request.setAttribute("count", count);
 			
 		        String pageBar = "";

@@ -357,20 +357,22 @@ a {
 #footer_wrap{position:relative; border-top:1px solid #e3e3e3;}
 #footer{overflow:hidden; padding:0 0 40px 0;}
 /* 풋터 메뉴 */
-.foot_list{border-bottom:1px solid #e3e3e3; line-height:1;}
+.foot_list{border-bottom:1px solid #e3e3e3; line-height:1; }
 .foot_list ul{overflow:hidden; width:1200px; margin:0 auto;}
 .foot_list ul li{float:left; padding:15px 0 15px 0;}
-.foot_list ul li a{padding:0 15px 0 14px; color:#717171; border-left:1px solid #e0e0e0;}
+.foot_list ul li a{padding:0 15px 0 14px; color:#717171; /* border-left:1px solid #e0e0e0; */}
 .foot_list ul li:first-child a{padding-left:0; border-left:0 none;}
 
 
 
 #footer {
     padding: 0;
+   
 }
 
 #footer_wrap {
-    border-color: #343434;
+	/* background-color:#ecb731; */
+    border-color: #4d3b00;
     padding: 0;
 }
 
@@ -384,7 +386,7 @@ a {
 }
 
 .foot_list ul.company-menu li {
-    margin-right: 43px;
+  
 }
 
 .foot_list ul.company-menu li a {
@@ -410,22 +412,22 @@ a {
 }
 
 .footer-bottom .container>div {
-    box-sizing: border-box;
+ /*    box-sizing: border-box;
     position: relative;
     margin-top: 37px;
-    margin-bottom: 50px;
+    margin-bottom: 50px; */
 }
 
 .footer-bottom .container>div:after {
-    content: "";
+  /*   content: "";
     display: block;
     width: 1px;
     height: 80px;
-    background: #dfdfdf;
+
     position: absolute;
     top: -10%;
     right: 0;
-    
+     */
 }
 
 .footer-bottom .container>div:last-child:after {
@@ -438,7 +440,7 @@ a {
 
 .footer-bottom .bank-account {
     width: 300px;
-    padding-left: 34px;
+    /* padding-left: 34px; */
 }
 
 .footer-bottom .community {
@@ -3300,14 +3302,16 @@ body .cart_cont .price_sum{
     text-align: left;
     margin: 0;
 }
-
-.cart_content_box .order_table_type .td_left a{
-    margin: 25px;
+.cart_content_box .order_table_type .pick_add_img_info{
+	display: inline-block;
 }
 
 .cart_content_box .order_table_type .td_left .cart_pname{
     /* border: solid 1px red; */
-    padding-top: 30px;
+    float: right;
+	margin: 25px 0 0 28px;
+	
+    font-size: bold;
 }
 
 .cart_content_box .order_table_type .td_left .pick_add_cont{

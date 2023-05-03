@@ -77,6 +77,9 @@
 
 <script type="text/javascript">
 
+
+
+
 </script>
      
      
@@ -134,79 +137,56 @@
             <div class="content">
                 <div class="mypage_main">
 
-                     <div class="mypage_lately_info">
-                        <div class="mypage_zone_tit">
-                            <h3>좋아요 내역</h3>
-                        </div>
+                     <div class="reviews_cont">
+                         <div class="review_header">
+                             <div class="review_header_tit">
+                                 <span class="title">REVIEW</span>
+                             </div>
+                         </div>
 
-						    <span class="pick_list_num">
-                                좋아요 내역 총 <strong>${requestScope.count}</strong> 건
-                            </span>
+                         <table class="review_table table table-hover">
+                         	<colgroup>
+                                        <col style="width:10%">
+                                        <col style="width:35%">
+                                        <col style="width:40%">
+                                        <col style="width:15%">
+                             </colgroup>
+                             <thead>
+                                 <tr>
+                                 	 <th>글번호</th>
+                                     <th>상품명</th>
+                                     <th>내용</th>
+                                     <th>작성일</th>
+                                 </tr>
+                             </thead>
 
-                            <!-- 좋아요 리스트 -->
-                            <div class="mypage_lately_info_cont">
-                            <!-- 좋아요 리스트 -->
-                            <div class="mypage_table_type">
-                                <table>
-                                    <colgroup>
-                                        <col> <!-- 상품명 -->
-                                        <col style="width:19%"> <!-- 상품금액-->
-                                        <col style="width:19%"> <!-- 재고 -->
-                                        <col style="width:19%"> <!-- 적립마일리지 -->
-                                    </colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th>상품명</th>
-				                            <th>상품금액</th>
-				                            <th>재고</th>
-				                            <th>적립마일리지</th>
-				                        </tr>
-                                    </thead>
-                                    <tbody>
-										<c:if test="${empty requestScope.likeList}">	
-	                                        <tr>
-	                                            <td colspan="6">
-	                                                <p class="no_data">조회내역이 없습니다.</p>
-	                                            </td>
-	                                        </tr>
-	                                    </c:if>
-	                                     
-	                                    <c:if test="${not empty requestScope.likeList}">
-							               <c:forEach var="pvo" items="${requestScope.likeList}" varStatus="status"> 
-							                   <tr>
-							                        <td> <%-- 체크박스 및 제품번호 --%>
-							                             <%-- c:forEach 에서 선택자 id를 고유하게 사용하는 방법  
-							                                  varStatus="status" 을 이용하면 된다.
-							                                  status.index 은 0 부터 시작하고,
-							                                  status.count 는 1 부터 시작한다. 
-							                             --%>  <%-- 상품명 --%> 
-							                            <a href="/MyMVC/shop/prodView.up?pnum=${cartvo.pnum}"><!-- 제품상세페이지 링크 -->
-							                              <img src="/MyMVC/images/${cartvo.prod.pimage1}" class="img-thumbnail" width="130px" height="100px" />
+                             <tbody>
+								 <c:if test="${not empty requestScope.reviewList}">
+									<c:forEach var="rvo" items="${requestScope.reviewList}">
+										<tr>
+										  <td ><span>${rvo.purchase_review_id}</span></td>	
+							              <td ><a href="<%= ctxPath%>/productDeatail.ban?product_num=${rvo.pvo.product_num}"><!-- 제품상세페이지 링크 -->
+							                              <img src="/SemiProject/images/itme_main/${rvo.pvo.main_image}" class="img-thumbnail" width="130px" height="100px" />
 							                           </a> 
-							                           <br/><span class="product_title">${pvo.product_title}</span> 
-							                        </td>
-							                        <td align="center"> <%-- 상품금액 --%> 
-							                           <fmt:formatNumber value="${pvo.product_price}" pattern="###,###" /> 원<br>
-							                        </td>
-							                        <td align="center"> 
-							                            <%-- 재고--%>
-							                              <span class="order_quantity">${pvo.product_inventory}</span> 개
-							                        </td>
-							                       <td align="center"> <%-- 적립마일리지 --%> 
-							                            <fmt:formatNumber value="${pvo.product_price*0.01}" pattern="###,###" /> 원<br>
-							                        </td>
-							                      </tr>
-							                 </c:forEach>
-							            </c:if>    
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
+							              <span>${rvo.pvo.product_title}</span></td>
+							              
+							              
+							              <td>${rvo.review_content}</td>
+							              <td>${rvo.review_date}</td>
+							              
+							           </tr>
+									</c:forEach>
+							 	 </c:if>
+								<c:if test="${empty requestScope.reviewList}">
+									<tr>
+										<td colspan="3">작성된 리뷰가 없습니다.</td>
+									</tr>
+								</c:if>
+		                                         
+                             </tbody>
+                         </table>
 
-                        </div>
-                        <!-- //mypage_lately_info_cont -->
-                    </div>
-                    <!-- //mypage_lately_info -->
+                     </div>
 
 
                     <div class="pagination">

@@ -18,7 +18,6 @@ public class CartChoiseDeleteAction extends AbstractController{
 		
 		if("POST".equalsIgnoreCase(method)) {
 			
-			
 			String cart_ck_join = request.getParameter("cart_ck_join");
 			String[] cart_ck_arr = cart_ck_join.split("\\,");
 			

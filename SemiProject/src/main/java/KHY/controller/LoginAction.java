@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
+import sge.member.model.InterMemberDAO;
+import sge.member.model.MemberDAO;
+import sge.member.model.MemberVO;
 import KHY.model.*;
 
 public class LoginAction extends AbstractController {

@@ -8,11 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import KHY.model.MemberVO;
+
 import KHY.product.model.InterProductDAO;
+import KHY.product.model.OrderDeatailVO;
 import KHY.product.model.ProductDAO;
 import common.controller.AbstractController;
-import parkjuenyub.order.model.OrderDeatailVO;
+import sge.member.model.MemberVO;
+
 
 
 
@@ -86,9 +88,9 @@ public class MypageOrderListAction extends AbstractController {
 				////////////////////////////////////////////////
 				
 				// **** [맨처음][이전] 만들기 **** //
-				pageBar += "<div class='pagi'><li class='page-item'><a class='page-link' href='mypageOrderList.ban?currentShowPageNO=1'>[맨처음]</a></li>";
+				pageBar += "<div class='pagi'><li class='page-item'><a class='page-link' href='mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate+"&currentShowPageNO=1'>[맨처음]</a></li>";
 				if(pageNo != 1) {
-					pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?currentShowPageNO="+(pageNo-1)+"'>[이전]</a></li>";
+					pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate+"&currentShowPageNO="+(pageNo-1)+"'>[이전]</a></li>";
 				}
 				
 				
@@ -100,7 +102,7 @@ public class MypageOrderListAction extends AbstractController {
 						pageBar += "<li class='page-item active'><a class='page-link' href='#'>"+pageNo+"</a></li>"; // 부트스트랩에 있는 네비게이션 페이지바 사용하는거임
 					}
 					else {
-						pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?currentShowPageNO="+pageNo+"'>"+pageNo+"</a></li>"; // 부트스트랩에 있는 네비게이션 페이지바 사용하는거임
+						pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate+"&currentShowPageNO="+pageNo+"'>"+pageNo+"</a></li>"; // 부트스트랩에 있는 네비게이션 페이지바 사용하는거임
 					}
 					loop++;   // 1 2 3 4 5 6 7 8 9 10
 					
@@ -115,10 +117,10 @@ public class MypageOrderListAction extends AbstractController {
 				// pageNo => 11
 				// pageNo => 21
 				if(pageNo <= totalPage) {
-					pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?currentShowPageNO="+pageNo+"'>[다음]</a></li>";
+					pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate+"&currentShowPageNO="+pageNo+"'>[다음]</a></li>";
 						
 				}
-				pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?currentShowPageNO="+totalPage+"'>[마지막]</a></li></div>";
+				pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate+"&currentShowPageNO="+totalPage+"'>[마지막]</a></li></div>";
 				
 				
 				
