@@ -73,7 +73,7 @@ public class ProductDAO implements InterProductDAO  {
 			pvo.setProduct_num(rs.getLong(1));
 			pvo.setCategory_num(rs.getLong(2));
 			pvo.setProduct_title(rs.getString(3));
-			pvo.setMain_image(rs.getLong(4));
+			pvo.setMain_image(rs.getString(4));
 			pvo.setProduct_price(rs.getLong(5));
 			pvo.setProduct_detail(rs.getString(6));
 			pvo.setProduct_inventory(rs.getLong("product_inventory"));
@@ -418,15 +418,15 @@ public class ProductDAO implements InterProductDAO  {
 	         pstmt.setLong(1,  pvo.getProduct_num());
 	         pstmt.setLong(2, pvo.getCategory_num());
 	         pstmt.setString(3, pvo.getProduct_title());    
-	         pstmt.setLong(4,  pvo.getMain_image()); 
+	         pstmt.setString(4,  pvo.getMain_image()); 
 	         pstmt.setLong(5,  pvo.getProduct_price());    
 	         pstmt.setString(6, pvo.getProduct_detail()); 
 	         pstmt.setLong(7, pvo.getProduct_inventory());
 	         pstmt.setString(8, pvo.getProduct_date());
 	         pstmt.setLong(9, pvo.getSale_count());
-	        
-	            
+ 
 	         result = pstmt.executeUpdate();
+
 	         
 	      } catch(NumberFormatException e){
 	    	 
@@ -439,6 +439,38 @@ public class ProductDAO implements InterProductDAO  {
 		
 		
 	}
+
+	@Override
+	public List<ProductVO> getPvoListByPnum(String[] pnum_join) throws SQLException {
+		List<ProductVO> pvoList = new ArrayList<>();
+
+		for(int i = 0; i<pnum_join.length; i++) {
+			try {
+				conn = ds.getConnection();
+
+		         String sql = " select product_num, product_title, main_image "
+		         		+ " from tbl_product where product_num = ? ";
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setString(1, pnum_join[i]);
+		         rs = pstmt.executeQuery();
+
+		         ProductVO pvo = new ProductVO();
+		         rs.next();
+		         pvo.setProduct_num(rs.getLong(1));
+		         pvo.setProduct_title(rs.getString(2));
+		         pvo.setMain_image((rs.getString(3)));
+
+		         pvoList.add(pvo);
+
+			} finally {
+				close();
+			}
+		}
+
+
+		return pvoList;
+	}
+
 
 	
 	

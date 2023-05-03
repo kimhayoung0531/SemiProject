@@ -1,4 +1,4 @@
-package parkjuneyub.product.controller;
+package parkjuneyub.board.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -6,28 +6,26 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import common.controller.AbstractController;
-import parkjuneyub.product.model.InterProductDAO;
-import parkjuneyub.product.model.ProductDAO;
+import parkjuneyub.board.model.BoardDAO;
+import parkjuneyub.board.model.InterBoardDAO;
 
-
-public class CheckLikeAction extends AbstractController {
+public class DeleteReviewAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String user_id = (String)request.getParameter("user_id");
-		String product_num = (String)request.getParameter("product_num");
-		InterProductDAO pdao = new ProductDAO();
-		
-		int n = pdao.checkLikeList(user_id, product_num);
-		
+		String purchase_review_id = request.getParameter("purchase_review_id");
+
+		InterBoardDAO bdao = new BoardDAO();
+		int n = bdao.deleteReviewByReviewId(purchase_review_id);
+
 		JSONObject jsonObj = new JSONObject();
 		jsonObj.put("n", n);
 		String json = jsonObj.toString();
 		request.setAttribute("json", json);
-		
+
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/jsonview.jsp");
-		
+
 	}
 
 }
