@@ -376,9 +376,6 @@
                                             <li>
                                                 <a href="#reviews">상품후기</a>
                                             </li>
-                                            <li>
-                                                <a href="#qna">상품문의</a>
-                                            </li>
                                         </ul>
                                     </div>
 
@@ -416,9 +413,7 @@
                                             <li>
                                                 <a href="#reviews">상품후기</a>
                                             </li>
-                                            <li>
-                                                <a href="#qna">상품문의</a>
-                                            </li>
+
                                         </ul>
                                     </div>
 
@@ -449,9 +444,7 @@
                                             <li>
                                                 <a href="#reviews">상품후기</a>
                                             </li>
-                                            <li>
-                                                <a href="#qna">상품문의</a>
-                                            </li>
+
                                         </ul>
                                     </div>
 
@@ -498,9 +491,7 @@
                                             <li class="on">
                                                 <a href="#reviews">상품후기</a>
                                             </li>
-                                            <li>
-                                                <a href="#qna">상품문의</a>
-                                            </li>
+
                                         </ul>
                                     </div>
 
@@ -564,60 +555,6 @@
                                     
                                 </div>
                                 <!-- 리뷰 끝 -->
-
-                                <div id="qna">
-                                    <div class="item_goods_tab">
-                                        <ul>
-                                            <li>
-                                                <a href="#detail">상품상세정보</a>
-                                            </li>
-                                            <li>
-                                                <a href="#delivery">배송안내</a>
-                                            </li>
-                                            <li>
-                                                <a href="#exchange">교환 및 반품안내</a>
-                                            </li>
-                                            <li>
-                                                <a href="#reviews">상품후기</a>
-                                            </li>
-                                            <li class="on">
-                                                <a href="#qna">상품문의</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="reviews_cont">
-                                        <div class="review_header">
-                                            <div class="review_header_tit">
-                                                <span class="title">상품문의</span>
-                                            </div>
-                                            <div class="review_header_description">
-                                            	
-                                                <a class="review_header_description_link" href="#">전체 상품 문의 보기</a>
-                                            </div>
-                                        </div>
-
-                                        <table class="review_table table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>작성자</th>
-                                                    <th>내용</th>
-                                                    <th>작성일</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <tr>
-                                                    <td>테스트1</td>
-                                                    <td>테스트 내용</td>
-                                                    <td>태스트 날짜</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-
-                                </div>
 
 
                             </div>
