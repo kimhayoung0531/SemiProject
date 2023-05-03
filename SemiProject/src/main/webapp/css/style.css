@@ -3574,7 +3574,7 @@ body .add_cart_layer_popup .view .btn_box .btn_confirm{
 }
 
 .pjj_board_list_table {
-    margin: 0px 0px 0px 200px;
+    margin: 0px 50px 0px 200px;
     border-spacing: 0;
     border-collapse: collapse;
     border-top: 1px solid #999999;
@@ -3600,7 +3600,7 @@ body .add_cart_layer_popup .view .btn_box .btn_confirm{
     background: #fbfbfb;
 }
 .pjj_board_list_table td {
-    padding: 13px 10px 15px 10px;
+    padding: 13px 0 15px 0;
     border-bottom: 1px solid #dbdbdb;
 }
 
@@ -3641,7 +3641,7 @@ body .add_cart_layer_popup .view .btn_box .btn_confirm{
 }
 
 .pjj_search{
-    margin: 20px 195px 30px 195px;
+    margin: 20px 55px 30px 195px;
     padding: 10px 10px 10px 10px;
     border-top: 1px solid #e8e8e8;
     border-bottom: 1px solid #e8e8e8;
@@ -3706,6 +3706,9 @@ body .add_cart_layer_popup .view .btn_box .btn_confirm{
     color: #777777;
 }
 
+.pjj_anniversary {
+	background:url('<%=ctxPath%>/image/icon_calendar.png') no-repeat right center;
+}
 .pjj_date_check_calendar {
     position: relative;
     float: left;
@@ -3840,7 +3843,7 @@ body .add_cart_layer_popup .view .btn_box .btn_confirm{
     text-align: center;
     cursor: pointer;
 }
-.pjj_btn_write_ok {
+#pjj_btn_write_ok {
     border: 1px solid #4c4c4c;
     background: #4c4c4c;
     min-width: 100px;
