@@ -208,7 +208,7 @@ public class NoticeDAO implements InterNoticeDAO{
 		
 		return totalPage;
 	   
-   }
+   }// end of public int inquiryPage(Map<String, String> paraMap) throws SQLException-----
 
    // 페이징 처리를 한 모든 상품문의 또는 검색한 상품문의 목록 보여주기
    @Override
@@ -264,12 +264,15 @@ public class NoticeDAO implements InterNoticeDAO{
 	         while(rs.next()) {
 	            NoticeVO inquiry = new NoticeVO();
 	            
-	            inquiry.setNotice_num(rs.getInt(1));
-	            inquiry.setNotice_head(rs.getString(2));
-	            inquiry.setNotice_title(rs.getString(3));
-	            inquiry.setNotice_date(rs.getString(4));
-	            inquiry.setNotice_writer(rs.getString(5));
-	            inquiry.setNotice_viewcount(rs.getInt(6));
+	            inquiry.setInquiry_num(rs.getInt(1));
+	            inquiry.setUser_id(rs.getString(2));
+	            inquiry.setProduct_num(rs.getInt(3));
+	            inquiry.setInquiry_title(rs.getString(4));
+	            inquiry.setInquiry_text(rs.getString(5));
+	            inquiry.setInquiry_date(rs.getString(6));
+	            inquiry.setInquiry_answer_time(rs.getString(7));
+	            inquiry.setInquiry_view_count(rs.getInt(8));
+	            
 	            
 	            System.out.println(inquiry);
 	            inquiryList.add(inquiry);
@@ -283,8 +286,42 @@ public class NoticeDAO implements InterNoticeDAO{
 	      
 	      return inquiryList;
 	   
-   }
+   }// end of public List<NoticeVO> selectinquiryPaging(Map<String, String> paraMap) throws SQLException-----
+
+   
+    // 상품문의 페이지에 문의 등록하기
+	@Override
+	public int inquiryInsert(NoticeVO nvo) throws SQLException{
+		
+		int result = 0;
+	      
+	      try {
+	         conn = ds.getConnection();
+	         
+	         System.out.println(nvo.getInquiry_num());
+	         System.out.println(nvo);
+	         
+	         String sql = " insert into tbl_inquiry(inquiry_num, user_id, product_num, inquiry_title, inquiry_text, inquiry_date, inquiry_state, inquiry_answer_time, inquiry_view_count) " +  
+	                      " values((select nvl(max(inquiry_num),0) +1 from tbl_inquiry) ,? ,(select nvl(max(product_num),0) +1 from tbl_inquiry) ,? ,? , sysdate ,'답변완료' ,sysdate , (select nvl(max(inquiry_view_count),0) from tbl_inquiry)) ";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, nvo.getUser_id());  
+	         pstmt.setString(2, nvo.getInquiry_title()); 
+	         pstmt.setString(3, nvo.getInquiry_text());    
+	         
+	         
+	         result = pstmt.executeUpdate();
+	         
+	      } finally {
+	         close();
+	      }
+	      
+	      return result;
+		
+	}// end of public int inquiryInsert(NoticeVO nvo) throws SQLException------------
 
 	
+
 	
 }
