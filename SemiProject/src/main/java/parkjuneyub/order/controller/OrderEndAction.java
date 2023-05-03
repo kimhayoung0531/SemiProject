@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,7 @@ import parkjuenyub.order.model.OrderVO;
 import sge.member.model.MemberVO;
 import parkjuneyub.product.model.InterProductDAO;
 import parkjuneyub.product.model.ProductDAO;
+import parkjuneyub.product.model.ProductVO;
 
 public class OrderEndAction extends AbstractController {
 
@@ -65,12 +68,6 @@ public class OrderEndAction extends AbstractController {
 		HashMap<String, Object> paraMap = new HashMap<>();
 		
 		String oderNum = getOderNum();
-		System.out.println("order_name " + order_name);
-		System.out.println("receive_phone " + receive_phone);
-		System.out.println("productNum_join " + productNum_join);
-		System.out.println("productCnt_join " + productCnt_join);
-		System.out.println("productMileage_join " + productMileage_join);
-		
 		
 		// 주문테이블에 insert 할 데이터들
 		paraMap.put("oderNum", oderNum);
@@ -119,11 +116,14 @@ public class OrderEndAction extends AbstractController {
 			ovo.setOrder_num(oderNum);
 			ovo.setOrder_mileage_total(Long.parseLong(useMileage));
 			ovo.setOrder_price_total(Long.parseLong(finalTotalPrice));
-			
+
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date now = new Date();
 			String orderTime = sdf.format(now);
 			ovo.setOrder_date(orderTime);
+			
+			String[] productNum_arr = productNum_join.split("\\,");
+			List<ProductVO> productList = pdao.getPvoListByPnum(productNum_arr);
 			
 			
 			String recipt_address = "우편번호("+postcode + ") " + postcode + " " + detailAddress + " " + extraAddress;
@@ -131,7 +131,100 @@ public class OrderEndAction extends AbstractController {
 			request.setAttribute("recipt_address", recipt_address);
 			request.setAttribute("save_mileage", save_mileage);
 			request.setAttribute("order_name", order_name);
+			request.setAttribute("productList", productList);
 		
+		
+		
+		// **** 주문이 완료되었을시 세션에 저장되어져 있는 loginuser 정보를 갱신하고
+	    //      이어서 주문이 완료되었다라는 email 보내주기  **** //
+		
+			// 세션에 저장되어져 있는 loginuser 정보를 갱신
+			loginuser.setMileage(loginuser.getMileage() - Integer.parseInt(useMileage) + Integer.parseInt(save_mileage));
+			
+			//// == 주문이 완료되었다는 mail 보내기 시작 == ////
+			GoogleMail mail = new GoogleMail();
+
+			StringBuilder sb = new StringBuilder();
+			
+			String html = "                                        <div class=\"order_view_info\">\r\n"
+					+ "                                            <div class=\"order_info\">\r\n"
+					+ "                                                <div class=\"order_zone_tit\">\r\n"
+					+ "                                                    <h3 class=\"title_h3\">주문자 정보</h3>\r\n"
+					+ "                                                </div>\r\n"
+					+ "                                                <div class=\"order_table_type\">\r\n"
+					+ "                                                    <table class=\"table_left\">\r\n"
+					+ "                                                        <colgroup>\r\n"
+					+ "                                                            <col style=\"width:20%\">\r\n"
+					+ "                                                            <col style=\"width:80%\">\r\n"
+					+ "                                                        </colgroup>\r\n"
+					+ "                                                        <tbody>\r\n"
+					+ "                                                            <tr>\r\n"
+					+ "                                                                <th><span class=\"order_important\">결제수단</span></th>\r\n"
+					+ "                                                                <td>\r\n"
+					+ "                                                                    <ul class=\"order_summary_information\">\r\n"
+					+ "                                                                        <li>신용카드</li>\r\n"
+					+ "                                                                    </ul>\r\n"
+					+ "                                                                </td>\r\n"
+					+ "                                                            </tr>\r\n"
+					+ "                                                            <tr>\r\n"
+					+ "	                                                            <th><span class=\"order_important\">주문상품</span></th>\r\n"
+					+ "	                                                            <td>";
+			
+			for(int i = 0; i < productList.size(); i++) {
+				html += "<li>"+productList.get(i).getProduct_title()+"</li>";
+			}
+			html += "</td> "
+					+ "</tr>"
+					+ "<th><span class=\"order_important\">주문번호</span></th>\r\n"
+					+ "  <td>"+oderNum+"</td>\r\n"
+					+ " </tr>"
+					+ " <tr>\r\n"
+					+ " <th><span class=\"order_important\">주문일자</span></th>\r\n"
+					+ " <td>"+orderTime+"</td>\r\n"
+					+ " </tr>"
+					+ "<tr>\r\n"
+					+ " <th><span class=\"order_important\">주문자명</span></th>\r\n"
+					+ " <td>"+order_name+"</td>\r\n"
+					+ "  </tr>\r\n"
+					+ "  <tr>\r\n"
+					+ "   <th><span class=\"order_important\">배송정보</span></th>\r\n"
+					+ "  <td>"+recipt_address+"</td>\r\n"
+					+ "   </tr>\r\n"
+					+ "    <tr>\r\n"
+					+ "  <th><span class=\"order_important\">배송비</span></th>\r\n"
+					+ "  <td>3,000원</td>\r\n"
+					+ "  </tr>\r\n"
+					+ "     <tr>\r\n"
+					+ "    <th><span class=\"order_important\">마일리지 적립/사용</span></th>\r\n"
+					+ "       <td>\r\n"
+					+ "       <ul class=\"order_benefit_list\"> \r\n"
+					+ "   <li>마일리지 적립 : <span class='save_mileage'>"+ovo.getOrder_mileage_total()+"</span>원</li>\r\n"
+					+ "   <li>마일리지 사용 : <span class='save_mileage'>"+save_mileage+"</span>원</li>\r\n"
+					+ "   </ul>\r\n"
+					+ "  </td>\r\n"
+					+ " </tr>\r\n"
+					+ "  <tr>\r\n"
+					+ "   <th><span class=\"order_important\">총 결제금액(배송비 포함)</span></th>\r\n"
+					+ "   <td><strong>"+ovo.getOrder_price_total()+"</strong></td>\r\n"
+					+ "  </tr>\r\n"
+					+ "  </tbody>\r\n"
+					+ "  </table>\r\n"
+					+ "   </div>\r\n";
+
+			sb.append("<br>이용해 주셔서 감사합니다.");
+
+			
+			String emailContents = sb.toString();
+			
+			
+			try {
+				mail.sendmail_OrderFinish("ajsjdlwj0123@naver.com", loginuser.getUser_name(), emailContents);
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			//// == 주문이 완료되었다는 mail 보내기 끝 == ////
+			
 		}
 
 		super.setRedirect(false);

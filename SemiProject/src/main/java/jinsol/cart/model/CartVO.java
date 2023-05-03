@@ -48,6 +48,10 @@ public class CartVO{
 	
 
 
+	public void setTotalMileage(long totalMileage) {
+		this.totalMileage = totalMileage;
+	}
+
 	public long getCart_num() {
 		return cart_num;
 	}
