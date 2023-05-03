@@ -74,7 +74,7 @@ public class ProductDAO implements InterProductDAO  {
 			pvo.setProduct_num(rs.getLong(1));
 			pvo.setCategory_num(rs.getLong(2));
 			pvo.setProduct_title(rs.getString(3));
-			pvo.setMain_image(rs.getLong(4));
+			pvo.setMain_image(rs.getString(4));
 			pvo.setProduct_price(rs.getLong(5));
 			pvo.setProduct_detail(rs.getString(6));
 			pvo.setProduct_inventory(rs.getLong("product_inventory"));
@@ -415,7 +415,7 @@ public class ProductDAO implements InterProductDAO  {
 	         pstmt.setLong(1,  pvo.getProduct_num());
 	         pstmt.setLong(2, pvo.getCategory_num());
 	         pstmt.setString(3, pvo.getProduct_title());    
-	         pstmt.setLong(4,  pvo.getMain_image()); 
+	         pstmt.setString(4,  pvo.getMain_image()); 
 	         pstmt.setLong(5,  pvo.getProduct_price());    
 	         pstmt.setString(6, pvo.getProduct_detail()); 
 	         pstmt.setLong(7, pvo.getProduct_inventory());
@@ -455,7 +455,7 @@ public class ProductDAO implements InterProductDAO  {
 		         rs.next();
 		         pvo.setProduct_num(rs.getLong(1));
 		         pvo.setProduct_title(rs.getString(2));
-		         pvo.setMain_image(Long.parseLong(rs.getString(3)));
+		         pvo.setMain_image((rs.getString(3)));
 		         
 		         pvoList.add(pvo);
 		         
