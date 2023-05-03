@@ -52,9 +52,11 @@ public class CartListAction extends AbstractController {
 	        request.setAttribute("sumMap", sumMap);
 	
 	        String sumPrice = sumMap.get("SUMTOTALPRICE");
+	        request.setAttribute("sumPrice", sumPrice);
 	        
 	        long sumPriceDelivery = Long.parseLong(sumPrice) +  3000;
 	        request.setAttribute("sumPriceDelivery", sumPriceDelivery);
+	        
 	        
 	
 	        super.setRedirect(false);
