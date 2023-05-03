@@ -4,8 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import= "sge.member.model.MemberVO" %>    
-<%@ page import= "parkjuneyub.board.model.ReviewVO" %>    
-<%@ page import= "parkjuneyub.member.model.*" %> 
 <%
 	String ctxPath = request.getContextPath();
 	// SemiProject
@@ -28,6 +26,7 @@
 <script type="text/javascript">
 	
 	$(document).ready(function(){
+
 		$("div.add_cart_layer_popup").hide();		//팝업창 가리기
 		
 		
@@ -164,9 +163,10 @@
 		const pop_top = Math.ceil((window.screen.height - pop_height)/2);
 		window.open(url, "writeReview", "left="+pop_left+", top="+pop_top+" , width="+pop_width+", height="+pop_height);
 
-	};
+	}
 	// ==== 리뷰 작성 페이지 이동 끝 ==== 
 	
+<<<<<<< HEAD
 
 	function deleteReview(purchase_review_id) {
 		$.ajax({
@@ -190,7 +190,23 @@
 	          }
 		});
 	}
-	
+		
+	// 장바구니 버튼 클릭시 호출되는 함수	
+	function goCart(){
+		// 주문수량에 대한 유효성 검사 //
+		const frm = document.itemFrmView;
+
+		const regExp = /^[1-9]+$/;  // 숫자(1-9)만 체크하는 정규표현식
+		const item_cnt = $("input#item_cnt").val();		//주문수량
+		const bool = regExp.test(item_cnt);
+		
+		if(!bool){	//숫자 이외의 값 들어온 경우
+	         alert("주문 개수는 1개 이상이어야 합니다.");
+	         frm.item_cnt.value = "1";
+	         frm.item_cnt.focus();
+	         return; // 종료 
+		}
+		else{
 	function writeReview(userid) {
 		product_num = "${requestScope.pvo.product_num}";
 		if(userid == "") {
@@ -233,6 +249,40 @@
 	          }
 		});
 	}
+=======
+			$("div.add_cart_layer_popup").show();	// '장바구니 바로 확인?' 팝업창
+	
+			
+			$("button.btn_cancel").bind("click", function(){
+				
+				$.ajax({
+			 		url:"<%= ctxPath%>/cart.ban",
+			 		type:"get",
+			 		data:{"product_num":${requestScope.pvo.product_num},
+			 			  "cart_cnt":item_cnt},					
+			 		success:function(){
+						$("div.add_cart_layer_popup").hide();	// 취소하면 팝업창 닫음
+					},
+		            error: function(request, status, error){
+	                  alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+			        }
+				});
+
+			});	//end of $("button.btn_cancel").bind("click", function() ------------------
+	
+			
+			$("button.btn_confirm").bind("click", function (){	//확인하면 장바구니로 이동
+				
+				location.href = "<%= ctxPath%>/cart.ban?cart_cnt=" + item_cnt +"&product_num="+${requestScope.pvo.product_num};
+				
+				$("div.add_cart_layer_popup").hide();
+				
+			});	
+			
+		}//end of else		
+	}// end of function goCart()--------------------------------	
+	
+>>>>>>> refs/heads/main
 </script>
 
 
@@ -530,13 +580,12 @@
                                             </div>
                                         </div>
 
-                                        <table class="review_table table ">
+                                        <table class="review_table table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th style="width:8%">작성자</th>
-                                                    <th style="width:67%">내용</th>
-                                                    <th style="width:15%">작성일</th>
-                                                    
+                                                    <th>작성자</th>
+                                                    <th>내용</th>
+                                                    <th>작성일</th>
                                                 </tr>
                                             </thead>
 
@@ -548,16 +597,6 @@
 											              <td class="userid"><span>${rvo.mvo.user_id}</span></td>
 											              <td>${rvo.review_content}</td>
 											              <td>${rvo.review_date}</td>
-															
-											              <% 
-											              	ReviewVO rvo =(ReviewVO) pageContext.getAttribute("rvo");
-											              	parkjuneyub.member.model.MemberVO mvo = rvo.getMvo();
-											              	String tmp = mvo.getUser_id();
-											                if(tmp.equals(user_id)) {
-											                %>
-											              
-											               <td><button type="button" class="btn btn-light" onclick="deleteReview('${rvo.purchase_review_id}')">삭제</button><td> 
-															<% } %>
 											              
 											           </tr>
 													</c:forEach>
