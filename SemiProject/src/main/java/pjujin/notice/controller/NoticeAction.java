@@ -42,8 +42,8 @@ public class NoticeAction extends AbstractController {
 		}
 
 		if (sizePerPage == null || 
-		    !("1".equals(sizePerPage) || "2".equals(sizePerPage) || "3".equals(sizePerPage))) {
-			sizePerPage = "3";
+		    !("10".equals(sizePerPage) || "5".equals(sizePerPage) || "3".equals(sizePerPage))) {
+			sizePerPage = "10";
 		}
 
 		try {
@@ -58,8 +58,9 @@ public class NoticeAction extends AbstractController {
 		paraMap.put("sizePerPage", sizePerPage);
 
 		int totalPage = ndao.getTotalPage(paraMap);
-
-
+		
+		
+		
 		if (Integer.parseInt(currentShowPageNo) > totalPage) {
 			currentShowPageNo = "1";
 			paraMap.put("currentShowPageNo", currentShowPageNo);
@@ -120,6 +121,7 @@ public class NoticeAction extends AbstractController {
 
 		request.setAttribute("pageBar", pageBar);
 
+		
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/pjujin_cs/announcement.jsp");
 
