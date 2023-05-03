@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import parkjuenyub.order.model.OrderVO;
 import sge.admin.controller.CategoryVO;
 
 
@@ -252,6 +253,7 @@ public class ProductDAO implements InterProductDAO  {
 				}
 			}
 			//System.out.println("n4 " +  n4);
+			// 5. 회원테이블에 마일리지 업데이트하기
 			if(n4 > 0) {
 				sql = " update tbl_member set mileage = mileage - ? + ? "
 						+ " where user_id = ? ";
@@ -270,10 +272,7 @@ public class ProductDAO implements InterProductDAO  {
 				
 				//System.out.println("주문 완료");
 				isSuccess = 1;
-			}
-			
-			
-			// 5. 회원테이블에 마일리지 업데이트하기
+			}		
 		} 
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -285,8 +284,6 @@ public class ProductDAO implements InterProductDAO  {
 			close();
 		}
 				
-				
-		//System.out.println(isSuccess);
 		return isSuccess;
 	}
 
@@ -438,6 +435,37 @@ public class ProductDAO implements InterProductDAO  {
 	      return result;
 		
 		
+	}
+
+	@Override
+	public List<ProductVO> getPvoListByPnum(String[] pnum_join) throws SQLException {
+		List<ProductVO> pvoList = new ArrayList<>();
+		
+		for(int i = 0; i<pnum_join.length; i++) {
+			try {
+				conn = ds.getConnection();
+		         
+		         String sql = " select product_num, product_title, main_image "
+		         		+ " from tbl_product where product_num = ? ";
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setString(1, pnum_join[i]);
+		         rs = pstmt.executeQuery();
+		         
+		         ProductVO pvo = new ProductVO();
+		         rs.next();
+		         pvo.setProduct_num(rs.getLong(1));
+		         pvo.setProduct_title(rs.getString(2));
+		         pvo.setMain_image(Long.parseLong(rs.getString(3)));
+		         
+		         pvoList.add(pvo);
+		         
+			} finally {
+				close();
+			}
+		}
+		
+		
+		return pvoList;
 	}
 
 	

@@ -17,9 +17,27 @@ public class CartVO {
 	public CartVO() {}
 
 
+
+	private long totalPrice;         // 판매당시의 한 제품에 대한 제품판매가 * 주문량
+	private long totalMileage;
+	
 	///////////////////////////////////////////////////
 	// Getter Setter
+	public long getTotalPrice() {
+		return totalPrice;
+	}
 
+	public void setTotalPrice(long totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public long getTotalMileage() {
+		return totalMileage;
+	}
+
+	public void setTotalMileage(long totalMileage) {
+		this.totalMileage = totalMileage;
+	}
 	public long getCart_num() {
 		return cart_num;
 	}
