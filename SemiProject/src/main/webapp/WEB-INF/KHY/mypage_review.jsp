@@ -166,8 +166,8 @@
 										<tr>
 										  <td ><span>${rvo.purchase_review_id}</span></td>	
 							              <td ><a href="<%= ctxPath%>/productDeatail.ban?product_num=${rvo.pvo.product_num}"><!-- 제품상세페이지 링크 -->
-							                              <img src="/SemiProject/images/itme_main/${rvo.pvo.main_image}" class="img-thumbnail" width="130px" height="100px" />
-							                           </a> 
+							                              <img src="<%= ctxPath%>/image/item_main/${rvo.pvo.main_image}" class="img-thumbnail" width="130px" height="100px" />
+							                   </a> 
 							              <span>${rvo.pvo.product_title}</span></td>
 							              
 							              

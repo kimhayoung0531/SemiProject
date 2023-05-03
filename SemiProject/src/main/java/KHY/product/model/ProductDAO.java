@@ -78,7 +78,7 @@ public class ProductDAO implements InterProductDAO  {
 			pvo.setProduct_num(rs.getLong(1));
 			pvo.setCategory_num(rs.getLong(2));
 			pvo.setProduct_title(rs.getString(3));
-			pvo.setMain_image(rs.getLong(4));
+			pvo.setMain_image(rs.getString(4));
 			pvo.setProduct_price(rs.getLong(5));
 			pvo.setProduct_detail(rs.getString(6));
 			pvo.setProduct_inventory(rs.getLong("product_inventory"));
@@ -626,7 +626,7 @@ public class ProductDAO implements InterProductDAO  {
 				ProductVO pvo = new ProductVO();
 				pvo.setProduct_num(rs.getLong("product_num"));
 				pvo.setProduct_title(rs.getString("product_title"));
-				pvo.setMain_image(rs.getLong("main_image"));
+				pvo.setMain_image(rs.getString("main_image"));
 				pvo.setProduct_price(rs.getLong("product_price"));
 				pvo.setProduct_detail(rs.getString("product_detail"));
 				pvo.setProduct_inventory(rs.getLong("product_inventory"));
@@ -738,18 +738,18 @@ public class ProductDAO implements InterProductDAO  {
 			conn = ds.getConnection();
 			
 			String sql = "select purchase_review_id, A.product_num as product_num, review_content, \n"+
-					"    review_date, product_title, main_image \n"+
-					"from\n"+
-					"(\n"+
-					"select rownum AS RNO, purchase_review_id, product_num, review_content, review_date\n"+
-					"from tbl_purchase_review\n"+
-					"where userid = ? \n"+
-					") A \n"+
-					"join \n"+
-					"(select product_num, product_title, main_image \n"+
-					"from tbl_product ) B\n"+
-					"on A.product_num = B.product_num " +
-					"WHERE RNO between ? and ? ";
+						"    review_date, product_title, main_image \n"+
+						"from\n"+
+						"(\n"+
+						"select rownum AS RNO, purchase_review_id, product_num, review_content, review_date\n"+
+						"from tbl_purchase_review\n"+
+						"where userid = ? \n"+
+						") A \n"+
+						"join \n"+
+						"(select product_num, product_title, main_image \n"+
+						"from tbl_product ) B\n"+
+						"on A.product_num = B.product_num " +
+						"WHERE RNO between ? and ? ";
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -768,14 +768,14 @@ public class ProductDAO implements InterProductDAO  {
 				
 				ReviewVO rvo = new ReviewVO();
 				rvo.setPurchase_review_id(rs.getInt("purchase_review_id"));
-				rvo.setProduct_num(rs.getLong("product_num"));
 				rvo.setReview_content(rs.getString("review_content"));
 				rvo.setReview_date(rs.getString("review_date"));
 				
 				
 				ProductVO pvo = new ProductVO();
+				pvo.setProduct_num(rs.getLong("product_num"));
 				pvo.setProduct_title(rs.getString("product_title"));
-				pvo.setMain_image(rs.getLong("main_image"));
+				pvo.setMain_image(rs.getString("main_image"));
 				rvo.setPvo(pvo);
 				
 				

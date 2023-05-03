@@ -77,8 +77,8 @@ public class ProductDAO implements InterProductDAO  {
 			pvo.setProduct_price(rs.getLong(5));
 			pvo.setProduct_detail(rs.getString(6));
 			pvo.setProduct_inventory(rs.getLong("product_inventory"));
-			pvo.setProduct_date(rs.getString(8));
-			pvo.setSale_count(rs.getInt(9));
+			pvo.setProduct_date(rs.getString("roduct_date"));
+			pvo.setSale_count(rs.getInt("sale_count"));
 			
 		}
 		finally {
