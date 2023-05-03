@@ -141,7 +141,7 @@
                                         </a>
                                     </li>
                                     <li class="cartBtn">
-                                        <a href="#">
+                                        <a href="<%=ctxPath%>/cartList.ban">
                                         	 <img src="<%=ctxPath%>/image/icon_cart_ku.svg">
                                         </a>
                                     </li>
