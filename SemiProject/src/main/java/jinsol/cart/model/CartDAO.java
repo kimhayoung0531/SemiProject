@@ -64,14 +64,15 @@ public class CartDAO implements InterCartDAO {
 	                  + " ( "
 	                  + " select cart_num, product_num, product_count, cart_date "
 	                  + " from tbl_cart "
-	                  + " where user_id = 'demo' and product_num = ? "
+	                  + " where user_id = ? and product_num = ? "
 	                  + " ) A "
 	                  + " join "
 	                  + " (select product_num, product_price from tbl_product ) B "
 	                  + " on A.product_num = B.product_num ";
 	         
 	         pstmt = conn.prepareStatement(sql);
-	         pstmt.setString(1, paraMap.get("product_num"));  
+	         pstmt.setString(1, paraMap.get("user_id"));
+	         pstmt.setString(2, paraMap.get("product_num"));  
 	         
 	         rs = pstmt.executeQuery();
 	         
