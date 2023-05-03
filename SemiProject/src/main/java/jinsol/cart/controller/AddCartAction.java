@@ -41,10 +41,10 @@ public class AddCartAction extends AbstractController {
 		
 		
 				  ////////////////////////테스트용///////////////////////////////////
-				  
+				  /*
 				  loginuser = new MemberVO();
 				  loginuser.setUser_id("demo");
-				  
+				  */
 				  //////////////////////////////////////////////////////////////////
 				  
 				  String cart_cnt = request.getParameter("cart_cnt");
