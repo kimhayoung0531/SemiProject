@@ -223,7 +223,7 @@ public class ProductDAO implements InterProductDAO  {
 				int cnt = 0;
 				for(int i = 0; i < productNum_arr.length; i++) {
 					sql = " update tbl_product set product_inventory =  product_inventory - ? "
-						+ "where product_num = ? ";
+							+ "where product_num = ? ";
 					
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setLong(1, Long.parseLong(productCnt_arr[i]));
@@ -407,7 +407,7 @@ public class ProductDAO implements InterProductDAO  {
 	      try {
 	         conn = ds.getConnection();
 	         
-	         String sql = " insert into tbl_product(product_num, category_num, product_title, main_image, product_price, product_detail, product_inventory, sale_count) " +  
+	         String sql = " insert into tbl_product(product_num, category_num, product_title, main_image, product_price, product_detail, product_inventory,product_date, sale_count) " +  
 	                      " values(?,?,?,?,?,?,?,?,?)";
 	         
 	         pstmt = conn.prepareStatement(sql);
@@ -419,8 +419,9 @@ public class ProductDAO implements InterProductDAO  {
 	         pstmt.setLong(5,  pvo.getProduct_price());    
 	         pstmt.setString(6, pvo.getProduct_detail()); 
 	         pstmt.setLong(7, pvo.getProduct_inventory());
-				/* pstmt.setString(8, pvo.getProduct_date()); */
-	         pstmt.setLong(8, pvo.getSale_count());
+	         pstmt.setString(8, pvo.getProduct_date());
+	         pstmt.setLong(9, pvo.getSale_count());
+	        
 	            
 	         result = pstmt.executeUpdate();
 	         
@@ -454,11 +455,8 @@ public class ProductDAO implements InterProductDAO  {
 		         rs.next();
 		         pvo.setProduct_num(rs.getLong(1));
 		         pvo.setProduct_title(rs.getString(2));
-
-		         pvo.setMain_image(rs.getString(3));
-
 		         pvo.setMain_image((rs.getString(3)));
-
+		         
 		         pvoList.add(pvo);
 		         
 			} finally {
