@@ -240,55 +240,33 @@
             const totalPrice_join = totalPrice_arr.join();
             const totalMileage_join = totalMileage_arr.join();
             
+            
             let sum_totalPrice = 0;
+            let sum_totalPriceDelivery = 0;
             for(let i=0; i<totalPrice_arr.length; i++) {
                sum_totalPrice += Number(totalPrice_arr[i]);
             }
-            sum_totalPrice += 3000;
 
+            sum_totalPriceDelivery = sum_totalPrice + 3000;
             
             let sum_totalMileage = 0;
             for(let i=0; i<totalMileage_arr.length; i++) {
                sum_totalMileage += Number(totalMileage_arr[i]);
             }
             
-            console.log("~~~ 확인용 pnum_join : "+pnum_join);
-            console.log("~~~ 확인용 cart_cnt_join : "+cart_cnt_join);
-            console.log("~~~ 확인용 cart_num_join : "+cart_num_join);
-            console.log("~~~ 확인용 totalPrice_join : "+totalPrice_join);
-            console.log("~~~ 확인용 totalMileage_join : "+totalMileage_join);
-            console.log("~~~ 확인용 sum_totalPrice : "+sum_totalPrice);
-            console.log("~~~ 확인용 sum_totalMileage : "+sum_totalMileage);
             
             
-            if(confirm("총주문액 : "+sum_totalPrice.toLocaleString('en')+"원 결제하시겠습니까?")) {
-               <%-- 
-                $.ajax({
-                   url:"<%= request.getContextPath()%>/order.ban",
-                   type:"post",
-                   data:{"sum_totalPrice":sum_totalPrice,
-                       "sum_totalMileage":sum_totalMileage,
-                       "pnum_join":pnum_join,
-                       "cart_cnt_join":cart_cnt_join,
-                       "cart_num_join":cart_num_join,
-                       "totalPrice_join":totalPrice_join
-                       },
-                   dataType:"json",
-                   success:function(json) {
-                      // json 은 {"isSuccess":1} 또는 {"isSuccess":0} 이다.
-                      if(json.isSuccess == 1){
-                     	 location.href="<%= request.getContextPath()%>/orderList.ban";
-                      }
-                      else{
-                     	 location.href="<%= request.getContextPath()%>/orderError.ban";
-                      }
-                   },
-                    error: function(request, status, error){
-                         alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-                      }
-                });	//end of $.ajax ------------------------------------------
+            if(confirm("총주문액 : "+sum_totalPriceDelivery.toLocaleString('en')+"원 결제하시겠습니까?")) {
+
+                $("input[name='product_price']").val("${cartvo.product_price}");
+                $("input[name='pnum_join']").val(pnum_join);
+                $("input[name='cart_cnt_join']").val(cart_cnt_join);
+                $("input[name='cart_num_join']").val(cart_num_join);
+                $("input[name='totalPrice_join']").val(totalPrice_join);		//상품 당 총 가격
+                $("input[name='totalMileage_join']").val(totalMileage_join);
+                $("input[name='sum_totalPrice']").val(sum_totalPrice);			//결제할 총 가격
+
                 
-                --%>
                 const frm = document.frmCart;
         		frm.action = "<%= request.getContextPath()%>/order.ban";
         		frm.method = "post";
@@ -327,15 +305,14 @@
                 <div class="cart_cont">
         
                     <form id="frmCart" name="frmCart" method="post" target="ifrmProcess">
-                      <!--   <input type="hidden" name="mode" value="">
-                        <input type="hidden" name="cart[cartSno]" value="">
-                        <input type="hidden" name="cart[goodsNo]" value="">
-                        <input type="hidden" name="cart[goodsCnt]" value="">
-                        <input type="hidden" name="cart[addGoodsNo]" value="">
-                        <input type="hidden" name="cart[addGoodsCnt]" value="">
-                        <input type="hidden" name="cart[couponApplyNo]" value="">
-                        <input type="hidden" name="useBundleGoods" value="1">
-                        <input type="hidden" name="ac_id" value=""> -->
+		                <input type="hidden" name="pnum_join" value="" />
+						<input type="hidden" name="product_price" value="" /> 
+						<input type="hidden" name="cart_cnt_join" value="" /> 
+						<input type="hidden" name="cart_num_join" value="" /> 
+						<input type="hidden" name="totalPrice_join" value="" /> 
+						<input type="hidden" name="totalMileage_join" value="" /> 
+  						<input type="hidden" name="sum_totalPrice" value="" />
+                        
                         <!-- 장바구니 상품리스트 시작 -->
                         
                         <div class="cart_cont_list">
@@ -388,7 +365,6 @@
 					                             --%>   
 		                                            <div class="form_element">
 		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}" checked="checked"/><label for="pnum${status.index}">${cartvo.product_num}</label>   
-		                                                <input type="hidden" name="productNum" value="${cartvo.product_num}" />
 		                                            </div>
 		                                        </td>
 		
@@ -413,14 +389,12 @@
 		                                                <button class="btn btn-outline-secondary btn-sm updateBtn" type="button" style="margin-top:3px;" onclick="goOqtyEdit(this)">수정</button>
 							                              <%-- 장바구니 테이블에서 특정제품의 현재주문수량을 변경하여 적용하려면 먼저 장바구니번호(시퀀스)를 알아야 한다 --%>
 							                            <input type="hidden" class="cartno" name="cartno" value="${cartvo.cart_num}" /> 
-							                            <input type="hidden" name="cartNum" value="${cartvo.cart_num}" /> 
 		                                            </div>
 		                                        </td>
 		                                        
 		                                        <%-- 상품 금액 --%>
 		                                        <td>  
 		                                            <span class="order_sum_txt price" style="font-weight:bold;"><fmt:formatNumber value="${cartvo.product_price}" pattern="###,###" /></span> 원
-							                        <input type="hidden" name="product_price" value="${cartvo.product_price}" /> 
 		                                        </td>
 		
 												 <%-- 마일리지 --%>
@@ -434,8 +408,6 @@
 		                                        <%-- 상품 당 합계금액 --%>
 			                                    <td>
 			                                    	<strong><fmt:formatNumber value="${cartvo.totalPrice}" pattern="###,###" /> 원</strong>
-		                                           <input type="hidden" class="totalPrice" value="${cartvo.totalPrice}" />
-                            						<input type="hidden" class="totalMileage" value="${cartvo.totalMileage}" />
 			                                    </td>
 			                                    <%-- 상품 삭제 --%>
 			                                    <td>
