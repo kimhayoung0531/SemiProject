@@ -161,7 +161,7 @@
 	   
 	   
 
-	   // === 장바구니에서 특정 제품을 삭제하기 === //  
+	   // === 장바구니에서 개별 제품을 삭제하기 === //  
 	   function goDel(cart_num) {
 		   
 		   const pname = $("span.cart_pname").text();		
