@@ -5,16 +5,6 @@
     //    /SemiProject
 %>  
   
-<script>
-
-$(document).ready(function(){
-	
-	
-	
-	
-}); // end of $(document).ready(function()
-
-</script>  
 
 
     <jsp:include page="../header.jsp" />
