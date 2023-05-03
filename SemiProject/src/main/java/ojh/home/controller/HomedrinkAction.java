@@ -14,7 +14,7 @@ public class HomedrinkAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String cartegory_num = "1";
+		String cartegory_num = "4";
 		
 		InterHomeDAO hdao = new HomeDAO();
 		

@@ -11,6 +11,8 @@ public interface InterHomeDAO {
 
 	// 카테고리 상품 가져오기
 	List<ProductVO> getProductInfo(String category_num) throws SQLException;
+	// 베스트 상품 가져오기
+	List<ProductVO> getBestItemBysalecount() throws SQLException;
 	
 	
 	/* List<ProductVO> getBestItemBysalecount() throws SQLException; */
