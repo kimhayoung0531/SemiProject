@@ -26,7 +26,7 @@ $(document).ready(function(){
 	      });// end of $("#spinnerPqty").spinner()--------
 	      
 	      //제품 등록하기 
-	      $("input#btnRegister").click(function(){
+	      $("button#goToRegis").click(function(){
 	    	  
 	    	  let flag = false;
 	    	  
@@ -63,7 +63,7 @@ $(document).ready(function(){
                </div>
 
                <div class="member_cont">
-                   <form id="formJoin" name="prodInputFrm" action="<%= request.getContextPath()%>/shop/admin/productRegister.up"  method="POST" enctype="multipart/form-data" >
+                   <form id="formJoin" name="prodInputFrm" action="<%= request.getContextPath()%>/productRegister.ban"  method="POST" enctype="multipart/form-data" >
                        <div class="base_info_box">
                            <div class="base_info_sec">
                                <table id="tblMemberRegister">
@@ -108,7 +108,7 @@ $(document).ready(function(){
                                                <span>제품 판매가</span>
                                            </th>
                                            <td >
-									         <input type="text" name="saleprice" class="box infoData" /> 원
+									         <input type="text" name="price" class="box infoData" /> 원
 								
 									      </td>
                                        </tr>
@@ -118,6 +118,14 @@ $(document).ready(function(){
                                            </th>
                                            <td>
                                               <input id="spinnerPqty" name="pqty" value="1" style="border: none;"> 개
+                                           </td>
+                                       </tr>
+                                       <tr>
+                                           <th>
+                                               <span>상품 판매갯수</span>
+                                           </th>
+                                           <td>
+                                              <input id="spinnerPqty" name="saleCount" value="1" style="border: none;"> 개
                                            </td>
                                        </tr>
                                        <tr>
