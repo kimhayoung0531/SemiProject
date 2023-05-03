@@ -5,8 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 
 <%
-   String ctxPath = request.getContextPath();
-         
+   String ctxPath = request.getContextPath();        
 %>
 
 <jsp:include page="../header.jsp" />
