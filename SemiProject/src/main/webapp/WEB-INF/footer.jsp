@@ -13,10 +13,10 @@
                        <div class="container clearfix" style="display: flex;">
                             <!-- 인스타그램 영역 -->
                             <ul class="sns-menu pull-right inline">
-                                    <li><a href="https://www.instagram.com/cafenoli/" target="_blank"><img src="https://cafenoli605.hgodo.com/data/renewal_nodelete/icon_ins.png" alt="인스타그램"></a></li>
-                                    <li><a href="https://www.youtube.com/channel/UCEm9hmf4I4ZmMGl6NrDl4Mw" target="_blank"><img src="https://cafenoli605.hgodo.com/data/renewal_nodelete/icon_youtube.png" alt="유튜브"></a></li>
-                                    <li><a href="http://pf.kakao.com/_wTxomxl" target="_blank"><img src="https://cafenoli605.hgodo.com/data/renewal_nodelete/icon_kakao.png" alt="카카오"></a></li>
-                                       <li><a href="https://blog.naver.com/happy3845" target="_blank"><img src="https://cafenoli605.hgodo.com/data/renewal_nodelete/icon_blog.png" alt="블로그"></a></li>
+                                    <li><a href="#" target="_blank"><i class="fa-brands fa-instagram fa-2xl"></i></a></li>
+                                    <li><a href="#" target="_blank"><i class="fa-brands fa-twitter fa-2xl" ></i></a></li>
+                                    <li><a href="#"></a><i class="fa-brands fa-youtube fa-2xl"></i></li>
+                                    <li><a href="#" target="_blank"><i class="fa-sharp fa-solid fa-comment fa-2xl"></i></a></li>
                             </ul>
                             <!--// 인스타그램 영역 -->
                         </div>
