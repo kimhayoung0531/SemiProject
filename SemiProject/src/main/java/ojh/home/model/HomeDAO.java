@@ -1,3 +1,4 @@
+
 package ojh.home.model;
 
 import java.sql.*;
@@ -68,7 +69,7 @@ public class HomeDAO implements InterHomeDAO {
 				pvo.setProduct_num(rs.getLong("product_num"));
 				pvo.setCategory_num(rs.getLong("category_num"));
 				pvo.setProduct_title(rs.getString("product_title"));
-				pvo.setMain_image(rs.getLong("main_image"));
+				pvo.setMain_image(rs.getString("main_image"));
 				pvo.setProduct_price(rs.getLong("product_price"));
 				pvo.setProduct_detail(rs.getString("product_detail"));
 				pvo.setProduct_inventory(rs.getLong("product_inventory"));
@@ -87,25 +88,23 @@ public class HomeDAO implements InterHomeDAO {
 		return pvoList;
 	}
 
-	@Override
-	public List<ProductVO> getBestItemBysalecount() throws SQLException {
-		
-		List pvohomeList = new ArrayList<>();
-		
-		try {
-			conn = ds.getConnection();
-			String sql = " select Rank() over (Order by product_title desc) Rank "
-					   + " from tbl_product "
-					   + " where Rank<=6 ";
-			
-		} finally {
-			close();
-		}
-		
-		
-		
-	} // end of public List<ProductVO> getBestItemBysalecount()
-
+	/*
+	 * @Override public List<ProductVO> getBestItemBysalecount() throws SQLException
+	 * {
+	 * 
+	 * List pvohomeList = new ArrayList<>();
+	 * 
+	 * try { conn = ds.getConnection(); String sql =
+	 * " select Rank() over (Order by product_title desc) Rank " +
+	 * " from tbl_product " + " where Rank<=6 ";
+	 * 
+	 * } finally { close(); } return pvohomeList;
+	 * 
+	 * 
+	 * 
+	 * } // end of public List<ProductVO> getBestItemBysalecount()
+	 */
 	   
 	
 }
+
