@@ -12,8 +12,10 @@ public interface InterHomeDAO {
 	// 카테고리 상품 가져오기
 	List<ProductVO> getProductInfo(String category_num) throws SQLException;
 	
-	// 페이징 처리
-	int category_num(String string) throws SQLException;
+	
+	List<ProductVO> getBestItemBysalecount() throws SQLException;
+	
+	
 	
 	
 
