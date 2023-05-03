@@ -77,8 +77,8 @@ public class ProductDAO implements InterProductDAO  {
 			pvo.setProduct_price(rs.getLong(5));
 			pvo.setProduct_detail(rs.getString(6));
 			pvo.setProduct_inventory(rs.getLong("product_inventory"));
-			pvo.setProduct_date(rs.getString(8));
-			pvo.setSale_count(rs.getInt(9));
+			pvo.setProduct_date(rs.getString("product_date"));
+			pvo.setSale_count(rs.getInt("sale_count"));
 			
 		}
 		finally {
@@ -410,8 +410,8 @@ public class ProductDAO implements InterProductDAO  {
 	      try {
 	         conn = ds.getConnection();
 	         
-	         String sql = " insert into tbl_product(product_num, category_num, product_title, main_image, product_price, product_detail, product_inventory,product_date, sale_count) " +  
-	                    " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	         String sql = " insert into tbl_product_test(product_num, category_num, product_title, main_image, product_price, product_detail, product_inventory,product_date, sale_count) " +  
+	                      " values(?,?,?,?,?,?,?,?,?)";
 	         
 	         pstmt = conn.prepareStatement(sql);
 	         
@@ -428,7 +428,10 @@ public class ProductDAO implements InterProductDAO  {
 	            
 	         result = pstmt.executeUpdate();
 	         
+	      } catch(NumberFormatException e){
+	    	 
 	      } finally {
+	      
 	         close();
 	      }
 	      

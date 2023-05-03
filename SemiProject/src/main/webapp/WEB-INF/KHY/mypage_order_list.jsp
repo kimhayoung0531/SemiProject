@@ -60,7 +60,16 @@
 		text-align: center;
 	}
 
-	
+	.pagination li a, .pagination li span {
+    display: block;
+    padding: 0 !important;
+    height: 30px;
+    width: 50px;
+    color: #888;
+    font-size: 11px;
+    line-height: 30px;
+    margin-top: 15px;
+}
 	
 	
 </style>
@@ -70,7 +79,10 @@
 
 $(document).ready(function(){
 	
-	
+	var startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
+    var enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
+    
+    
     
     // === 전체 datepicker 옵션 일괄 설정하기 ===
     // 한번의 설정으로 $("input#fromDate") , $("input#toDate") 의 옵션을 모두 설정할 수 있다.
@@ -100,10 +112,21 @@ $(document).ready(function(){
         $("input#toDate").datepicker();
         
         //From의 초기값을 오늘 날짜로 설정
+        
+        
         $('input#fromDate').datepicker('setDate', '-7D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
         
         //To의 초기값을 3일후로 설정
         $('input#toDate').datepicker('setDate', 'sysdate'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
+    
+        if( localStorage.getItem('startdate') != null) {
+       
+            document.querySelector("#fromDate").value = localStorage.getItem('startdate');
+            document.querySelector("#toDate").value = localStorage.getItem('enddate');
+        }
+        
+	
+    
     });
 	
  // 검색 기간을 정하는 버튼
@@ -140,38 +163,46 @@ $(document).ready(function(){
         
         $('input#toDate').datepicker('setDate', 'sysdate');
        
-        var startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
-        var enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
+       startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
+       enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
 	
+       
        
         
 	});
  
+	//$(".date_check_calendar").change
  
-	 $('form[name="frmDateSearch"]').submit(function(e){
-         $chekcInputDate = $('input[name="wDate[]"]');
+ 
+	 $('form[name="frmDateSearch"]').submit(function(e){ 
+
+		 /* $chekcInputDate = $('input[name="wDate[]"]');
          var startDate = ($($chekcInputDate[0]).val()).split('-');
          startDate = new Date(startDate[0], startDate[1], startDate[2]);
          var endDate = ($($chekcInputDate[1]).val()).split('-');
-         endDate = new Date(endDate[0], endDate[1], endDate[2]);
+         endDate = new Date(endDate[0], endDate[1], endDate[2]); */
          
          var startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
          var enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
-         
+       
          document.querySelector("#fromDate").value = startdate;
          document.querySelector("#toDate").value = enddate;
          
+         localStorage.setItem('startdate2', startdate);
+         localStorage.setItem('enddate2', enddate);
+       
+         //alert(document.querySelector("#toDate").value);
+         //alert(document.querySelector("#fromDate").value);
          
-
          
-         if (startDate > endDate) {
+         if (startdate > enddate) {
              alert('종료 날짜가 시작 날짜보다 빠릅니다.\n확인 후 검색기간을 다시 선택해주세요.');
              return false;
          }
-         else{
+         else {
         
  				const frm = document.frmDateSearch;
- 				frm.action = "<%= ctxPath%>/mypageOrderList.ban";
+ 				frm.action = "<%= ctxPath%>/mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate;
  				frm.method = "get";
  				frm.submit();
  		
@@ -260,7 +291,7 @@ $(document).ready(function(){
                                 </div>
                                 <!-- //date_check_list -->
                                 <div class="date_check_calendar">
-                                    <input type="text" id="fromDate" name="wDate[] wDate1" class="anniversary" value="" /> ~ <input type="text" id="toDate" name="wDate[] wDate2" class="anniversary" value="" />
+                                    <input type="text" id="fromDate" name="wDate1" class="anniversary" value="" /> ~ <input type="text" id="toDate" name="wDate2" class="anniversary" value="" />
                                 </div>
                                 <!-- //date_check_calendar -->
 
@@ -270,10 +301,10 @@ $(document).ready(function(){
                         </div>
                         <!-- //date_check_box -->
 
-                        <div class="mypage_lately_info_cont">
+                        
 
                             <span class="pick_list_num">
-                                주문목록 / 배송조회 내역 총 <strong>0</strong> 건
+                                주문목록 / 배송조회 내역 총 <strong>${requestScope.count}</strong> 건
                             </span>
 
                             <!-- 주문상품 리스트 -->
@@ -332,11 +363,18 @@ $(document).ready(function(){
 							                              <span class="order_quantity">${odvo.order_quantity}</span> 개
 							                              
 							                        </td>
-							                        <td align="right"> <%-- 주문상태 --%> 
-							                            <span class="order_quantity">${odvo.delivery_status}</span>
+							                        <td align="center"> <%-- 주문상태 --%> 
+							                            <c:choose>
+										              		<c:when test="${odvo.delivery_status eq '0'}">
+										              			배송완료
+										              		</c:when>
+										              		<c:otherwise>
+										              			상품준비중
+										              		</c:otherwise>
+										              	</c:choose>
 							                            
 							                        </td>
-							                        <td align="right"> <%-- 리뷰 --%> 
+							                        <td align="center"> <%-- 리뷰 --%> 
 							                            
 							                            <%-- 리뷰 작성한거 끌어오기 안썼으면 작성하기 버튼 생성 --%>
 							                            
@@ -348,8 +386,6 @@ $(document).ready(function(){
                                     </tbody>
                                 </table>
                             </div>
-
-                           
 
                         </div>
                         <!-- //mypage_lately_info_cont -->

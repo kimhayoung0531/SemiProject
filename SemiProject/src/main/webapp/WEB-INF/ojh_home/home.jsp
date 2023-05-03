@@ -61,7 +61,7 @@
                             
                                     <div class="goods_list_tit">
                                         <h3>
-                                         <a href="#" class="btn_goods_view_moer">신상도 할인 중👍</a>
+                                         <a href="#" class="btn_goods_view_moer">5월 신상인데요? 👍</a>
                                         </h3>
                                         <h4></h4>
                                     </div>
@@ -302,7 +302,7 @@
                             
                                     <div class="goods_list_tit">
                                         <h3>
-                                         <a href="#" class="btn_goods_view_moer">봄맞이 할인 특가👍</a>
+                                         <a href="#" class="btn_goods_view_moer">빵 향기만 남기고 갔단다👍</a>
                                         </h3>
                                         <h4></h4>
                                     </div>
@@ -540,7 +540,7 @@
                             
                                     <div class="goods_list_tit">
                                         <h3>
-                                         <a href="#" class="btn_goods_view_moer">샀는데 또 사요👍</a>
+                                         <a href="#" class="btn_goods_view_moer">지금 여기는 파리 어디쯤..👍</a>
                                         </h3>
                                         <h4></h4>
                                     </div>

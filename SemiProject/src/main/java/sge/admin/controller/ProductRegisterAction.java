@@ -55,7 +55,7 @@ public class ProductRegisterAction extends AbstractController {
 					
 				} catch (IOException e) {
 					request.setAttribute("message","업로드 되어질 경로가 잘못되었거나 또는 최대용량 10MB를 초과했으므로 파일업로드 실패함!!");
-					request.setAttribute("loc",request.getContextPath()+"/shop/admin/productRegister.up");
+					request.setAttribute("loc",request.getContextPath()+"/productRegister.ban");
 					
 					super.setRedirect(false);
 					super.setViewPage("/WEB-INF/msg.jsp");
@@ -77,7 +77,6 @@ public class ProductRegisterAction extends AbstractController {
 	            // 이때 업로드 된 파일이 없는 경우에는 null을 반환한다.
 	            
 	            String pimage1 = mtrequest.getFilesystemName("pimage1"); 
-	            String saleprice = mtrequest.getParameter("saleprice");
 	            String price = mtrequest.getParameter("price");
 	            String pqty = mtrequest.getParameter("pqty");
 	            //그로스 사이트 스크립트 공격 막기(시큐어 코드)
@@ -86,8 +85,8 @@ public class ProductRegisterAction extends AbstractController {
 	            pcontent =  pcontent.replaceAll("<","&lt");
 	            pcontent =  pcontent.replaceAll(">","&gt");
 	            pcontent = pcontent.replaceAll("\r\n", "<br>");
-	            
-	            String point = mtrequest.getParameter("point");
+	            String sale_count = mtrequest.getParameter("saleCount");
+	           
 	            
 	            InterProductDAO pdao = new ProductDAO();
 	            
@@ -98,10 +97,11 @@ public class ProductRegisterAction extends AbstractController {
 	            pvo.setProduct_num(pnum);
 	            pvo.setCategory_num(fk_cnum);
 	            pvo.setProduct_title(prodName);
-	            pvo.setMain_image(Integer.parseInt(pimage1));
+	            pvo.setMain_image(pimage1);
 	            pvo.setProduct_price(Integer.parseInt(price));
 	            pvo.setProduct_inventory(Integer.parseInt(pqty));
 	            pvo.setProduct_detail(pcontent);
+	            pvo.setSale_count(Integer.parseInt(sale_count));
 	           
 
 	            String message = "";
@@ -112,12 +112,12 @@ public class ProductRegisterAction extends AbstractController {
 		            pdao.productInsert(pvo);
 
 		           message = "제품등록 성공!";
-		           loc = request.getContextPath()+"/shop/mallHome1.up";
+		           loc = request.getContextPath()+"/productRegister.ban";
 	         }catch(SQLException e) {
 	        	 e.printStackTrace();
 	             
 	             message = "제품등록 실패!!";
-	             loc = request.getContextPath()+"/shop/admin/productRegister.up";
+	             loc = request.getContextPath()+"/productRegister.ban";
 	        	 
 	         }
 	            request.setAttribute("message", message);
@@ -135,7 +135,6 @@ public class ProductRegisterAction extends AbstractController {
 	            
 	            request.setAttribute("message", message);
 	            request.setAttribute("loc", loc);
-	            
 
 	            super.setRedirect(false);
 	            super.setViewPage("/WEB-INF/msg.jsp");

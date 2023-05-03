@@ -26,7 +26,8 @@ public interface InterMemberDAO {
 	// 비밀번호 업데이트 메소드
 	int pwdUpdate(Map<String, String> paraMap)throws SQLException;
 		
-
+	// 마이페이지 회원정보 변경시 패스워드 확인 메소드
+	boolean mypageMemberPwdCheck(Map<String, String> paraMap) throws SQLException;
 
 	
 

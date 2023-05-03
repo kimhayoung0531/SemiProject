@@ -64,14 +64,15 @@ public class CartDAO implements InterCartDAO {
 	                  + " ( "
 	                  + " select cart_num, product_num, product_count, cart_date "
 	                  + " from tbl_cart "
-	                  + " where user_id = 'demo' and product_num = ? "
+	                  + " where user_id = ? and product_num = ? "
 	                  + " ) A "
 	                  + " join "
 	                  + " (select product_num, product_price from tbl_product ) B "
 	                  + " on A.product_num = B.product_num ";
 	         
 	         pstmt = conn.prepareStatement(sql);
-	         pstmt.setString(1, paraMap.get("product_num"));  
+	         pstmt.setString(1, paraMap.get("user_id"));
+	         pstmt.setString(2, paraMap.get("product_num"));  
 	         
 	         rs = pstmt.executeQuery();
 	         
@@ -146,7 +147,7 @@ public class CartDAO implements InterCartDAO {
 	            String fk_user_id = rs.getString("user_id");
 	            long product_num = rs.getLong("product_num");
 	            String product_title = rs.getString("product_title");
-	            long main_image = rs.getLong("main_image");
+	            String main_image = rs.getString("main_image");
 	            long product_price = rs.getLong("product_price");
 	            long product_count = rs.getLong("product_count");  // 주문량 
 	                        
@@ -216,7 +217,7 @@ public class CartDAO implements InterCartDAO {
 	}	// end of public HashMap<String, String> selectCartSumPricePoint(String user_id) ------------
 
 	
-	//장바구니 테이블에서 특정 제품을 삭제
+	//장바구니 테이블에서 개별 제품을 삭제
 	@Override
 	public int deleteCart(String cart_num) throws SQLException {
 
@@ -233,6 +234,29 @@ public class CartDAO implements InterCartDAO {
 		         
 		         n = pstmt.executeUpdate();
 		                  
+		      } finally {
+		         close();
+		      }
+		      
+		return n;
+		
+	}
+	
+	//장바구니 테이블에서 선택 제품을 삭제
+	@Override
+	public int choiseDeleteCart(String pnumes) throws SQLException {
+		int n = 0;
+		
+		   try {
+			   conn = ds.getConnection();
+		         
+		         String sql = " delete from tbl_cart "
+			               + " where product_num in ("+pnumes+") ";
+		         
+		         pstmt = conn.prepareStatement(sql);
+		         
+		         n = pstmt.executeUpdate();
+		         
 		      } finally {
 		         close();
 		      }
@@ -267,6 +291,6 @@ public class CartDAO implements InterCartDAO {
 		      
 		return n;
 	}
-	
+
 	
 }

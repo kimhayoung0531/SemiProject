@@ -14,7 +14,7 @@
 	}
 	
 %>    
-	<jsp:include page="../header.jsp" />
+<jsp:include page="../header.jsp" />
 	 
 	<style>
 	  a#writeReviewButton {
@@ -24,6 +24,7 @@
 	</style> 
 	 
 <script type="text/javascript">
+	
 	$(document).ready(function(){
 
 		$("div.add_cart_layer_popup").hide();		//팝업창 가리기
@@ -140,51 +141,10 @@
         
     	}); // end of $("div#firstDiv").find("label").click(function(event)
     	// ==== 상품 좋아요 기능 끝
-
-		// ====== 장바구니 시작 ===== 김진솔 ==//
-		$("button.btn_add_cart").bind("click", function(){
-			
-			// 주문수량에 대한 유효성 검사 //
-			const frm = document.itemFrmView;
-	
-			const regExp = /^[1-9]+$/;  // 숫자(1-9)만 체크하는 정규표현식
-			const item_cnt = $("input#item_cnt").val();		//주문수량
-			const bool = regExp.test(item_cnt);
-			
-			if(!bool){	//숫자 이외의 값 들어온 경우
-		         alert("주문 개수는 1개 이상이어야 합니다.");
-		         frm.item_cnt.value = "1";
-		         frm.item_cnt.focus();
-		         return; // 종료 
-			}
-			else{
-			}
-	
-			$("div.add_cart_layer_popup").show();	// '장바구니 바로 확인?' 팝업창
-	
-			
-			$("button.btn_cancel").bind("click", function(){
-				$("div.add_cart_layer_popup").hide();	// 취소하면 팝업창 닫음
-			});
-	
-			
-			$("button.btn_confirm").bind("click", function goCart(){	//확인하면 장바구니로 이동
-			
-		       // 주문개수가 1개 이상인 경우
-				frm.action = "<%= request.getContextPath()%>/cart.ban";
-				frm.method = "POST";
-				frm.submit();
-				
-				$("div.add_cart_layer_popup").hide();
-			 });	
-			
-		});	//end of $("button.btn_add_cart").bind("click", function()---------------------------
-		// ====== 장바구니 끝 =======//
-				
-				
 		
-		
-	});
+	}); // end of $(document).ready(function(){})--------------------------------
+	
+	
 	// ==== 리뷰 작성 페이지 이동 ==== 	
 	function writeReview(userid) {
 		product_num = "${requestScope.pvo.product_num}";
@@ -205,6 +165,56 @@
 
 	}
 	// ==== 리뷰 작성 페이지 이동 끝 ==== 
+	
+		
+	// 장바구니 버튼 클릭시 호출되는 함수	
+	function goCart(){
+		// 주문수량에 대한 유효성 검사 //
+		const frm = document.itemFrmView;
+
+		const regExp = /^[1-9]+$/;  // 숫자(1-9)만 체크하는 정규표현식
+		const item_cnt = $("input#item_cnt").val();		//주문수량
+		const bool = regExp.test(item_cnt);
+		
+		if(!bool){	//숫자 이외의 값 들어온 경우
+	         alert("주문 개수는 1개 이상이어야 합니다.");
+	         frm.item_cnt.value = "1";
+	         frm.item_cnt.focus();
+	         return; // 종료 
+		}
+		else{
+	
+			$("div.add_cart_layer_popup").show();	// '장바구니 바로 확인?' 팝업창
+	
+			
+			$("button.btn_cancel").bind("click", function(){
+				
+				$.ajax({
+			 		url:"<%= ctxPath%>/cart.ban",
+			 		type:"get",
+			 		data:{"product_num":${requestScope.pvo.product_num},
+			 			  "cart_cnt":item_cnt},					
+			 		success:function(){
+						$("div.add_cart_layer_popup").hide();	// 취소하면 팝업창 닫음
+					},
+		            error: function(request, status, error){
+	                  alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+			        }
+				});
+
+			});	//end of $("button.btn_cancel").bind("click", function() ------------------
+	
+			
+			$("button.btn_confirm").bind("click", function (){	//확인하면 장바구니로 이동
+				
+				location.href = "<%= ctxPath%>/cart.ban?cart_cnt=" + item_cnt +"&product_num="+${requestScope.pvo.product_num};
+				
+				$("div.add_cart_layer_popup").hide();
+				
+			});	
+			
+		}//end of else		
+	}// end of function goCart()--------------------------------	
 	
 </script>
 
@@ -310,7 +320,7 @@
                                                     <dl class="item_detail_each">
                                                         <dt>개수</dt>
                                                         <dd>
-                                                            <input id="item_cnt" type="number" class="form-control" min="1" value="1">
+                                                            <input id="item_cnt" name="item_cnt" type="number" class="form-control" min="1" value="1">
                                                         </dd>
                                                     </dl>
                                                 </div>
@@ -331,7 +341,7 @@
                                                 <button type="button" class="btn_add_wish">
                                                     <span class="material-symbols-outlined">favorite</span> 
                                                 </button>
-                                                <button type="button" class="btn_add_cart" onclick="goCart();" >장바구니</button>
+                                                <button type="button" class="btn_add_cart" onclick="goCart()">장바구니</button>
                                                 <button type="button" class="btn_add_order">바로 구매하기</button>
 
                                             </div>
@@ -613,7 +623,7 @@
                                <p class="success"><strong>상품이 장바구니에 담겼습니다.</strong><br>바로 확인하시겠습니까?</p>
                            </div>
                            <div class="btn_box">
-                               <button class="btn_cancel"><span>취소</span></button>
+                               <button class="btn_cancel">취소</button>
                                <button class="btn_confirm btn_move_cart"><span>확인</span></button>
                            </div>
                        </div>

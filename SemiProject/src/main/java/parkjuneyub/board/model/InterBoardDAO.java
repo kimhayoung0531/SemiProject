@@ -21,4 +21,7 @@ public interface InterBoardDAO {
 	//한 상품의 전체 리뷰를 가져온다.
 	int getTotalPage(Map<String, String> paraMap) throws SQLException;
 	
+	// 리뷰 id를 이용해 후기를 삭제하는 메소드
+	int deleteReviewByReviewId(String purchase_review_id) throws SQLException;
+	
 }

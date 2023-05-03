@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	
+   
 <%
-	String ctxPath = request.getContextPath();
-	// SemiProject
+   String ctxPath = request.getContextPath();
+   // SemiProject
 %>    
 
-		<div id="footer_wrap">
+      <div id="footer_wrap">
               <div id="footer">
 
                     <div class="foot_list">
@@ -55,10 +55,10 @@
                 </div> <!-- footer-bottom -->
 
               </div> <!-- footer  -->
-     	    </div> <!-- footer_wrap -->
+            </div> <!-- footer_wrap -->
 
       </div> <!-- wrap -->
-	 </div> <!-- body-main body-index pc -->
-   	
+    </div> <!-- body-main body-index pc -->
+      
 </body>
 </html>

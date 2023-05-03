@@ -1,6 +1,6 @@
-package parkjuneyub.product.model;
+package KHY.product.model;
 
-import parkjuneyub.member.model.MemberVO;
+import sge.member.model.MemberVO;
 
 public class ProductVO {
 	
@@ -129,6 +129,11 @@ public class ProductVO {
 		return mvo;
 	}
 
+	public void setMvo(MemberVO mvo) {
+		this.mvo = mvo;
+	}
+
+	
 
 	
 	

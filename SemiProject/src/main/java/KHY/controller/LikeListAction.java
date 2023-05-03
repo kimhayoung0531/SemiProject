@@ -1,3 +1,5 @@
+
+
 package KHY.controller;
 
 import java.util.HashMap;
@@ -10,37 +12,32 @@ import javax.servlet.http.HttpSession;
 
 
 import KHY.product.model.InterProductDAO;
-import KHY.product.model.OrderDeatailVO;
 import KHY.product.model.ProductDAO;
+import KHY.product.model.ProductVO;
 import common.controller.AbstractController;
 import sge.member.model.MemberVO;
 
 
-
-
-public class MypageOrderListAction extends AbstractController {
+public class LikeListAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		
+
 		HttpSession session = request.getSession();
 		MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 		
-		String startdate = request.getParameter("wDate1");
-		String enddate = request.getParameter("wDate2");
+		
 		String currentShowPageNO = request.getParameter("currentShowPageNO");
 		Map<String, String> paraMap = new HashMap<>();
 		paraMap.put("user_id", loginuser.getUser_id());
-		paraMap.put("startdate", startdate);
-		paraMap.put("enddate", enddate);
+		
 		
 		
 		
 		if(loginuser != null)  {
 			// 로그인을 했으면
 			super.setRedirect(false);
-			super.setViewPage("/WEB-INF/KHY/mypage_order_list.jsp");
+			super.setViewPage("/WEB-INF/KHY/mypage_like_list.jsp");
 				InterProductDAO pdao = new ProductDAO(); 
 				
 				if(currentShowPageNO == null) {
@@ -58,7 +55,7 @@ public class MypageOrderListAction extends AbstractController {
 				
 				paraMap.put("currentShowPageNO", currentShowPageNO); //조회하고자하는 페이지번호
 		         
-				int totalPage = pdao.getTotalPageOrder(paraMap);
+				int totalPage = pdao.getTotalPageLike(paraMap);
 				
 				if( Integer.parseInt(currentShowPageNO) > totalPage) {
 					  currentShowPageNO = "1";
@@ -66,11 +63,11 @@ public class MypageOrderListAction extends AbstractController {
 				  }
 				
 
-				List<OrderDeatailVO> orderList = pdao.selectPagingOrderList(paraMap);
+				List<ProductVO> likeList = pdao.selectPagingLikeList(paraMap);
 				
-				int count = pdao.selectOrderListCount(paraMap);
+				int count = pdao.selectLikeListCount(paraMap);
 				
-		        request.setAttribute("orderList", orderList);
+		        request.setAttribute("likeList", likeList);
 		        request.setAttribute("count", count);
 			
 		        String pageBar = "";
@@ -88,9 +85,9 @@ public class MypageOrderListAction extends AbstractController {
 				////////////////////////////////////////////////
 				
 				// **** [맨처음][이전] 만들기 **** //
-				pageBar += "<div class='pagi'><li class='page-item'><a class='page-link' href='mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate+"&currentShowPageNO=1'>[맨처음]</a></li>";
+				pageBar += "<div class='pagi'><li class='page-item'><a class='page-link' href='mypageLikeList.ban?currentShowPageNO=1'>[맨처음]</a></li>";
 				if(pageNo != 1) {
-					pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate+"&currentShowPageNO="+(pageNo-1)+"'>[이전]</a></li>";
+					pageBar += "<li class='page-item'><a class='page-link' href='mypageLikeList.ban?currentShowPageNO="+(pageNo-1)+"'>[이전]</a></li>";
 				}
 				
 				
@@ -102,7 +99,7 @@ public class MypageOrderListAction extends AbstractController {
 						pageBar += "<li class='page-item active'><a class='page-link' href='#'>"+pageNo+"</a></li>"; // 부트스트랩에 있는 네비게이션 페이지바 사용하는거임
 					}
 					else {
-						pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate+"&currentShowPageNO="+pageNo+"'>"+pageNo+"</a></li>"; // 부트스트랩에 있는 네비게이션 페이지바 사용하는거임
+						pageBar += "<li class='page-item'><a class='page-link' href='mypageLikeList.ban?currentShowPageNO="+pageNo+"'>"+pageNo+"</a></li>"; // 부트스트랩에 있는 네비게이션 페이지바 사용하는거임
 					}
 					loop++;   // 1 2 3 4 5 6 7 8 9 10
 					
@@ -117,10 +114,10 @@ public class MypageOrderListAction extends AbstractController {
 				// pageNo => 11
 				// pageNo => 21
 				if(pageNo <= totalPage) {
-					pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate+"&currentShowPageNO="+pageNo+"'>[다음]</a></li>";
+					pageBar += "<li class='page-item'><a class='page-link' href='mypageLikeList.ban?currentShowPageNO="+pageNo+"'>[다음]</a></li>";
 						
 				}
-				pageBar += "<li class='page-item'><a class='page-link' href='mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate+"&currentShowPageNO="+totalPage+"'>[마지막]</a></li></div>";
+				pageBar += "<li class='page-item'><a class='page-link' href='mypageLikeList.ban?currentShowPageNO="+totalPage+"'>[마지막]</a></li></div>";
 				
 				
 				
@@ -129,7 +126,7 @@ public class MypageOrderListAction extends AbstractController {
 			
 				// 로그인한 사용자가 자신의 마이페이지를 보는 경우
 				super.setRedirect(false);
-				super.setViewPage("/WEB-INF/KHY/mypage_order_list.jsp");
+				super.setViewPage("/WEB-INF/KHY/mypage_like_list.jsp");
 
 			
 			
@@ -149,6 +146,6 @@ public class MypageOrderListAction extends AbstractController {
 			
 		}
 		
-	
 	}
+
 }
