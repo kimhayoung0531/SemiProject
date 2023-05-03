@@ -207,7 +207,7 @@
 			
 			$("button.btn_confirm").bind("click", function (){	//확인하면 장바구니로 이동
 				
-				location.href = "<%= ctxPath%>/cart.ban?cart_cnt=" + item_cnt +"&product_num="+product_num;
+				location.href = "<%= ctxPath%>/cart.ban?cart_cnt=" + item_cnt +"&product_num="+${requestScope.pvo.product_num};
 				
 				$("div.add_cart_layer_popup").hide();
 				
@@ -624,7 +624,7 @@
                            </div>
                            <div class="btn_box">
                                <button class="btn_cancel">취소</button>
-                               <button class="btn_confirm btn_move_cart">확인</button>
+                               <button class="btn_confirm btn_move_cart"><span>확인</span></button>
                            </div>
                        </div>
                    </div>

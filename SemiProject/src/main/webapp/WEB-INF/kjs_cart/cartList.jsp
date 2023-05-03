@@ -252,11 +252,11 @@
             for(let i=0; i<totalPrice_arr.length; i++) {
                sum_totalPrice += Number(totalPrice_arr[i]);
             }
-
-            if(${not empty requestScope.cartList}){
-            	 sum_totalPriceDelivery = sum_totalPrice + 3000; 	
+            
+            if(${empty requestScope.cartList}){
+            	
             }
-           
+            
             
             let sum_totalMileage = 0;
             for(let i=0; i<totalMileage_arr.length; i++) {
@@ -344,7 +344,6 @@
 						            </c:if>   
 						            
                                     <c:if test="${not empty requestScope.cartList}">
-                                        <c:forEach var="cartvo" items="${requestScope.cartList}" varStatus="status"> 
 	                                    <thead>
 	                                    <tr>
 	                                        <th>        <!-- 전체선택 체크박스 allCheck-->
@@ -361,7 +360,7 @@
 	                                    </tr>
 	                                    </thead>
 	
-	
+	                                    <c:forEach var="cartvo" items="${requestScope.cartList}" varStatus="status"> 
 	                                    <tbody>
 		                                    <tr>
 		                                        <td class="td_chk"> <%-- 선택상품 체크박스--%>  
@@ -475,7 +474,15 @@
                                     <div class = "allprice_head">
                                         합계
                                     </div>
-                                    <div class="allprice_won"><fmt:formatNumber value="${requestScope.sumPriceDelivery}" pattern="###,###"/>원</div>
+                                    
+                                    <c:if test="${empty requestScope.cartList}">
+                                    <div class="allprice_won"><fmt:formatNumber value="${requestScope.sumPrice}" pattern="###,###"/>원</div>
+                                	</c:if>
+                                	
+                                	<c:if test="${not empty requestScope.cartList}">
+                                	<div class="allprice_won"><fmt:formatNumber value="${requestScope.sumPriceDelivery}" pattern="###,###"/>원</div>
+                                	</c:if>
+                                	
                                 </div>
                                 
                             </div>
