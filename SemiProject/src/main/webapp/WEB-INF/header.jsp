@@ -99,7 +99,7 @@
 		                                    <span class="xtt_bar"></span>
 		                                </li>
 		                                 <li>
-		                                    <a href="#">마이페이지</a>
+		                                    <a href="<%= ctxPath%>/mypage.ban">마이페이지</a>
 		                                    <span class="txt_bar"></span>
 		                                </li>
 		                            </ul>
