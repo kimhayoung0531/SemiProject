@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
+import sge.member.model.MemberVO;
 import KHY.model.*;
 
 
@@ -16,22 +17,18 @@ public class MemberChangePwdcheckAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		HttpSession session = request.getSession();
+		MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 		
 		// 내정보(회원정보)를 수정하기위한 전제조건은 먼저 로그인을 해야한다.
-				if(super.checkLogin(request)) {
+				if(loginuser != null) {
 					// 로그인을 했으면
-					
-					
-					HttpSession session = request.getSession();
-					MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
-					
 					
 					
 					super.setRedirect(false);
 					super.setViewPage("/WEB-INF/KHY/mypage_memberchange_pwdcheck.jsp");
+					
 			
-					
-					
 					
 					
 				}

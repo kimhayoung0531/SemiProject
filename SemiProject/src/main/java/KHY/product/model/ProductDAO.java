@@ -13,10 +13,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import parkjuenyub.order.model.OrderDeatailVO;
-import parkjuenyub.order.model.OrderVO;
-import parkjuneyub.product.model.CartVO;
-import parkjuneyub.product.model.ProductVO;
+
+import KHY.model.ReviewVO;
+import sge.member.model.MemberVO;
+
 
 //
 
@@ -382,7 +382,7 @@ public class ProductDAO implements InterProductDAO  {
 						"(\n"+
 						"select order_num, order_date\n"+
 						"from tbl_order \n"+
-						"where user_id = ? AND ? <= order_date AND order_date < ? "+
+						"where user_id = ? AND ? <= order_date AND order_date < to_date(?) + 1 "+
 						") A \n"+
 						"join \n"+
 						"(select order_details_num, order_num, product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
@@ -509,7 +509,7 @@ public class ProductDAO implements InterProductDAO  {
 						"       \n"+
 						"from\n"+
 						"(\n"+
-						"select rownum AS RNO, order_num, order_date\n"+
+						"select order_num, order_date\n"+
 						"from tbl_order \n"+
 						"where user_id = ? AND ? <= order_date AND order_date < to_date(?) + 1 "+
 						") A \n"+
@@ -543,6 +543,251 @@ public class ProductDAO implements InterProductDAO  {
 			close();
 		}
 		return n;
-	}
+	}// end of public int selectOrderListCount(Map<String, String> paraMap) throws SQLException
+	
+
+	//페이징 처리를 위한 회원의 상품 좋아요에 대한 총페이지 알아오기
+	@Override
+	public int getTotalPageLike(Map<String, String> paraMap) throws SQLException {
+		
+		int totalPage = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+
+			String sql = "select ceil( count(*) / 10 ) "+
+					"from\n"+
+					"(\n"+
+					"select user_id, product_num\n"+
+					"from tbl_product_like\n"+
+					"where user_id = ?\n"+
+					") A \n"+
+					"join \n"+
+					"(select product_num, product_title, main_image, product_price, product_detail\n"+
+					"from tbl_product ) B\n"+
+					"on A.product_num = B.product_num\n" ;
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, paraMap.get("user_id"));
+			
+			
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			totalPage = rs.getInt(1);
+			
+			
+			
+		}  finally {
+			close();
+		}
+		
+		return totalPage;
+	}// end of public int getTotalPageLike(Map<String, String> paraMap) throws SQLException
+
+	
+	//페이징 처리를 한 회원의 좋아요 목록 알아오기
+	@Override
+	public List<ProductVO> selectPagingLikeList(Map<String, String> paraMap) throws SQLException {
+		
+		List<ProductVO> likeList = new ArrayList<>();
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "select A.user_id as user_id, A.product_num as product_num, product_title, main_image, product_price, product_detail, product_inventory \n"+
+					"from\n"+
+					"(\n"+
+					"select rownum AS RNO, user_id, product_num\n"+
+					"from tbl_product_like\n"+
+					"where user_id = ?\n"+
+					") A \n"+
+					"join \n"+
+					"(select product_num, product_title, main_image, product_price, product_detail, product_inventory \n"+
+					"from tbl_product ) B\n"+
+					"on A.product_num = B.product_num\n"+
+					"WHERE RNO between ? and ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			int currentShowPageNO = Integer.parseInt(paraMap.get("currentShowPageNO")); // 조회하고자하는 페이지번호
+			
+			pstmt.setString(1, paraMap.get("user_id"));
+			pstmt.setInt(2, (currentShowPageNO * 10) - (10-1));
+			pstmt.setInt(3, (currentShowPageNO * 10));
+			
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				ProductVO pvo = new ProductVO();
+				pvo.setProduct_num(rs.getLong("product_num"));
+				pvo.setProduct_title(rs.getString("product_title"));
+				pvo.setMain_image(rs.getLong("main_image"));
+				pvo.setProduct_price(rs.getLong("product_price"));
+				pvo.setProduct_detail(rs.getString("product_detail"));
+				pvo.setProduct_inventory(rs.getLong("product_inventory"));
+				
+				
+				MemberVO mvo = new MemberVO();
+				mvo.setUser_id(rs.getString("user_id"));
+				pvo.setMvo(mvo);
+				
+				
+				likeList.add(pvo);
+				
+				
+			}
+		} finally {
+			close();
+		}
+		return likeList;
+	}// end of public List<ProductVO> selectPagingLikeList(Map<String, String> paraMap) throws SQLException
+
+	//좋아요 한 총 내역 수 알아오기
+	@Override
+	public int selectLikeListCount(Map<String, String> paraMap) throws SQLException {
+		
+		int n = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "select count(*)"+
+						"from\n"+
+						"(\n"+
+						"select rownum AS RNO, user_id, product_num\n"+
+						"from tbl_product_like\n"+
+						"where user_id = ?\n"+
+						") A \n"+
+						"join \n"+
+						"(select product_num, product_title, main_image, product_price, product_detail\n"+
+						"from tbl_product ) B\n"+
+						"on A.product_num = B.product_num\n" ;
+						
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, paraMap.get("user_id"));
+			
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			n = rs.getInt(1);
+			
+		} finally {
+			close();
+		}
+		return n;
+	}// end of public int selectLikeListCount(Map<String, String> paraMap) throws SQLException
+
+	//페이징 처리를 위한 회원의 상품 후기에 대한 총페이지 알아오기
+	@Override
+	public int getTotalPageReview(Map<String, String> paraMap) throws SQLException {
+		
+		int totalPage = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+
+			String sql = "select ceil( count(*) / 10 ) "+
+						"from\n"+
+						"(\n"+
+						"select purchase_review_id, product_num, review_content, review_date\n"+
+						"from tbl_purchase_review\n"+
+						"where userid = ? \n"+
+						") A \n"+
+						"join \n"+
+						"(select product_num, product_title, main_image\n"+
+						"from tbl_product ) B\n"+
+						"on A.product_num = B.product_num";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, paraMap.get("user_id"));
+			
+			
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			totalPage = rs.getInt(1);
+			
+			
+			
+		}  finally {
+			close();
+		}
+		
+		return totalPage;
+		
+	} // end of public int getTotalPageReview(Map<String, String> paraMap) throws SQLException
+
+	//페이징 처리를 한 회원의 리뷰 목록 알아오기
+	@Override
+	public List<ReviewVO> selectPagingReviewList(Map<String, String> paraMap) throws SQLException {
+		
+		List<ReviewVO> reviewList = new ArrayList<>();
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "select purchase_review_id, A.product_num as product_num, review_content, \n"+
+					"    review_date, product_title, main_image \n"+
+					"from\n"+
+					"(\n"+
+					"select rownum AS RNO, purchase_review_id, product_num, review_content, review_date\n"+
+					"from tbl_purchase_review\n"+
+					"where userid = ? \n"+
+					") A \n"+
+					"join \n"+
+					"(select product_num, product_title, main_image \n"+
+					"from tbl_product ) B\n"+
+					"on A.product_num = B.product_num " +
+					"WHERE RNO between ? and ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			int currentShowPageNO = Integer.parseInt(paraMap.get("currentShowPageNO")); // 조회하고자하는 페이지번호
+			
+			pstmt.setString(1, paraMap.get("user_id"));
+			pstmt.setInt(2, (currentShowPageNO * 10) - (10-1));
+			pstmt.setInt(3, (currentShowPageNO * 10));
+			
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				
+				
+				ReviewVO rvo = new ReviewVO();
+				rvo.setPurchase_review_id(rs.getInt("purchase_review_id"));
+				rvo.setProduct_num(rs.getLong("product_num"));
+				rvo.setReview_content(rs.getString("review_content"));
+				rvo.setReview_date(rs.getString("review_date"));
+				
+				
+				ProductVO pvo = new ProductVO();
+				pvo.setProduct_title(rs.getString("product_title"));
+				pvo.setMain_image(rs.getLong("main_image"));
+				rvo.setPvo(pvo);
+				
+				
+				reviewList.add(rvo);
+				
+				
+			}
+		} finally {
+			close();
+		}
+		return reviewList;
+		
+	}// end of public List<ReviewVO> selectPagingReviewList(Map<String, String> paraMap) throws SQLException
 	
 }
