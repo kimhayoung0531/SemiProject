@@ -150,28 +150,26 @@ public class OrderEndAction extends AbstractController {
 					+ " <h3 class=\"title_h3\">주문자 정보</h3>\r\n"
 					+ " </div>\r\n"
 					+ "  <div class=\"order_table_type\">\r\n"
-					+ "                                                    <table class=\"table_left\">\r\n"
+					+ "                                                    <table>\r\n"
 					+ "                                                        <colgroup>\r\n"
-					+ "                                                            <col style=\"width:20%\">\r\n"
-					+ "                                                            <col style=\"width:80%\">\r\n"
+					+ "                                                            <col style=\"width:50%\">\r\n"
+					+ "                                                            <col style=\"width:50%\">\r\n"
 					+ "                                                        </colgroup>\r\n"
 					+ "                                                        <tbody>\r\n"
 					+ "                                                            <tr>\r\n"
 					+ "                                                                <th><span class=\"order_important\">결제수단</span></th>\r\n"
-					+ "                                                                <td>\r\n"
-					+ "                                                                    <ul class=\"order_summary_information\">\r\n"
-					+ "                                                                        <li>신용카드</li>\r\n"
-					+ "                                                                    </ul>\r\n"
+					+ "                                                                <td>"
+					+ "                                                                 신용카드"
 					+ "                                                                </td>\r\n"
 					+ "                                                            </tr>\r\n"
 					+ "<tr>\r\n"
 					+ "	     <th><span class=\"order_important\">주문상품</span></th>\r\n"
-					+ "<td>";
-			
+					+ "<td><ul>";
+					
 			for(int i = 0; i < productList.size(); i++) {
 				html += "<li>"+productList.get(i).getProduct_title()+"</li>";
 			}
-			html += "</td> "
+			html += "</ul></td> "
 					+ "</tr>"
 					+ "<tr>"
 					+ "		<th><span class=\"order_important\">주문번호</span></th>\r\n"
@@ -209,7 +207,8 @@ public class OrderEndAction extends AbstractController {
 					+ " </tbody>\r\n"
 					+ " </table>\r\n"
 					+ " </div>\r\n";
-
+			
+			sb.append(html);
 			sb.append("<br>이용해 주셔서 감사합니다.");
 
 			

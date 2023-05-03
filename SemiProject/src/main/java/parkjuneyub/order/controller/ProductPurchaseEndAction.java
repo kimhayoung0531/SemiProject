@@ -35,11 +35,6 @@ public class ProductPurchaseEndAction extends AbstractController {
 				request.setAttribute("userid", userid);
 				request.setAttribute("finalTotalPrice", finalTotalPrice);
 
-				System.out.println(loginuser.getEmail());
-				System.out.println(loginuser.getUser_name());
-				System.out.println(userid);
-
-
 				super.setRedirect(false);
 				super.setViewPage("/WEB-INF/pjy_order/paymentGateway.jsp");
 			} else {
