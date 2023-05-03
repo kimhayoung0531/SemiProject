@@ -79,10 +79,12 @@ public class BoardDAO implements InterBoardDAO {
 					"   order by review_date desc "+
 					"   ) V "+
 					"  ) T "+
-					" WHERE RNO between 1 and 10 ";
+					" WHERE RNO between ? and ? ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, paraMap.get("product_num"));
+			pstmt.setInt(2, (Integer.parseInt(paraMap.get("currentShowPageNo"))*10)-(10-1) );
+			pstmt.setInt(3, Integer.parseInt(paraMap.get("currentShowPageNo"))*10 );
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

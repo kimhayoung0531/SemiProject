@@ -66,6 +66,7 @@ public class ProductDetailAction extends AbstractController {
 			
 			//*** 페이징 처리를 한 회원들 보여주기 *** ////////////////////////////////////////
 			String currentShowPageNo = request.getParameter("currentShowPageNo");
+			
 			// currentShowPageNo 은 사용자가 보고자하는 페이지바의 페이지번호이다.
 			// 메뉴에서 회원목록만을 클릭했을 경우에는 currentShowPageNo 는 null이 된다. 그러니 null이라면 1을 줘야 한다.
 			if(currentShowPageNo == null) {
@@ -113,9 +114,9 @@ public class ProductDetailAction extends AbstractController {
 				int pageNo = ( (Integer.parseInt(currentShowPageNo) - 1)/blockSize ) * blockSize + 1;
 				
 				/// **** [맨처음][이전] 만들기 **** //
-				pageBar += "<li class='page-item'><a class='page-link' href='memberList.up?currentShowPageNo="+1+"'>[맨처음]</a></li>";
+				pageBar += "<li class='page-item'><a class='page-link' href='productDeatail.ban?product_num="+product_num+"&currentShowPageNo="+1+"#reviews'>[맨처음]</a></li>";
 				if(pageNo > 1) {
-				pageBar += "<li class='page-item'><a class='page-link' href='memberList.up?currentShowPageNo="+(pageNo-1)+"'>[이전]</a></li>";
+				pageBar += "<li class='page-item'><a class='page-link' href='productDeatail.ban?product_num="+product_num+"&currentShowPageNo="+(pageNo-1)+"#reviews'>[이전]</a></li>";
 				}
 				
 				while( !(loop > blockSize || pageNo > totalPage) ) {
@@ -124,7 +125,7 @@ public class ProductDetailAction extends AbstractController {
 						pageBar += "<li class='page-item active'><a class='page-link' href='#'>" + pageNo + "</a></li>";
 					}
 					else {
-						pageBar += "<li class='page-item'><a class='page-link' href='memberList.up?currentShowPageNo="+pageNo+"'>" + pageNo + "</a></li>";
+						pageBar += "<li class='page-item'><a class='page-link' href='productDeatail.ban?product_num="+product_num+"&currentShowPageNo="+pageNo+"#reviews'>" + pageNo + "</a></li>";
 					}
 								
 					loop++; // 1 2 3 4 5 6 7 8 9 10 
@@ -134,9 +135,9 @@ public class ProductDetailAction extends AbstractController {
 				} // end of while-------------------------------------------------
 				
 				if(pageNo <= totalPage) {
-					pageBar += "<li class='page-item'><a class='page-link' href='memberList.up?currentShowPageNo="+pageNo+"'>[다음]</a></li>";
+					pageBar += "<li class='page-item'><a class='page-link' href='productDeatail.ban?product_num="+product_num+"&currentShowPageNo="+pageNo+"#reviews'>[다음]</a></li>";
 				}
-				pageBar += "<li class='page-item'><a class='page-link' href='memberList.up?currentShowPageNo="+totalPage+"'>[마지막]</a></li>";
+				pageBar += "<li class='page-item'><a class='page-link' href='productDeatail.ban?product_num="+product_num+"&currentShowPageNo="+totalPage+"#reviews'>[마지막]</a></li>";
 				
 				request.setAttribute("reviewList", reviewList);
 				request.setAttribute("pageBar", pageBar);
