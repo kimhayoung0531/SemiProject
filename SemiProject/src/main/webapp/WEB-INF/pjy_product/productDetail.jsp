@@ -389,9 +389,8 @@
                                                 <p align="center" style="text-align: center;">
                                                     <img src="<%= ctxPath%>/image/delivery_system.jpg">
                                                 </p>
-
                                                 <p align="center" style="text-align: center;">
-                                                    <img src="<%= ctxPath%>/image/item_detail/test02.jpg">
+                                                    <img src="<%= ctxPath%>/image/item_detail/${requestScope.pvo.aivo.image_name}">
                                                 </p>
                                             </div>
                                         </div>
