@@ -424,9 +424,9 @@ public class ProductDAO implements InterProductDAO  {
 	         pstmt.setLong(7, pvo.getProduct_inventory());
 	         pstmt.setString(8, pvo.getProduct_date());
 	         pstmt.setLong(9, pvo.getSale_count());
-	        
-	            
+ 
 	         result = pstmt.executeUpdate();
+
 	         
 	      } catch(NumberFormatException e){
 	    	 
