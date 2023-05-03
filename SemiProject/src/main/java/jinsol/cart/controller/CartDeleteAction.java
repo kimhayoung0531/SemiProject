@@ -16,7 +16,7 @@ public class CartDeleteAction extends AbstractController{
 		
 		String method = request.getMethod();
 		
-		if(!"POST".equalsIgnoreCase(method)) {
+		if("POST".equalsIgnoreCase(method)) {
 			
 			String cart_num = request.getParameter("cart_num");
 
@@ -35,6 +35,17 @@ public class CartDeleteAction extends AbstractController{
 			super.setRedirect(false);
 			super.setViewPage("/WEB-INF/jsonview.jsp");
 
+			
+		}else {
+			//GET방식이라면 
+			String message = "비정상적인 경로로 들어왔습니다.";
+		    String loc = "javascript:history.back()";
+		      
+		   request.setAttribute("message", message);
+		   request.setAttribute("loc", loc);
+		      
+		   super.setViewPage("/WEB-INF/msg.jsp");
+		   return;
 		}
 		
 	}	//end of public void execute ------------------------------------

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String ctxPath = request.getContextPath();
 	// SemiProject
@@ -57,8 +59,9 @@
    <!--  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
     <script type="text/javascript" src="http://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
-    	function logOut(){
-    		location.href="<%= request.getContextPath()%>/login/logout.up";
+
+    	function goLogOut(){
+    		location.href="<%= request.getContextPath()%>/logout.up";
     	}
     </script>
 </head>
@@ -70,21 +73,40 @@
                 <div id="header">
                     <div class="header_top"> <!--회원가입 로그인 고객센터--> 
                         <div class="header_top_cont">
+                          <c:if test="${empty sessionScope.loginuser.user_id}">
                             <ul class="top_member_box">
                                 <li>
-                                    <a onclick="logOut()">로그아웃</a>
+                                    <a href="<%= ctxPath%>/registerAgreement.ban">회원가입</a>
+                                    <span class="txt_bar"></span>
+                                </li>
+
+                                <li>
+                                    <a href="<%= ctxPath%>/login.ban">로그인</a>
+                                    <span class="txt_bar"></span>
+                                </li>
+                                 <li>
+                                    <a href="#">고객센터</a>
+                                    <span class="txt_bar"></span>
+                                </li>
+                            </ul>
+                          </c:if>
+                          <c:if test="${not empty sessionScope.loginuser}">
+                            <ul class="top_member_box">
+                                <li>
+                                    <a onclick="goLogOut()">로그아웃</a>
                                     <span class="txt_bar"></span>
                                 </li>
 
                                 <li>
                                     <a href="#">고객센터</a>
-                                    <span class="txt_bar"></span>
+                                    <span class="xtt_bar"></span>
                                 </li>
                                  <li>
                                     <a href="#">마이페이지</a>
                                     <span class="txt_bar"></span>
                                 </li>
                             </ul>
+                          </c:if>
                         </div>
                     </div>
                     <div class="header_search"> <!-- 검색창, 찜, 장바구니--> 
@@ -121,7 +143,7 @@
                                         </a>
                                     </li>
                                     <li class="cartBtn">
-                                        <a href="#">
+                                        <a href="<%=ctxPath%>/cartList.ban">
                                         	 <img src="<%=ctxPath%>/image/icon_cart_ku.svg">
                                         </a>
                                     </li>

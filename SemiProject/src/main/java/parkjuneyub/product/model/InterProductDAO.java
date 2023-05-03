@@ -4,7 +4,9 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 
+import parkjuenyub.order.model.OrderVO;
 import parkjuneyub.product.model.*;
+import sge.admin.controller.CategoryVO;
 
 public interface InterProductDAO {
 	
@@ -25,7 +27,19 @@ public interface InterProductDAO {
 
 	// 좋아요를 눌렀는지 확인하기
 	int checkLikeList(String user_id, String product_num) throws SQLException;
-	
+
+	//카테고리 리스트를 조회해오는 메소드
+	List<CategoryVO> selectCategoryList()throws SQLException;
+
+	//상품번호 채번해오기
+	int getPnumOfProduct()throws SQLException;
+
+	//상품테이블에 상품 추가하기
+	int productInsert(ProductVO pvo)throws SQLException;
+
+	// 상품번호 리스트로 상품의 메인이미지, 상품 타이틀, 상품 번호 가져오기
+	List<ProductVO> getPvoListByPnum(String[] pnum_join) throws SQLException;
+
 	
 	
 }

@@ -13,7 +13,7 @@ public interface InterHomeDAO {
 	List<ProductVO> getProductInfo(String category_num) throws SQLException;
 	
 	
-	List<ProductVO> getBestItemBysalecount() throws SQLException;
+	/* List<ProductVO> getBestItemBysalecount() throws SQLException; */
 	
 	
 	

@@ -1,6 +1,7 @@
 package parkjuneyub.product.model;
 
 import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import parkjuenyub.order.model.OrderVO;
+import sge.admin.controller.CategoryVO;
 
 
 
@@ -249,6 +253,7 @@ public class ProductDAO implements InterProductDAO  {
 				}
 			}
 			//System.out.println("n4 " +  n4);
+			// 5. 회원테이블에 마일리지 업데이트하기
 			if(n4 > 0) {
 				sql = " update tbl_member set mileage = mileage - ? + ? "
 						+ " where user_id = ? ";
@@ -267,10 +272,7 @@ public class ProductDAO implements InterProductDAO  {
 				
 				//System.out.println("주문 완료");
 				isSuccess = 1;
-			}
-			
-			
-			// 5. 회원테이블에 마일리지 업데이트하기
+			}		
 		} 
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -282,8 +284,6 @@ public class ProductDAO implements InterProductDAO  {
 			close();
 		}
 				
-				
-		//System.out.println(isSuccess);
 		return isSuccess;
 	}
 
@@ -341,4 +341,133 @@ public class ProductDAO implements InterProductDAO  {
 		}
 		return n;
 	}
+
+	//카테고리 리스트를 조회해오는 메소드
+	@Override
+	public List<CategoryVO> selectCategoryList() throws SQLException{
+		
+		List<CategoryVO> categoryList = new ArrayList<>();
+			
+		try {
+			conn = ds.getConnection();
+
+			String sql = " select category_num, category_name "
+					   + " from tbl_category "
+					   + " order by category_num asc ";
+			
+		    pstmt = conn.prepareStatement(sql);
+		    
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				CategoryVO cvo = new CategoryVO();
+				cvo.setCategory_num(rs.getInt(1));
+				cvo.setCategory_name(rs.getString(2));
+				
+				categoryList.add(cvo);
+			}// end of while
+
+		} finally {
+			close();
+		}
+		return categoryList;
+	}
+	
+	//상품번호 채번하기
+	@Override
+	public int getPnumOfProduct() throws SQLException {
+		int pnum = 0;
+		
+		try {
+			conn = ds.getConnection();
+
+			String sql = " select seq_product_product_num.nextval AS PNUM  "
+					   + " from dual ";
+					 
+			
+		    pstmt = conn.prepareStatement(sql);
+		    
+			rs = pstmt.executeQuery();
+
+			rs.next();
+			pnum = rs.getInt(1);
+		} finally {
+			close();
+		}
+		return pnum;
+	}//end of public int getPnumOfProduct()
+    
+	// 상품 테이블에 상품 추가하기
+	@Override
+	public int productInsert(ProductVO pvo) throws SQLException {
+		
+		
+		 int result = 0;
+	      
+	      try {
+	         conn = ds.getConnection();
+	         
+	         String sql = " insert into tbl_product(product_num, category_num, product_title, main_image, product_price, product_detail, product_inventory,product_date, sale_count) " +  
+	                      " values(?,?,?,?,?,?,?,?,?)";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setLong(1,  pvo.getProduct_num());
+	         pstmt.setLong(2, pvo.getCategory_num());
+	         pstmt.setString(3, pvo.getProduct_title());    
+	         pstmt.setLong(4,  pvo.getMain_image()); 
+	         pstmt.setLong(5,  pvo.getProduct_price());    
+	         pstmt.setString(6, pvo.getProduct_detail()); 
+	         pstmt.setLong(7, pvo.getProduct_inventory());
+	         pstmt.setString(8, pvo.getProduct_date());
+	         pstmt.setLong(9, pvo.getSale_count());
+	        
+	            
+	         result = pstmt.executeUpdate();
+	         
+	      } catch(NumberFormatException e){
+	    	 
+	      } finally {
+	      
+	         close();
+	      }
+	      
+	      return result;
+		
+		
+	}
+
+	@Override
+	public List<ProductVO> getPvoListByPnum(String[] pnum_join) throws SQLException {
+		List<ProductVO> pvoList = new ArrayList<>();
+		
+		for(int i = 0; i<pnum_join.length; i++) {
+			try {
+				conn = ds.getConnection();
+		         
+		         String sql = " select product_num, product_title, main_image "
+		         		+ " from tbl_product where product_num = ? ";
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setString(1, pnum_join[i]);
+		         rs = pstmt.executeQuery();
+		         
+		         ProductVO pvo = new ProductVO();
+		         rs.next();
+		         pvo.setProduct_num(rs.getLong(1));
+		         pvo.setProduct_title(rs.getString(2));
+		         pvo.setMain_image(Long.parseLong(rs.getString(3)));
+		         
+		         pvoList.add(pvo);
+		         
+			} finally {
+				close();
+			}
+		}
+		
+		
+		return pvoList;
+	}
+
+	
+	
 }

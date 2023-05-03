@@ -18,62 +18,72 @@ public class AddCartAction extends AbstractController {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-		
-		String method = request.getMethod();
-		
-		if("GET".equalsIgnoreCase(method)) {
-			
-		  String cart_cnt = request.getParameter("cart_cnt");
-		  String product_num = request.getParameter("product_num");
-		  
-		  System.out.println("~~~~~~ AddCartAction.java 에서1 cart_cnt : " + cart_cnt);
-		  System.out.println("~~~~~~ AddCartAction.java 에서1 pnum : " + product_num);
-		  
-		  HttpSession session = request.getSession();
-		  MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
-		  
-		  ////////////////////////테스트용///////////////////////////////////
-		  
-		  loginuser = new MemberVO();
-		  loginuser.setUser_id("demo");
-		  
-		  //////////////////////////////////////////////////////////////////
-		  
-		  InterCartDAO cdao = new CartDAO();
 
-		  Map<String, String> paraMap = new HashMap<>();
-		  paraMap.put("user_id", loginuser.getUser_id());
-		  paraMap.put("product_num", product_num);
-		  paraMap.put("cart_cnt", cart_cnt);
-		  
-		  int n = cdao.addCart(paraMap);
-		  
-		  if(n==1) {
-			request.setAttribute("message", "장바구니에 담겼습니다.");
-			request.setAttribute("loc", "cartList.ban");
-		  }
-		  else {
-			request.setAttribute("message", "장바구니 담기에 실패하셨습니다.");
-			request.setAttribute("loc", "javascript:history.back()");
-		  }
-		  
-		  super.setViewPage("/WEB-INF/msg.jsp");
-
+		// 1. == 로그인 유무 검사하기 ==
+		boolean isLogin = super.checkLogin(request);
+		
+		if(!isLogin) {	
+			  	 request.setAttribute("message", "장바구니에 담으려면 먼저 로그인부터 하세요.");
+		         request.setAttribute("loc", "javascript:history.back()");
+		            
+		         //   super.setRedirect(false);
+		         super.setViewPage("/WEB-INF/msg.jsp");
+		            
+		         return;
 		}
-		
 		else {
-			//GET방식이라면 
-			String message = "비정상적인 경로로 들어왔습니다.";
-		    String loc = "javascript:history.back()";
-		      
-		   request.setAttribute("message", message);
-		   request.setAttribute("loc", loc);
-		      
-		   super.setRedirect(false);
-		   super.setViewPage("/WEB-INF/msg.jsp");
+				String method = request.getMethod();
+				
+				if("GET".equalsIgnoreCase(method)) {
+				
+				 HttpSession session = request.getSession();
+		         MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
+		
+		
+				  ////////////////////////테스트용///////////////////////////////////
+				  /*
+				  loginuser = new MemberVO();
+				  loginuser.setUser_id("demo");
+				  */
+				  //////////////////////////////////////////////////////////////////
+				  
+				  String cart_cnt = request.getParameter("cart_cnt");
+				  String product_num = request.getParameter("product_num");
+				  
+				  Map<String, String> paraMap = new HashMap<>();
+				  paraMap.put("user_id", loginuser.getUser_id());
+				  paraMap.put("product_num", product_num);
+				  paraMap.put("cart_cnt", cart_cnt);
+			      
+				  InterCartDAO cdao = new CartDAO(); 
+		
+				  int n = cdao.addCart(paraMap);
+				  
+				  if(n==1) {
+					request.setAttribute("message", "장바구니에 담겼습니다.");
+					request.setAttribute("loc", "cartList.ban");
+				  }
+				  else {
+					request.setAttribute("message", "장바구니 담기에 실패하셨습니다.");
+					request.setAttribute("loc", "javascript:history.back()");
+				  }
+				  
+				  super.setViewPage("/WEB-INF/msg.jsp");
+		
+				}
+				
+				else {
+					//post방식이라면 
+					String message = "비정상적인 경로로 들어왔습니다.";
+				    String loc = "javascript:history.back()";
+				      
+				   request.setAttribute("message", message);
+				   request.setAttribute("loc", loc);
+				      
+				   super.setRedirect(false);
+				   super.setViewPage("/WEB-INF/msg.jsp");
+				}
 		}
-			 
-				 
 	} //end of public void execute ---------------------------------------
 
 	

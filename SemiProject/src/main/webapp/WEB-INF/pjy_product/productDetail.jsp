@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import= "sge.member.model.MemberVO" %>    
+<%@ page import= "parkjuneyub.board.model.ReviewVO" %>    
+<%@ page import= "parkjuneyub.member.model.*" %> 
 <%
 	String ctxPath = request.getContextPath();
 	// SemiProject
@@ -13,7 +16,7 @@
 	}
 	
 %>    
-	<jsp:include page="../header.jsp" />
+<jsp:include page="../header.jsp" />
 	 
 	<style>
 	  a#writeReviewButton {
@@ -23,8 +26,8 @@
 	</style> 
 	 
 <script type="text/javascript">
+	
 	$(document).ready(function(){
-
 		$("div.add_cart_layer_popup").hide();		//팝업창 가리기
 		
 		
@@ -139,51 +142,10 @@
         
     	}); // end of $("div#firstDiv").find("label").click(function(event)
     	// ==== 상품 좋아요 기능 끝
-
-		// ====== 장바구니 시작 ===== 김진솔 ==//
-		$("button.btn_add_cart").bind("click", function(){
-			
-			// 주문수량에 대한 유효성 검사 //
-			const frm = document.itemFrmView;
-	
-			const regExp = /^[1-9]+$/;  // 숫자(1-9)만 체크하는 정규표현식
-			const item_cnt = $("input#item_cnt").val();		//주문수량
-			const bool = regExp.test(item_cnt);
-			
-			if(!bool){	//숫자 이외의 값 들어온 경우
-		         alert("주문 개수는 1개 이상이어야 합니다.");
-		         frm.item_cnt.value = "1";
-		         frm.item_cnt.focus();
-		         return; // 종료 
-			}
-			else{
-			}
-	
-			$("div.add_cart_layer_popup").show();	// '장바구니 바로 확인?' 팝업창
-	
-			
-			$("button.btn_cancel").bind("click", function(){
-				$("div.add_cart_layer_popup").hide();	// 취소하면 팝업창 닫음
-			});
-	
-			
-			$("button.btn_confirm").bind("click", function goCart(){	//확인하면 장바구니로 이동
-			
-		       // 주문개수가 1개 이상인 경우
-				frm.action = "<%= request.getContextPath()%>/cart.ban";
-				frm.method = "POST";
-				frm.submit();
-				
-				$("div.add_cart_layer_popup").hide();
-			 });	
-			
-		});	//end of $("button.btn_add_cart").bind("click", function()---------------------------
-		// ====== 장바구니 끝 =======//
-				
-				
 		
-		
-	});
+	}); // end of $(document).ready(function(){})--------------------------------
+	
+	
 	// ==== 리뷰 작성 페이지 이동 ==== 	
 	function writeReview(userid) {
 		product_num = "${requestScope.pvo.product_num}";
@@ -202,9 +164,37 @@
 		const pop_top = Math.ceil((window.screen.height - pop_height)/2);
 		window.open(url, "writeReview", "left="+pop_left+", top="+pop_top+" , width="+pop_width+", height="+pop_height);
 
-	}
+	};
 	// ==== 리뷰 작성 페이지 이동 끝 ==== 
 	
+<<<<<<< HEAD
+	function deleteReview(purchase_review_id) {
+		$.ajax({
+        	url:"<%= request.getContextPath()%>/board/deleteReview.ban",
+        	type:"POST",
+        	data: {
+        		"purchase_review_id":purchase_review_id
+        	},
+        	dataType: "JSON",
+        	success:function(json){
+        		if(json.n == '1') {
+        			alert("정상적으로 삭제되었습니다");
+        			window.location.reload();
+        		}
+        		if(json.n == '0') {
+        			alert("후기 삭제과정에서 오류가 발생했습니다");
+        		}
+        	}, 	
+            error: function(request, status, error){
+              alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+	          }
+		});
+	}
+		
+		
+=======
+	
+>>>>>>> refs/heads/main
 </script>
 
 
@@ -309,7 +299,7 @@
                                                     <dl class="item_detail_each">
                                                         <dt>개수</dt>
                                                         <dd>
-                                                            <input id="item_cnt" type="number" class="form-control" min="1" value="1">
+                                                            <input id="item_cnt" name="item_cnt" type="number" class="form-control" min="1" value="1">
                                                         </dd>
                                                     </dl>
                                                 </div>
@@ -330,7 +320,7 @@
                                                 <button type="button" class="btn_add_wish">
                                                     <span class="material-symbols-outlined">favorite</span> 
                                                 </button>
-                                                <button type="button" class="btn_add_cart" onclick="goCart();" >장바구니</button>
+                                                <button type="button" class="btn_add_cart" onclick="goCart()">장바구니</button>
                                                 <button type="button" class="btn_add_order">바로 구매하기</button>
 
                                             </div>
@@ -502,25 +492,53 @@
                                             </div>
                                         </div>
 
-                                        <table class="review_table table table-hover">
+                                        <table class="review_table table ">
                                             <thead>
                                                 <tr>
-                                                    <th>작성자</th>
-                                                    <th>내용</th>
-                                                    <th>작성일</th>
+                                                    <th style="width:8%">작성자</th>
+                                                    <th style="width:67%">내용</th>
+                                                    <th style="width:15%">작성일</th>
+                                                    
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                <tr>
-                                                    <td>테스트1</td>
-                                                    <td>테스트 내용</td>
-                                                    <td>태스트 날짜</td>
-                                                </tr>
+
+                                                <c:if test="${not empty requestScope.reviewList}">
+													<c:forEach var="rvo" items="${requestScope.reviewList}">
+														<tr>
+											              <td class="userid"><span>${rvo.mvo.user_id}</span></td>
+											              <td>${rvo.review_content}</td>
+											              <td>${rvo.review_date}</td>
+															
+											              <% 
+											              	ReviewVO rvo =(ReviewVO) pageContext.getAttribute("rvo");
+											              	parkjuneyub.member.model.MemberVO mvo = rvo.getMvo();
+											              	String tmp = mvo.getUser_id();
+											                if(tmp.equals(user_id)) {
+											                %>
+											              
+											               <td><button type="button" class="btn btn-light" onclick="deleteReview('${rvo.purchase_review_id}')">삭제</button><td> 
+															<% } %>
+											              
+											           </tr>
+													</c:forEach>
+											 	 </c:if>
+												<c:if test="${empty requestScope.reviewList}">
+													<tr>
+														<td colspan="3">작성된 리뷰가 없습니다.</td>
+													</tr>
+												</c:if>
+                                                
                                             </tbody>
                                         </table>
 
                                     </div>
+                                    	<nav class="my-5">
+									        <div style='display:flex;'>
+									          <ul class="pagination" style='margin:auto;'>${requestScope.pageBar}</ul>
+									       </div>
+									    </nav>
                                     
                                 </div>
                                 <!-- 리뷰 끝 -->
@@ -595,7 +613,7 @@
                                <p class="success"><strong>상품이 장바구니에 담겼습니다.</strong><br>바로 확인하시겠습니까?</p>
                            </div>
                            <div class="btn_box">
-                               <button class="btn_cancel"><span>취소</span></button>
+                               <button class="btn_cancel">취소</button>
                                <button class="btn_confirm btn_move_cart"><span>확인</span></button>
                            </div>
                        </div>

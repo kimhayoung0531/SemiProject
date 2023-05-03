@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
 <%
 	String ctxPath = request.getContextPath();
 	
@@ -59,7 +60,16 @@
 		text-align: center;
 	}
 
-	
+	.pagination li a, .pagination li span {
+    display: block;
+    padding: 0 !important;
+    height: 30px;
+    width: 50px;
+    color: #888;
+    font-size: 11px;
+    line-height: 30px;
+    margin-top: 15px;
+}
 	
 	
 </style>
@@ -69,14 +79,17 @@
 
 $(document).ready(function(){
 	
-	
+	var startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
+    var enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
+    
+    
     
     // === 전체 datepicker 옵션 일괄 설정하기 ===
     // 한번의 설정으로 $("input#fromDate") , $("input#toDate") 의 옵션을 모두 설정할 수 있다.
     $(function() {
         //모든 datepicker에 대한 공통 옵션 설정
         $.datepicker.setDefaults({
-             dateFormat: 'yy-mm-dd' //Input Display Format 변경
+             dateFormat: 'yy/mm/dd' //Input Display Format 변경
             ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
             ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
             ,changeYear: true //콤보박스에서 년 선택 가능
@@ -99,10 +112,21 @@ $(document).ready(function(){
         $("input#toDate").datepicker();
         
         //From의 초기값을 오늘 날짜로 설정
+        
+        
         $('input#fromDate').datepicker('setDate', '-7D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
         
         //To의 초기값을 3일후로 설정
         $('input#toDate').datepicker('setDate', 'sysdate'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
+    
+        if( localStorage.getItem('startdate') != null) {
+       
+            document.querySelector("#fromDate").value = localStorage.getItem('startdate');
+            document.querySelector("#toDate").value = localStorage.getItem('enddate');
+        }
+        
+	
+    
     });
 	
  // 검색 기간을 정하는 버튼
@@ -110,6 +134,8 @@ $(document).ready(function(){
  
 	$(".date_check_list button").click(function(e){
 		
+       
+        
 		$('.date_check_list button').removeClass('on');
         $(this).addClass('on');
 
@@ -136,22 +162,53 @@ $(document).ready(function(){
         }
         
         $('input#toDate').datepicker('setDate', 'sysdate');
+       
+       startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
+       enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
+	
+       
+       
         
 	});
  
+	//$(".date_check_calendar").change
  
-	 $('form[name="frmDateSearch"]').submit(function(e){
-         $chekcInputDate = $('input[name="wDate[]"]');
+ 
+	 $('form[name="frmDateSearch"]').submit(function(e){ 
+
+		 /* $chekcInputDate = $('input[name="wDate[]"]');
          var startDate = ($($chekcInputDate[0]).val()).split('-');
          startDate = new Date(startDate[0], startDate[1], startDate[2]);
          var endDate = ($($chekcInputDate[1]).val()).split('-');
-         endDate = new Date(endDate[0], endDate[1], endDate[2]);
-
-         if (startDate > endDate) {
+         endDate = new Date(endDate[0], endDate[1], endDate[2]); */
+         
+         var startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
+         var enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
+       
+         document.querySelector("#fromDate").value = startdate;
+         document.querySelector("#toDate").value = enddate;
+         
+         localStorage.setItem('startdate2', startdate);
+         localStorage.setItem('enddate2', enddate);
+       
+         //alert(document.querySelector("#toDate").value);
+         //alert(document.querySelector("#fromDate").value);
+         
+         
+         if (startdate > enddate) {
              alert('종료 날짜가 시작 날짜보다 빠릅니다.\n확인 후 검색기간을 다시 선택해주세요.');
              return false;
          }
-     });
+         else {
+        
+ 				const frm = document.frmDateSearch;
+ 				frm.action = "<%= ctxPath%>/mypageOrderList.ban?wDate1="+startdate+"&wDate2="+enddate;
+ 				frm.method = "get";
+ 				frm.submit();
+ 		
+         }
+	 
+	 });
  
  
  
@@ -180,8 +237,7 @@ $(document).ready(function(){
                         <li>쇼핑정보
                             <ul class="sub_depth1">
                                 <li><a href="../mypage/order_list.php">- 주문목록/배송조회</a></li>
-                                <li><a href="../mypage/cancel_list.php">- 취소/반품/교환 내역</a></li>
-                                <li><a href="../mypage/refund_list.php">- 환불/입금 내역</a></li>
+                                <li><a href="../mypage/cancel_list.php">- 주문취소</a></li>
                                 <li><a href="../mypage/wish_list.php">- 좋아요리스트</a></li>
                             </ul>
                         </li>
@@ -235,7 +291,7 @@ $(document).ready(function(){
                                 </div>
                                 <!-- //date_check_list -->
                                 <div class="date_check_calendar">
-                                    <input type="text" id="fromDate" name="wDate[]" class="anniversary" value="" /> ~ <input type="text" id="toDate" name="wDate[]" class="anniversary" value="" />
+                                    <input type="text" id="fromDate" name="wDate1" class="anniversary" value="" /> ~ <input type="text" id="toDate" name="wDate2" class="anniversary" value="" />
                                 </div>
                                 <!-- //date_check_calendar -->
 
@@ -245,12 +301,14 @@ $(document).ready(function(){
                         </div>
                         <!-- //date_check_box -->
 
-                        <div class="mypage_lately_info_cont">
+                        
 
                             <span class="pick_list_num">
-                                주문목록 / 배송조회 내역 총 <strong>0</strong> 건
+                                주문목록 / 배송조회 내역 총 <strong>${requestScope.count}</strong> 건
                             </span>
 
+                            <!-- 주문상품 리스트 -->
+                            <div class="mypage_lately_info_cont">
                             <!-- 주문상품 리스트 -->
                             <div class="mypage_table_type">
                                 <table>
@@ -264,7 +322,7 @@ $(document).ready(function(){
                                     <thead>
                                         <tr>
                                             <th>날짜/주문번호</th>
-                                            <th>상품명/옵션</th>
+                                            <th>상품명</th>
                                             <th>상품금액/수량</th>
                                             <th>주문상태</th>
                                             <th>
@@ -273,16 +331,61 @@ $(document).ready(function(){
                                         </tr>
                                     </thead>
                                     <tbody>
-										<tr>
-                                            <td colspan="6">
-                                                <p class="no_data">조회내역이 없습니다.</p>
-                                            </td>
-                                        </tr>
+										<c:if test="${empty requestScope.orderList}">	
+	                                        <tr>
+	                                            <td colspan="6">
+	                                                <p class="no_data">조회내역이 없습니다.</p>
+	                                            </td>
+	                                        </tr>
+	                                    </c:if>
+	                                     
+	                                    <c:if test="${not empty requestScope.orderList}">
+							               <c:forEach var="odvo" items="${requestScope.orderList}" varStatus="status"> 
+							                   <tr>
+							                        <td> <%-- 체크박스 및 제품번호 --%>
+							                             <%-- c:forEach 에서 선택자 id를 고유하게 사용하는 방법  
+							                                  varStatus="status" 을 이용하면 된다.
+							                                  status.index 은 0 부터 시작하고,
+							                                  status.count 는 1 부터 시작한다. 
+							                             --%>  <%-- 날짜 및 주문번호 --%> 
+							                            <span class="product_title">${odvo.ovo.order_date}</span><br>
+							                            <span class="product_title">${odvo.order_details_num}</span>
+							                        </td>
+							                        <td align="center"> <%-- 상품명 --%> 
+							                           <a href="/MyMVC/shop/prodView.up?pnum=${cartvo.pnum}"><!-- 제품상세페이지 링크 -->
+							                              <img src="/MyMVC/images/${cartvo.prod.pimage1}" class="img-thumbnail" width="130px" height="100px" />
+							                           </a> 
+							                           <br/><span class="product_title">${odvo.pvo.product_title}</span> 
+							                        </td>
+							                        <td align="center"> 
+							                            <%-- 상품 금액 및 주문 수량 --%>
+							                              <fmt:formatNumber value="${odvo.product_selling_price}" pattern="###,###" /> 원<br>
+							                              <span class="order_quantity">${odvo.order_quantity}</span> 개
+							                              
+							                        </td>
+							                        <td align="center"> <%-- 주문상태 --%> 
+							                            <c:choose>
+										              		<c:when test="${odvo.delivery_status eq '0'}">
+										              			배송완료
+										              		</c:when>
+										              		<c:otherwise>
+										              			상품준비중
+										              		</c:otherwise>
+										              	</c:choose>
+							                            
+							                        </td>
+							                        <td align="center"> <%-- 리뷰 --%> 
+							                            
+							                            <%-- 리뷰 작성한거 끌어오기 안썼으면 작성하기 버튼 생성 --%>
+							                            
+							                        </td>
+							                      </tr>
+							                 </c:forEach>
+							            </c:if>    
+                                        
                                     </tbody>
                                 </table>
                             </div>
-
-                           
 
                         </div>
                         <!-- //mypage_lately_info_cont -->
@@ -292,7 +395,7 @@ $(document).ready(function(){
 
                     <div class="pagination">
                         <div class="pagination">
-                            <ul></ul>
+                            <ul class="pagination" style='margin:auto;'>${requestScope.pageBar}</ul>
                         </div>
                     </div>
                     <!-- //pagination -->

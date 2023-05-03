@@ -1,11 +1,13 @@
 package parkjuneyub.product.model;
 
+import parkjuneyub.member.model.MemberVO;
+
 public class ProductVO {
 	
 	private long product_num;
 	private long category_num;
 	private String product_title;
-	private long main_image;
+	private String main_image;
 	private long product_price;
 	private String product_detail;
 	private long product_inventory;
@@ -20,7 +22,10 @@ public class ProductVO {
 		
 	}
 	
-	public ProductVO(long product_num, long category_num, String product_title, long main_image, long product_price,
+	//select용
+	private MemberVO mvo;
+	
+	public ProductVO(long product_num, long category_num, String product_title, String main_image, long product_price,
 			String product_detail, long product_inventory, String product_date, int sale_count) {
 		super();
 		this.product_num = product_num;
@@ -71,11 +76,11 @@ public class ProductVO {
 		this.product_title = product_title;
 	}
 
-	public long getMain_image() {
+	public String getMain_image() {
 		return main_image;
 	}
 
-	public void setMain_image(long main_image) {
+	public void setMain_image(String main_image) {
 		this.main_image = main_image;
 	}
 
@@ -120,8 +125,12 @@ public class ProductVO {
 		this.sale_count = sale_count;
 	}
 
+	public MemberVO getMvo() {
+		return mvo;
+	}
+
 
 	
-
+	
 	
 }

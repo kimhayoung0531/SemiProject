@@ -12,6 +12,8 @@ public class CartVO{
 	private long product_count;	//제품 수량
 	private long main_image;	//제품 이미지
 	private String cart_date;	//장바구니 날짜
+	private long product_price;
+	
 
 	// * select용 *
 	private MemberVO mvo;
@@ -19,7 +21,7 @@ public class CartVO{
 	
 
 	/* 기본생성자 */
-	public CartVO() {}
+	public CartVO() { }
 	
 	public CartVO(long cart_num, String user_id, long product_num, long product_count ,
 			long main_image, String cart_date,MemberVO mvo, ProductVO pvo) {
@@ -38,14 +40,17 @@ public class CartVO{
     해당 제품의 판매총액과 포인트부여 총액은 판매당시의 제품판매가와 포인트 점수로 구해와야 한다.  
 	 */
 	private long totalPrice;         // 판매당시의 한 제품에 대한 제품판매가 * 주문량
-
-
+	private long totalMileage;
 
 
 	///////////////////////////////////////////////////
 	// GETTER SETTER
 	
 
+
+	public void setTotalMileage(long totalMileage) {
+		this.totalMileage = totalMileage;
+	}
 
 	public long getCart_num() {
 		return cart_num;
@@ -126,13 +131,20 @@ public class CartVO{
 		this.pvo = pvo;
 	}
 
+	public long getProduct_price() {
+		return product_price;
+	}
+
+	public void setProduct_price(long product_price) {
+		this.product_price = product_price;
+	}
 
 	///////////////////////////////////////////////////
 
 	// *** 제품의 마일리지 (1%) 구하기 ***
 	public long getMileagePercent() {
 		
-		long mileage = (pvo.getProduct_price() / 100);
+		long mileage = product_price / 100;
 		
 		return mileage;
 	}
@@ -144,13 +156,17 @@ public class CartVO{
 	/////////////////////////////////////////////////
 	// *** 제품의 총판매가(실제판매가 * 주문량) 구해오기 ***
 	public void setTotalPriceTotalMileage(long oqty) {   
-		totalPrice = pvo.getProduct_price() * oqty; // 판매당시의 제품판매가 * 주문량
+		totalPrice = product_price * oqty;
+		totalMileage = getMileagePercent() * oqty;
 	}
 	
 	public long getTotalPrice() {
 		return totalPrice;
 	}
 	
+	public long getTotalMileage() {
+		return totalMileage;
+	}
 	
 	
 }

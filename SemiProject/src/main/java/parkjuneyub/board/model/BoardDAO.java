@@ -1,5 +1,7 @@
 package parkjuneyub.board.model;
 
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -58,22 +60,33 @@ public class BoardDAO implements InterBoardDAO {
 	}
 
 	@Override
-	public List<ReviewVO> getReivewList(String product_num) throws SQLException {
+	public List<ReviewVO> getReviewList(Map<String, String> paraMap) throws SQLException {
 		
 		List<ReviewVO> reviewList = new ArrayList<>();
 		
 		try {
 			conn = ds.getConnection();
 			
-			String sql = " select * from tbl_purchase_review where product_num = ? ";
+			String sql = " SELECT RNO, purchase_review_id, order_details_num, userid, review_content, review_rating, review_date "+
+					" FROM "+
+					" ( "+
+					" select rownum AS RNO, purchase_review_id, userid, order_details_num, product_num, review_content, review_rating, review_date "+
+					" from "+
+					" ( "+
+					" 	select * "+
+					"   from tbl_purchase_review "+
+					"   where product_num = ? "+
+					"   order by review_date desc "+
+					"   ) V "+
+					"  ) T "+
+					" WHERE RNO between 1 and 10 ";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, product_num);
+			pstmt.setString(1, paraMap.get("product_num"));
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				ReviewVO rvo = new ReviewVO();
-				
 				rvo.setPurchase_review_id(rs.getInt("purchase_review_id"));
 				
 				MemberVO mvo = new MemberVO();
@@ -135,7 +148,8 @@ public class BoardDAO implements InterBoardDAO {
 		}
 		return result;
 	}
-
+	
+	// 아이디랑 상품번호로 주문번호를 조회해오는 메소드
 	@Override
 	public List<OrderVO> getOrderDeatailList(String user_id, String product_num) throws SQLException {
 		List<OrderVO> odrDeatailList = new ArrayList<>();
@@ -150,9 +164,10 @@ public class BoardDAO implements InterBoardDAO {
 					" ) A "+
 					" join\n"+
 					" ( "+
-					" select order_num, product_num, order_quantity "+
+					" select order_details_num, order_num, product_num, order_quantity "+
 					" from tbl_order_detail "+
-					" where product_num = ? "+
+					" where product_num = ? and order_details_num not in ( "
+					+ " select order_details_num from tbl_purchase_review where product_num = ? ) "+
 					" ) B "+
 					" on A.order_num = B.order_num "+
 					" order by order_date asc ";
@@ -160,6 +175,7 @@ public class BoardDAO implements InterBoardDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
 			pstmt.setLong(2, Long.parseLong(product_num));
+			pstmt.setLong(3, Long.parseLong(product_num));
 			
 			rs =  pstmt.executeQuery();
 			
@@ -176,6 +192,51 @@ public class BoardDAO implements InterBoardDAO {
 		
 		
 		return odrDeatailList;
+	}
+	
+	// 한 상품의 전체 리뷰를 가져온다.
+	@Override
+	public int getTotalPage(Map<String, String> paraMap) throws SQLException {
+int totalPage = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String  sql = " select ceil(count(*) / 10 ) from tbl_purchase_review where product_num = ? ";
+
+			pstmt =conn.prepareStatement(sql);
+			pstmt.setString(1,  paraMap.get("product_num"));
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			totalPage = rs.getInt(1);
+			
+		} 
+		finally {
+			close();
+		}
+		
+		return totalPage;
+		
+	}
+
+	@Override
+	public int deleteReviewByReviewId(String purchase_review_id) throws SQLException {
+		int result = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+			String sql = " delete from tbl_purchase_review where purchase_review_id = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(purchase_review_id));
+			
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			
+		}
+		return result;
 	}
 
 }

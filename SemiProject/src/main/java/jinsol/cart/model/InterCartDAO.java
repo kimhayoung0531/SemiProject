@@ -22,5 +22,11 @@ public interface InterCartDAO {
 	//장바구니 테이블에서 특정 제품을 삭제
 	int deleteCart(String cart_num)throws SQLException;
 	
+	//장바구니 테이블에서 선택 제품을 삭제
+	int choiseDeleteCart(String pnumes)throws SQLException;
+	
+	//장바구니 테이블에서 특정 제품의 주문량 변경
+	int updateCart(String cart_num, String cart_cnt)throws SQLException;
+
 	
 }
