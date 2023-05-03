@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+import ojh.home.model.HomeDAO;
 import sge.member.model.MemberVO;
 
 public abstract class AbstractController implements InterCommand {
@@ -83,6 +85,9 @@ public abstract class AbstractController implements InterCommand {
          
          
       }   //end of public boolean checkLogin() ----------------------------------
+    
+	
+    
 
 	 
 

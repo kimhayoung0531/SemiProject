@@ -88,7 +88,7 @@
                             <ul class="sub_depth1">
                                 <li><a href="<%= ctxPath%>/mypageOrderList.ban">- 주문목록/배송조회</a></li>
                                 <li><a href="../mypage/cancel_list.php">- 주문취소</a></li>
-                                <li><a href="../mypage/wish_list.php">- 좋아요리스트</a></li>
+                                <li><a href="<%= ctxPath%>/mypageLikeList.ban">- 좋아요리스트</a></li>
                             </ul>
                         </li>
                         <li>고객센터
@@ -110,7 +110,7 @@
                         </li>
                         <li>나의 상품후기
                             <ul class="sub_depth1">
-                                <li><a href="../mypage/mypage_goods_review.php">- 나의 상품후기</a></li>
+                                <li><a href="<%= ctxPath%>/mypageReview.ban">- 나의 상품후기</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -244,8 +244,8 @@
 							                            <span class="product_title">${odvo.order_details_num}</span>
 							                        </td>
 							                        <td align="center"> <%-- 상품명 --%> 
-							                           <a href="/MyMVC/shop/prodView.up?pnum=${cartvo.pnum}"><!-- 제품상세페이지 링크 -->
-							                              <img src="/MyMVC/images/${cartvo.prod.pimage1}" class="img-thumbnail" width="130px" height="100px" />
+							                           <a href="<%= ctxPath%>/productDeatail.ban?product_num=${odvo.pvo.product_num}"><!-- 제품상세페이지 링크 -->
+							                              <img src="/SemiProject/images/${cartvo.prod.pimage1}" class="img-thumbnail" width="130px" height="100px" />
 							                           </a> 
 							                           <br/><span class="product_title">${odvo.pvo.product_title}</span> 
 							                        </td>
@@ -255,11 +255,18 @@
 							                              <span class="order_quantity">${odvo.order_quantity}</span> 개
 							                              
 							                        </td>
-							                        <td align="right"> <%-- 주문상태 --%> 
-							                            <span class="order_quantity">${odvo.delivery_status}</span>
+							                        <td align="center"> <%-- 주문상태 --%> 
+							                            <c:choose>
+										              		<c:when test="${odvo.delivery_status eq '0'}">
+										              			배송완료
+										              		</c:when>
+										              		<c:otherwise>
+										              			상품준비중
+										              		</c:otherwise>
+										              	</c:choose>
 							                            
 							                        </td>
-							                        <td align="right"> <%-- 리뷰 --%> 
+							                        <td align="center"> <%-- 리뷰 --%> 
 							                            
 							                            <%-- 리뷰 작성한거 끌어오기 안썼으면 작성하기 버튼 생성 --%>
 							                            

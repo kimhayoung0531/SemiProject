@@ -7,12 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import KHY.model.MemberVO;
+
 import KHY.product.model.InterProductDAO;
+import KHY.product.model.OrderDeatailVO;
 import KHY.product.model.ProductDAO;
 import common.controller.AbstractController;
+import sge.member.model.MemberVO;
 
-import parkjuenyub.order.model.OrderDeatailVO;
+
+
 
 
 public class MypageAction extends AbstractController {
@@ -29,7 +32,7 @@ public class MypageAction extends AbstractController {
 			
 				InterProductDAO pdao = new ProductDAO(); 
 		         
-				List<OrderDeatailVO> orderList = pdao.selectOrderList(loginuser.getUser_id());
+				List<OrderDeatailVO> orderList = pdao.selectOrderList(loginuser.getUser_id());  
 		        
 				request.setAttribute("orderList", orderList);
 		        
