@@ -454,8 +454,11 @@ public class ProductDAO implements InterProductDAO  {
 		         rs.next();
 		         pvo.setProduct_num(rs.getLong(1));
 		         pvo.setProduct_title(rs.getString(2));
+
 		         pvo.setMain_image(rs.getString(3));
-		         
+
+		         pvo.setMain_image((rs.getString(3)));
+
 		         pvoList.add(pvo);
 		         
 			} finally {

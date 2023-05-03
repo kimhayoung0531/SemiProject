@@ -97,7 +97,7 @@ public class ProductRegisterAction extends AbstractController {
 	            pvo.setProduct_num(pnum);
 	            pvo.setCategory_num(fk_cnum);
 	            pvo.setProduct_title(prodName);
-	            pvo.setMain_image(Integer.parseInt(pimage1));
+	            pvo.setMain_image(pimage1);
 	            pvo.setProduct_price(Integer.parseInt(price));
 	            pvo.setProduct_inventory(Integer.parseInt(pqty));
 	            pvo.setProduct_detail(pcontent);
