@@ -370,7 +370,7 @@
 					                                  status.count 는 1 부터 시작한다. 
 					                             --%>   
 		                                            <div class="form_element">
-		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}" checked="checked"/><label for="pnum${status.index}">${cartvo.product_num}</label>   
+		                                                <input type="checkbox" name="pnum" class="chkboxpnum" id="pnum${status.index}" value="${cartvo.product_num}" checked="checked"/><label for="pnum${status.index}"></label>   
 		                                            </div>
 		                                        </td>
 		
