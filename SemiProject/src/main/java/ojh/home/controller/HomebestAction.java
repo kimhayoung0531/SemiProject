@@ -1,8 +1,6 @@
 package ojh.home.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,20 +10,22 @@ import ojh.home.model.*;
 import parkjuneyub.product.model.ProductVO;
 
 public class HomebestAction extends AbstractController {
-	
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String category_num = "1";
 		
-		InterHomeDAO hdao = new HomeDAO();
+		  InterHomeDAO hdao = new HomeDAO();
+		  
+		  List<ProductVO> pvoCatBestList = hdao.getCatBestItemBysalecount();
+		  
+		  request.setAttribute("pvoCatBestList", pvoCatBestList);
 		
-		List<ProductVO> pvoList = hdao.getProductInfo(category_num);
-		
-		request.setAttribute("pvoList", pvoList);
+		  
 		
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/ojh_home/homebest.jsp");
+		
 		
 	}
 
