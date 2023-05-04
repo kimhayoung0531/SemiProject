@@ -68,7 +68,7 @@ public class ProductRegisterAction extends AbstractController {
 	            // 새로운 제품 등록시 form태그에서 입력한 값 가져오기
 	            
 	            int fk_cnum = Integer.parseInt(mtrequest.getParameter("fk_cnum"));
-	            String prodName  = mtrequest.getParameter("prodName");
+	            String prodName = mtrequest.getParameter("prodName");
 	          
 	          
 	            
@@ -92,7 +92,7 @@ public class ProductRegisterAction extends AbstractController {
 	            
 	            // 제품번호 채번해오기 
 	            
-	            int pnum = pdao.getPnumOfProduct();
+	            long pnum = pdao.getPnumOfProduct();
 	            ProductVO pvo = new ProductVO();
 	            pvo.setProduct_num(pnum);
 	            pvo.setCategory_num(fk_cnum);
@@ -108,8 +108,8 @@ public class ProductRegisterAction extends AbstractController {
 	            String loc = "";
 	            try {
 
-		            // tbl_product 테이블에 insert 하기
-		            pdao.productInsert(pvo);
+		           // tbl_product 테이블에 insert 하기
+		           pdao.productInsert(pvo);
 
 		           message = "제품등록 성공!";
 		           loc = request.getContextPath()+"/productRegister.ban";
@@ -117,7 +117,7 @@ public class ProductRegisterAction extends AbstractController {
 	        	 e.printStackTrace();
 	             
 	             message = "제품등록 실패!!";
-	             loc = request.getContextPath()+"/productRegister.ban";
+	             loc = request.getContextPath()+"/home.ban";
 	        	 
 	         }
 	            request.setAttribute("message", message);
