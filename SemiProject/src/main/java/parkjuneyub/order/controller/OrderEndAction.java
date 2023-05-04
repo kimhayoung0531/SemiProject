@@ -215,7 +215,7 @@ public class OrderEndAction extends AbstractController {
 			
 			
 			try {
-				mail.sendmail_OrderFinish("ajsjdlwj0123@naver.com", loginuser.getUser_name(), emailContents);
+				mail.sendmail_OrderFinish(order_email, loginuser.getUser_name(), emailContents);
 			} catch (MessagingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
