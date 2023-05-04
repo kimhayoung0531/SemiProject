@@ -22,12 +22,6 @@
         	
         	const input_file = $(e.target).get(0);
                 	
-            console.log(input_file.files);
-        	
-            console.log(input_file.files[0]);
-           
-            
-            console.log(input_file.files[0].name);
          	
             const fileReader = new FileReader();
             
@@ -60,10 +54,6 @@
 			
 			if(!flag) {
 				
-				if($("[name='user_id']").val()==""){
-			         alert("작성자를 입력해주세요.");
-			         return false;
-			       }
 				
 				if($("[name='inquiry_title']").val()==""){
 			         alert("제목을 입력해주세요.");
@@ -105,22 +95,14 @@
 							<col style="width:85%">
 						</colgroup>
 						<tbody>
-						<tr>
-							<th scope="row">작성자</th>
-							<td>
-								<input type="text" class="text" name="user_id" class="infoData">
-								<span class="error">필수입력</span>
-							</td>
-						</tr>
 						
 						<tr>
 							<th scope="row">상품 선택</th>
 							<td>
 								<div>
 									<span class="js_selected_info_text" name="product_num">선택된 상품이 없습니다.</span>
-									<a href="http://localhost:9090/SemiProject/notice.ban" title="찾아보기" class="pjj_btn_goods_select"> 상품 선택 </a>
+									<a href="http://localhost:9090/SemiProject/notice.ban" title="찾아보기" class="pjj_btn_goods_select">상품 선택</a>
 								</div>
-								
 							</td>
 						</tr>
 						<tr>
@@ -129,10 +111,10 @@
 								<input type="text" name="inquiry_title" class="infoData">
 								<span class="error">필수입력</span>
 								</td>
-							
+
 						</tr>
 						<tr>
-							<th scope="row">본문</th>
+							<th scope="row">문의내용</th>
 							<td>
 								
 								<textarea id="pjj_editor" name="inquiry_text" cols="30" rows="10" class="infoData"></textarea>
@@ -150,7 +132,7 @@
                          </tr>
                          <tr>	
                          	  
-					          <td class="prodInputName" style="padding: 10px 10px 10px 20px; font-weight: 800;">이미지파일 미리보기</td>
+					          <td class="prodInputName" style="padding: 10px 10px 10px 23px; font-weight: 800;">이미지파일 미리보기</td>
 					          <td>
 					          	 <div class="pjj_btn_upload_box"></div>
 					             <img id="previewImg" width="100"/>
@@ -172,7 +154,7 @@
 
 		</form>
 	</div>
-	<!-- //board_zone_cont -->
+	
 
 </div>
 </div>

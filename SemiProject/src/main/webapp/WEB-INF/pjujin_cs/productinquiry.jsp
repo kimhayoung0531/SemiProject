@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%
 	String ctxPath = request.getContextPath();
@@ -71,7 +71,7 @@ $(document).ready(function(){
     
     });
 	
- // 검색 기간을 정하는 버튼
+ 	// 검색 기간을 정하는 버튼
  	
  
 	$(".date_check_list button").click(function(e){
@@ -193,10 +193,7 @@ $(document).ready(function(){
         </div>
         <!-- //pjj_info_box -->
         
-        <script type="text/javascript">
-        // 메뉴 선택
-        $('.sub_menu li > a[href*="' + document.location.pathname + '"]').addClass('active');
-        </script>
+        
         </div>
                 <!-- //pjj_side_cont -->
     </div>
@@ -254,14 +251,12 @@ $(document).ready(function(){
 				<c:forEach var="nvo" items="${requestScope.inquiryList}">
 						
 						<tr class="pjj_noticeInfo">
-						
 			              <td class=inquiry_date>${nvo.inquiry_date}</td>
 			              <td>${nvo.inquiry_num}</td>
 			              <td><button style="font-weight: 800; font-size:15px">${nvo.inquiry_title}</button></td>
 			              <td>${nvo.user_id}</td>
 			              <td>${nvo.inquiry_view_count}</td>
 			              <td>${nvo.inquiry_answer_time}</td>
-			           	
 			           </tr>
 			            
 				</c:forEach>
