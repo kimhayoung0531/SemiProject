@@ -15,7 +15,7 @@
              <div class="member_cont">
                  <div class="register_success">
                      <p>회원가입이 <strong>완료</strong> 되었습니다</p>
-                     <span>님의 회원가입을 축하드립니다.</span>
+                     <span><strong>${requestScope.user_name}</strong>님의 회원가입을 축하드립니다.</span>
                      <p>알차고 실속있는 서비스로 찾아뵙겠습니다.</p>
                  </div>
 
