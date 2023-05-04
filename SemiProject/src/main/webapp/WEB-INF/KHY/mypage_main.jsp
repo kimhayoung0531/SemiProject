@@ -93,13 +93,8 @@
                         <li>회원정보
                             <ul class="sub_depth1">
                                 <li><a href="<%= ctxPath%>/mypageMemberChangePwdcheck.ban">- 회원정보 변경</a></li>
-                                <li><a href="../mypage/hack_out.php">- 회원 탈퇴</a></li>
+                                <li><a href="<%= ctxPath%>/mypagememberDeletePwdcheck.ban">- 회원 탈퇴</a></li>
                                 <li><a href="<%= ctxPath%>/mypageMileageList.ban">- 마일리지</a></li>
-                            </ul>
-                        </li>
-                        <li>나의 상품문의
-                            <ul class="sub_depth1">
-                                <li><a href="../mypage/mypage_goods_qa.php">- 나의 상품문의</a></li>
                             </ul>
                         </li>
                         <li>나의 상품후기

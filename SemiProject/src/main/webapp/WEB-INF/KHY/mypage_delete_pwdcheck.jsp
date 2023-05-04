@@ -131,7 +131,7 @@
 		$("button#goToRegis").click(function(){
 			
 			const frm = document.formFind;
-			frm.action = "<%= ctxPath%>/mypageMemberChange.ban";
+			frm.action = "<%= ctxPath%>/mypagememberDelete.ban";
 			frm.method = "post";
 			frm.submit();
 			
@@ -196,7 +196,7 @@
 					<div class="my_page_password">
 					
 					<div class="mypage_zone_tit">
-					<h2>회원정보 변경</h2>
+					<h2>회원탈퇴</h2>
 					</div>
 					
 					<p><strong>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해 주세요.</strong></p>
