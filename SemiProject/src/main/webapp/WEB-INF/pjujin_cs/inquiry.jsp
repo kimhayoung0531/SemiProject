@@ -22,12 +22,6 @@
         	
         	const input_file = $(e.target).get(0);
                 	
-            console.log(input_file.files);
-        	
-            console.log(input_file.files[0]);
-           
-            
-            console.log(input_file.files[0].name);
          	
             const fileReader = new FileReader();
             
