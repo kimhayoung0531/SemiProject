@@ -208,7 +208,7 @@
    	      const checked_cnt = $("input:checkbox[name='pnum']:checked").length;
    	      
    	      if(checked_cnt < 1){
-   	    	  alert("장바구니에 담겨있는 상품이 없습니다.");
+   	    	  alert("주문하실 제품을 선택해주세요.");
    	    	  return;
    	      }
    	      else{         
@@ -498,9 +498,16 @@
                         <div class="btn_delete_box">
                             <button type="button" class="btn_order_choice_del">선택 상품 삭제</button>
                         </div>
-                        <div class="btn_order_box">
-                            <button type="button" class="btn_order_whole_buy" onclick="goOrder()">선택 상품 주문</button>
-                        </div>
+                        <c:if test="${empty requestScope.cartList}">
+	                        <div class="btn_order_box">
+	                            <button type="button" class="btn_order_whole_buy" onclick="" style="background-color: gray;">선택 상품 주문</button>
+	                        </div>
+                        </c:if>
+                        <c:if test="${not empty requestScope.cartList}">
+                          <div class="btn_order_box">
+	                            <button type="button" class="btn_order_whole_buy" onclick="goOrder()">선택 상품 주문</button>
+	                       </div>
+                        </c:if>
                     </div>
                     <div class="chk_none"> ※ 주문서 작성단계에서 마일리지 적용을 하실 수 있습니다.</div>                    
                 </div>
