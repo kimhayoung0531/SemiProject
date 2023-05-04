@@ -238,5 +238,50 @@ public class HomeDAO implements InterHomeDAO {
 			
 			return pvoNewList;
 		}
+		
+		// 메인페이지 초코파티 이벤트 데이터 출력
+		@Override
+		public List<ProductVO> getChocoProduct() throws SQLException {
+			
+			List pvoChocoList = new ArrayList<>();
+			
+			try {
+				conn = ds.getConnection();
+
+				String sql = " select * "
+						   + " from tbl_product "
+						   + " where product_title like '%초코%' "
+						   + " order by product_num desc ";	
+				
+				pstmt = conn.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					
+					ProductVO pvo = new ProductVO();
+					
+					pvo.setProduct_num(rs.getLong("product_num"));
+					pvo.setCategory_num(rs.getLong("category_num"));
+					pvo.setProduct_title(rs.getString("product_title"));
+					pvo.setMain_image(rs.getString("main_image"));
+					pvo.setProduct_price(rs.getLong("product_price"));
+					pvo.setProduct_detail(rs.getString("product_detail"));
+					pvo.setProduct_inventory(rs.getLong("product_inventory"));
+					pvo.setProduct_date(rs.getString("product_date"));
+					pvo.setSale_count(rs.getInt("sale_count"));
+				
+					pvoChocoList.add(pvo);
+				
+				}
+				
+				
+				
+			} finally {
+				close();
+			}
+			
+			return pvoChocoList;
+		}
 	
 }
