@@ -98,6 +98,316 @@
 	}
 	
 </style>
+<script type="text/javascript">
+   
+   
+   //중복 확인 버튼을 눌렀는지 안눌렀지 여부확인을 위한 FLAG 
+   
+   let b_flag_emailDuplicate_click = true;
+   
+   let b_flag_zipcodeSearch_click = false;
+   
+   ////////////////////////////////////////////
+   
+   $(document).ready(function(){
+   
+	   $("input#email").bind("change", function(){
+		   b_flag_emailDuplicate_click = false;
+				
+		});		 
+	   
+	  
+	   
+	      $("span.error").hide();
+	      
+	      
+	      
+	      
+	       
+	       //비밀번호 유효성 검사 
+	       $("input#pwd").blur( (e) => {
+	            
+	          const regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).*$/g;
+	          
+	          const bool = regExp.test($(e.target).val());
+	          
+	          if(!bool){
+	             //암호가 정규표현식에 위배된 경우
+	             $("table#tblMemberRegister :input").prop("disabled",true);
+	             $(e.target).prop("disabled",false);
+	            
+	             $(e.target).parent().find("span.error").show();
+	             $(e.target).focus();
+	          }
+	          else{
+	             //암호가 정규표현식에 맞는 경우
+	             $("table#tblMemberRegister :input").prop("disabled",false);
+	             $(e.target).parent().find("span.error").hide();
+	          }
+	       });
+	       
+	       // 비밀번호 체크
+	       $("input#pwdcheck").blur( (e) => {
+	            
+	            if($("input#pwd").val() != $(e.target).val() ){
+	               
+	              $(e.target).prop("disabled",false);
+	              $("input#pwd").prop("disabled",false);
+	            
+	               $(e.target).parent().find("span.error").show();
+	               $("input#pwd").focus();
+	            }
+	            else{
+	               $("table#tblMemberRegister :input").prop("disabled",false);
+	               $(e.target).parent().find("span.error").hide();
+	            }
+	             
+	          });// 비번이 입력한비번과 같은지 체크 
+	      
+	       //이름
+	       $("input#user_name").blur((e) => {
+	         if( $(e.target).val().trim() == ""){
+	            
+	            $("table#tblMemberRegister :input").prop("disabled",true);
+	            $(e.target).prop("disabled",false);
+	            
+	            $(e.target).parent().find("span.error").show();
+	            $(e.target).focus();
+	
+	         }
+	         else{
+	            // 공백만이 아닌 글자를 입력했을 경우
+	            $("table#tblMemberRegister :input").prop("disabled",false);
+	            $(e.target).parent().find("span.error").hide();
+	         }
+	       }); 
+	       
+	       //이메일
+	       $("input#email").blur( (e) => {
+	          const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
+	          const bool = regExp.test($(e.target).val());
+	          
+	          if(!bool){
+	             //암호가 정규표현식에 위배된 경우
+	             $("table#tblMemberRegister :input").prop("disabled",true);
+	               $(e.target).prop("disabled",false);
+	               
+	               $(e.target).parent().find("span.error").show();
+	               $(e.target).focus();
+	          }
+	          else{
+	             //암호가 정규표현식에 맞는 경우
+	             $("table#tblMemberRegister :input").prop("disabled",false);
+	             $(e.target).parent().find("span.error").hide();
+	          }
+	             
+	          });
+	      // 휴대폰 두번째 칸
+	       $("input#hp2").blur( (e) => {
+	          const regExp = /^[1-9][0-9]{2,3}$/g; 
+	          const bool = regExp.test($(e.target).val());
+	          
+	          if(!bool){
+	             //국번이 정규표현식에 위배된 경우
+	             $("table#tblMemberRegister :input").prop("disabled",true);
+	               $(e.target).prop("disabled",false);
+	               $(e.target).parent().find("span.error").show();
+	               $(e.target).focus();
+	          }
+	          else{
+	             //국번이 정규표현식에 맞는 경우
+	             $("table#tblMemberRegister :input").prop("disabled",false);
+	             $(e.target).parent().find("span.error").hide();
+	          }
+	             
+	        });
+	      
+	       // 마지막칸  국번
+	       $("input#hp3").blur( (e) => {
+	         
+	          const regExp = /^\d{4}$/g; 
+	          const bool = regExp.test($(e.target).val());
+	          
+	          if(!bool){
+	             //국번이 정규표현식에 위배된 경우
+	             $("table#tblMemberRegister :input").prop("disabled",true);
+	               $(e.target).prop("disabled",false);
+	               $(e.target).parent().find("span.error").show();
+	               $(e.target).focus();
+	          }
+	          else{
+	             //국번이 정규표현식에 맞는 경우
+	             $("table#tblMemberRegister :input").prop("disabled",false);
+	             $(e.target).parent().find("span.error").hide();
+	          }
+	             
+	       });
+	       
+	      
+	      //우편번호 
+	       $("button#btnPostcode").click(function(){
+	           new daum.Postcode({
+	               oncomplete: function(data) {
+	                   // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	
+	                   // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                   // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                   let addr = ''; // 주소 변수
+	                   let extraAddr = ''; // 참고항목 변수
+	
+	                   //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                   if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                       addr = data.roadAddress;
+	                   } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                       addr = data.jibunAddress;
+	                   }
+	
+	                   // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                   if(data.userSelectedType === 'R'){
+	                       // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                       // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                       if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                           extraAddr += data.bname;
+	                       }
+	                       // 건물명이 있고, 공동주택일 경우 추가한다.
+	                       if(data.buildingName !== '' && data.apartment === 'Y'){
+	                           extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                       }
+	                       // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                       if(extraAddr !== ''){
+	                           extraAddr = ' (' + extraAddr + ')';
+	                       }
+	                       // 조합된 참고항목을 해당 필드에 넣는다.
+	                       document.getElementById("extraAddress").value = extraAddr;
+	                   
+	                   } else {
+	                       document.getElementById("extraAddress").value = '';
+	                   }
+	
+	                   // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                   document.getElementById('post_code').value = data.zonecode;
+	                   document.getElementById("address").value = addr;
+	                   // 커서를 상세주소 필드로 이동한다.
+	                   document.getElementById("detailAddress").focus();
+	               }
+	           }).open();
+	       });// $("button#btnPostcode").click
+	       
+	   	   $("input:text[id='post_code']").keyup(function(){
+	   		   alert(`우편번호 입력은 "우편번호찾기"를 클릭으로만 됩니다`);
+	   		   $(this).val("");
+	   	   });
+       
+	   	 //===== jQery UI의 datapicker =====//
+	      $("input#datepicker").datepicker({
+	        dateFormat: 'yy-mm-dd'  //Input Display Format 변경
+	          ,showOtherMonths: true   //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+	          ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+	          ,changeYear: true        //콤보박스에서 년 선택 가능
+	          ,changeMonth: true       //콤보박스에서 월 선택 가능                
+	         // ,showOn: "both"          //button:버튼을 표시하고,버튼을 눌러야만 달력 표시됨. both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시됨.  
+	         // ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+	         // ,buttonImageOnly: true   //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+	         // ,buttonText: "선택"       //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+	          ,yearSuffix: "년"         //달력의 년도 부분 뒤에 붙는 텍스트
+	          ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+	          ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+	          ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+	          ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+	        //,minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+	        //,maxDate: "+1M" //최대 선택일자(+1D:하루후, +1M:한달후, +1Y:일년후)  
+	      });
+	      //초기값을 오늘 날짜로 설정
+	      //$('input#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후) 
+	  	   
+		    
+	  	  // 우편번호 찾기를 클릭했을때 
+		  $("button#btn_post_search").click(function(){
+		      alert("hi");
+		 	  b_flag_zipcodeSearch_click = true;
+		  });
+	 	   
+	 	 // 우편번호를 그냥 입력하려고 할떄 
+	 	 $("input:text[id='podt_code']").keyup(function(){
+			  alert(`우편번호 입력은 "우편번호검색"를 클릭으로만 됩니다`);
+			  $(this).val("");
+	  	 });
+	  	   
+		
+	    		
+	    // 이메일 중복 체크 
+   	   
+   		$("button#doubleCheckEmail").click(function(){
+   		 	$.ajax({
+		    	url:"<%= ctxPath%>/emailDoubleCheck.ban",
+		    	data:{"email":$("input#email").val()}, // data는 /MyMVC/member/idDuplicateCheck.up로 전송해야할 데이터를 말한다.
+		    	type:"post",// method 를 쓰는 실수 X type을 생략하면 type:"get"이다.
+		    
+		    	success:function(text){ 
+		    
+		    		const json = JSON.parse(text); // 객체로 파싱 
+		    		if(json.emailExist ) {
+		    			// 이미 사용중인 userid라면
+		    			$("span#emailCheckResult").html($("input#email").val()+"은 중복된 EMAIL이므로 사용 불가합니다.").css("color","red");
+		    			$("input#email").val("");
+		    		}
+		    		else if(!json.emailExist && $("input#email").val().trim() !="" ){
+		    			// 존재하지 않는 경우라면 또는 공백을 입력한 경우
+		    			$("span#emailCheckResult").html($("input#email").val()+"은 사용가능합니다.").css("color","blue");
+		    		}
+		    	},
+		    	
+		    	error: function(request, status, error){
+		            alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+		          }
+		      });
+   		});// end of $("button#doublecheckID").click(function()
+   	   
+	   		
+	    		
+   
+    
+   	   
+
+   });// end of document ready()
+   
+   //====================================================================
+	   
+    
+   // 회원가입 버튼 누를 시 진행되는 메소드
+   function goRegister(){
+	////***** 필수입력사항에 모두 입력이 되었는지 검사한다 *******//////
+		let b_Flag_requiredInfo = false;
+		
+		$("input.requiredInfo").each( (index,elmt) => {
+			if( $(elmt).val().trim() == ""){
+				//비어있다면 true
+				alert("* 표시된 필수입력사항은 모두 입력하셔야 합니다.");
+				b_Flag_requiredInfo = true;
+				return false; //break; 라는 뜻이다.
+			}
+		});
+		
+		 if(!b_flag_emailDuplicate_click) {
+				// "이메일중복확인" 을 클릭 안 했을 경우
+				alert("이메일중복확인을 클릭하셔야 합니다.");
+				return; // 함수종료
+			}	
+		
+		if(b_Flag_requiredInfo){ // 칸이 비어있다면 가입하기 함수를 실행하지 않고 종료
+			return; // 함수종료
+		}
+		
+		
+
+		const frm = document.formJoin;
+		frm.action="mypagememberChangeEnd.ban";
+		frm.method="post";
+		frm.submit();
+		
+   }// end of goRegister
+
+</script>
     
 </head>
 
@@ -194,44 +504,49 @@
                                                         </td>
 
                                                     </tr>
-                                                    <tr>
-                                                        <th>
-                                                            <span class="important">* 새 비밀번호</span>
-                                                        </th>
-                                                        <td><input type="password" id="pwd" class="pwd" autocomplete="off" /></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>
-                                                            <span class="important">* 새 비밀번호확인</span>
-                                                        </th>
-                                                        <td><input type="password" id="pwdCheck" class="pwdCheck" autocomplete="off" />
-                                                        </td>
-                                                    </tr>
-                                                    </td>
-                                                    </tr>
+                                                     <tr>
+			                                           <th>
+			                                               <span class="important">*새 비밀번호</span>
+			                                           </th>
+			                                           <td>
+			                                           	   <input type="password" id="pwd" name="pwd" class="requiredInfo"
+			                                                   autocomplete="off" />
+			                                               <span class="error">암호는 영문자,숫자,특수기호가 혼합된 8~15 글자로 입력하세요.</span>
+			                                           </td>
+			                                       </tr>
+			                                       <tr>
+			                                           <th>
+			                                               <span class="important">*새 비밀번호확인</span>
+			                                           </th>
+			                                           <td>
+			                                           	   <input type="password" id="pwdcheck"  name="pwdcheck" class="requiredInfo"
+			                                                   autocomplete="off" />
+			                                               <span class="error" style="color:red;">비밀번호가 같지 않습니다.</span>
+			                                           </td>
+			                                       </tr>
                                                     <tr>
                                                         <th><span class="important">* 이름</span></th>
                                                         <td>
                                                             <div class="member_warning">
-                                                                <input type="text" name="memNm" data-pattern="gdMemberNmGlobal" value="${sessionScope.loginuser.user_name}" maxlength="30" />
+                                                                <input type="text" id="user_name" name="user_name" data-pattern="gdMemberNmGlobal" value="${sessionScope.loginuser.user_name}" maxlength="30" />
                                                             </div>
                                                         </td>
+                                                        
                                                     </tr>
                                                     <tr>
                                                         <th><span>* 이메일</span></th>
-                                                        <td class="member_email">
-                                                            <div class="member_warning">
-                                                                <input type="text" name="email" id="email" value="${sessionScope.loginuser.email}" tabindex="-1" />
-                                                                <button class=" btn_double_check"> 이메일 중복 체크</button>
-                                                            </div>
-                                                            
-                                                        </td>
+                                                        <td>
+			                                               <input type="text" id="email" name="email" class="requiredInfo"  value="${sessionScope.loginuser.email}" tabindex="-1" />
+			                                               <button type="button" class=" btn_double_check" id="doubleCheckEmail" > 이메일 중복 체크</button>
+			                                               <span id="emailCheckResult"></span>
+			                                               <span class="error">이메일 형식에 맞지 않습니다.</span>
+			                                           </td>
                                                     </tr>
                                                     <tr>
                                                         <th><span>* 휴대폰번호</span></th>
                                                         <td class="member_address">
                                                             <div class="address_postcode">
-                                                                <input type="text" id="cellPhone" name="cellPhone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" value="" />
+                                                                <input type="text" id="cellPhone" name="cellPhone" maxlength="12" value="${sessionScope.loginuser.mobile}"  placeholder="- 없이 입력하세요." data-pattern="gdNum" value="" />
                                                             </div>
                                                             
                                                         </td>
@@ -248,202 +563,19 @@
                                                         <th><span>* 주소</span></th>
                                                         <td class="member_address">
                                                             <div class="address_postcode">
-                                                                <input type="text" name="zonecode" readonly="readonly" value="" />
+                                                                <input type="text" name="zonecode" readonly="readonly" value="${sessionScope.loginuser.post_code}" />
                                                                 <button type="button" id="btnPostcode" class="btn_post_search">우편번호검색</button>
                                                                 <input type="hidden" name="zipcode" value="-" />
                                                             </div>
                                                             <div class="address_input">
-					                   						   <input type="text" id="address" name="address" class="requiredInfo" placeholder="주소"/>
-			                                                   <input type="text" id="detailAddress" name="detailAddress"
+					                   						   <input type="text" id="address" name="address" class="requiredInfo" value="${sessionScope.loginuser.address}" placeholder="주소"/>
+			                                                   <input type="text" id="detailAddress" name="detailAddress" value="${sessionScope.loginuser.detailAddress}"
 			                                                       class="requiredInfo" placeholder="상세주소" />
 															   <span class="error">주소를 입력하세요</span>
-			                                                   <input type="text" id="extraAddress" placeholder="부가주소" name="extraAddress"
+			                                                   <input type="text" id="extraAddress" placeholder="부가주소" name="extraAddress" value="${sessionScope.loginuser.extraAddress}"
 			                                                       class="extra_address" />
 			                                                       
 			                                               </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th><span>생일</span></th>
-                                                        <td class="member_birthday">
-                                                            <div class="member_warning">
-                                                            </div>
-                                                            <div class="member_warning"><select class=" chosen-single" id="birthYear" name="birthYear" style="width: 100px;">
-                                                                    <option value="">년</option>
-                                                                    <option value="2023">2023</option>
-                                                                    <option value="2022">2022</option>
-                                                                    <option value="2021">2021</option>
-                                                                    <option value="2020">2020</option>
-                                                                    <option value="2019">2019</option>
-                                                                    <option value="2018">2018</option>
-                                                                    <option value="2017">2017</option>
-                                                                    <option value="2016">2016</option>
-                                                                    <option value="2015">2015</option>
-                                                                    <option value="2014">2014</option>
-                                                                    <option value="2013">2013</option>
-                                                                    <option value="2012">2012</option>
-                                                                    <option value="2011">2011</option>
-                                                                    <option value="2010">2010</option>
-                                                                    <option value="2009">2009</option>
-                                                                    <option value="2008">2008</option>
-                                                                    <option value="2007">2007</option>
-                                                                    <option value="2006">2006</option>
-                                                                    <option value="2005">2005</option>
-                                                                    <option value="2004">2004</option>
-                                                                    <option value="2003">2003</option>
-                                                                    <option value="2002">2002</option>
-                                                                    <option value="2001">2001</option>
-                                                                    <option value="2000">2000</option>
-                                                                    <option value="1999">1999</option>
-                                                                    <option value="1998">1998</option>
-                                                                    <option value="1997">1997</option>
-                                                                    <option value="1996">1996</option>
-                                                                    <option value="1995">1995</option>
-                                                                    <option value="1994">1994</option>
-                                                                    <option value="1993">1993</option>
-                                                                    <option value="1992">1992</option>
-                                                                    <option value="1991">1991</option>
-                                                                    <option value="1990">1990</option>
-                                                                    <option value="1989">1989</option>
-                                                                    <option value="1988">1988</option>
-                                                                    <option value="1987">1987</option>
-                                                                    <option value="1986">1986</option>
-                                                                    <option value="1985">1985</option>
-                                                                    <option value="1984">1984</option>
-                                                                    <option value="1983">1983</option>
-                                                                    <option value="1982">1982</option>
-                                                                    <option value="1981">1981</option>
-                                                                    <option value="1980">1980</option>
-                                                                    <option value="1979">1979</option>
-                                                                    <option value="1978">1978</option>
-                                                                    <option value="1977">1977</option>
-                                                                    <option value="1976">1976</option>
-                                                                    <option value="1975">1975</option>
-                                                                    <option value="1974">1974</option>
-                                                                    <option value="1973">1973</option>
-                                                                    <option value="1972">1972</option>
-                                                                    <option value="1971">1971</option>
-                                                                    <option value="1970">1970</option>
-                                                                    <option value="1969">1969</option>
-                                                                    <option value="1968">1968</option>
-                                                                    <option value="1967">1967</option>
-                                                                    <option value="1966">1966</option>
-                                                                    <option value="1965">1965</option>
-                                                                    <option value="1964">1964</option>
-                                                                    <option value="1963">1963</option>
-                                                                    <option value="1962">1962</option>
-                                                                    <option value="1961">1961</option>
-                                                                    <option value="1960">1960</option>
-                                                                    <option value="1959">1959</option>
-                                                                    <option value="1958">1958</option>
-                                                                    <option value="1957">1957</option>
-                                                                    <option value="1956">1956</option>
-                                                                    <option value="1955">1955</option>
-                                                                    <option value="1954">1954</option>
-                                                                    <option value="1953">1953</option>
-                                                                    <option value="1952">1952</option>
-                                                                    <option value="1951">1951</option>
-                                                                    <option value="1950">1950</option>
-                                                                    <option value="1949">1949</option>
-                                                                    <option value="1948">1948</option>
-                                                                    <option value="1947">1947</option>
-                                                                    <option value="1946">1946</option>
-                                                                    <option value="1945">1945</option>
-                                                                    <option value="1944">1944</option>
-                                                                    <option value="1943">1943</option>
-                                                                    <option value="1942">1942</option>
-                                                                    <option value="1941">1941</option>
-                                                                    <option value="1940">1940</option>
-                                                                    <option value="1939">1939</option>
-                                                                    <option value="1938">1938</option>
-                                                                    <option value="1937">1937</option>
-                                                                    <option value="1936">1936</option>
-                                                                    <option value="1935">1935</option>
-                                                                    <option value="1934">1934</option>
-                                                                    <option value="1933">1933</option>
-                                                                    <option value="1932">1932</option>
-                                                                    <option value="1931">1931</option>
-                                                                    <option value="1930">1930</option>
-                                                                    <option value="1929">1929</option>
-                                                                    <option value="1928">1928</option>
-                                                                    <option value="1927">1927</option>
-                                                                    <option value="1926">1926</option>
-                                                                    <option value="1925">1925</option>
-                                                                    <option value="1924">1924</option>
-                                                                    <option value="1923">1923</option>
-                                                                    <option value="1922">1922</option>
-                                                                    <option value="1921">1921</option>
-                                                                    <option value="1920">1920</option>
-                                                                    <option value="1919">1919</option>
-                                                                    <option value="1918">1918</option>
-                                                                    <option value="1917">1917</option>
-                                                                    <option value="1916">1916</option>
-                                                                    <option value="1915">1915</option>
-                                                                    <option value="1914">1914</option>
-                                                                    <option value="1913">1913</option>
-                                                                    <option value="1912">1912</option>
-                                                                    <option value="1911">1911</option>
-                                                                    <option value="1910">1910</option>
-                                                                    <option value="1909">1909</option>
-                                                                    <option value="1908">1908</option>
-                                                                    <option value="1907">1907</option>
-                                                                    <option value="1906">1906</option>
-                                                                    <option value="1905">1905</option>
-                                                                    <option value="1904">1904</option>
-                                                                    <option value="1903">1903</option>
-                                                                    <option value="1902">1902</option>
-                                                                    <option value="1901">1901</option>
-                                                                    <option value="1900">1900</option>
-                                                                </select></div>
-                                                            <div class="member_warning"><select class=" chosen-single" id="birthMonth" name="birthMonth" style="width: 80px;">
-                                                                    <option value="">월</option>
-                                                                    <option value="01">01</option>
-                                                                    <option value="02">02</option>
-                                                                    <option value="03">03</option>
-                                                                    <option value="04">04</option>
-                                                                    <option value="05">05</option>
-                                                                    <option value="06">06</option>
-                                                                    <option value="07">07</option>
-                                                                    <option value="08">08</option>
-                                                                    <option value="09">09</option>
-                                                                    <option value="10">10</option>
-                                                                    <option value="11">11</option>
-                                                                    <option value="12">12</option>
-                                                                </select></div>
-                                                            <div class="member_warning"><select class=" chosen-single" id="birthDay" name="birthDay" style="width: 80px;">
-                                                                    <option value="">일</option>
-                                                                    <option value="01">01</option>
-                                                                    <option value="02">02</option>
-                                                                    <option value="03">03</option>
-                                                                    <option value="04">04</option>
-                                                                    <option value="05">05</option>
-                                                                    <option value="06">06</option>
-                                                                    <option value="07">07</option>
-                                                                    <option value="08">08</option>
-                                                                    <option value="09">09</option>
-                                                                    <option value="10">10</option>
-                                                                    <option value="11">11</option>
-                                                                    <option value="12">12</option>
-                                                                    <option value="13">13</option>
-                                                                    <option value="14">14</option>
-                                                                    <option value="15">15</option>
-                                                                    <option value="16">16</option>
-                                                                    <option value="17">17</option>
-                                                                    <option value="18">18</option>
-                                                                    <option value="19">19</option>
-                                                                    <option value="20">20</option>
-                                                                    <option value="21">21</option>
-                                                                    <option value="22">22</option>
-                                                                    <option value="23">23</option>
-                                                                    <option value="24">24</option>
-                                                                    <option value="25">25</option>
-                                                                    <option value="26">26</option>
-                                                                    <option value="27">27</option>
-                                                                    <option value="28">28</option>
-                                                                    <option value="29">29</option>
-                                                                    <option value="30">30</option>
-                                                                    <option value="31">31</option>
-                                                                </select></div>
                                                         </td>
                                                     </tr>
                                                     

@@ -41,6 +41,21 @@ public class MemberVO {
 		this.gender = gender;
 		this.birthday = birthday;
 	}
+	
+	//update 용 
+		public MemberVO(String user_id, String pwd, String user_name, String email, String mobile, String telephone,String post_code, String address, String detailAddress, String extraAddress) {
+			this.user_id = user_id;
+			this.pwd = pwd;
+			this.user_name = user_name;
+			this.email = email;
+			this.mobile = mobile;
+			this.telephone = telephone;
+			this.post_code = post_code;
+			this.address = address;
+			this.detailAddress = detailAddress;
+			this.extraAddress = extraAddress;
+
+		}
 
 	///////////////////////////////////////////////////////////////////
 
