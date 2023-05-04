@@ -306,7 +306,7 @@ public class ProductDAO implements InterProductDAO  {
 			
 			String sql = "select order_details_num, A.order_num as order_num, order_date, B.product_num as product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
 						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
-						"        orderer_mobile, payment_time, use_mileage, product_title\n"+
+						"        orderer_mobile, payment_time, use_mileage, product_title, main_image \n"+
 						"       \n"+
 						"from\n"+
 						"(\n"+
@@ -321,7 +321,7 @@ public class ProductDAO implements InterProductDAO  {
 						"from tbl_order_detail ) B\n"+
 						"on A.order_num = B.order_num\n"+
 						"join\n"+
-						"(select product_num, product_title from tbl_product) C\n"+
+						"(select product_num, product_title, main_image  from tbl_product) C\n"+
 						"on B.product_num = C.product_num ";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -355,6 +355,7 @@ public class ProductDAO implements InterProductDAO  {
 				ProductVO pvo = new ProductVO();
 				pvo.setProduct_title(rs.getString("product_title"));
 				pvo.setProduct_num(rs.getLong("product_num"));
+				pvo.setMain_image(rs.getString("main_image"));
 				odvo.setPvo(pvo);
 				
 				orderList.add(odvo);
@@ -426,7 +427,7 @@ public class ProductDAO implements InterProductDAO  {
 			
 			String sql = "select order_details_num, A.order_num as order_num, order_date, B.product_num as product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
 						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
-						"        orderer_mobile, payment_time, use_mileage, product_title\n"+
+						"        orderer_mobile, payment_time, use_mileage, product_title, main_image \n"+
 						"       \n"+
 						"from\n"+
 						"(\n"+
@@ -441,7 +442,7 @@ public class ProductDAO implements InterProductDAO  {
 						"from tbl_order_detail ) B\n"+
 						"on A.order_num = B.order_num\n"+
 						"join\n"+
-						"(select product_num, product_title from tbl_product) C\n"+
+						"(select product_num, product_title, main_image from tbl_product) C\n"+
 						"on B.product_num = C.product_num " +
 						"WHERE RNO between ? and ? ";
 			
@@ -485,6 +486,7 @@ public class ProductDAO implements InterProductDAO  {
 				ProductVO pvo = new ProductVO();
 				pvo.setProduct_title(rs.getString("product_title"));
 				pvo.setProduct_num(rs.getLong("product_num"));
+				pvo.setMain_image(rs.getString("main_image"));
 				odvo.setPvo(pvo);
 				
 				orderList.add(odvo);
@@ -789,5 +791,203 @@ public class ProductDAO implements InterProductDAO  {
 		return reviewList;
 		
 	}// end of public List<ReviewVO> selectPagingReviewList(Map<String, String> paraMap) throws SQLException
+
+	@Override
+	public int getTotalPageMileage(Map<String, String> paraMap) throws SQLException {
+int totalPage = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+
+			String sql = "select ceil( count(*) / 10 ) "+
+						"from\n"+
+						"(\n"+
+						"select order_num, order_date\n"+
+						"from tbl_order \n"+
+						"where user_id = ? AND ? <= order_date AND order_date < to_date(?) + 1 "+
+						") A \n"+
+						"join \n"+
+						"(select order_details_num, order_num, product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
+						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
+						"        orderer_mobile, payment_time, use_mileage\n"+
+						"from tbl_order_detail ) B\n"+
+						"on A.order_num = B.order_num\n"+
+						"join\n"+
+						"(select product_num, product_title from tbl_product) C\n"+
+						"on B.product_num = C.product_num ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, paraMap.get("user_id"));
+			pstmt.setString(2, paraMap.get("startdate"));
+			pstmt.setString(3, paraMap.get("enddate"));
+			
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			totalPage = rs.getInt(1);
+			
+			
+			
+		}  finally {
+			close();
+		}
+		
+		return totalPage;
+	}
+
+	@Override
+	public List<OrderDeatailVO> selectPagingMileageList(Map<String, String> paraMap) throws SQLException {
+		List<OrderDeatailVO> orderList = new ArrayList<>();
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "select order_details_num, A.order_num as order_num, order_date, B.product_num as product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
+						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
+						"        orderer_mobile, payment_time, use_mileage, product_title, order_price_total \n"+
+						"       \n"+
+						"from\n"+
+						"(\n"+
+						"select rownum AS RNO, order_num, order_date, order_price_total \n"+
+						"from tbl_order \n"+
+						"where user_id = ? AND ? <= order_date AND order_date < to_date(?) + 1 "+
+						") A \n"+
+						"join \n"+
+						"(select order_details_num, order_num, product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
+						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
+						"        orderer_mobile, payment_time, use_mileage\n"+
+						"from tbl_order_detail ) B\n"+
+						"on A.order_num = B.order_num\n"+
+						"join\n"+
+						"(select product_num, product_title from tbl_product) C\n"+
+						"on B.product_num = C.product_num " +
+						"WHERE RNO between ? and ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			int currentShowPageNO = Integer.parseInt(paraMap.get("currentShowPageNO")); // 조회하고자하는 페이지번호
+			
+			pstmt.setString(1, paraMap.get("user_id"));
+			pstmt.setString(2, paraMap.get("startdate"));
+			pstmt.setString(3, paraMap.get("enddate"));
+			pstmt.setInt(4, (currentShowPageNO * 10) - (10-1));
+			pstmt.setInt(5, (currentShowPageNO * 10));
+			
+			
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				OrderDeatailVO odvo = new OrderDeatailVO();
+				odvo.setOrder_details_num(rs.getLong("order_details_num"));
+				odvo.setOrder_name(rs.getString("order_name"));
+				odvo.setOrder_quantity(rs.getInt("order_quantity"));
+				odvo.setProduct_selling_price(rs.getInt("product_selling_price"));
+				odvo.setProduct_main_image(rs.getString("product_main_image"));
+				odvo.setRecipient_name(rs.getString("recipient_name"));
+				odvo.setRecipient_mobile(rs.getString("recipient_mobile"));
+				odvo.setRecipient_telephone(rs.getString("recipient_telephone"));
+				odvo.setForwarded_message(rs.getString("forwarded_message"));
+				odvo.setDelivery_status(rs.getString("delivery_status"));
+				odvo.setOrderer_mobile(rs.getString("orderer_mobile"));
+				odvo.setPayment_time(rs.getString("payment_time"));
+				odvo.setUse_mileage(rs.getInt("use_mileage"));
+				
+				
+				OrderVO ovo = new OrderVO();
+				ovo.setOrder_num(rs.getString("order_num"));
+				ovo.setOrder_date( (rs.getString("order_date")).substring(0, 11) );
+				ovo.setOrder_price_total(rs.getLong("order_price_total"));
+				odvo.setOvo(ovo);
+				
+				ProductVO pvo = new ProductVO();
+				pvo.setProduct_title(rs.getString("product_title"));
+				pvo.setProduct_num(rs.getLong("product_num"));
+				odvo.setPvo(pvo);
+				
+				orderList.add(odvo);
+				
+				
+			}
+		} finally {
+			close();
+		}
+		return orderList;
+	}
+
+	@Override
+	public int getTotalMileage(String user_id) throws SQLException {
+		int TotalMileage = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+
+			String sql = "select mileage from tbl_member\r\n"
+					+ "where user_id =  ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			TotalMileage = rs.getInt(1);
+			
+			
+			
+		}  finally {
+			close();
+		}
+		
+		return TotalMileage;
+	}
+
+	@Override
+	public int selectStatus(String user_id) throws SQLException {
+		int Totalstatus = 0;
+		
+		try {
+			conn = ds.getConnection();
+			
+
+			String sql = "select count(*)\r\n"
+					+ "from\r\n"
+					+ "(\r\n"
+					+ "select delivery_status, order_num\r\n"
+					+ "from tbl_order_detail\r\n"
+					+ "where delivery_status = 0\r\n"
+					+ ") A\r\n"
+					+ "join\r\n"
+					+ "(select order_num, user_id\r\n"
+					+ "from tbl_order\r\n"
+					+ "where user_id = ? \r\n"
+					+ ") B\r\n"
+					+ "on A.order_num = B.order_num\r\n"
+					+ " ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			
+			
+			rs = pstmt.executeQuery();
+			
+			rs.next();
+			
+			Totalstatus = rs.getInt(1);
+			
+			
+			
+		}  finally {
+			close();
+		}
+		
+		return Totalstatus;
+	}
 	
 }
