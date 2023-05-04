@@ -48,7 +48,7 @@ public class MypageAction extends AbstractController {
 		}
 		else {
 			// 로그인을 안했으면
-			String message = "회원정보를 수정 하기 위해서는 먼저 로그인을 하세요!!";
+			String message = "마이페이지를 보기 위해서는 먼저 로그인을 하세요!!";
 			String loc = "javascript:history.back()";
 			
 			request.setAttribute("message", message);

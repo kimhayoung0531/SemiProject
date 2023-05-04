@@ -27,23 +27,10 @@ $(document).ready(function(){
 	      
 	      //제품 등록하기 
 	      $("button#goToRegis").click(function(){
+
+    		  const frm = document.prodInputFrm;
+    		  frm.submit();
 	    	  
-	    	  let flag = false;
-	    	  
-	    	  
-	    	  $(".infoData").each(function(index, elmt){
-	    		  const val = $(elmt).val().trim();
-	    		  if(val == ""){
-	    			  $(elmt).next().show();
-	    			  flag = true;
-	    			  return false;
-	    		  }
-	    		  
-	    	  });
-	    	  if(!flag) {
-	    		  const frm = document.prodInputFrm;
-	    		  frm.submit();
-	    	  }
 	      });
 	      
 	      // 취소
@@ -77,11 +64,11 @@ $(document).ready(function(){
                                                <span>카테고리</span>
                                            </th>
                                            <td>
-                                           		<select name="fk_cnum" class="infoData">
-										            <option value="">선택하세요</option>
+                                           		<select name="fk_cnum" style="font-size: 12pt;" class="infoData">
+										            <option value="" >카테고리를 선택하세요</option>
 										            
 										            <c:forEach var="cvo" items="${requestScope.categoryList}">
-										             	<option value="${cvo.category_num}">${cvo.category_name}</option>
+										             	<option value="${cvo.category_num}" >${cvo.category_name}</option>
 										            </c:forEach>
 										         </select>
                                            </td> 
@@ -102,15 +89,7 @@ $(document).ready(function(){
 									         <input type="file" name="pimage1" style="border: none;" class="infoData img_file" accept='image/*'  />			   
 									      </td>
                                        </tr>
-                                       <tr>
-                                           <th>
-                                               <span>상품 상세 이미지</span>
-                                           </th>
-                                           <td >
-									         <input type="file" name="pimage2" style="border: none;" class="infoData img_file" accept='image/*'  />			   
-									      </td>
-                                       </tr>
-
+                                   
                                        <tr>
                                            <th>
                                                <span>제품 판매가</span>
@@ -153,7 +132,7 @@ $(document).ready(function(){
                            <div class="btn_center_box">
                                <button type="reset" id="btnReset" class="btn_cancle">취소
                                </button>
-                               <button type="button" id="goToRegis" onclick="goRegister();" class="btn_register">등록하기
+                               <button type="button" id="goToRegis" onclick="" class="btn_register">등록하기
                                </button>
                            </div>
                         </div>

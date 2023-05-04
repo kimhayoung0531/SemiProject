@@ -62,7 +62,7 @@ public class ProductDAO implements InterProductDAO  {
 		ProductVO pvo = new ProductVO();
 		
 		try {
-			String sql = " select * from tbl_product where product_num = ? ";
+			String sql = " select * from tbl_product A join tbl_addimage B on A.product_num= B.product_num join tbl_category C on A.category_num = C. category_num where A.product_num = ? ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,  product_num);
@@ -79,6 +79,15 @@ public class ProductDAO implements InterProductDAO  {
 			pvo.setProduct_inventory(rs.getLong("product_inventory"));
 			pvo.setProduct_date(rs.getString("product_date"));
 			pvo.setSale_count(rs.getInt("sale_count"));
+			
+			AddImageVO aivo = new AddImageVO();
+			aivo.setImage_name(rs.getString("image_name"));
+			pvo.setAivo(aivo);
+			
+			parkjuneyub.product.model.CategoryVO cvo = new parkjuneyub.product.model.CategoryVO();
+			
+			cvo.setCategory_name(rs.getString("category_name"));
+			pvo.setCvo(cvo);
 			
 		}
 		finally {
@@ -221,14 +230,16 @@ public class ProductDAO implements InterProductDAO  {
 				
 				int cnt = 0;
 				for(int i = 0; i < productNum_arr.length; i++) {
-					sql = " update tbl_product set product_inventory =  product_inventory - ? "
+					sql = " update tbl_product set (product_inventory, sale_count) =  (product_inventory - ?,  sale_count + ?)"
 							+ "where product_num = ? ";
 					
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setLong(1, Long.parseLong(productCnt_arr[i]));
-					pstmt.setLong(2, Long.parseLong(productNum_arr[i]));
+					pstmt.setLong(2, Long.parseLong(productCnt_arr[i]));
+					pstmt.setLong(3, Long.parseLong(productNum_arr[i]));
 					
 					pstmt.executeUpdate();
+
 					cnt++;
 				}
 				if(cnt == productNum_arr.length) {
@@ -410,34 +421,30 @@ public class ProductDAO implements InterProductDAO  {
 	      try {
 	         conn = ds.getConnection();
 	         
-	         String sql = " insert into tbl_product_test(product_num, category_num, product_title, main_image, product_price, product_detail, product_inventory,product_date, sale_count) " +  
-	                      " values(?,?,?,?,?,?,?,?,?)";
+	         String sql = " insert into tbl_product(product_num, category_num, product_title, main_image, product_price, product_detail, sale_count, product_inventory) " +  
+	                      " values(?,?,?,?,?,?,?,?) ";
 	         
 	         pstmt = conn.prepareStatement(sql);
 	         
-	         pstmt.setLong(1,  pvo.getProduct_num());
+	         pstmt.setLong(1, pvo.getProduct_num());
 	         pstmt.setLong(2, pvo.getCategory_num());
 	         pstmt.setString(3, pvo.getProduct_title());    
 	         pstmt.setString(4,  pvo.getMain_image()); 
 	         pstmt.setLong(5,  pvo.getProduct_price());    
 	         pstmt.setString(6, pvo.getProduct_detail()); 
-	         pstmt.setLong(7, pvo.getProduct_inventory());
-	         pstmt.setString(8, pvo.getProduct_date());
-	         pstmt.setLong(9, pvo.getSale_count());
+	         pstmt.setLong(7, pvo.getSale_count());
+	         pstmt.setLong(8, pvo.getProduct_inventory());
  
 	         result = pstmt.executeUpdate();
 
 	         
-	      } catch(NumberFormatException e){
-	    	 
 	      } finally {
 	      
 	         close();
 	      }
 	      
 	      return result;
-		
-		
+
 	}
 
 	@Override

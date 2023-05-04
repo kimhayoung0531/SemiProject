@@ -29,6 +29,9 @@ public interface InterMemberDAO {
 	// 마이페이지 회원정보 변경시 패스워드 확인 메소드
 	boolean mypageMemberPwdCheck(Map<String, String> paraMap) throws SQLException;
 
+	// 마이페이지 회원정보 변경
+	int editmember(MemberVO member) throws SQLException;
+
 	
 
 	

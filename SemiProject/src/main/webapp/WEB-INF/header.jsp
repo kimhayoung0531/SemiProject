@@ -111,7 +111,7 @@
                         <div class="header_search_cont">
                             <div class="h1_logo">
                                 <a href="http://localhost:9090/SemiProject/home.ban">
-                                    <img src="<%=ctxPath%>/image/main_logo.png">
+                                    <img src="<%=ctxPath%>/image/logo_bp.png">
                                 </a>
                             </div>
 

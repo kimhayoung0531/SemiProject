@@ -13,8 +13,7 @@ public class ProductVO {
 	private long product_inventory;
 	private String product_date;
 	private int sale_count;
-	private long mileage;
-	
+	private long mileage; 
 	private long totalPrice;
 	private long totalMileage;
 	
@@ -24,7 +23,12 @@ public class ProductVO {
 	
 	//select용
 	private MemberVO mvo;
-	
+	private AddImageVO aivo;
+	private CategoryVO cvo;
+
+
+
+
 	public ProductVO(long product_num, long category_num, String product_title, String main_image, long product_price,
 			String product_detail, long product_inventory, String product_date, int sale_count) {
 		super();
@@ -48,6 +52,30 @@ public class ProductVO {
 		totalMileage = mileage * oqty;     // 판매당시의 포인트점수 * 주문량 
 	}
 	
+	public long getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(long totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public long getTotalMileage() {
+		return totalMileage;
+	}
+
+	public void setTotalMileage(long totalMileage) {
+		this.totalMileage = totalMileage;
+	}
+
+	public void setMileage(long mileage) {
+		this.mileage = mileage;
+	}
+
+	public void setMvo(MemberVO mvo) {
+		this.mvo = mvo;
+	}
+
 	public long getMileage() {
 		return mileage;
 	}
@@ -129,8 +157,20 @@ public class ProductVO {
 		return mvo;
 	}
 
+	public AddImageVO getAivo() {
+		return aivo;
+	}
 
+	public void setAivo(AddImageVO aivo) {
+		this.aivo = aivo;
+	}
 	
-	
+	public CategoryVO getCvo() {
+		return cvo;
+	}
+
+	public void setCvo(CategoryVO cvo) {
+		this.cvo = cvo;
+	}
 	
 }
