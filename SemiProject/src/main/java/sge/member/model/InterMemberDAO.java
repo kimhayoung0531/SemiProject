@@ -32,6 +32,9 @@ public interface InterMemberDAO {
 	// 마이페이지 회원정보 변경
 	int editmember(MemberVO member) throws SQLException;
 
+	// 회원탈퇴
+	int deletemember(String user_id) throws SQLException;
+
 	
 
 	
