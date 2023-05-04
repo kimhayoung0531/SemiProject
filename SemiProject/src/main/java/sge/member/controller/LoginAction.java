@@ -55,19 +55,7 @@ public class LoginAction extends AbstractController {
 				
 				return; //메소드 종료
 			}
-			else if(loginuser.getStatus() == 1) {
-				String message = "이미 탈퇴한 회원입니다";
-				String loc = "";
-				
-				
-				request.setAttribute("message", message);
-				request.setAttribute("loc", loc);
-				
-				super.setRedirect(false);
-				super.setViewPage("/WEB-INF/msg.jsp");
-				
-				return; //메소드 종료
-			}
+			
 			// 로그인 성공시 
 			  System.out.println(">> 확인용 로그인 사용자명 " + loginuser.getUser_name());
 			
