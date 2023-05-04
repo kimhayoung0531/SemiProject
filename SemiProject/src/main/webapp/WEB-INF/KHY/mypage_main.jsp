@@ -87,20 +87,14 @@
                         <li>쇼핑정보
                             <ul class="sub_depth1">
                                 <li><a href="<%= ctxPath%>/mypageOrderList.ban">- 주문목록/배송조회</a></li>
-                                <li><a href="../mypage/cancel_list.php">- 주문취소</a></li>
                                 <li><a href="<%= ctxPath%>/mypageLikeList.ban">- 좋아요리스트</a></li>
-                            </ul>
-                        </li>
-                        <li>고객센터
-                            <ul class="sub_depth1">
-                                <li><a href="../mypage/mypage_qa.php">- 1:1 문의</a></li>
                             </ul>
                         </li>
                         <li>회원정보
                             <ul class="sub_depth1">
                                 <li><a href="<%= ctxPath%>/mypageMemberChangePwdcheck.ban">- 회원정보 변경</a></li>
                                 <li><a href="../mypage/hack_out.php">- 회원 탈퇴</a></li>
-                                <li><a href="../mypage/mileage.php">- 마일리지</a></li>
+                                <li><a href="<%= ctxPath%>/mypageMileageList.ban">- 마일리지</a></li>
                             </ul>
                         </li>
                         <li>나의 상품문의
@@ -282,7 +276,7 @@
 
                     	</div>
                      	 <!-- //mypage_lately_info_cont -->
-                      <a href="../mypage/order_list.php" class="btn_board_more">+ 더보기</a>
+                      <a href="<%= ctxPath%>/mypageOrderList.ban" class="btn_board_more">+ 더보기</a>
                     </div>
                     <!-- //mypage_lately_info -->
 

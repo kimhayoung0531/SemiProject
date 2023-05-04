@@ -243,7 +243,7 @@ $(document).ready(function(){
                 <th>글번호</th>
                 <th>제목</th>
                 <th>작성자</th>
-                <th>문의상태</th>
+                <th>조회수</th>
                 <th>답변시간</th>
             </tr>
             </thead>
@@ -255,7 +255,7 @@ $(document).ready(function(){
 			              <td>${nvo.inquiry_num}</td>
 			              <td><button style="font-weight: 800; font-size:15px">${nvo.inquiry_title}</button></td>
 			              <td>${nvo.user_id}</td>
-			              <td>${nvo.inquiry_state}</td>
+			              <td>${nvo.inquiry_view_count}</td>
 			              <td>${nvo.inquiry_answer_time}</td>
 			           </tr>
 			            
