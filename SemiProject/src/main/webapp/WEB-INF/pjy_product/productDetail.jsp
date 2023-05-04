@@ -501,7 +501,7 @@
                                             </div>
                                             <div class="review_header_description">
                                             	<a id="writeReviewButton" class="review_header_description_link" onclick="writeReview('<%=user_id%>')">리뷰 작성</a>
-                                                <a class="review_header_description_link" href="#">전체 상품 리뷰 보기</a>
+                                                
                                             </div>
                                         </div>
 

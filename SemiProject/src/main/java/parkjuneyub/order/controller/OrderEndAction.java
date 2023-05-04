@@ -57,8 +57,8 @@ public class OrderEndAction extends AbstractController {
 		String productMileage_join = request.getParameter("productMileage_join");
 		String save_mileage = request.getParameter("save_mileage");
 		String finalTotalPrice = request.getParameter("finalTotalPrice");
-		String cartNo_join = request.getParameter("cartNo_join");
-		
+		String cart_num_join = request.getParameter("cart_num_join");
+		System.out.println("cart_num_join "+ cart_num_join);
 		String postcode = request.getParameter("postcode");
 		String address = request.getParameter("address");
 		String detailAddress = request.getParameter("detailAddress");
@@ -104,8 +104,8 @@ public class OrderEndAction extends AbstractController {
 		paraMap.put("detailAddress", detailAddress);
 		paraMap.put("extraAddress", extraAddress);
 		
-		if(cartNo_join != null) {
-			paraMap.put("cartNo_join", cartNo_join);
+		if(cart_num_join != null) {
+			paraMap.put("cart_num_join", cart_num_join);
 		}
 		
 		int isSuccess = pdao.orderAdd(paraMap);
