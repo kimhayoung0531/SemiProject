@@ -79,7 +79,7 @@
                                                     <div class="ojh_imte_cont" style="display: inline-block;">
                                                         <div class="ojh_photo_box" style="display: inline-block">
                                                             <a href="<%= request.getContextPath()%>/productDeatail.ban?product_num=${pvo.product_num}">
-                                                                <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " >
+                                                                <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}" width="245" alt="" title="" >
                                                             </a>
 
                                                         </div>
