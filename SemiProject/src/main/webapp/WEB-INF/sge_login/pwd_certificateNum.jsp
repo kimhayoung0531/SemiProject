@@ -14,7 +14,7 @@
 
 	    const timerDiv = $("span#timer");// 타이머를 보여줄 장소
 	    
-		let time = 180;
+		let time = 14;
 		
 		//타이머 함수 만들기
 		
@@ -85,7 +85,7 @@
 
                                  <input type="hidden" id="user_id" name="user_id" value="${requestScope.user_id}" />
                                   <c:if test="${sessionScope.certificationCode != null}">
-                                  	 <p>남은 인증시간:<span id="timer">03:00</span></p>
+                                  	 <p>남은 인증시간:<span id="timer">00:15</span></p>
                                   	 <span class="time_error">인증시간이 만료되었습니다</span>
                                   	 
                                   </c:if>
