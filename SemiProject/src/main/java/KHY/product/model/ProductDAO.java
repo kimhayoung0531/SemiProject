@@ -312,7 +312,7 @@ public class ProductDAO implements InterProductDAO  {
 						"(\n"+
 						"select order_num, order_date\n"+
 						"from tbl_order \n"+
-						"where user_id = ? AND sysdate-30 <= order_date AND order_date < sysdate+1 "+
+						"where user_id = ? AND sysdate-30 <= order_date AND order_date < (sysdate+1) "+
 						") A \n"+
 						"join \n"+
 						"(select order_details_num, order_num, product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
@@ -322,7 +322,8 @@ public class ProductDAO implements InterProductDAO  {
 						"on A.order_num = B.order_num\n"+
 						"join\n"+
 						"(select product_num, product_title, main_image  from tbl_product) C\n"+
-						"on B.product_num = C.product_num ";
+						"on B.product_num = C.product_num "+
+						"order by order_date desc ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
@@ -434,18 +435,19 @@ public class ProductDAO implements InterProductDAO  {
 						"select rownum AS RNO, order_num, order_date\n"+
 						"from tbl_order \n"+
 						"where user_id = ? AND ? <= order_date AND order_date < to_date(?) + 1 "+
+						
 						") A \n"+
 						"join \n"+
 						"(select order_details_num, order_num, product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
 						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
-						"        orderer_mobile, payment_time, use_mileage\n"+
+						"        orderer_mobile, payment_time, use_mileage \n"+
 						"from tbl_order_detail ) B\n"+
 						"on A.order_num = B.order_num\n"+
 						"join\n"+
 						"(select product_num, product_title, main_image from tbl_product) C\n"+
 						"on B.product_num = C.product_num " +
 						"WHERE RNO between ? and ? ";
-			
+						
 			pstmt = conn.prepareStatement(sql);
 			
 			int currentShowPageNO = Integer.parseInt(paraMap.get("currentShowPageNO")); // 조회하고자하는 페이지번호
@@ -611,7 +613,7 @@ public class ProductDAO implements InterProductDAO  {
 					"from tbl_product ) B\n"+
 					"on A.product_num = B.product_num\n"+
 					"WHERE RNO between ? and ? ";
-			
+					
 			pstmt = conn.prepareStatement(sql);
 			
 			int currentShowPageNO = Integer.parseInt(paraMap.get("currentShowPageNO")); // 조회하고자하는 페이지번호
@@ -816,7 +818,7 @@ int totalPage = 0;
 						"join\n"+
 						"(select product_num, product_title from tbl_product) C\n"+
 						"on B.product_num = C.product_num ";
-			
+						
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, paraMap.get("user_id"));
 			pstmt.setString(2, paraMap.get("startdate"));
@@ -846,7 +848,7 @@ int totalPage = 0;
 			
 			String sql = "select order_details_num, A.order_num as order_num, order_date, B.product_num as product_num, order_name, order_quantity, product_selling_price, product_main_image,\n"+
 						"        recipient_name, recipient_mobile, recipient_telephone, forwarded_message, delivery_status,\n"+
-						"        orderer_mobile, payment_time, use_mileage, product_title, order_price_total \n"+
+						"        orderer_mobile, payment_time, use_mileage, product_title, order_price_total, main_image \n"+
 						"       \n"+
 						"from\n"+
 						"(\n"+
@@ -861,7 +863,7 @@ int totalPage = 0;
 						"from tbl_order_detail ) B\n"+
 						"on A.order_num = B.order_num\n"+
 						"join\n"+
-						"(select product_num, product_title from tbl_product) C\n"+
+						"(select product_num, product_title, main_image from tbl_product) C\n"+
 						"on B.product_num = C.product_num " +
 						"WHERE RNO between ? and ? ";
 			
@@ -906,6 +908,7 @@ int totalPage = 0;
 				ProductVO pvo = new ProductVO();
 				pvo.setProduct_title(rs.getString("product_title"));
 				pvo.setProduct_num(rs.getLong("product_num"));
+				pvo.setMain_image(rs.getString("main_image"));
 				odvo.setPvo(pvo);
 				
 				orderList.add(odvo);

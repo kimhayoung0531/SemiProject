@@ -172,7 +172,7 @@
 							                                  status.count 는 1 부터 시작한다. 
 							                             --%>  <%-- 상품명 --%> 
 							                            <a href="<%= ctxPath%>/productDeatail.ban?product_num=${pvo.product_num}"><!-- 제품상세페이지 링크 -->
-							                              <img src="/MyMVC/images/${cartvo.prod.pimage1}" class="img-thumbnail" width="130px" height="100px" />
+							                              <img src="<%= ctxPath%>/image/item_main/${pvo.main_image}" class="img-thumbnail" width="130px" height="100px" />
 							                           </a> 
 							                           <br/><span class="product_title">${pvo.product_title}</span> 
 							                        </td>

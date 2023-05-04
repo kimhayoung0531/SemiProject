@@ -336,8 +336,8 @@ $(document).ready(function(){
 							                            <span class="product_title">${odvo.order_details_num}</span>
 							                        </td>
 							                        <td align="center"> <%-- 상품명 --%> 
-							                           <a href="/MyMVC/shop/prodView.up?pnum=${cartvo.pnum}"><!-- 제품상세페이지 링크 -->
-							                              <img src="/MyMVC/images/${cartvo.prod.pimage1}" class="img-thumbnail" width="130px" height="100px" />
+							                           <a href="<%= ctxPath%>/productDeatail.ban?product_num=${odvo.pvo.product_num}"><!-- 제품상세페이지 링크 -->
+							                              <img src="<%= ctxPath%>/image/item_main/${odvo.pvo.main_image}" class="img-thumbnail" width="130px" height="100px" />
 							                           </a> 
 							                           <br/><span class="product_title">${odvo.pvo.product_title}</span> 
 							                        </td>
