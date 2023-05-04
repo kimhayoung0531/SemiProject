@@ -174,16 +174,14 @@
                                                     <span class="ojh_item_name_explain" style="color: #a8a8a8; display: flex;">${pvo.product_detail}</span>
                                                     </a>
                                                 <div class="imem_money_box">
-                                                    <span class="precent" style="display: none;">20%</span>
+                                                    <span class="precent" style="display: none;"></span>
                                                     <strong class="item_price">
                                                         <span >${pvo.product_price}원 </span>
-                                                        
                                                         </span>
                                                     </strong>
                                                 </div>
                                               </div> 
                                             </div>
-                                             
                                           </li> 
 											</c:forEach>
                                           
@@ -234,195 +232,40 @@
                             
                                     <div class="goods_list_tit">
                                         <h3>
-                                         <a href="#" class="btn_goods_view_moer">지금 여기는 파리 어디쯤..👍</a>
+                                         <a href="#" class="btn_goods_view_moer">가정의 달 초코파티~👍</a>
                                         </h3>
                                         <h4></h4>
                                     </div>
                                     <div class="goods_list_cont_1 goods_content_222">
                                         <section class="visual_3">
-                                          <li class="slick-slider slick-current" style="width: 265px;">  
+                                          
+                                          <li class="slick-slider slick-current" style="width: 265px;"> 
+                                          
+                                          <c:forEach var="pvo" items="${pvoChocoList}" varStatus="status">
                                             <div class="item_cont" >
                                               <div class="photo_box">  
-                                                <a href="#">
-                                                    <img src="<%=ctxPath%>/image/item_main/17.jpg" width="200" alt="[15%~20% 할인] 애플파이" title="[15%~20% 할인] 애플파이 " class="middle" >
+                                                <a href="<%=ctxPath%>/productDeatail.ban?product_num=${pvo.product_num}">
+                                                    <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}" width="200" alt="[15~20% 할인]감사의 달 타르트" title="[15~20% 할인]감사의 달 타르트 " class="middle" >
                                                 </a>
                                               </div>  
-                                              <div class="item-info-cont" style="display:block; text-align: left;">
-                                                    <a href="#">
-                                                    <strong class="item_name" style="direction: ltr;">[베스트 상품]  애플파이</strong>
+                                              <div class="item-info-cont" style="display:block; text-align: left; margin: 0px 0px 0px 25px;">
+                                                    <a href="<%=ctxPath%>/productDeatail.ban?product_num=${pvo.product_num}">
+                                                    <strong class="item_name" style="direction: ltr;">${pvo.product_title}</strong>
+                                                    <span class="ojh_item_name_explain" style="color: #a8a8a8; display: flex;">${pvo.product_detail}</span>
                                                     </a>
                                                 <div class="imem_money_box">
-                                                    <span class="precent" style="display: none;">15%</span>
+                                                    <span class="precent" style="display: none;"></span>
                                                     <strong class="item_price">
-                                                        <span >21,000원 </span>
-                                                        <span style="color: #888; text-decoration: line-through;">
+                                                        <span >${pvo.product_price}원 </span>
                                                         </span>
                                                     </strong>
                                                 </div>
                                               </div> 
                                             </div>
                                           </li> 
+											</c:forEach>
 
-                                          <li class="slick-slider slick-current" style="width: 265px;">  
-                                            <div class="item_cont" >
-                                              <div class="photo_box">  
-                                                <a href="#">
-                                                    <img src="<%=ctxPath%>/image/item_main/18.jpg" width="200" alt="[베스트 상품] 조각케익 4종" title="[베스트 상품] 조각케익 4종 " class="middle" >
-                                                </a>
-                                              </div>  
-                                              <div class="item-info-cont" style="display:block; text-align: left;">
-                                                    <a href="#">
-                                                    <strong class="item_name" style="direction: ltr;">[베스트 상품] 조각케익 4종</strong>
-                                                    </a>
-                                                <div class="imem_money_box">
-                                                    <span class="precent" style="display: none;">15%</span>
-                                                    <strong class="item_price">
-                                                        <span >3,000원 </span>
-                                                        <span style="color: #888; text-decoration: line-through;">
-                                                        </span>
-                                                    </strong>
-                                                </div>
-                                              </div> 
-                                            </div>
-                                          </li> 
-
-                                          <li class="slick-slider slick-current" style="width: 265px;">  
-                                            <div class="item_cont" >
-                                              <div class="photo_box">  
-                                                <a href="#">
-                                                    <img src="<%=ctxPath%>/image/item_main/19.jpg" width="200" alt="[베스트 상품] 반미 바게트 B" title="[베스트 상품] 반미 바게트 B" " class="middle" >
-                                                </a>
-                                              </div>  
-                                              <div class="item-info-cont" style="display:block; text-align: left;">
-                                                    <a href="#">
-                                                    <strong class="item_name" style="direction: ltr;">[베스트 상품] 반미 바게트 B"</strong>
-                                                    </a>
-                                                <div class="imem_money_box">
-                                                    <span class="precent" style="display: none;">15%</span>
-                                                    <strong class="item_price">
-                                                        <span >4,500원</span>
-                                                        <span style="color: #888; text-decoration: line-through;">
-                                                        </span>
-                                                    </strong>
-                                                </div>
-                                              </div> 
-                                            </div>
-                                          </li> 
-
-                                          <li class="slick-slider slick-current" style="width: 265px;">  
-                                            <div class="item_cont" >
-                                              <div class="photo_box">  
-                                                <a href="#">
-                                                    <img src="<%=ctxPath%>/image/item_main/20.jpg" width="200" alt="[베스트 상품] 초콜릿 브라우니" title="[베스트 상품] 초콜릿 브라우니 " class="middle" >
-                                                </a>
-                                              </div>  
-                                              <div class="item-info-cont" style="display:block; text-align: left;">
-                                                    <a href="#">
-                                                    <strong class="item_name" style="direction: ltr;">[베스트 상품] 초콜릿 브라우니</strong>
-                                                    </a>
-                                                <div class="imem_money_box">
-                                                    <span class="precent" style="display: none;">15%</span>
-                                                    <strong class="item_price">
-                                                        <span >22,500원 </span>
-                                                        <span style="color: #888; text-decoration: line-through;">
-                                                        </span>
-                                                    </strong>
-                                                </div>
-                                              </div> 
-                                            </div>
-                                          </li> 
-
-                                          <li class="slick-slider slick-current" style="width: 265px;">  
-                                            <div class="item_cont" >
-                                              <div class="photo_box">  
-                                                <a href="#">
-                                                    <img src="<%=ctxPath%>/image/item_main/21.jpg" width="200" alt="[베스트 상품] 얼그레이 레몬 스콘" title="[베스트 상품] 얼그레이 레몬 스콘 " class="middle" >
-                                                </a>
-                                              </div>  
-                                              <div class="item-info-cont" style="display:block; text-align: left;">
-                                                    <a href="#">
-                                                    <strong class="item_name" style="direction: ltr;">[베스트 상품] 얼그레이 레몬 스콘</strong>
-                                                    </a>
-                                                <div class="imem_money_box">
-                                                    <span class="precent" style="display: none;">15%</span>
-                                                    <strong class="item_price">
-                                                        <span >14,500원 </span>
-                                                        <span style="color: #888; text-decoration: line-through;">
-                                                        </span>
-                                                    </strong>
-                                                </div>
-                                              </div> 
-                                            </div>
-                                          </li> 
-
-                                          <li class="slick-slider slick-current" style="width: 265px;">  
-                                            <div class="item_cont" >
-                                              <div class="photo_box">  
-                                                <a href="#">
-                                                    <img src="<%=ctxPath%>/image/item_main/22.jpg" width="200" alt="[베스트 상품] 진짜 고구마빵" title="[베스트 상품] 진짜 고구마빵 " class="middle" >
-                                                </a>
-                                              </div>  
-                                              <div class="item-info-cont" style="display:block; text-align: left;">
-                                                    <a href="#">
-                                                    <strong class="item_name" style="direction: ltr;">[베스트 상품] 진짜 고구마빵</strong>
-                                                    </a>
-                                                <div class="imem_money_box">
-                                                    <span class="precent" style="display: none;">15%</span>
-                                                    <strong class="item_price">
-                                                        <span >19,500원 </span>
-                                                        <span style="color: #888; text-decoration: line-through;">
-                                                        </span>
-                                                    </strong>
-                                                </div>
-                                              </div> 
-                                            </div>
-                                          </li> 
-
-                                          <li class="slick-slider slick-current" style="width: 265px;">  
-                                            <div class="item_cont" >
-                                              <div class="photo_box">  
-                                                <a href="#">
-                                                    <img src="<%=ctxPath%>/image/item_main/23.jpg" width="200" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " class="middle" >
-                                                </a>
-                                              </div>  
-                                              <div class="item-info-cont" style="display:block; text-align: left;">
-                                                    <a href="#">
-                                                    <strong class="item_name" style="direction: ltr;">[베스트 상품] 우유크림카스테라</strong>
-                                                    </a>
-                                                <div class="imem_money_box">
-                                                    <span class="precent" style="display: none;">15%</span>
-                                                    <strong class="item_price">
-                                                        <span >3,500원 </span>
-                                                        <span style="color: #888; text-decoration: line-through;">
-                                                        </span>
-                                                    </strong>
-                                                </div>
-                                              </div> 
-                                            </div>
-                                          </li> 
-
-                                          <li class="slick-slider slick-current" style="width: 265px;">  
-                                            <div class="item_cont" >
-                                              <div class="photo_box">  
-                                                <a href="#">
-                                                    <img src="<%=ctxPath%>/image/item_main/24.jpg" width="200" alt="[베스트상품] 플레인롤" title="[베스트상품] 플레인롤" class="middle" >
-                                                </a>
-                                              </div>  
-                                              <div class="item-info-cont" style="display:block; text-align: left;">
-                                                    <a href="#">
-                                                    <strong class="item_name" style="direction: ltr;">[베스트상품] 플레인롤</strong>
-                                                    </a>
-                                                <div class="imem_money_box">
-                                                    <span class="precent" style="display: none;">15%</span>
-                                                    <strong class="item_price">
-                                                        <span >18,500원</span>
-                                                        <span style="color: #888; text-decoration: line-through;">
-                                                        </span>
-                                                    </strong>
-                                                </div>
-                                              </div> 
-                                            </div>
-                                          </li> 
+                                         
 
                                           </section>
                                           <script type="text/javascript">
