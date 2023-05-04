@@ -17,7 +17,7 @@ public class NoticeAction extends AbstractController {
 		
 		InterNoticeDAO ndao = new NoticeDAO();
 		
-		/*** 페이징처리 ***/
+		//*** 페이징처리 ***//
 		String searchType = request.getParameter("searchType");
 		String searchWord = request.getParameter("searchWord");
 
