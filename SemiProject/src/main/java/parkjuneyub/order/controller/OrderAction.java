@@ -76,7 +76,7 @@ public class OrderAction extends AbstractController {
 				String[] totalMileage_join = request.getParameter("totalMileage_join").split(",");
 				String sum_totalPrice = request.getParameter("sum_totalPrice");
 				String sum_totalMileage = request.getParameter("sum_totalMileage");	
-
+				String cart_num = request.getParameter("cart_num_join");
 				List<ProductVO> pvoList = pdao.getPvoListByPnum(pnum_join);
 
 				List<CartVO> cartList = new ArrayList<>();
@@ -92,6 +92,7 @@ public class OrderAction extends AbstractController {
 					cvo.setPvo(pvoList.get(i));
 					cartList.add(cvo);
 				}
+				request.setAttribute("cart_num", cart_num);
 				request.setAttribute("cartList", cartList);
 				request.setAttribute("sum_totalPrice", sum_totalPrice);
 				request.setAttribute("sum_totalMileage", sum_totalMileage);

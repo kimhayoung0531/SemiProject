@@ -183,6 +183,7 @@ public class ProductDAO implements InterProductDAO  {
 			//System.out.println("n1 " +  n1);
 			// 2. 주문 상세 테이블에 주문 id 와 그 이외에 데이터 넣기
 			if(n1 == 1) {
+				
 				String[] productNum_arr = (String[]) paraMap.get("productNum_arr"); 
 				String[] productCnt_arr = (String[]) paraMap.get("productCnt_arr"); 
 				String[] productPrice_arr = (String[]) paraMap.get("productPrice_arr"); 
@@ -225,6 +226,7 @@ public class ProductDAO implements InterProductDAO  {
 			//System.out.println("n2 " +  n2);
 			// 3. 제품 테이블 재고량 업데이트하기
 			if(n2 == 1) {
+				
 				String[] productNum_arr = (String[]) paraMap.get("productNum_arr"); 
 				String[] productCnt_arr = (String[]) paraMap.get("productCnt_arr"); 
 				
@@ -256,16 +258,19 @@ public class ProductDAO implements InterProductDAO  {
 			//System.out.println("n3 " +  n3);
 			// 4. cartno가 null이 아니면 장바구니 테이블에서 해당 행들을 삭제하기
 			if(n3 == 1) {
-				if(paraMap.get("carno_arr") != null & n3 == 1) {
-					
-					String cartno_join = String.join("','", (String[])paraMap.get("cartno_arr"));
-					
-					cartno_join = "'"+cartno_join+"'";
-					sql = " delete from tbl_cart where cartno in (" + cartno_join +") ";
+				System.out.println(" cartno가 null이 아니면 장바구니 테이블에서 해당 행들을 삭제하기");
+				if(paraMap.get("cart_num_join") != null & n3 == 1) {
+					String cart_num_join = (String) paraMap.get("cart_num_join");
+					String[] cart_num_arr = cart_num_join.split(",");
+					String cartNo_join = String.join("','", cart_num_arr);
+					cartNo_join = "'" + cartNo_join + "'";
+
+					sql = " delete from tbl_cart where cart_num in (" + cartNo_join +") ";
+
 					pstmt = conn.prepareStatement(sql);
 					n4 = pstmt.executeUpdate();
 				}
-				if(paraMap.get("carno_arr") == null & n3 == 1) {
+				if(paraMap.get("cartNo_join") == null & n3 == 1) {
 					n4 = 1;
 				}
 			}

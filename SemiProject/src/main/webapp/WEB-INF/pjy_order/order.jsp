@@ -10,7 +10,6 @@
 	<jsp:include page="../header.jsp" />	
 	<script>
 		$(document).ready(function () {
-			
 			b_flag_zipcodeSearch_click = false;
 			const deliveryFee = 3000;
 			
@@ -403,7 +402,7 @@
                     <div class="order_sub_content">
                         <div class="order_sub_content_box">
                             <form id="frmOrder" name="frmOrder" >
-								
+								<input type="hidden" id="cart_num_join" name="cart_num_join" value="${requestScope.cart_num}" />
 								<input type="hidden" id="productNum_join" name="productNum_join" />
 								<input type="hidden" id="productCnt_join" name="productCnt_join" />
 								<input type="hidden" id="productPrice_join" name="productPrice_join" />
