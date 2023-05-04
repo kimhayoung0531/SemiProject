@@ -21,10 +21,12 @@ public class NoticeAction extends AbstractController {
 		String searchType = request.getParameter("searchType");
 		String searchWord = request.getParameter("searchWord");
 
-		if (searchType == null || (!"notice_title".equals(searchType) && !"notice_content".equals(searchType)
-				&& !"notice_writer".equals(searchType))) {
-			searchType = "";
-		}
+		if(searchType == null || 
+				(!"notice_title".equals(searchType) && 
+				 !"notice_content".equals(searchType) && 
+				 !"notice_writer".equals(searchType)) ) {
+				searchType = "";
+			}
 
 		if (searchWord == null || (searchWord != null && searchWord.trim().isEmpty())) {
 			searchWord = "";

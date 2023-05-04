@@ -218,13 +218,13 @@ public class NoticeDAO implements InterNoticeDAO{
 	      try {
 	         conn = ds.getConnection();
 	         
-	         String sql = " SELECT inquiry_num, user_id, product_num, inquiry_title, inquiry_text, inquiry_date, inquiry_answer_time, inquiry_view_count "
+	         String sql = " SELECT inquiry_num, user_id, product_num, inquiry_title, inquiry_text, inquiry_date, inquiry_answer_time, inquiry_view_count, inquiry_state "
 	               + " FROM "
 	               + " ( "
-	               + " select rownum AS RNO, inquiry_num, user_id, product_num, inquiry_title, inquiry_text, inquiry_date, inquiry_answer_time, inquiry_view_count "
+	               + " select rownum AS RNO, inquiry_num, user_id, product_num, inquiry_title, inquiry_text, inquiry_date, inquiry_answer_time, inquiry_view_count, inquiry_state "
 	               + " from "
 	               + "    ( "
-	               + "    select inquiry_num, user_id, product_num, inquiry_title, inquiry_text, inquiry_date, inquiry_answer_time, inquiry_view_count "
+	               + "    select inquiry_num, user_id, product_num, inquiry_title, inquiry_text, inquiry_date, inquiry_answer_time, inquiry_view_count, inquiry_state "
 	               + "    from tbl_inquiry ";
 	               
 	         
@@ -302,7 +302,7 @@ public class NoticeDAO implements InterNoticeDAO{
 	         System.out.println(nvo);
 	         
 	         String sql = " insert into tbl_inquiry(inquiry_num, user_id, product_num, inquiry_title, inquiry_text, inquiry_date, inquiry_state, inquiry_answer_time, inquiry_view_count) " +  
-	                      " values((select nvl(max(inquiry_num),0) +1 from tbl_inquiry) ,? ,(select nvl(max(product_num),0) +1 from tbl_inquiry) ,? ,? , sysdate ,'답변완료' ,sysdate , (select nvl(max(inquiry_view_count),0) from tbl_inquiry)) ";
+	                      " values((select nvl(max(inquiry_num),0) +1 from tbl_inquiry) ,? ,(select nvl(max(product_num),0) +1 from tbl_inquiry) ,? ,? , sysdate ,'답변완료' , sysdate , (select nvl(max(inquiry_view_count),0) from tbl_inquiry)) ";
 	         
 	         pstmt = conn.prepareStatement(sql);
 	         

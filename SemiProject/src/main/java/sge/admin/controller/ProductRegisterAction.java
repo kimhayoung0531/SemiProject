@@ -77,6 +77,7 @@ public class ProductRegisterAction extends AbstractController {
 	            // 이때 업로드 된 파일이 없는 경우에는 null을 반환한다.
 	            
 	            String pimage1 = mtrequest.getFilesystemName("pimage1"); 
+	           
 	            String price = mtrequest.getParameter("price");
 	            String pqty = mtrequest.getParameter("pqty");
 	            //그로스 사이트 스크립트 공격 막기(시큐어 코드)
@@ -110,6 +111,7 @@ public class ProductRegisterAction extends AbstractController {
 
 		           // tbl_product 테이블에 insert 하기
 		           pdao.productInsert(pvo);
+		   
 
 		           message = "제품등록 성공!";
 		           loc = request.getContextPath()+"/productRegister.ban";
@@ -120,6 +122,9 @@ public class ProductRegisterAction extends AbstractController {
 	             loc = request.getContextPath()+"/home.ban";
 	        	 
 	         }
+	            String addImage  =  mtrequest.getFilesystemName("pimage2");  
+	        	pdao.product_imageFile_Insert(pnum,addImage);
+	        	
 	            request.setAttribute("message", message);
 	            request.setAttribute("loc", loc);
 	            

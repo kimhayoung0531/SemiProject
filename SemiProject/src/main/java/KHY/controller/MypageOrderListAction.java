@@ -36,7 +36,6 @@ public class MypageOrderListAction extends AbstractController {
 		paraMap.put("enddate", enddate);
 		
 		
-		
 		if(loginuser != null)  {
 			// 로그인을 했으면
 			super.setRedirect(false);

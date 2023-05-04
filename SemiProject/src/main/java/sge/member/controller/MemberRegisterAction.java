@@ -54,7 +54,7 @@ public class MemberRegisterAction extends AbstractController {
 				InterMemberDAO mdao = new MemberDAO();
 				int n = mdao.registermember(member);
 				 if(n==1) {
-					 request.setAttribute("user_id", user_id);
+					 request.setAttribute("user_name", user_name);
 					 request.setAttribute("pwd", pwd);
 					 super.setRedirect(false);
 					 super.setViewPage("/WEB-INF/sge_login/afterRegister.jsp"); 

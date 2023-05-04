@@ -41,6 +41,13 @@ $(document).ready(function(){
 		const frm = document.pjj_searchFrm;	
 		
 		
+		if( frm.searchWord.value.trim() == "" ) {
+			alert("검색어를 올바르게 입력하세요!!")
+			return; // 함수종료
+		} 
+	
+		
+		
 		frm.action = "notice.ban";
 		frm.method = "get";
 		frm.submit();
@@ -123,14 +130,12 @@ $(document).ready(function(){
 				<c:forEach var="nvo" items="${requestScope.noticeList}">
 						
 						<tr class="pjj_noticeInfo">
-						
 			              <td class="notice_num">${nvo.notice_num}</td>
 			              <td>${nvo.notice_head}</td>
 			              <td><button class="admin_notice" id="admin_notice" style="font-size: 13pt" onclick="location.href='http://localhost:9090/SemiProject/noticeview.ban'">${nvo.notice_title}</button></td>
 			              <td>${nvo.notice_date}</td>
 			              <td>${nvo.notice_writer}</td>
-			              <td id="admin_noticecnt">${nvo.notice_viewcount}</td>
-			           	
+			              <td id="admin_noticecnt">${nvo.notice_viewcount}</td>        	
 			           </tr>
 			            
 				</c:forEach>
@@ -163,8 +168,6 @@ $(document).ready(function(){
 							<option value="notice_writer">작성자</option>
 						</select>
 						<input type="text" id="searchWord" name="searchWord" />
-						
-						<input type="text" style="display: none;">  
 						
 						<button type="button" class="btn btn-secondary" style="margin-left: 10px; margin-right: 30px;" onclick="goSearch();">검색</button>
 						

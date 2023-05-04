@@ -230,16 +230,23 @@ public class ProductDAO implements InterProductDAO  {
 				
 				int cnt = 0;
 				for(int i = 0; i < productNum_arr.length; i++) {
-					sql = " update tbl_product set (product_inventory, sale_count) =  (product_inventory - ?,  sale_count + ?)"
+					sql = " update tbl_product set product_inventory = (product_inventory - ?) "
 							+ "where product_num = ? ";
 					
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setLong(1, Long.parseLong(productCnt_arr[i]));
-					pstmt.setLong(2, Long.parseLong(productCnt_arr[i]));
-					pstmt.setLong(3, Long.parseLong(productNum_arr[i]));
+					pstmt.setLong(2, Long.parseLong(productNum_arr[i]));
 					
 					pstmt.executeUpdate();
 
+					sql = " update tbl_product set sale_count = (sale_count + ?) "
+							+ "where product_num = ? ";
+					
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, Integer.parseInt(productCnt_arr[i]));
+					pstmt.setLong(2, Long.parseLong(productNum_arr[i]));
+					
+					pstmt.executeUpdate();
 					cnt++;
 				}
 				if(cnt == productNum_arr.length) {
@@ -476,6 +483,32 @@ public class ProductDAO implements InterProductDAO  {
 
 
 		return pvoList;
+	}
+	
+	//상세이미지 추가하기
+	@Override
+	public int product_imageFile_Insert(long pnum, String addImage) throws SQLException {
+		int result = 0;
+	      
+	      try {
+	         conn = ds.getConnection();
+	         
+	         String sql = " insert into tbl_addimage(image_num, product_num, image_name) "+ 
+	                      " values(seq_addImgae_num.nextval, ?, ?) ";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setLong(1, pnum);
+	         pstmt.setString(2, addImage);
+	         
+	         result = pstmt.executeUpdate();
+	         
+	      } finally {
+	         close();
+	      }
+	      
+	      return result;
+     
 	}
 
 
