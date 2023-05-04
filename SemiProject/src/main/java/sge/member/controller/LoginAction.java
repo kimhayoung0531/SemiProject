@@ -55,7 +55,7 @@ public class LoginAction extends AbstractController {
 				
 				return; //메소드 종료
 			}
-			else if(loginuser.getStatus() == 1) {
+			else if(loginuser.getStatus() == 0) {
 				String message = "이미 탈퇴한 회원입니다";
 				String loc = "";
 				
