@@ -245,7 +245,7 @@ body .centerMenu ul li a {
 }
 .allMenu>li:hover .switch_submenu  {
     display: block;
-}   
+} 
 
 .switch_submenu ul>li:hover .sub_delth1 {
     display: block;
@@ -305,6 +305,8 @@ body .centerMenu ul li a {
 /*   상단 배너 ,이벤트 슬라이드 */
 .goods_list_cont_1 {padding: 0px 0px 0px 45px}
 .goods_list_tit >h3 {padding: 20px 0px 20px 0px;}
+
+.slick-slider img {height: 280px;}
 
 /* 이벤트 슬라이드 버튼 컨트롤*/
 .visual_0, .visual_1, .visual_2 { position: relative;}
