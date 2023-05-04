@@ -112,7 +112,6 @@
 								<input type="text" name="inquiry_title" class="infoData">
 								<span class="error">필수입력</span>
 								</td>
-							
 						</tr>
 						<tr>
 							<th scope="row">문의내용</th>
