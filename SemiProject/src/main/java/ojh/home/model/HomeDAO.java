@@ -226,8 +226,7 @@ public class HomeDAO implements InterHomeDAO {
 					
 					pvoNewList.add(pvo);
 					
-					System.out.println(rs.getString("product_date"));
-					System.out.println(Long.parseLong(rs.getString("product_num")));
+					
 					
 				}
 				
