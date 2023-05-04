@@ -304,16 +304,16 @@ $(document).ready(function(){
                             <div class="mypage_table_type">
                                 <table>
                                     <colgroup>
-                                        <col style="width:12%">	<!-- 날짜 -->
-			                            <col style="width:12%"> <!-- 유형 -->
+                                        <col style="width:20%">	<!-- 날짜 -->
+			                            <col style="width:20%"> <!-- 유형 -->
 			                            <col>					<!-- 구매내역 -->
-			                            <col style="width:14%"> <!-- 마일리지 내역 -->
-			                            <col style="width:14%"> <!-- 현재 총 마일리지 -->
+			                            <col style="width:20%"> <!-- 마일리지 내역 -->
+			                            <col style="width:20%"> <!-- 현재 총 마일리지 -->
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th>날짜</th>
-				                            <th>유형</th>
+                                            <th>날짜/주문상세번호</th>
+				                            <th>상품</th>
 				                            <th>구매내역</th>
 				                            <th class="td_cash"><span>마일리지 내역</span></th>
 				                            <th class="td_cash"><span>현재 총 마일리지</span></th>
@@ -329,7 +329,7 @@ $(document).ready(function(){
 	                                    </c:if>
 	                                     
 	                                    <c:if test="${not empty requestScope.mileageList}">
-							               <c:forEach var="odvo" items="${requestScope.likeList}" varStatus="status"> 
+							               <c:forEach var="odvo" items="${requestScope.mileageList}" varStatus="status"> 
 							                   <tr>
 							                        <td> <%-- 날짜 및 주문번호 --%> 
 							                            <span class="product_title">${odvo.ovo.order_date}</span><br>
@@ -348,12 +348,12 @@ $(document).ready(function(){
 							                              
 							                        </td>
 							                        <td align="right"> <%-- 주문상태 --%> 
-							                            <span class="order_quantity">${odvo.delivery_status}</span>
+							                             <fmt:formatNumber value="${odvo.ovo.order_price_total*0.01}" pattern="###,###" /> 원<br>
 							                            
 							                        </td>
 							                        <td align="right"> <%-- 리뷰 --%> 
 							                            
-							                            <%-- 리뷰 작성한거 끌어오기 안썼으면 작성하기 버튼 생성 --%>
+							                            <fmt:formatNumber value="${requestScope.totalMileage}" pattern="###,###" /> 원<br>
 							                            
 							                        </td>
 							                      </tr>

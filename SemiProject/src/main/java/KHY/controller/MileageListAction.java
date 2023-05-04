@@ -56,7 +56,7 @@ public class MileageListAction extends AbstractController {
 				
 				paraMap.put("currentShowPageNO", currentShowPageNO); //조회하고자하는 페이지번호
 		         
-				int totalPage = pdao.getTotalPageOrder(paraMap);
+				int totalPage = pdao.getTotalPageMileage(paraMap);
 				
 				if( Integer.parseInt(currentShowPageNO) > totalPage) {
 					  currentShowPageNO = "1";
@@ -64,11 +64,14 @@ public class MileageListAction extends AbstractController {
 				  }
 				
 
-				List<OrderDeatailVO> orderList = pdao.selectPagingOrderList(paraMap);
+				List<OrderDeatailVO> mileageList = pdao.selectPagingMileageList(paraMap);
+				
+				int TotalMileage = pdao.getTotalMileage(loginuser.getUser_id());
 				
 				int count = pdao.selectOrderListCount(paraMap);
 				
-		        request.setAttribute("orderList", orderList);
+				request.setAttribute("totalMileage", TotalMileage);
+		        request.setAttribute("mileageList", mileageList);
 		        request.setAttribute("count", count);
 			
 		        String pageBar = "";

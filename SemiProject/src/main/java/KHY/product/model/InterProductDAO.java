@@ -51,7 +51,16 @@ public interface InterProductDAO {
 
 	//페이징 처리를 한 회원의 리뷰 목록 알아오기
 	List<ReviewVO> selectPagingReviewList(Map<String, String> paraMap) throws SQLException;
-	
+
+	int getTotalPageMileage(Map<String, String> paraMap) throws SQLException;
+
+	List<OrderDeatailVO> selectPagingMileageList(Map<String, String> paraMap) throws SQLException;
+
+	// 토탈 마일리지 알아오기
+	int getTotalMileage(String user_id) throws SQLException;
+
+	// 배송 완료 수 알아오기
+	int selectStatus(String user_id) throws SQLException;
 	
 	
 }

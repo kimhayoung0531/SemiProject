@@ -34,7 +34,11 @@ public class MypageAction extends AbstractController {
 		         
 				List<OrderDeatailVO> orderList = pdao.selectOrderList(loginuser.getUser_id());  
 		        
+				int total = pdao.selectStatus(loginuser.getUser_id());
+				
 				request.setAttribute("orderList", orderList);
+				request.setAttribute("total", total);
+				
 		        
 			
 			

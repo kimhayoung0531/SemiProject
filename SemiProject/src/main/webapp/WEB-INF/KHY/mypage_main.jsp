@@ -153,7 +153,7 @@
                                 <li class="jb-wrap">
                                     <b>배송완료</b>
                                     <img src="image/mypgae_ing_list_bg.png" alt="">
-                                    <span>0</span>
+                                    <span>${requestScope.total }</span>
 
                                 </li>
                                 <li class="jb-wrap">
@@ -194,11 +194,10 @@
                             <div class="mypage_table_type">
                                 <table>
                                     <colgroup>
-                                        <col style="width:15%"> <!-- 날짜/주문번호 -->
+                                        <col style="width:18%"> <!-- 날짜/주문번호 -->
                                         <col> <!-- 상품명/옵션 -->
-                                        <col style="width:15%"> <!-- 상품금액/수량 -->
-                                        <col style="width:15%"> <!-- 주문상태 -->
-                                        <col style="width:15%"> <!-- 확인/리뷰 -->
+                                        <col style="width:18%"> <!-- 상품금액/수량 -->
+                                        <col style="width:18%"> <!-- 주문상태 -->
                                     </colgroup>
                                     <thead>
                                         <tr>
@@ -206,9 +205,7 @@
                                             <th>상품명</th>
                                             <th>상품금액/수량</th>
                                             <th>주문상태</th>
-                                            <th>
-                                                확인/리뷰
-                                            </th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -234,7 +231,7 @@
 							                        </td>
 							                        <td align="center"> <%-- 상품명 --%> 
 							                           <a href="<%= ctxPath%>/productDeatail.ban?product_num=${odvo.pvo.product_num}"><!-- 제품상세페이지 링크 -->
-							                              <img src="/SemiProject/images/${cartvo.prod.pimage1}" class="img-thumbnail" width="130px" height="100px" />
+							                              <img src="<%= ctxPath%>/image/item_main/${odvo.pvo.main_image}" class="img-thumbnail" width="130px" height="100px" />
 							                           </a> 
 							                           <br/><span class="product_title">${odvo.pvo.product_title}</span> 
 							                        </td>
@@ -255,11 +252,7 @@
 										              	</c:choose>
 							                            
 							                        </td>
-							                        <td align="center"> <%-- 리뷰 --%> 
-							                            
-							                            <%-- 리뷰 작성한거 끌어오기 안썼으면 작성하기 버튼 생성 --%>
-							                            
-							                        </td>
+							                        
 							                      </tr>
 							                 </c:forEach>
 							            </c:if>    
