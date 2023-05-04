@@ -62,7 +62,7 @@ public class ProductDAO implements InterProductDAO  {
 		ProductVO pvo = new ProductVO();
 		
 		try {
-			String sql = " select * from tbl_product A join tbl_addimage B on A.product_num= B.product_num where A.product_num = ? ";
+			String sql = " select * from tbl_product A join tbl_addimage B on A.product_num= B.product_num join tbl_category C on A.category_num = C. category_num where A.product_num = ? ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,  product_num);
@@ -83,6 +83,11 @@ public class ProductDAO implements InterProductDAO  {
 			AddImageVO aivo = new AddImageVO();
 			aivo.setImage_name(rs.getString("image_name"));
 			pvo.setAivo(aivo);
+			
+			parkjuneyub.product.model.CategoryVO cvo = new parkjuneyub.product.model.CategoryVO();
+			
+			cvo.setCategory_name(rs.getString("category_name"));
+			pvo.setCvo(cvo);
 			
 		}
 		finally {
@@ -225,11 +230,20 @@ public class ProductDAO implements InterProductDAO  {
 				
 				int cnt = 0;
 				for(int i = 0; i < productNum_arr.length; i++) {
-					sql = " update tbl_product set product_inventory =  product_inventory - ? "
+					sql = " update tbl_product set product_inventory = (product_inventory - ?) "
 							+ "where product_num = ? ";
 					
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setLong(1, Long.parseLong(productCnt_arr[i]));
+					pstmt.setLong(2, Long.parseLong(productNum_arr[i]));
+					
+					pstmt.executeUpdate();
+
+					sql = " update tbl_product set sale_count = (sale_count + ?) "
+							+ "where product_num = ? ";
+					
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, Integer.parseInt(productCnt_arr[i]));
 					pstmt.setLong(2, Long.parseLong(productNum_arr[i]));
 					
 					pstmt.executeUpdate();

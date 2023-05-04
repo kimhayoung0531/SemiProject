@@ -146,10 +146,10 @@ public class OrderEndAction extends AbstractController {
 			StringBuilder sb = new StringBuilder();
 			
 			String html = "  <div class=\"order_zone_tit\">\r\n"
-					+ " <h3 class=\"title_h3\">주문자 정보</h3>\r\n"
+					+ " <h3 class=\"title_h3\" style=\"text-align:center\">주문자 정보</h3>\r\n"
 					+ " </div>\r\n"
 					+ "  <div class=\"order_table_type\">\r\n"
-					+ "                                                    <table>\r\n"
+					+ "                                                    <table style=\"border:1px solid black\">\r\n"
 					+ "                                                        <colgroup>\r\n"
 					+ "                                                            <col style=\"width:50%\">\r\n"
 					+ "                                                            <col style=\"width:50%\">\r\n"
@@ -194,8 +194,8 @@ public class OrderEndAction extends AbstractController {
 					+ "    		<th><span class=\"order_important\">마일리지 적립/사용</span></th>\r\n"
 					+ "  <td>\r\n"
 					+ "      <ul class=\"order_benefit_list\"> \r\n"
-					+ "   		<li>마일리지 적립 : <span class='save_mileage'>"+ovo.getOrder_mileage_total()+"</span>원</li>\r\n"
-					+ "   		<li>마일리지 사용 : <span class='save_mileage'>"+save_mileage+"</span>원</li>\r\n"
+					+ "   		<li>마일리지 적립 : <span class='save_mileage'>"+save_mileage+"</span>원</li>\r\n"
+					+ "   		<li>마일리지 사용 : <span class='save_mileage'>"+ovo.getOrder_mileage_total()+"</span>원</li>\r\n"
 					+ "   	</ul>\r\n"
 					+ " </td>\r\n"
 					+ " </tr>\r\n"

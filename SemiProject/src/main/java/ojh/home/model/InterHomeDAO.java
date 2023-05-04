@@ -20,6 +20,9 @@ public interface InterHomeDAO {
 
 	// 메인페이지 신상품 이벤트 데이터 출력
 	List<ProductVO> getNewProduct() throws SQLException;
+
+	// 메인페이지 초코파티 이벤트 데이터 출력
+	List<ProductVO> getChocoProduct() throws SQLException;
 	
 	
 	

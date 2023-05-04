@@ -82,7 +82,7 @@
 		                                    <span class="txt_bar"></span>
 		                                </li>
 		                                 <li>
-		                                    <a href="#">고객센터</a>
+		                                    <a href="<%= ctxPath%>/notice.ban">고객센터</a>
 		                                    <span class="txt_bar"></span>
 		                                </li>
 		                           	 </ul>
@@ -95,7 +95,7 @@
 		                                </li>
 		
 		                                <li>
-		                                    <a href="#">고객센터</a>
+		                                    <a href="<%= ctxPath%>/notice.ban">고객센터</a>
 		                                    <span class="xtt_bar"></span>
 		                                </li>
 		                                 <li>
@@ -111,7 +111,7 @@
                         <div class="header_search_cont">
                             <div class="h1_logo">
                                 <a href="http://localhost:9090/SemiProject/home.ban">
-                                    <img src="<%=ctxPath%>/image/main_logo.png">
+                                    <img src="<%=ctxPath%>/image/main_logo_bp.png">
                                 </a>
                             </div>
 
@@ -136,7 +136,7 @@
                             <div class="headBtn">
                                 <ul>
                                      <li class="mypageBtn">
-                                        <a href="#">
+                                        <a href="<%= ctxPath%>/mypage.ban">
                                         	 <img src="<%=ctxPath%>/image/icon_heart_ku.svg">
                                         </a>
                                     </li>
@@ -176,8 +176,7 @@
 
                                     <li><a href="<%= ctxPath%>/homebest.ban">베스트</a></li>
                                     <li><a href="<%= ctxPath%>/event.ban">이벤트</a></li>
-                                    <li><a href="">구매후기</a></li>
-                                    <li><a href="">고객센터</a></li>
+                                    <li><a href="<%= ctxPath%>/notice.ban">고객센터</a></li>
                                     <c:if test="${not empty sessionScope.loginuser && sessionScope.loginuser.user_id == 'admin'}"> <!-- 로그인 하기 후  -->
 		                                <li><a href="<%= ctxPath%>/productRegister.ban">상품등록하기</a></li>
                           			</c:if>
