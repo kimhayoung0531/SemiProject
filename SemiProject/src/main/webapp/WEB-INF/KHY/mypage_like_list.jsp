@@ -99,31 +99,20 @@
                     <ul class="sub_menu_mypage">
                         <li>쇼핑정보
                             <ul class="sub_depth1">
-                                <li><a href="../mypage/order_list.php">- 주문목록/배송조회</a></li>
-                                <li><a href="../mypage/cancel_list.php">- 주문취소</a></li>
-                                <li><a href="../mypage/wish_list.php">- 좋아요리스트</a></li>
-                            </ul>
-                        </li>
-                        <li>고객센터
-                            <ul class="sub_depth1">
-                                <li><a href="../mypage/mypage_qa.php">- 1:1 문의</a></li>
+                                <li><a href="<%= ctxPath%>/mypageOrderList.ban">- 주문목록/배송조회</a></li>
+                                <li><a href="<%= ctxPath%>/mypageLikeList.ban">- 좋아요리스트</a></li>
                             </ul>
                         </li>
                         <li>회원정보
                             <ul class="sub_depth1">
-                                <li><a href="../mypage/my_page_password.php">- 회원정보 변경</a></li>
-                                <li><a href="../mypage/hack_out.php">- 회원 탈퇴</a></li>
-                                <li><a href="../mypage/mileage.php">- 마일리지</a></li>
-                            </ul>
-                        </li>
-                        <li>나의 상품문의
-                            <ul class="sub_depth1">
-                                <li><a href="../mypage/mypage_goods_qa.php">- 나의 상품문의</a></li>
+                                <li><a href="<%= ctxPath%>/mypageMemberChangePwdcheck.ban">- 회원정보 변경</a></li>
+                                <li><a href="<%= ctxPath%>/mypagememberDeletePwdcheck.ban">- 회원 탈퇴</a></li>
+                                <li><a href="<%= ctxPath%>/mypageMileageList.ban">- 마일리지</a></li>
                             </ul>
                         </li>
                         <li>나의 상품후기
                             <ul class="sub_depth1">
-                                <li><a href="../mypage/mypage_goods_review.php">- 나의 상품후기</a></li>
+                                <li><a href="<%= ctxPath%>/mypageReview.ban">- 나의 상품후기</a></li>
                             </ul>
                         </li>
                     </ul>
