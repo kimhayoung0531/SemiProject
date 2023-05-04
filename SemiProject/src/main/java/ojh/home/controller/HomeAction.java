@@ -22,6 +22,16 @@ public class HomeAction extends AbstractController {
 		  request.setAttribute("pvohomeList", pvohomeList);
 		
 		  
+		  
+		  List<ProductVO> pvoNewList = hdao.getNewProduct();
+			
+		  request.setAttribute("pvoNewList", pvoNewList);
+		  
+		  
+		  List<ProductVO> pvoChocoList = hdao.getChocoProduct();
+		  
+		  request.setAttribute("pvoChocoList", pvoChocoList);
+		  
 		
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/ojh_home/home.jsp");
