@@ -82,9 +82,9 @@ public class MypageReviewAction extends AbstractController {
 				////////////////////////////////////////////////
 				
 				// **** [맨처음][이전] 만들기 **** //
-				pageBar += "<div class='pagi'><li class='page-item'><a class='page-link' href='mypageReviewList.ban?currentShowPageNO=1'>[맨처음]</a></li>";
+				pageBar += "<div class='pagi'><li class='page-item'><a class='page-link' href='mypageReview.ban?currentShowPageNO=1'>[맨처음]</a></li>";
 				if(pageNo != 1) {
-					pageBar += "<li class='page-item'><a class='page-link' href='mypageReviewList.ban?currentShowPageNO="+(pageNo-1)+"'>[이전]</a></li>";
+					pageBar += "<li class='page-item'><a class='page-link' href='mypageReview.ban?currentShowPageNO="+(pageNo-1)+"'>[이전]</a></li>";
 				}
 				
 				
@@ -96,7 +96,7 @@ public class MypageReviewAction extends AbstractController {
 						pageBar += "<li class='page-item active'><a class='page-link' href='#'>"+pageNo+"</a></li>"; // 부트스트랩에 있는 네비게이션 페이지바 사용하는거임
 					}
 					else {
-						pageBar += "<li class='page-item'><a class='page-link' href='mypageReviewList.ban?currentShowPageNO="+pageNo+"'>"+pageNo+"</a></li>"; // 부트스트랩에 있는 네비게이션 페이지바 사용하는거임
+						pageBar += "<li class='page-item'><a class='page-link' href='mypageReview.ban?currentShowPageNO="+pageNo+"'>"+pageNo+"</a></li>"; // 부트스트랩에 있는 네비게이션 페이지바 사용하는거임
 					}
 					loop++;   // 1 2 3 4 5 6 7 8 9 10
 					
@@ -111,10 +111,10 @@ public class MypageReviewAction extends AbstractController {
 				// pageNo => 11
 				// pageNo => 21
 				if(pageNo <= totalPage) {
-					pageBar += "<li class='page-item'><a class='page-link' href='mypageReviewList.ban?currentShowPageNO="+pageNo+"'>[다음]</a></li>";
+					pageBar += "<li class='page-item'><a class='page-link' href='mypageReview.ban?currentShowPageNO="+pageNo+"'>[다음]</a></li>";
 						
 				}
-				pageBar += "<li class='page-item'><a class='page-link' href='mypageReviewList.ban?currentShowPageNO="+totalPage+"'>[마지막]</a></li></div>";
+				pageBar += "<li class='page-item'><a class='page-link' href='mypageReview.ban?currentShowPageNO="+totalPage+"'>[마지막]</a></li></div>";
 				
 				
 				

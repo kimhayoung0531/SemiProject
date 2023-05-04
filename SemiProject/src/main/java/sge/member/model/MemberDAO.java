@@ -244,6 +244,7 @@ public class MemberDAO implements InterMemberDAO {
 					 pstmt.setString(1, paraMap.get("user_id"));
 					 pstmt.setString(2, paraMap.get("clientip"));
 					 
+					 
 					 pstmt.executeUpdate();
 				 }
 				
@@ -378,6 +379,50 @@ public class MemberDAO implements InterMemberDAO {
 			}
 			
 			return bool;
+		}
+		
+		// 마이페이지 회원정보 변경
+		@Override
+		public int editmember(MemberVO member) throws SQLException {
+			 int n = 0;
+		      
+		      try {
+		         conn = ds.getConnection();
+		         
+		         String sql = " update tbl_member set user_name = ? "
+		                  + "                     , pwd = ? "
+		                  + "                     , email = ? "
+		                  + "                     , mobile = ? "
+		                  + "                     , post_code = ? "
+		                  + "                     , address = ? "
+		                  + "                     , detailAddress = ? "
+		                  + "                     , extraAddress = ? "
+		                  + "                     , lastPwdChange = sysdate "
+		                  + "                     , telephone = ? "
+		                  + " where user_id = ? ";
+		         
+		         pstmt = conn.prepareStatement(sql); 
+		         
+		         pstmt.setString(1, member.getUser_name());
+		         pstmt.setString(2, Sha256.encrypt(member.getPwd())); // 암호를 SHA256 알고리즘으로 단방향 암호화 시킨다. 
+		         pstmt.setString(3, aes.encrypt(member.getEmail()));  // 이메일을 AES256 알고리즘으로 양방향 암호화 시킨다. 
+		         pstmt.setString(4, aes.encrypt(member.getMobile()) ); // 휴대폰번호를 AES256 알고리즘으로 양방향 암호화 시킨다. 
+		         pstmt.setString(5, member.getPost_code());
+		         pstmt.setString(6, member.getAddress());
+		         pstmt.setString(7, member.getDetailAddress());
+		         pstmt.setString(8, member.getExtraAddress());
+		         pstmt.setString(9, member.getTelephone());
+		         pstmt.setString(10, member.getUser_id());
+		         
+		         n = pstmt.executeUpdate();
+		         
+		      } catch(GeneralSecurityException | UnsupportedEncodingException e) {
+		         e.printStackTrace();
+		      } finally {
+		         close();
+		      }
+		      
+		      return n;
 		}
 	
 
