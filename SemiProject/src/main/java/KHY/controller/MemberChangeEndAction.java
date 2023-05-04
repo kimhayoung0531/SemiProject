@@ -30,26 +30,21 @@ public class MemberChangeEndAction extends AbstractController {
 		}
 		else {
 			// post 방식으로 넘어온다면 디비에 저장해줘야한다.
+			
+			System.out.println("제발");
 		    
 			String user_id = request.getParameter("user_id");
 			String pwd = request.getParameter("pwd");
 			String user_name = request.getParameter("user_name");
 			String email = request.getParameter("email");
-			String hp1 = request.getParameter("hp1");
-			String hp2 = request.getParameter("hp2");
-			String hp3 = request.getParameter("hp3");
-			String mp1 = request.getParameter("mp1");
-			String mp2 = request.getParameter("mp2");
-			String mp3 = request.getParameter("mp3");
+			String mobile = request.getParameter("mobile");
+			String telephone = request.getParameter("telephone");
 			String post_code = request.getParameter("post_code");
 			String address = request.getParameter("address");
 			String detailAddress = request.getParameter("detailAddress");
 			String extraAddress = request.getParameter("extraAddress");
 
-
-			String mobile = hp1+hp2+hp3;
-			String telephone = mp1+mp2+mp3;
-
+			System.out.println(post_code);
 			
 		    MemberVO member = new MemberVO(user_id, pwd, user_name, email, mobile,telephone,post_code, address,  detailAddress,  extraAddress);
 		
@@ -73,12 +68,11 @@ public class MemberChangeEndAction extends AbstractController {
 						loginuser.setExtraAddress(extraAddress);
 												
 					
-					 request.setAttribute("user_id", user_id);
-					 request.setAttribute("pwd", pwd);
+						request.setAttribute("pwd", pwd);
 					 
 					
 					super.setRedirect(false);
-					super.setViewPage("/WEB-INF/KHY/mypage_main.jsp");
+					super.setViewPage("/WEB-INF/ojh_home/home.jsp");
 					 
 				 }
 			}catch (SQLException e) {
