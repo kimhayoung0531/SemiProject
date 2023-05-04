@@ -378,7 +378,7 @@
 		                                            <div class="pick_add_cont"> 
 		                                                <div class="pick_add_img_info"> 
 		                                                    <a href="/SemiProject/productDeatail.ban?product_num=${cartvo.pvo.product_num}">
-		                                                    <img src="/SemiProject/image/item_main/${cartvo.pvo.main_image}.jpg" width="60"
+		                                                    <img src="/SemiProject/image/item_main/${cartvo.pvo.main_image}" width="60"
 		                                                        alt="${cartvo.pvo.product_title}" title="${cartvo.pvo.product_title}" />
 		                                                    </a>
 		                                                   <p class="cart_pname"><a href="/SemiProject/productDeatail.ban?product_num=${cartvo.pvo.product_num}">${cartvo.pvo.product_title}</a></p>
