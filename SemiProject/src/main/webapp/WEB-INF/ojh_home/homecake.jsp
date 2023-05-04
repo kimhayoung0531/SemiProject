@@ -113,12 +113,12 @@
                                                     <div class="ojh_imte_cont" style="display: inline-block;">
                                                         <div class="ojh_photo_box" style="display: inline-block">
                                                             <a href="<%= request.getContextPath()%>/productDeatail.ban?product_num=${pvo.product_num}">
-                                                                <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " >
+                                                                <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}" width="245" alt="${pvo.product_title}" title="${pvo.product_title}" >
                                                             </a>
 
                                                         </div>
                                                         <div class="item-info-cont" style="display:block; text-align: left; margin: 15px 0px 15px 0px;">
-                                                                <a href="#">
+                                                                <a href="<%= request.getContextPath()%>/productDeatail.ban?product_num=${pvo.product_num}">
                                                                 <strong class="item_name" style="direction: ltr;">${pvo.product_title}</strong>
                                                                 
                                                                 <span class="ojh_item_name_explain" style="color: #a8a8a8;">${pvo.product_detail}</span>
