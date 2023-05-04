@@ -155,7 +155,7 @@
 
 		</form>
 	</div>
-	<!-- //board_zone_cont -->
+	
 
 </div>
 </div>
