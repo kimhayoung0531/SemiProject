@@ -43,6 +43,12 @@
                                   </a>
                                 </div>
                                 
+                                <div>
+                                  <a href="#">
+                                    <img src="<%=ctxPath%>/image/evt_ba4.jpg" class="middle">
+                                  </a>
+                                </div>
+                                
                             </div>
                             <script type="text/javascript">
                                 
@@ -79,7 +85,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="<%=ctxPath%>/productDeatail.ban?product_num=${pvo.product_num}">
-                                                    <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}" width="200" alt="[15~20% 할인]감사의 달 타르트" title="[15~20% 할인]감사의 달 타르트 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}" width="200" alt="${pvo.product_title}" title="${pvo.product_title}" class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left; margin: 0px 0px 0px 25px;">
@@ -165,7 +171,7 @@
                                             <div class="item_cont" >
                                               <div class="photo_box">  
                                                 <a href="<%=ctxPath%>/productDeatail.ban?product_num=${pvo.product_num}">
-                                                    <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}" width="200" alt="[15~20% 할인]감사의 달 타르트" title="[15~20% 할인]감사의 달 타르트 " class="middle" >
+                                                    <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}" width="200" alt="${pvo.product_title}" title="${pvo.product_title}" class="middle" >
                                                 </a>
                                               </div>  
                                               <div class="item-info-cont" style="display:block; text-align: left; margin: 0px 0px 0px 25px;">
