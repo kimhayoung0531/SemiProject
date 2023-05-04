@@ -39,6 +39,9 @@ public interface InterProductDAO {
 	// 상품번호 리스트로 상품의 메인이미지, 상품 타이틀, 상품 번호 가져오기
 	List<ProductVO> getPvoListByPnum(String[] productNum_arr) throws SQLException;
 
+	// 상세이미지 추가하기
+	int product_imageFile_Insert(long pnum, String addImage)throws SQLException;
+
 	
 	
 	

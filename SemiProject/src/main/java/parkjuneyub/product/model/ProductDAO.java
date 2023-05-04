@@ -484,6 +484,32 @@ public class ProductDAO implements InterProductDAO  {
 
 		return pvoList;
 	}
+	
+	//상세이미지 추가하기
+	@Override
+	public int product_imageFile_Insert(long pnum, String addImage) throws SQLException {
+		int result = 0;
+	      
+	      try {
+	         conn = ds.getConnection();
+	         
+	         String sql = " insert into tbl_addimage(image_num, product_num, image_name) "+ 
+	                      " values(seq_addImgae_num.nextval, ?, ?) ";
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setLong(1, pnum);
+	         pstmt.setString(2, addImage);
+	         
+	         result = pstmt.executeUpdate();
+	         
+	      } finally {
+	         close();
+	      }
+	      
+	      return result;
+     
+	}
 
 
 
