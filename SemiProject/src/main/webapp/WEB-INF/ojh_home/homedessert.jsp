@@ -120,12 +120,12 @@
                                                                 <a href="#">
                                                                 <strong class="item_name" style="direction: ltr;">${pvo.product_title}</strong>
                                                                 
-                                                                <span class="ojh_item_name_explain" style="color: #a8a8a8;">쫀득쫀득 알밤</span>
+                                                                <span class="ojh_item_name_explain" style="color: #a8a8a8;">${pvo.product_detail}</span>
                                                                 </a>
                                                             <div class="imem_money_box">
                                                                 <span class="precent" style="display: none;">15%</span>
                                                                 <strong class="item_price">
-                                                                    <span >3,500원 </span>
+                                                                    <span >${pvo.product_price}원 </span>
                                                                     <span style="color: #888; text-decoration: line-through;">
                                                                     </span>
                                                                 </strong>
@@ -136,15 +136,12 @@
                                                 </li>
                                         	</ul>
                                         </div> <!-- ojh_item_gallery_type -->
-                                       </div>
-                                      </div>
-                                        
-                               		
-									
+                                       
                                    </div> <!-- ojh_goods_list_cont -->
                                 </div> <!-- ojh_goods_list basic_product -->
                              </div> <!-- ojh_right_content goods_list -->
                            </div> <!-- end of ojh_container relative clearfix -->
+                           
                         </div> <!-- ojh_content -->
                     </div> <!-- ojh_sub_content -->
                 </div> <!-- content -->
