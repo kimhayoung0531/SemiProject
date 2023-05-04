@@ -146,7 +146,7 @@ public class OrderEndAction extends AbstractController {
 			StringBuilder sb = new StringBuilder();
 			
 			String html = "  <div class=\"order_zone_tit\">\r\n"
-					+ " <h3 class=\"title_h3\" style=\"text-align:center\">주문자 정보</h3>\r\n"
+					+ " <h3 class=\"title_h3\" style=\"text-align:left\">주문자 정보</h3>\r\n"
 					+ " </div>\r\n"
 					+ "  <div class=\"order_table_type\">\r\n"
 					+ "                                                    <table style=\"border:1px solid black\">\r\n"
