@@ -238,7 +238,7 @@
                                         <div class="item_photo_big">
                                             <span class="img_photo_big">
                                                 <a href="#lyZoom" id="mainImage" class="zoom_layer_open btn_open_layer">
-                                                    <img src="<%= ctxPath%>/image/item_main/${requestScope.pvo.main_image}.jpg" width="500" class="middle">
+                                                    <img src="<%= ctxPath%>/image/item_main/${requestScope.pvo.main_image}" width="500" class="middle">
                                                 </a>
                                                 
                                             </span>
@@ -255,7 +255,7 @@
                                                         <li class="slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" 
                                                         tabindex="-1" role="option" aria-describedby="slick-slide00" style="width :84px;">
                                                             <a href="#상품 메인이미지가 현재 클릭한 사진으로 바뀌는 메소드" tabindex="0">
-                                                                <img src="<%= ctxPath%>/image/item_main/${requestScope.pvo.main_image}.jpg" width="84px" class="middle">
+                                                                <img src="<%= ctxPath%>/image/item_main/${requestScope.pvo.main_image}" width="84px" class="middle">
                                                             </a>
                                                         </li>
                                                     </div>
@@ -301,7 +301,7 @@
                                                 <dl class="item_detail_category">
                                                     <dt>상품구분</dt>
                                                     <dd>
-                                                        냉동생지
+                                                       	${requestScope.pvo.cvo.category_name}
                                                     </dd>
                                                 </dl>
 
