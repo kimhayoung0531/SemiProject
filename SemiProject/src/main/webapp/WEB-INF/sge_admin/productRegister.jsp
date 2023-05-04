@@ -89,6 +89,14 @@ $(document).ready(function(){
 									         <input type="file" name="pimage1" style="border: none;" class="infoData img_file" accept='image/*'  />			   
 									      </td>
                                        </tr>
+                                        <tr>
+                                           <th>
+                                               <span>상품 상세 이미지</span>
+                                           </th>
+                                           <td >
+									         <input type="file" name="pimage2" style="border: none;" class="infoData img_file" accept='image/*'  />			   
+									      </td>
+                                       </tr>
                                    
                                        <tr>
                                            <th>
