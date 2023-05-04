@@ -14,13 +14,15 @@ public class HomedessertAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String category_num = "1";
+		String category_num = "3";
 		
 		InterHomeDAO hdao = new HomeDAO();
 		
 		List<ProductVO> pvoList = hdao.getProductInfo(category_num);
 		
 		request.setAttribute("pvoList", pvoList);
+		
+		System.out.println(pvoList);
 		
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/ojh_home/homedessert.jsp");

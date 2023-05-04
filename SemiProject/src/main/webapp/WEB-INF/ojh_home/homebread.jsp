@@ -63,7 +63,7 @@
                                             </li>
                                             <li class="ojh_li"> 
                                                 <a href="http://localhost:9090/SemiProject/homedrink.ban">
-                                                <span> 음료</span>
+                                                <span> 피자&브리또</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -82,9 +82,9 @@
                                     <div class="ojh_good_pick_list">
                                        <div class="card-group container" id="items"></div>
                                            <div class="ojh_pick_list_box" style="margin: 0px 0px 10px 0px;">
-                                              <button type="button" class="btn" id="sortAbc">가나다순 정렬</button>
-                                              <button type="button" class="btn" id="sortAbc">가격순 정렬</button>
-                                              <button type="button" class="btn" id="sortAbc">원래대로</button>
+                                              <button type="button" class="btn" id="sortAbc"></button>
+                                              <button type="button" class="btn" id="sortAbc"></button>
+                                              <button type="button" class="btn" id="sortAbc"></button>
                                               	 
                                                  <div class="ojh_choice_num view">
                                                     
@@ -115,12 +115,12 @@
                                                     <div class="ojh_imte_cont" style="display: inline-block;">
                                                         <div class="ojh_photo_box" style="display: inline-block">
                                                             <a href="<%= request.getContextPath()%>/productDeatail.ban?product_num=${pvo.product_num}">
-                                                                <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}.jpg" width="245" alt="" title=" " >
+                                                                <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}" width="245" alt="" title=" " >
                                                             </a>
 
                                                         </div>
                                                         <div class="item-info-cont" style="display:block; text-align: left; margin: 15px 0px 15px 0px;">
-                                                                <a href="#">
+                                                                <a href="<%= request.getContextPath()%>/productDeatail.ban?product_num=${pvo.product_num}">
                                                                 <strong class="item_name" style="direction: ltr;">${pvo.product_title}</strong>
                                                                 
                                                                 <span class="ojh_item_name_explain" style="color: #a8a8a8;">${pvo.product_detail}</span>
@@ -136,6 +136,7 @@
                                                         </div> 
                                                     </div>
                                                   </c:forEach>  
+                                                  
                                                 </li>
                                         	</ul>
                                         </div> <!-- ojh_item_gallery_type -->

@@ -316,14 +316,28 @@ body .centerMenu ul li a {
     font-family: 'xeicon'; color: black; font-size: 30px;}
 
 .visual_1 button.slick-prev, .visual_2 button.slick-prev, .visual_3 button.slick-prev {
-    left: -25px; font-size: 0; color: transparent;}
+    left: 2px; font-size: 0; color: transparent;}
 .visual_0 button.slick-prev{
     left: 50px; font-size: 0; color: transparent;}
 
 .visual_0 button.slick-prev:before, .visual_1 button.slick-prev:before, .visual_2 button.slick-prev:before, .visual_3 button.slick-prev:before {
     content: "\e93d"; }
 .visual_0 button.slick-next,  .visual_1 button.slick-next, .visual_2 button.slick-next, .visual_3 button.slick-next {
-    right: 25px; font-size: 0; color: transparent;}
+    right: 2px; font-size: 0; color: transparent;}
+
+
+ .visual_0 button.slick-prev:hover { background-color: #d9d9d9 }
+ .visual_0 button.slick-next:hover { background-color: #d9d9d9 }
+ 
+ .visual_1 button.slick-prev:hover { background-color: #d9d9d9 }
+ .visual_1 button.slick-next:hover { background-color: #d9d9d9 }
+ 
+ .visual_2 button.slick-prev:hover { background-color: #d9d9d9 }
+ .visual_2 button.slick-next:hover { background-color: #d9d9d9 }
+ 
+ .visual_3 button.slick-prev:hover { background-color: #d9d9d9 }
+ .visual_3 button.slick-next:hover { background-color: #d9d9d9 }
+    
 .visual_0 button.slick-next {
     right: 50px; font-size: 0; color: transparent;}
 .visual_0 button.slick-next::before, .visual_1 button.slick-next::before, .visual_2 button.slick-next::before, .visual_3 button.slick-next::before {
@@ -2162,7 +2176,7 @@ body #container #contents .order_sub_content .order_sub_content_box .order_cont 
 
 .item_goods_tab ul {
     float: none;
-    width: 900px;
+    width: 700px;
     padding: 5px 0 0 0;
     height: 48px;
     margin: 0 auto;
@@ -2285,8 +2299,13 @@ table.review_table tbody td:first-child, td:last-child {
 	text-align: center;
 	}
 	
+	#reviews > div.reviews_cont > table > tbody > tr > td:nth-child(4) {
+	width:10%;
+	}
 
-
+	#reviews > div.reviews_cont > table > thead > tr > th:nth-child(1) {
+	width:10%;
+	}
 /* 박준엽 끝------------------------------------------------------------------------------------------ */
 
 /* 성가은 ------------------------------------------------------------------------------------------- */

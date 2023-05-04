@@ -3,6 +3,8 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import= "parkjuneyub.board.model.ReviewVO" %>    
+<%@ page import= "parkjuneyub.member.model.*" %> 
 <%@ page import= "sge.member.model.MemberVO" %>    
 <%
 	String ctxPath = request.getContextPath();
@@ -374,9 +376,6 @@
                                             <li>
                                                 <a href="#reviews">상품후기</a>
                                             </li>
-                                            <li>
-                                                <a href="#qna">상품문의</a>
-                                            </li>
                                         </ul>
                                     </div>
 
@@ -390,9 +389,8 @@
                                                 <p align="center" style="text-align: center;">
                                                     <img src="<%= ctxPath%>/image/delivery_system.jpg">
                                                 </p>
-
                                                 <p align="center" style="text-align: center;">
-                                                    <img src="<%= ctxPath%>/image/item_detail/test02.jpg">
+                                                    <img src="<%= ctxPath%>/image/item_detail/${requestScope.pvo.aivo.image_name}">
                                                 </p>
                                             </div>
                                         </div>
@@ -414,9 +412,7 @@
                                             <li>
                                                 <a href="#reviews">상품후기</a>
                                             </li>
-                                            <li>
-                                                <a href="#qna">상품문의</a>
-                                            </li>
+
                                         </ul>
                                     </div>
 
@@ -447,9 +443,7 @@
                                             <li>
                                                 <a href="#reviews">상품후기</a>
                                             </li>
-                                            <li>
-                                                <a href="#qna">상품문의</a>
-                                            </li>
+
                                         </ul>
                                     </div>
 
@@ -496,9 +490,7 @@
                                             <li class="on">
                                                 <a href="#reviews">상품후기</a>
                                             </li>
-                                            <li>
-                                                <a href="#qna">상품문의</a>
-                                            </li>
+
                                         </ul>
                                     </div>
 
@@ -530,7 +522,17 @@
 											              <td class="userid"><span>${rvo.mvo.user_id}</span></td>
 											              <td>${rvo.review_content}</td>
 											              <td>${rvo.review_date}</td>
-											              
+
+											              <% 
+											              	ReviewVO rvo =(ReviewVO) pageContext.getAttribute("rvo");
+											              	parkjuneyub.member.model.MemberVO mvo = rvo.getMvo();
+											              	String tmp = mvo.getUser_id();
+											                if(tmp.equals(user_id)) {
+											                %>
+
+											               <td><button type="button" class="btn btn-light" onclick="deleteReview('${rvo.purchase_review_id}')">삭제</button><td> 
+															<% } %>
+
 											           </tr>
 													</c:forEach>
 											 	 </c:if>
@@ -552,60 +554,6 @@
                                     
                                 </div>
                                 <!-- 리뷰 끝 -->
-
-                                <div id="qna">
-                                    <div class="item_goods_tab">
-                                        <ul>
-                                            <li>
-                                                <a href="#detail">상품상세정보</a>
-                                            </li>
-                                            <li>
-                                                <a href="#delivery">배송안내</a>
-                                            </li>
-                                            <li>
-                                                <a href="#exchange">교환 및 반품안내</a>
-                                            </li>
-                                            <li>
-                                                <a href="#reviews">상품후기</a>
-                                            </li>
-                                            <li class="on">
-                                                <a href="#qna">상품문의</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="reviews_cont">
-                                        <div class="review_header">
-                                            <div class="review_header_tit">
-                                                <span class="title">상품문의</span>
-                                            </div>
-                                            <div class="review_header_description">
-                                            	
-                                                <a class="review_header_description_link" href="#">전체 상품 문의 보기</a>
-                                            </div>
-                                        </div>
-
-                                        <table class="review_table table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>작성자</th>
-                                                    <th>내용</th>
-                                                    <th>작성일</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <tr>
-                                                    <td>테스트1</td>
-                                                    <td>테스트 내용</td>
-                                                    <td>태스트 날짜</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-
-                                </div>
 
 
                             </div>

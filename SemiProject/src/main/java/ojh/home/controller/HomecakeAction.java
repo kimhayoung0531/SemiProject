@@ -15,7 +15,7 @@ public class HomecakeAction extends AbstractController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		String catrgory_Num = "1";
+		String catrgory_Num = "2";
 		
 		InterHomeDAO hdao = new HomeDAO();
 		

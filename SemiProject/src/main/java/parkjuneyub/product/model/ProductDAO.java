@@ -62,7 +62,7 @@ public class ProductDAO implements InterProductDAO  {
 		ProductVO pvo = new ProductVO();
 		
 		try {
-			String sql = " select * from tbl_product where product_num = ? ";
+			String sql = " select * from tbl_product A join tbl_addimage B on A.product_num= B.product_num where A.product_num = ? ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,  product_num);
@@ -79,6 +79,10 @@ public class ProductDAO implements InterProductDAO  {
 			pvo.setProduct_inventory(rs.getLong("product_inventory"));
 			pvo.setProduct_date(rs.getString("product_date"));
 			pvo.setSale_count(rs.getInt("sale_count"));
+			
+			AddImageVO aivo = new AddImageVO();
+			aivo.setImage_name(rs.getString("image_name"));
+			pvo.setAivo(aivo);
 			
 		}
 		finally {
@@ -424,9 +428,9 @@ public class ProductDAO implements InterProductDAO  {
 	         pstmt.setLong(7, pvo.getProduct_inventory());
 	         pstmt.setString(8, pvo.getProduct_date());
 	         pstmt.setLong(9, pvo.getSale_count());
-	        
-	            
+ 
 	         result = pstmt.executeUpdate();
+
 	         
 	      } catch(NumberFormatException e){
 	    	 
@@ -439,6 +443,40 @@ public class ProductDAO implements InterProductDAO  {
 		
 		
 	}
+
+	@Override
+	public List<ProductVO> getPvoListByPnum(String[] pnum_join) throws SQLException {
+		List<ProductVO> pvoList = new ArrayList<>();
+
+		for(int i = 0; i<pnum_join.length; i++) {
+			try {
+				conn = ds.getConnection();
+
+		         String sql = " select product_num, product_title, main_image "
+		         		+ " from tbl_product where product_num = ? ";
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setString(1, pnum_join[i]);
+		         rs = pstmt.executeQuery();
+
+		         ProductVO pvo = new ProductVO();
+		         rs.next();
+		         pvo.setProduct_num(rs.getLong(1));
+		         pvo.setProduct_title(rs.getString(2));
+		         pvo.setMain_image((rs.getString(3)));
+
+		         pvoList.add(pvo);
+
+			} finally {
+				close();
+			}
+		}
+
+
+		return pvoList;
+	}
+
+
+
 
 	
 	

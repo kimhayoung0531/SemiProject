@@ -163,7 +163,7 @@
                                             </li>
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedessert.ban">디저트</a>
                                             </li>
-                                            <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedrink.ban">음료</a>
+                                            <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homedrink.ban">피자&브리또</a>
                                             </li>
                                              
                                         </ul>
