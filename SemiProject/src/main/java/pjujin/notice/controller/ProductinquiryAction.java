@@ -6,18 +6,24 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import common.controller.AbstractController;
 import pjujin.noticelist.controller.InterNoticeDAO;
 import pjujin.noticelist.controller.NoticeDAO;
 import pjujin.noticelist.controller.NoticeVO;
+import sge.member.model.MemberVO;
 
 public class ProductinquiryAction extends AbstractController {
 
 	InterNoticeDAO ndao = new NoticeDAO();
 	
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			
+		String startdate = request.getParameter("wDate1");
+		String enddate = request.getParameter("wDate2");
 		
 		/*** 페이징처리 ***/
 		String searchType = request.getParameter("searchType");
@@ -35,7 +41,8 @@ public class ProductinquiryAction extends AbstractController {
 		Map<String, String> paraMap = new HashMap<>();
 		paraMap.put("searchType", searchType);
 		paraMap.put("searchWord", searchWord);
-
+		paraMap.put("startdate", startdate);
+		paraMap.put("enddate", enddate);
 		String currentShowPageNo = request.getParameter("currentShowPageNo");
 		String sizePerPage = request.getParameter("sizePerPage");
 

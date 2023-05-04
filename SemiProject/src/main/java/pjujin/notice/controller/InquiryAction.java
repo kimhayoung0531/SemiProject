@@ -41,7 +41,7 @@ public class InquiryAction extends AbstractController {
 			
 			else {
 		        ServletContext svlCtx = session.getServletContext();
-				String uploadFileDir = svlCtx.getRealPath("/pjujin_cs");
+				String uploadFileDir = svlCtx.getRealPath("/image");
 				
 				
 				try {
