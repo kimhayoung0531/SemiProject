@@ -86,7 +86,7 @@ $(document).ready(function(){
                                                <span>상품 대표 이미지</span>
                                            </th>
                                            <td >
-									         <input type="file" name="pimage1" style="border: none;" class="infoData img_file" accept='image/*'  />			   
+									         <input type="file" name="pimage1" style="border: none;" class="infoData img_file" accept='/image/item_main*'  />			   
 									      </td>
                                        </tr>
                                         <tr>
@@ -94,7 +94,7 @@ $(document).ready(function(){
                                                <span>상품 상세 이미지</span>
                                            </th>
                                            <td >
-									         <input type="file" name="pimage2" style="border: none;" class="infoData img_file" accept='image/*'  />			   
+									         <input type="file" name="pimage2" style="border: none;" class="infoData img_file" accept='/image/item_detail*'  />			   
 									      </td>
                                        </tr>
                                    
