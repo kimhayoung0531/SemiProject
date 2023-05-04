@@ -354,6 +354,7 @@
 		    		else if(!json.emailExist && $("input#email").val().trim() !="" ){
 		    			// 존재하지 않는 경우라면 또는 공백을 입력한 경우
 		    			$("span#emailCheckResult").html($("input#email").val()+"은 사용가능합니다.").css("color","blue");
+		    			b_flag_emailDuplicate_click = true;
 		    		}
 		    	},
 		    	
@@ -397,9 +398,6 @@
 		if(b_Flag_requiredInfo){ // 칸이 비어있다면 가입하기 함수를 실행하지 않고 종료
 			return; // 함수종료
 		}
-		
-		alert()
-		
 
 		const frm = document.formJoin;
 		frm.action="mypagememberChangeEnd.ban";
@@ -488,7 +486,7 @@
                                                     <tr>
                                                         <th><span class="important">아이디</span></th>
                                                         <td>
-                                                            <input type="hidden" name="memId" value="${sessionScope.loginuser.user_id}" />
+                                                            <input type="hidden" name="user_id" value="${sessionScope.loginuser.user_id}" />
                                                             ${sessionScope.loginuser.user_id}
                                                         </td>
 
@@ -535,16 +533,16 @@
                                                         <th><span>* 휴대폰번호</span></th>
                                                         <td class="member_address">
                                                             <div class="address_postcode">
-                                                                <input type="text" id="cellPhone" name="cellPhone" maxlength="12" value="${sessionScope.loginuser.mobile}"  placeholder="- 없이 입력하세요." data-pattern="gdNum" value="" />
+                                                                <input type="text" id="cellPhone" name="mobile" maxlength="12" value="${sessionScope.loginuser.mobile}"  placeholder="- 없이 입력하세요." data-pattern="gdNum" value="" />
                                                             </div>
                                                             
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <th><span>일반번호(선택)</span></th>
+                                                        <th><span>* 일반번호 </span></th>
                                                         <td>
                                                             <div class="member_warning">
-                                                                <input type="text" id="phone" name="phone" maxlength="12" placeholder="- 없이 입력하세요." data-pattern="gdNum" value="" />
+                                                                <input type="text" id="phone" class="requiredInfo" name="telephone" maxlength="12" placeholder="- 없이 입력하세요."  data-pattern="gdNum" value="" />
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -552,7 +550,7 @@
                                                         <th><span>* 주소</span></th>
                                                         <td class="member_address">
                                                             <div class="address_postcode">
-                                                                <input type="text" name="zonecode" readonly="readonly" value="${sessionScope.loginuser.post_code}" />
+                                                                <input type="text" name="post_code" readonly="readonly" value="${sessionScope.loginuser.post_code}" />
                                                                 <button type="button" id="btnPostcode" class="btn_post_search">우편번호검색</button>
                                                                 <input type="hidden" name="zipcode" value="-" />
                                                             </div>
@@ -577,7 +575,7 @@
                                     <!-- 회원가입/정보 기본정보 -->
 
                                     <div class="btn_center_box">
-		                               <button type="button" id="btnReset" class="btn_cancle">취소</button>
+		                               <button type="button" id="btnReset" class="btn_cancle" onclick="location.href='<%= ctxPath%>/mypage.ban'" >취소</button>
 		                               <button type="button" id="goToRegis" onclick="goRegister();" class="btn_register" value="정보수정">정보수정</button>
 		                           </div>
 		                            <!-- //btn_center_box -->
