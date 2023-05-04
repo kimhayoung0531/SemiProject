@@ -156,7 +156,7 @@
                               <li> 
                                 <div class="switch">전체 카테고리
                                     <div class="switch_submenu">
-                                        <ul class ="switch_detail_submenu" >
+                                        <ul class ="switch_detail_submenu" style="margin: 0px 0px 0px 16px;">
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homebread.ban">빵</a>
                                             </li>                                           
                                             <li class="ojh_li"><a href="http://localhost:9090/SemiProject/homecake.ban">케이크</a>
