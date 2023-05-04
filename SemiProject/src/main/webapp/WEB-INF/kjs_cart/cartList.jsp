@@ -208,7 +208,7 @@
    	      const checked_cnt = $("input:checkbox[name='pnum']:checked").length;
    	      
    	      if(checked_cnt < 1){
-   	    	  alert("주문하실 제품을 선택하세요.");
+   	    	  alert("장바구니에 담겨있는 상품이 없습니다.");
    	    	  return;
    	      }
    	      else{         
