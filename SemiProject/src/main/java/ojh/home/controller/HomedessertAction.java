@@ -22,7 +22,6 @@ public class HomedessertAction extends AbstractController {
 		
 		request.setAttribute("pvoList", pvoList);
 		
-		System.out.println(pvoList);
 		
 		super.setRedirect(false);
 		super.setViewPage("/WEB-INF/ojh_home/homedessert.jsp");
