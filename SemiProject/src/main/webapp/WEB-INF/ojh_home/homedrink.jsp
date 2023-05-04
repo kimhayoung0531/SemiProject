@@ -29,7 +29,7 @@
                                 <div class="ojh_left_wing">
                                 
                                     <div class="ojh_current-cate" >
-                                        <h3 class="ojh_li" style="line-height: 40px;"> 음료 </h3>
+                                        <h3 class="ojh_li" style="line-height: 40px;"> 피자&브리또 </h3>
                                     </div>
                                     <div class="ojh_category-box" >
                                         <ul>
@@ -50,7 +50,7 @@
                                             </li>
                                             <li class="ojh_li"> 
                                                 <a href="http://localhost:9090/SemiProject/homedrink.ban">
-                                                <span> 음료</span>
+                                                <span> 피자&브리또</span>
                                                 </a>
                                             </li>
                                         </ul>
@@ -62,7 +62,7 @@
                                      <div class="ojh_addition_zone" style="padding: 0px 0px 20px 0px;">
                            
                                        <p style="text-align: center;" >
-                                            <img src="<%=ctxPath%>/image/homedrink.jpg" style="width: 900px; ">
+                                            <img src="<%=ctxPath%>/image/homepizza.jpg" style="width: 900px; ">
                                         </p>
                                     </div> 
 
@@ -112,7 +112,7 @@
                                                     <div class="ojh_imte_cont" style="display: inline-block;">
                                                         <div class="ojh_photo_box" style="display: inline-block">
                                                             <a href="<%= request.getContextPath()%>/productDeatail.ban?product_num=${pvo.product_num}">
-                                                                <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}.jpg" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " >
+                                                                <img src="<%=ctxPath%>/image/item_main/${pvo.main_image}" width="245" alt="[베스트 상품] 우유크림카스테라" title="[베스트 상품] 우유크림카스테라 " >
                                                             </a>
 
                                                         </div>
@@ -120,12 +120,12 @@
                                                                 <a href="#">
                                                                 <strong class="item_name" style="direction: ltr;">${pvo.product_title}</strong>
                                                                 
-                                                                <span class="ojh_item_name_explain" style="color: #a8a8a8;">쫀득쫀득 알밤</span>
+                                                                <span class="ojh_item_name_explain" style="color: #a8a8a8;">${pvo.product_detail}</span>
                                                                 </a>
                                                             <div class="imem_money_box">
                                                                 <span class="precent" style="display: none;">15%</span>
                                                                 <strong class="item_price">
-                                                                    <span >3,500원 </span>
+                                                                    <span >${pvo.product_price}원 </span>
                                                                     <span style="color: #888; text-decoration: line-through;">
                                                                     </span>
                                                                 </strong>
