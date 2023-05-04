@@ -137,12 +137,12 @@
                                 <ul>
                                      <li class="mypageBtn">
                                         <a href="<%= ctxPath%>/mypage.ban">
-                                        	 <img src="<%=ctxPath%>/image/icon_heart_ku.svg">
+                                        	 <img src="<%=ctxPath%>/image/my-page.svg">
                                         </a>
                                     </li>
                                     <li class="cartBtn">
                                         <a href="<%=ctxPath%>/cartList.ban">
-                                        	 <img src="<%=ctxPath%>/image/icon_cart_ku.svg">
+                                        	 <img src="<%=ctxPath%>/image/icon_cart_ku.svg" style="margin: 7px 0px 0px 0px;" >
                                         </a>
                                     </li>
                                 </ul>
