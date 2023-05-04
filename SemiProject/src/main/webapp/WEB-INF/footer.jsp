@@ -43,7 +43,7 @@
                             <!--// 커뮤니티 -->
                             <!-- 팀원 -->
                             <div class="company-info pull-left" style="float: right; margin-right:60px;">
-                                <div class="team-title"><p style="font-size:11pt; font-weight: bold; margin-bottom: 7px;"> Project Info </p></div>
+                                <div class="team-title"><p style="font-size:11pt; font-weight: bold; margin-bottom: 7px;"> PROJECT INFO </p></div>
                                 <div class="info">
                                     <p> 김하영(조장) &nbsp&nbsp 성가은 &nbsp&nbsp 김진솔 &nbsp&nbsp&nbsp&nbsp  </p>
                                     <p> 오준혁 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 박준엽 &nbsp&nbsp 박주진</p>
