@@ -41,13 +41,6 @@ $(document).ready(function(){
 		const frm = document.pjj_searchFrm;	
 		
 		
-		if( frm.searchWord.value.trim() == "" ) {
-			alert("검색어를 올바르게 입력하세요!!")
-			return; // 함수종료
-		} 
-	
-		
-		
 		frm.action = "notice.ban";
 		frm.method = "get";
 		frm.submit();
@@ -168,7 +161,7 @@ $(document).ready(function(){
 							<option value="notice_writer">작성자</option>
 						</select>
 						<input type="text" id="searchWord" name="searchWord" />
-						
+						<input type="text" style="display: none;">
 						<button type="button" class="btn btn-secondary" style="margin-left: 10px; margin-right: 30px;" onclick="goSearch();">검색</button>
 						
 						<span style="color: red; font-weight: bold; font-size: 12pt;">공지사항 개수</span>
