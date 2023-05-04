@@ -28,7 +28,7 @@ public class InquiryAction extends AbstractController {
 		
 		MemberVO loginuser = (MemberVO) session.getAttribute("loginuser");
 		
-		if( loginuser == null ) {
+		if( loginuser != null ) {
 			
 			String method = request.getMethod();
 			
@@ -73,7 +73,7 @@ public class InquiryAction extends AbstractController {
 				
 				
 				
-				nvo.setUser_id("demo");
+				nvo.setUser_id(loginuser.getUser_id());
 				nvo.setInquiry_title(inquiry_title);
 		        nvo.setInquiry_text(inquiry_text);
 		        
