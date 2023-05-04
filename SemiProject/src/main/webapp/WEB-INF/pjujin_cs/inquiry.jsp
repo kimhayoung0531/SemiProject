@@ -14,6 +14,9 @@
  
     $(document).ready(function(){
     	
+    	$("span.error").hide();
+    	
+    	
     	// 제품이미지 미리 보여주기
 		$(document).on("change", "input.img_file", function(e){
         	
@@ -61,10 +64,12 @@
 			         alert("작성자를 입력해주세요.");
 			         return false;
 			       }
+				
 				if($("[name='inquiry_title']").val()==""){
 			         alert("제목을 입력해주세요.");
 			         return false;
 			       }
+				
 				if($("[name='inquiry_text']").val()==""){
 			         alert("문의내용을 입력해주세요.");
 			         return false;
@@ -103,7 +108,8 @@
 						<tr>
 							<th scope="row">작성자</th>
 							<td>
-								<input type="text" class="text" name="user_id">
+								<input type="text" class="text" name="user_id" class="infoData">
+								<span class="error">필수입력</span>
 							</td>
 						</tr>
 						
@@ -118,14 +124,19 @@
 							</td>
 						</tr>
 						<tr>
-							<th scope="row">제목
-							</th><td><input type="text" name="inquiry_title" value=""></td>
+							<th scope="row">제목</th>
+								<td>
+								<input type="text" name="inquiry_title" class="infoData">
+								<span class="error">필수입력</span>
+								</td>
+							
 						</tr>
 						<tr>
 							<th scope="row">본문</th>
 							<td>
 								
-								<textarea id="pjj_editor" name="inquiry_text" cols="30" rows="10"></textarea>
+								<textarea id="pjj_editor" name="inquiry_text" cols="30" rows="10" class="infoData"></textarea>
+								<span class="error">필수입력</span>
 							</td>
 						</tr>
 			

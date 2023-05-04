@@ -21,7 +21,10 @@
 
 $(document).ready(function(){
 	
-	
+	var startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
+    var enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
+    
+    
     
     // === 전체 datepicker 옵션 일괄 설정하기 ===
     // 한번의 설정으로 $("input#fromDate") , $("input#toDate") 의 옵션을 모두 설정할 수 있다.
@@ -51,10 +54,21 @@ $(document).ready(function(){
         $("input#toDate").datepicker();
         
         //From의 초기값을 오늘 날짜로 설정
+        
+        
         $('input#fromDate').datepicker('setDate', '-7D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
         
         //To의 초기값을 3일후로 설정
         $('input#toDate').datepicker('setDate', 'sysdate'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
+    
+        if( localStorage.getItem('startdate') != null) {
+       
+            document.querySelector("#fromDate").value = localStorage.getItem('startdate');
+            document.querySelector("#toDate").value = localStorage.getItem('enddate');
+        }
+        
+	
+    
     });
 	
  // 검색 기간을 정하는 버튼
@@ -91,36 +105,46 @@ $(document).ready(function(){
         
         $('input#toDate').datepicker('setDate', 'sysdate');
        
-        var startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
-        var enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
+       startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
+       enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
 	
+       
        
         
 	});
  
+	//$(".date_check_calendar").change
  
-	 $('form[name="frmDateSearch"]').submit(function(e){
-         $chekcInputDate = $('input[name="wDate[]"]');
+ 
+	 $('form[name="frmDateSearch"]').submit(function(e){ 
+
+		 /* $chekcInputDate = $('input[name="wDate[]"]');
          var startDate = ($($chekcInputDate[0]).val()).split('-');
          startDate = new Date(startDate[0], startDate[1], startDate[2]);
          var endDate = ($($chekcInputDate[1]).val()).split('-');
-         endDate = new Date(endDate[0], endDate[1], endDate[2]);
+         endDate = new Date(endDate[0], endDate[1], endDate[2]); */
          
          var startdate = $.datepicker.formatDate("yy/mm/dd",$( "input#fromDate" ).datepicker( "getDate" ));
          var enddate = $.datepicker.formatDate("yy/mm/dd",$( "input#toDate" ).datepicker( "getDate" ));
-         
+       
          document.querySelector("#fromDate").value = startdate;
          document.querySelector("#toDate").value = enddate;
-
          
-         if (startDate > endDate) {
+         localStorage.setItem('startdate', startdate);
+         localStorage.setItem('enddate', enddate);
+       
+         //alert(document.querySelector("#toDate").value);
+         //alert(document.querySelector("#fromDate").value);
+         
+         
+         if (startdate > enddate) {
              alert('종료 날짜가 시작 날짜보다 빠릅니다.\n확인 후 검색기간을 다시 선택해주세요.');
              return false;
          }
-         else{
+         else {
         
  				const frm = document.frmDateSearch;
- 				frm.action = "<%= ctxPath%>/mypageOrderList.ban";
+ 				frm.action = "<%= ctxPath%>/productinquiry.ban?wDate1="+startdate+"&wDate2="+enddate;
  				frm.method = "get";
  				frm.submit();
  		
@@ -222,7 +246,7 @@ $(document).ready(function(){
                 <th>글번호</th>
                 <th>제목</th>
                 <th>작성자</th>
-                <th>문의상태</th>
+                <th>조회수</th>
                 <th>답변시간</th>
             </tr>
             </thead>
@@ -235,7 +259,7 @@ $(document).ready(function(){
 			              <td>${nvo.inquiry_num}</td>
 			              <td><button style="font-weight: 800; font-size:15px">${nvo.inquiry_title}</button></td>
 			              <td>${nvo.user_id}</td>
-			              <td>${nvo.inquiry_state}</td>
+			              <td>${nvo.inquiry_view_count}</td>
 			              <td>${nvo.inquiry_answer_time}</td>
 			           	
 			           </tr>
